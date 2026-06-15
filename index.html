@@ -482,6 +482,38 @@
     .hero-actions { flex-direction: column; align-items: flex-start; gap: 14px; }
   }
 
+  /* MODAL CONFIRMAÇÃO */
+  .modal-confirm-overlay {
+    display: none; position: fixed; inset: 0; z-index: 2000;
+    background: rgba(17,17,16,0.6); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center;
+  }
+  .modal-confirm-overlay.open { display: flex; animation: fadeIn 0.25s ease both; }
+  .modal-confirm {
+    background: var(--white); padding: 48px 40px; text-align: center;
+    max-width: 380px; width: 90%; animation: slideUp 0.3s ease both;
+  }
+  .modal-confirm-icon {
+    width: 48px; height: 48px; background: var(--pink-light);
+    border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; margin: 0 auto 20px;
+    font-size: 22px;
+  }
+  .modal-confirm-title {
+    font-family: var(--serif); font-size: 22px; font-weight: 300;
+    margin-bottom: 10px;
+  }
+  .modal-confirm-text {
+    font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 28px;
+  }
+  .modal-confirm-btn {
+    background: var(--pink); color: white; border: none;
+    padding: 12px 32px; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.05em; cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .modal-confirm-btn:hover { opacity: 0.85; }
+
   /* MODAL */
   .modal-overlay {
     display: none;
@@ -759,10 +791,9 @@
         </div>
       </div></p>
 
-      <form class="contact-form" action="https://formsubmit.co/pestanascamilla@gmail.com" method="POST">
-        <input type="hidden" name="_subject" value="Nova mensagem do portfólio">
+      <form class="contact-form" id="contact-form">
         <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="about:blank">
+        <input type="hidden" name="_subject" value="Nova mensagem do portfólio!">
         <div class="form-field">
           <label for="nome">Seu nome</label>
           <input type="text" id="nome" name="nome" placeholder="Como posso te chamar?" required>
@@ -775,11 +806,21 @@
           <label for="mensagem">Mensagem</label>
           <textarea id="mensagem" name="mensagem" placeholder="Me conte sobre o que você precisa..." required></textarea>
         </div>
-        <button type="submit" class="btn-send">Enviar mensagem</button>
+        <button type="submit" class="btn-send" id="btn-send">Enviar mensagem</button>
       </form>
     </div>
   </div>
 
+</div>
+
+<!-- MODAL CONFIRMAÇÃO -->
+<div class="modal-confirm-overlay" id="modal-confirm">
+  <div class="modal-confirm">
+    <div class="modal-confirm-icon">✓</div>
+    <div class="modal-confirm-title">Mensagem enviada!</div>
+    <p class="modal-confirm-text">Obrigada pelo contato.<br>Retorno em breve. 😊</p>
+    <button class="modal-confirm-btn" onclick="closeConfirm()">OK</button>
+  </div>
 </div>
 
 <!-- MODAL -->
@@ -880,6 +921,42 @@ Este projeto de UX Research investiga as dores reais desse sistema, com foco em 
       cursor.style.opacity = '1';
     }
   });
+
+  // FORMULÁRIO AJAX
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-send');
+      btn.textContent = 'Enviando...';
+      btn.disabled = true;
+
+      const data = new FormData(contactForm);
+
+      try {
+        const res = await fetch('https://formsubmit.co/ajax/pestanascamilla@gmail.com', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: data
+        });
+        if (res.ok) {
+          contactForm.reset();
+          document.getElementById('modal-confirm').classList.add('open');
+          document.body.style.overflow = 'hidden';
+        }
+      } catch(err) {
+        alert('Erro ao enviar. Tente novamente.');
+      }
+
+      btn.textContent = 'Enviar mensagem';
+      btn.disabled = false;
+    });
+  }
+
+  function closeConfirm() {
+    document.getElementById('modal-confirm').classList.remove('open');
+    document.body.style.overflow = '';
+  }
 
   // MODAL
   function openModal(id) {
