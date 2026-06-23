@@ -285,6 +285,17 @@
   .project-link:hover { gap: 14px; }
   .project-link::after { content: '→'; }
 
+  .project-links-row { display: flex; gap: 28px; flex-wrap: wrap; }
+
+  .project-link-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--gray); text-decoration: none;
+    transition: gap 0.2s, color 0.2s;
+  }
+  .project-link-secondary:hover { gap: 14px; color: var(--black); }
+  .project-link-secondary::after { content: '→'; }
+
   /* BACK TO TOP */
   .back-to-top {
     display: flex; justify-content: center; padding: 48px 6vw 64px;
@@ -692,7 +703,10 @@
           </div>
           <div class="project-name">Daniel Noffs — Personal Trainer</div>
           <p class="project-desc">Site completo com integração ao Google Sheets para depoimentos, design responsivo e publicado via GitHub Pages.</p>
-          <a href="https://danielnoffs.com.br" target="_blank" class="project-link">Ver site</a>
+          <div class="project-links-row">
+            <a href="case-study-daniel-noffs.html" target="_blank" class="project-link-secondary">Ver processo</a>
+            <a href="https://danielnoffs.com.br" target="_blank" class="project-link">Ver resultado</a>
+          </div>
         </div>
       </div>
 
@@ -707,7 +721,10 @@
           </div>
           <div class="project-name">Landing page B2B — Educação Corporativa</div>
           <p class="project-desc">Design de landing page focada em conversão para plataforma de educação corporativa digital estratégica.</p>
-          <button onclick="openModal('b2b')" class="project-link" style="background:none;border:none;padding:0;font-family:var(--sans);">Ver projeto</button>
+          <div class="project-links-row">
+            <button onclick="openModal('b2b')" class="project-link-secondary" style="background:none;border:none;padding:0;font-family:var(--sans);cursor:pointer;">Ver processo</button>
+            <a href="https://camillapestana.myportfolio.com/landing-page-b2b-educacao-corporativa" target="_blank" class="project-link">Ver resultado</a>
+          </div>
         </div>
       </div>
 
@@ -721,7 +738,10 @@
           </div>
           <div class="project-name">Cuidados com a saúde all-in-one</div>
           <p class="project-desc">Como os cuidadores lidam com a saúde dos filhos e as barreiras encontradas no acesso ao cuidado.</p>
-          <button onclick="openModal('ux')" class="project-link" style="background:none;border:none;padding:0;font-family:var(--sans);">Ver projeto</button>
+          <div class="project-links-row">
+            <button onclick="openModal('ux')" class="project-link-secondary" style="background:none;border:none;padding:0;font-family:var(--sans);cursor:pointer;">Ver processo</button>
+            <a href="#" class="project-link" onclick="return false;">Ver resultado</a>
+          </div>
         </div>
       </div>
 
