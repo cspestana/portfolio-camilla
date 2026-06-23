@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: Daniel Noffs Personal Trainer | Camilla Pestana</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white: #FAFAF8;
+    --black: #111110;
+    --pink: #E8547A;
+    --pink-light: #FDF0F3;
+    --pink-mid: #F4C5D0;
+    --gray: #6B6B6B;
+    --gray-light: #F0EFED;
+    --gray-border: #E4E3E0;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+
+    --dn-black: #252528;
+    --dn-yellow: #ffcf05;
+    --dn-white: #F5F5F0;
+    --dn-gray: #1A1A1A;
+    --dn-gray2: #2A2A2A;
+    --dn-muted: #888888;
+    --dn-gold: #D4A843;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--sans);
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 22px 6vw;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-border);
+  }
+  .nav-logo {
+    font-family: var(--serif); font-size: 19px; font-weight: 400;
+    color: var(--black); text-decoration: none;
+  }
+  .nav-logo span { color: var(--pink); font-style: italic; }
+  .nav-back {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gray); text-decoration: none; display: flex; align-items: center; gap: 8px;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--pink); }
+
+  .case-hero {
+    padding: 140px 6vw 80px;
+    max-width: 1100px; margin: 0 auto;
+    border-bottom: 1px solid var(--gray-border);
+  }
+
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--pink); margin-bottom: 28px;
+  }
+  .hero-eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--pink); }
+
+  .hero-title {
+    font-family: var(--serif); font-weight: 300;
+    font-size: clamp(40px, 6vw, 76px); line-height: 1.05; letter-spacing: -0.01em;
+    max-width: 880px;
+  }
+  .hero-title em { font-style: italic; color: var(--pink); }
+
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 40px; margin-top: 48px; }
+  .meta-item { display: flex; flex-direction: column; gap: 6px; }
+  .meta-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray); }
+  .meta-value { font-size: 15px; color: var(--black); font-weight: 500; }
+  .meta-value a { color: var(--pink); text-decoration: none; border-bottom: 1px solid var(--pink-mid); }
+  .meta-value a:hover { border-color: var(--pink); }
+
+  .toc-wrap { padding: 56px 6vw; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--gray-border); }
+  .toc-label { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray); margin-bottom: 24px; }
+  .toc-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border: 1px solid var(--gray-border); }
+  @media (max-width: 900px) { .toc-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .toc-grid { grid-template-columns: 1fr; } }
+
+  .toc-item {
+    padding: 16px 18px; text-decoration: none; color: var(--black);
+    border-right: 1px solid var(--gray-border); border-bottom: 1px solid var(--gray-border);
+    display: flex; align-items: center; gap: 10px;
+    transition: background 0.2s; font-size: 13px;
+  }
+  .toc-item:hover { background: var(--pink-light); }
+  .toc-item .toc-num { font-family: var(--mono); font-size: 11px; color: var(--pink); }
+
+  .case-section { padding: 90px 6vw; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--gray-border); }
+
+  .section-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+  .section-num { font-family: var(--mono); font-size: 13px; color: var(--pink); letter-spacing: 0.05em; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); }
+
+  .section-title {
+    font-family: var(--serif); font-weight: 300;
+    font-size: clamp(32px, 4vw, 48px); line-height: 1.1; letter-spacing: -0.01em;
+    margin-bottom: 36px; max-width: 700px;
+  }
+  .section-title em { font-style: italic; color: var(--pink); }
+
+  .section-body { max-width: 700px; }
+  .section-body p { font-size: 16px; line-height: 1.85; color: #4A4A48; margin-bottom: 20px; }
+  .section-body p strong { color: var(--black); font-weight: 600; }
+  .section-body code {
+    background: var(--gray-light); padding: 2px 6px; border-radius: 3px;
+    font-family: var(--mono); font-size: 13px; color: var(--pink);
+  }
+
+  .pull-quote {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(22px, 3vw, 30px); line-height: 1.4; color: var(--black);
+    border-left: 3px solid var(--pink); padding-left: 28px; margin: 36px 0; max-width: 640px;
+  }
+
+  .insight-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: var(--gray-border); margin-top: 32px; }
+  @media (max-width: 700px) { .insight-grid { grid-template-columns: 1fr; } }
+
+  .insight-card { background: var(--white); padding: 28px 30px; }
+  .insight-card-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--pink); margin-bottom: 10px; }
+  .insight-card-text { font-size: 14px; line-height: 1.7; color: #4A4A48; }
+  .insight-card-text code {
+    background: var(--gray-light); padding: 1px 5px; border-radius: 3px;
+    font-family: var(--mono); font-size: 12px; color: var(--pink);
+  }
+
+  .ds-showcase { background: var(--dn-black); padding: 48px; margin-top: 32px; border-radius: 2px; }
+  .ds-row { margin-bottom: 36px; }
+  .ds-row:last-child { margin-bottom: 0; }
+  .ds-row-label { font-family: var(--mono); font-size: 11px; color: var(--dn-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px; }
+
+  .ds-swatches { display: flex; gap: 12px; flex-wrap: wrap; }
+  .ds-swatch { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+  .ds-swatch-color { width: 64px; height: 64px; border-radius: 2px; border: 1px solid rgba(255,255,255,0.08); }
+  .ds-swatch-name { font-family: var(--mono); font-size: 10px; color: var(--dn-muted); }
+
+  .ds-type-sample { display: flex; flex-direction: column; gap: 4px; }
+  .ds-type-display { font-family: 'Arial Black', sans-serif; font-weight: 900; font-size: 36px; letter-spacing: 0.02em; color: var(--dn-white); text-transform: uppercase; }
+  .ds-type-body { font-family: var(--sans); font-size: 16px; color: var(--dn-muted); font-weight: 300; }
+
+  .ds-components { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .ds-btn-primary { background: var(--dn-yellow); color: #111; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 14px 24px; border: none; }
+  .ds-btn-ghost { background: transparent; color: var(--dn-yellow); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 14px 24px; border: 1px solid var(--dn-yellow); }
+  .ds-card-mini { background: var(--dn-gray); padding: 20px 24px; font-size: 12px; color: var(--dn-muted); border: 1px solid var(--dn-gray2); }
+
+  .process-list { display: flex; flex-direction: column; margin-top: 32px; }
+  .process-item { display: grid; grid-template-columns: 80px 1fr; gap: 24px; padding: 24px 0; border-top: 1px solid var(--gray-border); }
+  .process-item:last-child { border-bottom: 1px solid var(--gray-border); }
+  .process-date { font-family: var(--mono); font-size: 12px; color: var(--pink); }
+  .process-text { font-size: 14px; line-height: 1.7; color: #4A4A48; }
+  .process-text strong { color: var(--black); }
+
+  .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: var(--gray-border); margin-top: 32px; }
+  @media (max-width: 800px) { .results-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .result-stat { background: var(--white); padding: 32px 24px; }
+  .result-num { font-family: var(--serif); font-size: 44px; font-weight: 300; color: var(--pink); line-height: 1; }
+  .result-label { font-size: 12px; color: var(--gray); margin-top: 8px; line-height: 1.5; }
+
+  .case-cta { padding: 90px 6vw 110px; max-width: 1100px; margin: 0 auto; text-align: center; }
+  .case-cta .section-title { margin: 0 auto 24px; }
+  .cta-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+  .btn-cta-primary { background: var(--pink); color: white; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 16px 32px; text-decoration: none; transition: transform 0.15s; display: inline-block; }
+  .btn-cta-primary:hover { transform: translateY(-2px); }
+  .btn-cta-ghost { border: 1px solid var(--gray-border); color: var(--black); font-size: 13px; font-weight: 600; letter-spacing: 0.05em; padding: 16px 32px; text-decoration: none; transition: border-color 0.2s; display: inline-block; }
+  .btn-cta-ghost:hover { border-color: var(--pink); color: var(--pink); }
+
+  footer {
+    padding: 28px 6vw; border-top: 1px solid var(--gray-border);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    max-width: 1100px; margin: 0 auto;
+  }
+  footer p { font-size: 12px; color: var(--gray); }
+
+  @media (max-width: 600px) {
+    .case-hero, .toc-wrap, .case-section, .case-cta { padding-left: 24px; padding-right: 24px; }
+    .ds-showcase { padding: 28px; }
+    .hero-meta { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Camilla <span>Pestana</span></a>
+  <a href="#" class="nav-back">← Voltar ao portfólio</a>
+</nav>
+
+<section class="case-hero">
+  <div class="hero-eyebrow">Case Study · Design & Front-end</div>
+  <h1 class="hero-title">Como construí a presença digital de um personal trainer: <em>site, marca e analytics</em></h1>
+
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-label">Cliente</span>
+      <span class="meta-value">Daniel Noffs · Personal Trainer</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Papel</span>
+      <span class="meta-value">Design + Front-end (solo)</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Stack</span>
+      <span class="meta-value">HTML · CSS · JS · GitHub Pages</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Site ao vivo</span>
+      <span class="meta-value"><a href="https://danielnoffs.com.br" target="_blank">danielnoffs.com.br ↗</a></span>
+    </div>
+  </div>
+</section>
+
+<div class="toc-wrap">
+  <div class="toc-label">Neste case</div>
+  <div class="toc-grid">
+    <a href="#contexto" class="toc-item"><span class="toc-num">01</span> Contexto</a>
+    <a href="#problema" class="toc-item"><span class="toc-num">02</span> Problema</a>
+    <a href="#pesquisa" class="toc-item"><span class="toc-num">03</span> Pesquisa</a>
+    <a href="#sintese" class="toc-item"><span class="toc-num">04</span> Síntese</a>
+    <a href="#ideacao" class="toc-item"><span class="toc-num">05</span> Ideação</a>
+    <a href="#solucao" class="toc-item"><span class="toc-num">06</span> Solução</a>
+    <a href="#validacao" class="toc-item"><span class="toc-num">07</span> Validação</a>
+    <a href="#implementacao" class="toc-item"><span class="toc-num">08</span> Implementação</a>
+    <a href="#resultados" class="toc-item"><span class="toc-num">09</span> Resultados</a>
+    <a href="#aprendizados" class="toc-item"><span class="toc-num">10</span> Aprendizados</a>
+  </div>
+</div>
+
+<section class="case-section" id="contexto">
+  <div class="section-eyebrow"><span class="section-num">01</span><span class="section-label">Contexto</span></div>
+  <h2 class="section-title">Um profissional real, sem presença digital nenhuma</h2>
+  <div class="section-body">
+    <p>Daniel Noffs é personal trainer com mais de 20 anos de experiência e pós-graduação em fisiologia do exercício, atuando em Santo André e na região do Grande ABC. Apesar da experiência sólida, toda a captação de novos alunos dependia de indicação pessoal e WhatsApp, sem site, sem domínio próprio, sem nenhum canal que comunicasse profissionalismo para quem ainda não o conhecia.</p>
+    <p>Esse projeto nasceu de uma necessidade concreta: <strong>quando alguém pedia informações sobre valores e serviços, não havia nada para enviar além de uma mensagem de texto solta.</strong> Não existia um lugar único que reunisse planos, formas de contato e prova social.</p>
+  </div>
+</section>
+
+<section class="case-section" id="problema">
+  <div class="section-eyebrow"><span class="section-num">02</span><span class="section-label">Problema</span></div>
+  <h2 class="section-title">Sem presença própria, <em>cada lead se perdia</em> na conversa</h2>
+  <div class="section-body">
+    <p>Ao mapear o fluxo real de um possível aluno entrando em contato, identifiquei quatro fricções principais que custavam conversão:</p>
+  </div>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-card-label">Fricção 01</div>
+      <div class="insight-card-text">Sem link único para enviar, cada explicação de plano e preço era redigitada manualmente no WhatsApp, de forma inconsistente e lenta.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label">Fricção 02</div>
+      <div class="insight-card-text">Nenhuma prova social visível. Depoimentos existiam, mas estavam dispersos em conversas privadas, nunca centralizados.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label">Fricção 03</div>
+      <div class="insight-card-text">Zero presença em buscas no Google: quem procurava "personal trainer Santo André" não encontrava o Daniel.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label">Fricção 04</div>
+      <div class="insight-card-text">Produtos digitais (planilhas de treino) recém-criados na Kiwify não tinham nenhuma vitrine além do próprio checkout.</div>
+    </div>
+  </div>
+</section>
+
+<section class="case-section" id="pesquisa">
+  <div class="section-eyebrow"><span class="section-num">03</span><span class="section-label">Pesquisa</span></div>
+  <h2 class="section-title">Entendendo o cliente real e o público que ele atende</h2>
+  <div class="section-body">
+    <p>A pesquisa aqui não foi um processo formal com múltiplos usuários. Foi uma <strong>pesquisa de contexto direta com o próprio Daniel</strong>, como stakeholder e usuário principal do produto, somada à observação do comportamento real do público dele.</p>
+    <p>Levantei três frentes:</p>
+  </div>
+  <div class="process-list">
+    <div class="process-item">
+      <span class="process-date">Negócio</span>
+      <span class="process-text"><strong>Modelo de atendimento real:</strong> presencial, online, e produtos digitais, três frentes distintas que precisariam de comunicação diferente, mas convivendo num único lugar.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date">Público</span>
+      <span class="process-text"><strong>Dois perfis de aluno muito diferentes:</strong> público 50+ (que busca por indicação, médicos e Google, não redes sociais) e público mais jovem (que descobre via Instagram/TikTok).</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date">Concorrência</span>
+      <span class="process-text"><strong>Benchmark informal</strong> de páginas de outros personal trainers e plataformas como Treinar.me e PersonalGO, entendendo o que comunicava confiança e o que parecia genérico.</span>
+    </div>
+  </div>
+</section>
+
+<section class="case-section" id="sintese">
+  <div class="section-eyebrow"><span class="section-num">04</span><span class="section-label">Síntese</span></div>
+  <h2 class="section-title">Três frentes de oferta, <em>uma única narrativa</em></h2>
+  <div class="section-body">
+    <p>Cruzando os achados da pesquisa, ficou claro que o site não podia ser uma "página de vendas" genérica. Precisava comunicar autoridade (20+ anos de experiência, pós-graduação) e, ao mesmo tempo, ser simples o bastante para conduzir qualquer visitante até o WhatsApp.</p>
+  </div>
+  <blockquote class="pull-quote">"O problema não era falta de competência do Daniel. Era falta de um lugar que provasse essa competência antes da primeira conversa."</blockquote>
+  <div class="section-body"><p>Defini três pilares que guiariam toda decisão de design a partir daqui:</p></div>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-card-label">Pilar 1: Autoridade</div>
+      <div class="insight-card-text">Visual sério, escuro, com tipografia de impacto, nada de clichê fitness colorido e genérico.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label">Pilar 2: Clareza de oferta</div>
+      <div class="insight-card-text">Presencial, online e produtos digitais navegáveis em abas, sem misturar contextos de compra diferentes.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label">Pilar 3: Conversão direta</div>
+      <div class="insight-card-text">Todo caminho do site termina no mesmo lugar: um clique de distância do WhatsApp.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label">Pilar 4: Prova social viva</div>
+      <div class="insight-card-text">Depoimentos não podiam ser estáticos. Precisavam crescer com o negócio, sem depender de mim para atualizar o código.</div>
+    </div>
+  </div>
+</section>
+
+<section class="case-section" id="ideacao">
+  <div class="section-eyebrow"><span class="section-num">05</span><span class="section-label">Ideação</span></div>
+  <h2 class="section-title">De wireframe de papel a <em>design system codificado</em></h2>
+  <div class="section-body">
+    <p>Como design engineer, pensei a ideação já em termos de componentes reutilizáveis. Cada bloco do site (cards de planos, abas, depoimentos) foi desenhado para se repetir com consistência visual, não como telas isoladas.</p>
+    <p>Decisões de identidade visual tomadas nesta fase:</p>
+  </div>
+
+  <div class="ds-showcase">
+    <div class="ds-row">
+      <div class="ds-row-label">Paleta de cores</div>
+      <div class="ds-swatches">
+        <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--dn-black);"></div><span class="ds-swatch-name">#252528</span></div>
+        <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--dn-yellow);"></div><span class="ds-swatch-name">#ffcf05</span></div>
+        <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--dn-white);"></div><span class="ds-swatch-name">#F5F5F0</span></div>
+        <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--dn-gray);"></div><span class="ds-swatch-name">#1A1A1A</span></div>
+        <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--dn-gold);"></div><span class="ds-swatch-name">#D4A843</span></div>
+      </div>
+    </div>
+
+    <div class="ds-row">
+      <div class="ds-row-label">Tipografia</div>
+      <div class="ds-type-sample">
+        <span class="ds-type-display">DANIEL NOFFS</span>
+        <span class="ds-type-body">Treinamento personalizado para todas as idades.</span>
+      </div>
+    </div>
+
+    <div class="ds-row">
+      <div class="ds-row-label">Componentes base</div>
+      <div class="ds-components">
+        <button class="ds-btn-primary">Falar no WhatsApp</button>
+        <button class="ds-btn-ghost">Adquirir agora</button>
+        <div class="ds-card-mini">Card de plano · reutilizável nas 3 abas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="case-section" id="solucao">
+  <div class="section-eyebrow"><span class="section-num">06</span><span class="section-label">Solução</span></div>
+  <h2 class="section-title">Um site de página única, <em>com três camadas de oferta</em></h2>
+  <div class="section-body"><p>A solução final estrutura a jornada em blocos sequenciais, todos levando à mesma ação final:</p></div>
+  <div class="process-list">
+    <div class="process-item">
+      <span class="process-date">Hero</span>
+      <span class="process-text">Nome, autoridade e badges de especialidade: primeira impressão de profissionalismo em segundos.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date">Bio</span>
+      <span class="process-text">Formação, anos de experiência e foto, humaniza antes de vender.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date">Investimento</span>
+      <span class="process-text">Sistema de abas (Produtos Digitais / Presencial / Online), cada modelo de negócio com sua própria lógica de preço e oferta, sem confundir o visitante.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date">Depoimentos</span>
+      <span class="process-text">Carrossel dinâmico puxando dados direto de uma planilha Google. O Daniel aprova um depoimento marcando "SIM" numa célula, e ele aparece no site automaticamente.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date">CTA final</span>
+      <span class="process-text">Botão de WhatsApp com mensagem pré-formatada, e link discreto para o Instagram.</span>
+    </div>
+  </div>
+</section>
+
+<section class="case-section" id="validacao">
+  <div class="section-eyebrow"><span class="section-num">07</span><span class="section-label">Validação</span></div>
+  <h2 class="section-title">Testando com o usuário real <em>antes do código final</em></h2>
+  <div class="section-body">
+    <p>A validação aconteceu em ciclos curtos e reais. Cada versão publicada era testada pelo próprio Daniel e por mim, em diferentes dispositivos, com ajustes imediatos. Alguns problemas só apareceram em uso real:</p>
+  </div>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-card-label">Bug 01: Mobile</div>
+      <div class="insight-card-text">A imagem de fundo usava <code>background-attachment: fixed</code>, que quebra em iOS. Corrigido com uma camada fixa separada via pseudo-elemento.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label">Bug 02: CORS</div>
+      <div class="insight-card-text">Depoimentos não carregavam ao testar localmente (<code>file://</code>) por política de CORS do navegador. Funcionava perfeitamente após o deploy real.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label">Ajuste 03: Hierarquia</div>
+      <div class="insight-card-text">Badges de especialidade pareciam botões clicáveis sem ser. Redesenhados como texto simples com separadores.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label">Ajuste 04: Escaneabilidade</div>
+      <div class="insight-card-text">Seção inicial ocupava 100% da viewport, escondendo que havia mais conteúdo. Reduzida para deixar a próxima seção parcialmente visível.</div>
+    </div>
+  </div>
+</section>
+
+<section class="case-section" id="implementacao">
+  <div class="section-eyebrow"><span class="section-num">08</span><span class="section-label">Implementação</span></div>
+  <h2 class="section-title">Código, deploy e <em>infraestrutura própria</em></h2>
+  <div class="section-body"><p>Implementei o site inteiro em HTML, CSS e JavaScript vanilla, sem framework, priorizando performance e simplicidade de manutenção para um projeto de página única. A versão final inclui:</p></div>
+  <div class="process-list">
+    <div class="process-item">
+      <span class="process-date">Front-end</span>
+      <span class="process-text">HTML5 semântico, CSS com custom properties (design tokens), JavaScript para sistema de abas e carrossel.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date">Integração</span>
+      <span class="process-text">Google Sheets como CMS leve para depoimentos, via Google Visualization API, sem backend próprio.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date">Deploy</span>
+      <span class="process-text">Versionamento com Git/GitHub Desktop, publicação via GitHub Pages.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date">Domínio & SEO</span>
+      <span class="process-text">Domínio próprio (danielnoffs.com.br) configurado via DNS, Google Search Console verificado e indexação solicitada.</span>
+    </div>
+  </div>
+</section>
+
+<section class="case-section" id="resultados">
+  <div class="section-eyebrow"><span class="section-num">09</span><span class="section-label">Resultados</span></div>
+  <h2 class="section-title">Dados reais, <em>primeiras semanas no ar</em></h2>
+  <div class="section-body"><p>Com o Google Analytics e Search Console configurados desde o lançamento, foi possível medir tração real desde a primeira semana publicada:</p></div>
+  <div class="results-grid">
+    <div class="result-stat"><div class="result-num">41+</div><div class="result-label">Usuários ativos nos primeiros 28 dias</div></div>
+    <div class="result-stat"><div class="result-num">3</div><div class="result-label">Camadas de oferta unificadas num único site (presencial, online, digital)</div></div>
+    <div class="result-stat"><div class="result-num">100%</div><div class="result-label">Indexado e verificado no Google Search Console</div></div>
+    <div class="result-stat"><div class="result-num">0→1</div><div class="result-label">Domínio próprio: de inexistente a ativo com HTTPS</div></div>
+  </div>
+  <div class="section-body" style="margin-top:32px;">
+    <p>Além dos números, o resultado qualitativo mais relevante foi operacional: o Daniel passou a ter <strong>um único link para enviar</strong> sempre que alguém pergunta sobre valores, substituindo respostas manuais e inconsistentes no WhatsApp.</p>
+  </div>
+</section>
+
+<section class="case-section" id="aprendizados">
+  <div class="section-eyebrow"><span class="section-num">10</span><span class="section-label">Aprendizados</span></div>
+  <h2 class="section-title">O que esse projeto me ensinou <em>sobre ser design engineer</em></h2>
+  <div class="section-body"><p>Esse foi meu primeiro projeto end-to-end como designer e desenvolvedora ao mesmo tempo, desenhando e codificando sem entregar para outra pessoa implementar. Três aprendizados centrais:</p></div>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-card-label">Aprendizado 01</div>
+      <div class="insight-card-text">Design tokens em CSS (variáveis de cor, espaçamento) tornam qualquer ajuste de marca uma mudança de minutos, não de horas. Vivi isso na prática ao trocar a paleta inteira do site uma vez sem reescrever nenhum componente.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label">Aprendizado 02</div>
+      <div class="insight-card-text">Testar só no ambiente local (<code>file://</code>) escondeu um bug real de CORS que só apareceu após o deploy. Validação em produção é insubstituível.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label">Aprendizado 03</div>
+      <div class="insight-card-text">Um MVP simples (HTML/CSS/JS sem framework) foi suficiente para entregar valor real e medível. A complexidade técnica deve seguir a necessidade do negócio, não o contrário.</div>
+    </div>
+  </div>
+</section>
+
+<section class="case-cta">
+  <div class="section-eyebrow" style="justify-content:center;"><span class="section-label">Próximo passo</span></div>
+  <h2 class="section-title">Quer ver o resultado <em>ao vivo?</em></h2>
+  <div class="cta-links">
+    <a href="https://danielnoffs.com.br" target="_blank" class="btn-cta-primary">Visitar o site →</a>
+    <a href="#" class="btn-cta-ghost">Voltar ao portfólio</a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Camilla Pestana</p>
+  <p>Case study · UX/UI & Front-end</p>
+</footer>
+
+</body>
+</html>
