@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: Escola Aberta do Terceiro Setor · on-Hive | Camilla Pestana</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111110'/%3E%3Ctext x='32' y='40' font-family='Georgia, serif' font-size='26' font-weight='300' fill='%23E8547A' text-anchor='middle'%3ECP%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white: #FAFAF8;
+    --black: #111110;
+    --pink: #E8547A;
+    --pink-light: #FDF0F3;
+    --pink-mid: #F4C5D0;
+    --gray: #6B6B6B;
+    --gray-light: #F0EFED;
+    --gray-border: #E4E3E0;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--sans);
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 22px 6vw;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-border);
+  }
+  .nav-logo {
+    font-family: var(--serif); font-size: 19px; font-weight: 400;
+    color: var(--black); text-decoration: none;
+  }
+  .nav-logo span { color: var(--pink); font-style: italic; }
+  .nav-back {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gray); text-decoration: none; display: flex; align-items: center; gap: 8px;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--pink); }
+
+  .case-hero {
+    padding: 140px 6vw 64px;
+    max-width: 1100px; margin: 0 auto;
+    border-bottom: 1px solid var(--gray-border);
+  }
+
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--pink); margin-bottom: 28px;
+  }
+  .hero-eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--pink); }
+
+  .hero-title {
+    font-family: var(--serif); font-weight: 300;
+    font-size: clamp(40px, 6vw, 76px); line-height: 1.05; letter-spacing: -0.01em;
+    max-width: 880px;
+  }
+  .hero-title em { font-style: italic; color: var(--pink); }
+
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 40px; margin-top: 48px; }
+  .meta-item { display: flex; flex-direction: column; gap: 6px; }
+  .meta-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray); }
+  .meta-value { font-size: 15px; color: var(--black); font-weight: 500; }
+  .meta-value a { color: var(--pink); text-decoration: none; border-bottom: 1px solid var(--pink-mid); }
+  .meta-value a:hover { border-color: var(--pink); }
+
+  .confidential-note {
+    margin-top: 28px; max-width: 640px;
+    font-size: 13px; font-style: italic; color: var(--gray); line-height: 1.6;
+    border-left: 2px solid var(--pink-mid); padding-left: 16px;
+  }
+
+  .toc-wrap { padding: 56px 6vw; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--gray-border); }
+  .toc-label { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray); margin-bottom: 24px; }
+  .toc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--gray-border); }
+  @media (max-width: 900px) { .toc-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .toc-grid { grid-template-columns: 1fr; } }
+
+  .toc-item {
+    padding: 16px 18px; text-decoration: none; color: var(--black);
+    border-right: 1px solid var(--gray-border); border-bottom: 1px solid var(--gray-border);
+    display: flex; align-items: center; gap: 10px;
+    transition: background 0.2s; font-size: 13px;
+  }
+  .toc-item:hover { background: var(--pink-light); }
+  .toc-item .toc-num { font-family: var(--mono); font-size: 11px; color: var(--pink); }
+
+  .case-section { padding: 90px 6vw; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--gray-border); }
+
+  .section-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+  .section-num { font-family: var(--mono); font-size: 13px; color: var(--pink); letter-spacing: 0.05em; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); }
+
+  .section-title {
+    font-family: var(--serif); font-weight: 300;
+    font-size: clamp(32px, 4vw, 48px); line-height: 1.1; letter-spacing: -0.01em;
+    margin-bottom: 36px; max-width: 700px;
+  }
+  .section-title em { font-style: italic; color: var(--pink); }
+
+  .section-body { max-width: 700px; }
+  .section-body p { font-size: 16px; line-height: 1.85; color: #4A4A48; margin-bottom: 20px; }
+  .section-body p strong { color: var(--black); font-weight: 600; }
+  .section-body code {
+    background: var(--gray-light); padding: 2px 6px; border-radius: 3px;
+    font-family: var(--mono); font-size: 13px; color: var(--pink);
+  }
+
+  .pull-quote {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(22px, 3vw, 30px); line-height: 1.4; color: var(--black);
+    border-left: 3px solid var(--pink); padding-left: 28px; margin: 36px 0; max-width: 640px;
+  }
+
+  .insight-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: var(--gray-border); margin-top: 32px; }
+  @media (max-width: 700px) { .insight-grid { grid-template-columns: 1fr; } }
+
+  .insight-card { background: var(--white); padding: 28px 30px; }
+  .insight-card-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--pink); margin-bottom: 10px; }
+  .insight-card-text { font-size: 14px; line-height: 1.7; color: #4A4A48; }
+  .insight-card-text code {
+    background: var(--gray-light); padding: 1px 5px; border-radius: 3px;
+    font-family: var(--mono); font-size: 12px; color: var(--pink);
+  }
+
+  .process-list { display: flex; flex-direction: column; margin-top: 32px; }
+  .process-item { display: grid; grid-template-columns: 96px 1fr; gap: 24px; padding: 24px 0; border-top: 1px solid var(--gray-border); }
+  .process-item:last-child { border-bottom: 1px solid var(--gray-border); }
+  .process-date { font-family: var(--mono); font-size: 12px; color: var(--pink); }
+  .process-text { font-size: 14px; line-height: 1.7; color: #4A4A48; }
+  .process-text strong { color: var(--black); }
+
+  .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: var(--gray-border); margin-top: 32px; }
+  @media (max-width: 800px) { .results-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .result-stat { background: var(--white); padding: 32px 24px; }
+  .result-num { font-family: var(--serif); font-size: 40px; font-weight: 300; color: var(--pink); line-height: 1; }
+  .result-label { font-size: 12px; color: var(--gray); margin-top: 8px; line-height: 1.5; }
+
+  .shot-frame { margin-top: 32px; }
+  .shot-frame img { width: 100%; display: block; border: 1px solid var(--gray-border); }
+  .shot-frame figcaption {
+    margin-top: 10px; font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray);
+  }
+  .shot-placeholder {
+    border: 1.5px dashed var(--gray-border);
+    background: var(--gray-light);
+    padding: 60px 24px;
+    text-align: center;
+  }
+  .shot-placeholder .shot-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pink); }
+  .shot-placeholder .shot-sub { font-size: 12px; color: var(--gray); margin-top: 8px; font-style: italic; }
+
+  .case-cta { padding: 90px 6vw 110px; max-width: 1100px; margin: 0 auto; text-align: center; }
+  .case-cta .section-title { margin: 0 auto 24px; }
+  .cta-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+  .btn-cta-primary { background: var(--pink); color: white; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 16px 32px; text-decoration: none; transition: transform 0.15s; display: inline-block; }
+  .btn-cta-primary:hover { transform: translateY(-2px); }
+  .btn-cta-ghost { border: 1px solid var(--gray-border); color: var(--black); font-size: 13px; font-weight: 600; letter-spacing: 0.05em; padding: 16px 32px; text-decoration: none; transition: border-color 0.2s; display: inline-block; }
+  .btn-cta-ghost:hover { border-color: var(--pink); color: var(--pink); }
+
+  footer {
+    padding: 28px 6vw; border-top: 1px solid var(--gray-border);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    max-width: 1100px; margin: 0 auto;
+  }
+  footer p { font-size: 12px; color: var(--gray); }
+
+  @media (max-width: 600px) {
+    .case-hero, .toc-wrap, .case-section, .case-cta { padding-left: 24px; padding-right: 24px; }
+    .hero-meta { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Camilla <span>Pestana</span></a>
+  <a href="index.html" class="nav-back">← Voltar ao portfólio</a>
+</nav>
+
+<section class="case-hero">
+  <div class="hero-eyebrow">Case Study · UX/UI</div>
+  <h1 class="hero-title">Herdei um estudo de design <em>e o levei à produção</em></h1>
+
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-label">Empresa</span>
+      <span class="meta-value">Fênix Educação</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Produto</span>
+      <span class="meta-value">Escola Aberta do Terceiro Setor · on-Hive</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Papel</span>
+      <span class="meta-value">UX/UI Designer · CLT</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Ferramentas</span>
+      <span class="meta-value">Figma · Microsoft Clarity</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Site ao vivo</span>
+      <span class="meta-value"><a href="https://eats.onhive.org.br/login" target="_blank">eats.onhive.org.br ↗</a></span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Código</span>
+      <span class="meta-value"><a href="https://github.com/FJPN-OnHive/OnHive-Backend" target="_blank">Open source · GPL-2.0 ↗</a></span>
+    </div>
+  </div>
+</section>
+
+<div class="toc-wrap">
+  <div class="toc-label">Neste case</div>
+  <div class="toc-grid">
+    <a href="#contexto" class="toc-item"><span class="toc-num">01</span> Contexto</a>
+    <a href="#desafio" class="toc-item"><span class="toc-num">02</span> Desafio</a>
+    <a href="#papel" class="toc-item"><span class="toc-num">03</span> Meu papel</a>
+    <a href="#processo" class="toc-item"><span class="toc-num">04</span> Processo</a>
+    <a href="#decisao" class="toc-item"><span class="toc-num">05</span> Decisão de design</a>
+    <a href="#validacao" class="toc-item"><span class="toc-num">06</span> Validação</a>
+    <a href="#resultados" class="toc-item"><span class="toc-num">07</span> Resultados</a>
+    <a href="#aprendizados" class="toc-item"><span class="toc-num">08</span> Aprendizados</a>
+  </div>
+</div>
+
+<section class="case-section" id="contexto">
+  <div class="section-eyebrow"><span class="section-num">01</span><span class="section-label">Contexto</span></div>
+  <h2 class="section-title">Um estudo herdado, <em>nunca implementado</em></h2>
+  <div class="section-body">
+    <p>Antes da minha entrada na empresa, já existia um estudo de design para uma nova plataforma de cursos: fluxos e telas pensados, mas nunca implementados. Até então, os alunos estudavam por uma <strong>plataforma terceirizada</strong>, sem nenhuma solução própria no ar.</p>
+    <p>Entrei como UX/UI Designer, na minha primeira posição na função e em regime CLT, para dar continuidade a esse estudo junto com a equipe de desenvolvimento. O objetivo era claro: <strong>migrar a base de alunos para uma plataforma própria</strong>, construída a partir daquele material herdado.</p>
+  </div>
+</section>
+
+<section class="case-section" id="desafio">
+  <div class="section-eyebrow"><span class="section-num">02</span><span class="section-label">Desafio</span></div>
+  <h2 class="section-title">Validar na prática <em>um estudo que só existia no papel</em></h2>
+  <div class="section-body">
+    <p>O desafio não era desenhar do zero. Era transformar protótipo em produto real, o que trazia três frentes de risco:</p>
+  </div>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-card-label">Risco 01</div>
+      <div class="insight-card-text">Garantir que os fluxos desenhados funcionassem com usuários reais, não só em protótipo no Figma.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label">Risco 02</div>
+      <div class="insight-card-text">Encontrar problemas de usabilidade que só apareceriam em uso real, depois do lançamento.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label">Risco 03</div>
+      <div class="insight-card-text">Migrar uma base de alunos já acostumada com a plataforma terceirizada, sem perder gente pelo caminho.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label">Risco 04</div>
+      <div class="insight-card-text">Dar suporte contínuo à equipe de dev depois do go-live, quando os primeiros bugs e atritos aparecessem.</div>
+    </div>
+  </div>
+</section>
+
+<section class="case-section" id="papel">
+  <div class="section-eyebrow"><span class="section-num">03</span><span class="section-label">Meu papel</span></div>
+  <h2 class="section-title">Da orientação do PO <em>ao acompanhamento de dados reais</em></h2>
+  <div class="section-body">
+    <p>Atuei sob orientação direta do Product Owner, contribuindo com sugestões de usabilidade e ideias de fluxo. Participei dos testes internos, dos ciclos de feedback e ajustes, até a aprovação da diretoria, e continuei acompanhando o produto depois que ele foi ao ar.</p>
+  </div>
+  <blockquote class="pull-quote">"Aprendi a função fazendo parte dela, dentro de um produto que de fato foi ao ar, não num projeto fictício de curso."</blockquote>
+  <div class="section-body">
+    <p>Paralelamente, eu cursava <strong>UX Unicórnio</strong>. Cada conceito novo que aprendia em sala virava prática quase no mesmo dia, numa curva de aprendizado bem diferente da de quem só estuda em projetos de estudo.</p>
+  </div>
+</section>
+
+<section class="case-section" id="processo">
+  <div class="section-eyebrow"><span class="section-num">04</span><span class="section-label">Processo</span></div>
+  <h2 class="section-title">Do estudo herdado <em>ao primeiro acesso real</em></h2>
+  <div class="section-body"><p>A linha do tempo do projeto, da herança do estudo ao monitoramento pós-lançamento:</p></div>
+  <div class="process-list">
+    <div class="process-item">
+      <span class="process-date">Estudo</span>
+      <span class="process-text"><strong>Ponto de partida:</strong> fluxos e protótipos desenhados antes da minha chegada, sem implementação.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date">Entrada</span>
+      <span class="process-text"><strong>Continuidade com a equipe:</strong> revisão do estudo com PO e devs, viabilizando tecnicamente o que tinha sido desenhado.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date">Testes</span>
+      <span class="process-text"><strong>Validação interna:</strong> ciclos de feedback e ajustes de fluxo, até a aprovação final da diretoria.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date">Go-live</span>
+      <span class="process-text"><strong>Lançamento:</strong> migração da base de alunos da plataforma terceirizada para a plataforma própria.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date">Pós-ar</span>
+      <span class="process-text"><strong>Monitoramento contínuo:</strong> acompanhamento dos primeiros acessos via Microsoft Clarity, para captar bugs e atritos reais.</span>
+    </div>
+  </div>
+  <figure class="shot-frame">
+    <div class="shot-placeholder">
+      <div class="shot-label">📌 Encaixe aqui: tela "Insira seu código de ativação"</div>
+      <div class="shot-sub">troque esta div por &lt;img src="ativacao.png" alt="Tela de ativação de conta por código"&gt;</div>
+    </div>
+    <figcaption>Etapa de ativação de conta · Escola Aberta do Terceiro Setor</figcaption>
+  </figure>
+</section>
+
+<section class="case-section" id="decisao">
+  <div class="section-eyebrow"><span class="section-num">05</span><span class="section-label">Decisão de design</span></div>
+  <h2 class="section-title">Reduzindo o atrito de <em>uma migração de plataforma</em></h2>
+  <div class="section-body">
+    <p>Migrar de plataforma é, por natureza, um momento de atrito: o aluno precisa entender onde estão seus cursos, como acessar, e por que tudo mudou. Para reduzir esse atrito, criei um <strong>vídeo tutorial passo a passo</strong>, orientando os alunos sobre como migrar da plataforma antiga para a nova.</p>
+    <p>Propus à equipe de dev a inclusão de um <strong>botão de destaque na própria tela de login</strong>, dando acesso direto a esse vídeo, pensado para captar o aluno exatamente no momento em que ele mais precisaria dessa orientação, antes de qualquer dúvida ou abandono.</p>
+  </div>
+  <figure class="shot-frame">
+    <div class="shot-placeholder">
+      <div class="shot-label">📌 Encaixe aqui: tela de Login / Cadastro</div>
+      <div class="shot-sub">troque esta div por &lt;img src="login.png" alt="Tela de login com botão de acesso ao vídeo tutorial"&gt;</div>
+    </div>
+    <figcaption>Tela de login / cadastro · Escola Aberta do Terceiro Setor</figcaption>
+  </figure>
+</section>
+
+<section class="case-section" id="validacao">
+  <div class="section-eyebrow"><span class="section-num">06</span><span class="section-label">Validação</span></div>
+  <h2 class="section-title">O que os testes internos <em>não revelaram</em></h2>
+  <div class="section-body">
+    <p>Depois do lançamento, acompanhei os primeiros acessos reais pelo Microsoft Clarity, com heatmaps e gravações de sessão. Dois padrões de uso real não tinham aparecido em nenhum teste interno:</p>
+  </div>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-card-label">Observação 01 · Clarity</div>
+      <div class="insight-card-text">Os alunos não tinham o hábito de ampliar o player de vídeo das aulas: assistiam numa janela pequena, sem perceber a opção de expandir.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label">Ajuste 01 · Design</div>
+      <div class="insight-card-text">Redesenhei o player para que já ocupasse, por padrão, uma área de boa visualização, eliminando a dependência de uma ação extra que os usuários simplesmente não faziam.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label">Observação 02 · Clarity</div>
+      <div class="insight-card-text">Um bug recorrente fazia a tela ficar branca após determinados cliques, sem mensagem de erro.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label">Ajuste 02 · Dev</div>
+      <div class="insight-card-text">Identifiquei o padrão de cliques que disparava o bug e reportei para a equipe de dev, que corrigiu o comportamento.</div>
+    </div>
+  </div>
+  <figure class="shot-frame">
+    <div class="shot-placeholder">
+      <div class="shot-label">📌 Encaixe aqui: tela do player de vídeo / módulo do curso</div>
+      <div class="shot-sub">troque esta div por &lt;img src="player.png" alt="Player de vídeo dentro do módulo do curso"&gt;</div>
+    </div>
+    <figcaption>Player de vídeo redesenhado, ocupando área de boa visualização por padrão</figcaption>
+  </figure>
+</section>
+
+<section class="case-section" id="resultados">
+  <div class="section-eyebrow"><span class="section-num">07</span><span class="section-label">Resultados</span></div>
+  <h2 class="section-title">Do estudo no papel <em>ao produto em produção</em></h2>
+  <div class="section-body"><p>O projeto foi aprovado pela diretoria e lançado com sucesso, com acompanhamento contínuo nas primeiras semanas:</p></div>
+  <div class="results-grid">
+    <div class="result-stat"><div class="result-num">Aprovado</div><div class="result-label">Validado pela diretoria antes do go-live</div></div>
+    <div class="result-stat"><div class="result-num">2</div><div class="result-label">Problemas reais de uso identificados e corrigidos via Clarity após o lançamento</div></div>
+    <div class="result-stat"><div class="result-num">1</div><div class="result-label">Vídeo tutorial criado para reduzir abandono na migração de plataforma</div></div>
+    <div class="result-stat"><div class="result-num">1ª</div><div class="result-label">Minha primeira posição em UX/UI, aprendendo Figma dentro de um produto real</div></div>
+  </div>
+  <div class="section-body" style="margin-top:32px;">
+    <p>Além desses pontos, o resultado mais relevante foi de processo: o ciclo entre <strong>design, dados e desenvolvimento</strong> se fechou de verdade, com problemas que não apareceram nos testes internos capturados e corrigidos com dados reais de uso, não com suposições. Hoje, inclusive, o backend da plataforma é <strong>open source</strong> (licença GPL-2.0), disponível publicamente no GitHub.</p>
+  </div>
+  <figure class="shot-frame">
+    <div class="shot-placeholder">
+      <div class="shot-label">📌 Encaixe aqui: tela "Meus Cursos" com progresso</div>
+      <div class="shot-sub">troque esta div por &lt;img src="meus-cursos.png" alt="Tela Meus Cursos com barras de progresso"&gt;</div>
+    </div>
+    <figcaption>Jornada do aluno após a migração · Escola Aberta do Terceiro Setor</figcaption>
+  </figure>
+</section>
+
+<section class="case-section" id="aprendizados">
+  <div class="section-eyebrow"><span class="section-num">08</span><span class="section-label">Aprendizados</span></div>
+  <h2 class="section-title">O que esse projeto me ensinou <em>sobre ser UX/UI Designer</em></h2>
+  <div class="section-body"><p>Esse foi meu primeiro contato real com a função e com o Figma dentro de um produto que de fato foi ao ar. Três aprendizados centrais:</p></div>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-card-label">Aprendizado 01</div>
+      <div class="insight-card-text">Aprender na prática, em paralelo à teoria do UX Unicórnio, acelerou minha curva de aprendizado de um jeito que nenhum projeto fictício teria feito.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label">Aprendizado 02</div>
+      <div class="insight-card-text">O design não termina quando a tela vai ao ar. Ele continua sendo validado (e corrigido) com dados reais de uso, como mostrou o monitoramento via <code>Microsoft Clarity</code>.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label">Aprendizado 03</div>
+      <div class="insight-card-text">Trabalhar lado a lado com PO e devs exige traduzir intenção de design em decisões viáveis tecnicamente, dentro do que já existia.</div>
+    </div>
+  </div>
+</section>
+
+<section class="case-cta">
+  <div class="section-eyebrow" style="justify-content:center;"><span class="section-label">Próximo passo</span></div>
+  <h2 class="section-title">Quer saber mais <em>sobre esse projeto?</em></h2>
+  <div class="cta-links">
+    <a href="https://eats.onhive.org.br/login" target="_blank" class="btn-cta-primary">Visitar o site →</a>
+    <a href="index.html" class="btn-cta-ghost">Voltar ao portfólio</a>
+  </div>
+  <p style="font-size:13px;color:var(--gray);font-style:italic;margin-top:22px;">O link leva à tela de login real da plataforma. O acesso ao conteúdo interno requer cadastro de aluno.</p>
+</section>
+
+<footer>
+  <p>© 2026 Camilla Pestana</p>
+  <p>Case study · UX/UI</p>
+</footer>
+
+</body>
+</html>
