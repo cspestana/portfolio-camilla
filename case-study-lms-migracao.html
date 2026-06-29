@@ -156,6 +156,16 @@
 
   .shot-frame { margin-top: 32px; }
   .shot-frame img { width: 100%; display: block; border: 1px solid var(--gray-border); }
+  .shot-filename {
+    font-family: var(--mono); font-size: 10px; color: var(--gray);
+    background: var(--gray-light); padding: 4px 10px; display: inline-block;
+    margin-top: 8px; letter-spacing: 0.02em;
+  }
+  .shot-gallery-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    margin-top: 32px;
+  }
+  .shot-gallery-row .shot-frame { margin-top: 0; }
   .shot-frame figcaption {
     margin-top: 10px; font-family: var(--mono); font-size: 11px;
     letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray);
@@ -187,6 +197,7 @@
   @media (max-width: 600px) {
     .case-hero, .toc-wrap, .case-section, .case-cta { padding-left: 24px; padding-right: 24px; }
     .hero-meta { gap: 24px; }
+    .shot-gallery-row { grid-template-columns: 1fr; gap: 28px; }
   }
 </style>
 </head>
@@ -315,9 +326,24 @@
       <span class="process-text"><strong>Monitoramento contínuo:</strong> acompanhamento dos primeiros acessos via Microsoft Clarity, para captar bugs e atritos reais.</span>
     </div>
   </div>
-<figure class="shot-frame">
-    <img src="images/tela-onhive-1.png" alt="Tela de ativação de conta por código">    </div>
-    <figcaption>Etapa de ativação de conta · Escola Aberta do Terceiro Setor</figcaption>
+
+  <div class="shot-gallery-row">
+    <figure class="shot-frame">
+      <img src="images/telas-eats-03.jpg" alt="Tela de cadastro com validação de senha e dados pessoais">
+      <figcaption>Cadastro de novo aluno · Escola Aberta do Terceiro Setor</figcaption>
+      <span class="shot-filename">telas-eats-03.jpg</span>
+    </figure>
+    <figure class="shot-frame">
+      <img src="images/telas-eats-02.jpg" alt="Modal de confirmação de cadastro efetuado com sucesso">
+      <figcaption>Confirmação de cadastro · Escola Aberta do Terceiro Setor</figcaption>
+      <span class="shot-filename">telas-eats-02.jpg</span>
+    </figure>
+  </div>
+
+  <figure class="shot-frame">
+    <img src="images/telas-eats-09.jpg" alt="Tela de dados pessoais e dados de login na área da conta">
+    <figcaption>Área da conta · dados pessoais e login · Escola Aberta do Terceiro Setor</figcaption>
+    <span class="shot-filename">telas-eats-09.jpg</span>
   </figure>
 </section>
 
@@ -329,11 +355,19 @@
     <p>Propus à equipe de dev a inclusão de um <strong>botão de destaque na própria tela de login</strong>, dando acesso direto a esse vídeo, pensado para captar o aluno exatamente no momento em que ele mais precisaria dessa orientação, antes de qualquer dúvida ou abandono.</p>
   </div>
   <figure class="shot-frame">
-    <div class="shot-placeholder">
-      <div class="shot-label">📌 Encaixe aqui: tela de Login / Cadastro</div>
-      <div class="shot-sub">troque esta div por &lt;img src="login.png" alt="Tela de login com botão de acesso ao vídeo tutorial"&gt;</div>
-    </div>
+    <img src="images/telas-eats-01.jpg" alt="Tela de login com campos de e-mail e senha">
     <figcaption>Tela de login / cadastro · Escola Aberta do Terceiro Setor</figcaption>
+    <span class="shot-filename">telas-eats-01.jpg</span>
+  </figure>
+  <figure class="shot-frame">
+    <img src="images/telas-eats-10.jpg" alt="Tela de inserção do código de ativação de conta">
+    <figcaption>Etapa de ativação de conta · Escola Aberta do Terceiro Setor</figcaption>
+    <span class="shot-filename">telas-eats-10.jpg</span>
+  </figure>
+  <figure class="shot-frame">
+    <img src="images/telas-eats-08.jpg" alt="Player de vídeo do módulo do curso com lista de aulas">
+    <figcaption>Player de aula e tutorial de migração · Escola Aberta do Terceiro Setor</figcaption>
+    <span class="shot-filename">telas-eats-08.jpg</span>
   </figure>
 </section>
 
@@ -350,13 +384,31 @@
   <div class="section-body" style="margin-top:32px;">
     <p>Além desses pontos, o resultado mais relevante foi de processo: o ciclo entre <strong>design, dados e desenvolvimento</strong> se fechou de verdade, com problemas que não apareceram nos testes internos capturados e corrigidos com dados reais de uso, não com suposições. Hoje, inclusive, o backend da plataforma é <strong>open source</strong> (licença GPL-2.0), disponível publicamente no GitHub.</p>
   </div>
-  <figure class="shot-frame">
-    <div class="shot-placeholder">
-      <div class="shot-label">📌 Encaixe aqui: tela "Meus Cursos" com progresso</div>
-      <div class="shot-sub">troque esta div por &lt;img src="meus-cursos.png" alt="Tela Meus Cursos com barras de progresso"&gt;</div>
-    </div>
-    <figcaption>Jornada do aluno após a migração · Escola Aberta do Terceiro Setor</figcaption>
-  </figure>
+
+  <div class="shot-gallery-row">
+    <figure class="shot-frame">
+      <img src="images/telas-eats-06.jpg" alt="Tela Meus Cursos sem nenhuma matrícula ainda">
+      <figcaption>Meus Cursos · estado vazio, antes da matrícula</figcaption>
+      <span class="shot-filename">telas-eats-06.jpg</span>
+    </figure>
+    <figure class="shot-frame">
+      <img src="images/telas-eats-07.jpg" alt="Tela Meus Cursos com barras de progresso de 100%, 20% e 0%">
+      <figcaption>Meus Cursos · jornada com progresso real do aluno</figcaption>
+      <span class="shot-filename">telas-eats-07.jpg</span>
+    </figure>
+  </div>
+  <div class="shot-gallery-row">
+    <figure class="shot-frame">
+      <img src="images/telas-eats-04.jpg" alt="Tela Meus Certificados sem nenhum certificado ainda">
+      <figcaption>Meus Certificados · estado vazio</figcaption>
+      <span class="shot-filename">telas-eats-04.jpg</span>
+    </figure>
+    <figure class="shot-frame">
+      <img src="images/telas-eats-05.jpg" alt="Tela Meus Certificados com um certificado disponível para download">
+      <figcaption>Meus Certificados · certificado liberado após conclusão</figcaption>
+      <span class="shot-filename">telas-eats-05.jpg</span>
+    </figure>
+  </div>
 </section>
 
 <section class="case-section" id="aprendizados">
