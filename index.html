@@ -65,6 +65,8 @@
   }
   .cursor-ring { display: none; }
 
+  .hamburger { display: none; }
+
   /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -492,6 +494,21 @@
     .projects-wrap, .about-page, .contact-page { padding: 48px 6vw 60px; }
     .projects-grid { grid-template-columns: 1fr; }
     .hero-actions { flex-direction: column; align-items: flex-start; gap: 14px; }
+
+    /* HAMBÚRGUER */
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(250,250,248,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray-border); padding: 8px 0; z-index: 99; }
+    .nav-links.open { display: flex; }
+    .nav-links li { list-style: none; }
+    .nav-links .nav-tab { display: block; padding: 14px 6vw; border-bottom: none; width: 100%; font-size: 13px; text-align: left; }
+    .hamburger { display: flex !important; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--black); transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* EXTRAS PREÇO */
+    .biz-pricing-extra { flex-direction: column; align-items: flex-start; gap: 16px; padding: 28px 24px; }
+    .biz-pricing-extra-item { width: 100%; justify-content: space-between; }
   }
 
   /* MODAL CONFIRMAÇÃO */
@@ -708,7 +725,10 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo" onclick="showPage('inicio'); return false;">camilla<span>.pestana</span></a>
-  <ul class="nav-links">
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
     <li><div class="nav-tab active" onclick="showPage('inicio')">Início</div></li>
     <li><div class="nav-tab" onclick="showPage('projetos')">Projetos</div></li>
     <li><div class="nav-tab" onclick="showPage('sobre')">Sobre</div></li>
@@ -724,7 +744,7 @@
     <section class="biz-hero">
       <div class="biz-eyebrow">Design + desenvolvimento</div>
       <h1 class="biz-hero-title">Sites profissionais,<br>do design ao <em>código</em>,<br>para o seu negócio.</h1>
-      <p class="biz-hero-sub">Projeto, identidade visual e desenvolvimento em um só lugar. Com domínio próprio incluso e no ar em até 10 a 15 dias úteis, dependendo do pacote.</p>
+      <p class="biz-hero-sub">Projeto, identidade visual e desenvolvimento em um só lugar — com domínio próprio incluso e no ar em até 10 a 15 dias úteis, dependendo do pacote.</p>
       <div class="biz-hero-actions">
         <button onclick="showPage('contato')" class="btn-primary" style="border:none;cursor:pointer;">Pedir uma proposta →</button>
         <button onclick="showPage('projetos')" class="btn-ghost-link" style="background:none;border:none;border-bottom:1px solid var(--black);cursor:pointer;font-family:var(--sans);">Ver trabalhos realizados</button>
@@ -751,7 +771,7 @@
         <div class="biz-how-step">
           <span class="biz-how-num">02</span>
           <h3>Proposta</h3>
-          <p>Te envio a proposta completa do site para você aprovar, ajustar ou tirar dúvidas.</p>
+          <p>Te envio o escopo fechado e o valor — sem surpresas, sem letra pequena.</p>
         </div>
         <div class="biz-how-step">
           <span class="biz-how-num">03</span>
@@ -792,8 +812,8 @@
         </div>
         <div class="biz-price-card featured">
           <span class="biz-pc-badge">Completo</span>
-          <h3>Site Plus</h3>
-          <div class="biz-pc-sub">Site + visibilidade no Google</div>
+          <h3>Presença Digital</h3>
+          <div class="biz-pc-sub">Site + visibilidade no Google desde o primeiro dia</div>
           <div class="biz-pc-price">R$ 370</div>
           <div class="biz-pc-note">domínio próprio incluso · 1 ano</div>
           <ul class="biz-pc-list">
@@ -820,7 +840,7 @@
     <!-- 5. CTA FINAL -->
     <section class="biz-final-cta">
       <h2>Seu negócio merece estar no Google.</h2>
-      <p>Vamos colocar seu site no ar, com domínio próprio, design profissional e suporte para tirar dúvidas.</p>
+      <p>Vamos colocar seu site no ar — com domínio próprio, design profissional e suporte para tirar dúvidas.</p>
       <button onclick="showPage('contato')" class="btn-primary" style="background:var(--white);color:var(--black);border:none;cursor:pointer;">Falar comigo →</button>
     </section>
 
@@ -1157,8 +1177,19 @@ Este projeto de UX Research investiga as dores reais desse sistema, com foco em 
   }
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
+  // HAMBÚRGUER
+  function toggleMenu() {
+    const nav = document.getElementById('nav-links');
+    const btn = document.getElementById('hamburger');
+    nav.classList.toggle('open');
+    btn.classList.toggle('open');
+  }
+
   // TABS
   function showPage(name) {
+    // fecha menu mobile se estiver aberto
+    document.getElementById('nav-links').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
     document.getElementById('page-' + name).classList.add('active');
