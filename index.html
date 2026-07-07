@@ -67,6 +67,19 @@
 
   .hamburger { display: none; }
 
+  .lang-toggle {
+    display: flex; gap: 0; align-items: center;
+    font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+    margin-left: 16px;
+  }
+  .lang-btn {
+    background: none; border: none; padding: 5px 8px; cursor: pointer;
+    color: var(--gray); font-family: var(--mono); font-size: 10px;
+    font-weight: 600; letter-spacing: 0.1em; transition: color 0.2s;
+  }
+  .lang-btn.active { color: var(--pink); }
+  .lang-divider { color: var(--gray-border); font-size: 10px; }
+
   /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -727,14 +740,21 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo" onclick="showPage('inicio'); return false;">camilla<span>.pestana</span></a>
-  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-pt" onclick="setLang('pt')">PT</button>
+      <span class="lang-divider">|</span>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
   <ul class="nav-links" id="nav-links">
-    <li><div class="nav-tab active" onclick="showPage('inicio')">Início</div></li>
-    <li><div class="nav-tab" onclick="showPage('projetos')">Projetos</div></li>
-    <li><div class="nav-tab" onclick="showPage('sobre')">Sobre</div></li>
-    <li><div class="nav-tab" onclick="showPage('contato')">Contato</div></li>
+    <li><div class="nav-tab active" onclick="showPage('inicio')" data-pt="Início" data-en="Home">Início</div></li>
+    <li><div class="nav-tab" onclick="showPage('projetos')" data-pt="Projetos" data-en="Projects">Projetos</div></li>
+    <li><div class="nav-tab" onclick="showPage('sobre')" data-pt="Sobre" data-en="About">Sobre</div></li>
+    <li><div class="nav-tab" onclick="showPage('contato')" data-pt="Contato" data-en="Contact">Contato</div></li>
   </ul>
 </nav>
 
@@ -744,46 +764,46 @@
 
     <!-- 1. HERO -->
     <section class="biz-hero">
-      <div class="biz-eyebrow">Design + desenvolvimento</div>
-      <h1 class="biz-hero-title">Sites profissionais,<br>do design ao <em>código</em>,<br>para o seu negócio.</h1>
-      <p class="biz-hero-sub">Projeto, identidade visual e desenvolvimento em um só lugar — com domínio próprio incluso e no ar em até 10 a 15 dias úteis, dependendo do pacote.</p>
+      <div class="biz-eyebrow" data-pt="Design + desenvolvimento" data-en="Design + development">Design + desenvolvimento</div>
+      <h1 class="biz-hero-title" data-pt="Sites profissionais,&lt;br&gt;do design ao &lt;em&gt;código&lt;/em&gt;,&lt;br&gt;para o seu negócio." data-en="Professional websites,&lt;br&gt;from design to &lt;em&gt;code&lt;/em&gt;,&lt;br&gt;for your business.">Sites profissionais,<br>do design ao <em>código</em>,<br>para o seu negócio.</h1>
+      <p class="biz-hero-sub" data-pt="Projeto, identidade visual e desenvolvimento em um só lugar — com domínio próprio incluso e no ar em até 10 a 15 dias úteis, dependendo do pacote." data-en="Design, visual identity and development in one place — with your own domain included and live in 10 to 15 business days, depending on the package.">Projeto, identidade visual e desenvolvimento em um só lugar — com domínio próprio incluso e no ar em até 10 a 15 dias úteis, dependendo do pacote.</p>
       <div class="biz-hero-actions">
-        <button onclick="showPage('contato')" class="btn-primary" style="border:none;cursor:pointer;">Pedir uma proposta →</button>
-        <button onclick="showPage('projetos')" class="btn-ghost-link" style="background:none;border:none;border-bottom:1px solid var(--black);cursor:pointer;font-family:var(--sans);">Ver trabalhos realizados</button>
+        <button onclick="showPage('contato')" class="btn-primary" style="border:none;cursor:pointer;" data-pt="Pedir uma proposta →" data-en="Request a proposal →">Pedir uma proposta →</button>
+        <button onclick="showPage('projetos')" class="btn-ghost-link" style="background:none;border:none;border-bottom:1px solid var(--black);cursor:pointer;font-family:var(--sans);" data-pt="Ver trabalhos realizados" data-en="See completed work">Ver trabalhos realizados</button>
       </div>
       <div class="biz-hero-proof">
-        <div class="biz-proof-item"><span class="biz-proof-num">10-15</span><span class="biz-proof-label">Dias úteis até o ar</span></div>
-        <div class="biz-proof-item"><span class="biz-proof-num">100%</span><span class="biz-proof-label">Responsivo</span></div>
-        <div class="biz-proof-item"><span class="biz-proof-num">CNPJ</span><span class="biz-proof-label">Nota fiscal</span></div>
+        <div class="biz-proof-item"><span class="biz-proof-num">10-15</span><span class="biz-proof-label" data-pt="Dias úteis até o ar" data-en="Business days to go live">Dias úteis até o ar</span></div>
+        <div class="biz-proof-item"><span class="biz-proof-num">100%</span><span class="biz-proof-label" data-pt="Responsivo" data-en="Responsive">Responsivo</span></div>
+        <div class="biz-proof-item"><span class="biz-proof-num">CNPJ</span><span class="biz-proof-label" data-pt="Nota fiscal" data-en="Invoice issued">Nota fiscal</span></div>
       </div>
     </section>
 
     <!-- 2. COMO FUNCIONA -->
     <section class="biz-how">
       <div class="biz-how-head">
-        <div class="biz-eyebrow">Como funciona</div>
-        <h2>Do briefing ao site no ar,<br>em 4 etapas simples.</h2>
+        <div class="biz-eyebrow" data-pt="Como funciona" data-en="How it works">Como funciona</div>
+        <h2 data-pt="Do briefing ao site no ar,&lt;br&gt;em 4 etapas simples." data-en="From briefing to launch,&lt;br&gt;in 4 simple steps.">Do briefing ao site no ar,<br>em 4 etapas simples.</h2>
       </div>
       <div class="biz-how-grid">
         <div class="biz-how-step">
           <span class="biz-how-num">01</span>
-          <h3>Briefing</h3>
-          <p>Você me conta sobre o negócio: serviços, fotos, contato e o que não pode faltar na página.</p>
+          <h3 data-pt="Briefing" data-en="Briefing">Briefing</h3>
+          <p data-pt="Você me conta sobre o negócio: serviços, fotos, contato e o que não pode faltar na página." data-en="You tell me about your business: services, photos, contact info and everything that needs to be on the page.">Você me conta sobre o negócio: serviços, fotos, contato e o que não pode faltar na página.</p>
         </div>
         <div class="biz-how-step">
           <span class="biz-how-num">02</span>
-          <h3>Proposta</h3>
-          <p>Te envio o escopo fechado e o valor — sem surpresas, sem letra pequena.</p>
+          <h3 data-pt="Proposta" data-en="Proposal">Proposta</h3>
+          <p data-pt="Te envio a proposta do site para você aprovar ou ajustar antes de seguirmos." data-en="I send you the site proposal for you to approve or adjust before we move forward.">Te envio a proposta do site para você aprovar ou ajustar antes de seguirmos.</p>
         </div>
         <div class="biz-how-step">
           <span class="biz-how-num">03</span>
-          <h3>Desenvolvimento</h3>
-          <p>Construo o site do design ao código, com domínio próprio já configurado.</p>
+          <h3 data-pt="Desenvolvimento" data-en="Development">Desenvolvimento</h3>
+          <p data-pt="Construo o site do design ao código, com domínio próprio já configurado." data-en="I build the site from design to code, with your own domain already set up.">Construo o site do design ao código, com domínio próprio já configurado.</p>
         </div>
         <div class="biz-how-step">
           <span class="biz-how-num">04</span>
-          <h3>Entrega</h3>
-          <p>Site no ar, testado no celular e no computador, pronto para receber clientes.</p>
+          <h3 data-pt="Entrega" data-en="Delivery">Entrega</h3>
+          <p data-pt="Site no ar, testado no celular e no computador, pronto para receber clientes." data-en="Site live, tested on mobile and desktop, ready to welcome customers.">Site no ar, testado no celular e no computador, pronto para receber clientes.</p>
         </div>
       </div>
     </section>
@@ -791,59 +811,59 @@
     <!-- 4. PACOTES -->
     <section class="biz-pricing">
       <div class="biz-pricing-head">
-        <div class="biz-eyebrow biz-eyebrow-light">Pacotes</div>
-        <h2>Um valor justo,<br>sem mensalidade obrigatória.</h2>
-        <p>Todo pacote já inclui domínio próprio por 1 ano. Sem letra pequena, sem custo escondido depois da entrega.</p>
+        <div class="biz-eyebrow biz-eyebrow-light" data-pt="Pacotes" data-en="Packages">Pacotes</div>
+        <h2 data-pt="Um valor justo,&lt;br&gt;sem mensalidade obrigatória." data-en="Fair pricing,&lt;br&gt;no mandatory monthly fee.">Um valor justo,<br>sem mensalidade obrigatória.</h2>
+        <p data-pt="Todo pacote já inclui domínio próprio por 1 ano. Sem letra pequena, sem custo escondido depois da entrega." data-en="Every package already includes your own domain for 1 year. No fine print, no hidden costs after delivery.">Todo pacote já inclui domínio próprio por 1 ano. Sem letra pequena, sem custo escondido depois da entrega.</p>
       </div>
 
       <div class="biz-pricing-grid">
         <div class="biz-price-card">
-          <span class="biz-pc-badge">Essencial</span>
-          <h3>Site Vitrine</h3>
-          <div class="biz-pc-sub">Para apresentar o negócio com profissionalismo</div>
+          <span class="biz-pc-badge" data-pt="Essencial" data-en="Essential">Essencial</span>
+          <h3 data-pt="Site Vitrine" data-en="Showcase Website">Site Vitrine</h3>
+          <div class="biz-pc-sub" data-pt="Para apresentar o negócio com profissionalismo" data-en="To present your business professionally">Para apresentar o negócio com profissionalismo</div>
           <div class="biz-pc-price">R$ 297</div>
-          <div class="biz-pc-note">domínio próprio incluso · 1 ano</div>
+          <div class="biz-pc-note" data-pt="domínio próprio incluso · 1 ano" data-en="own domain included · 1 year">domínio próprio incluso · 1 ano</div>
           <ul class="biz-pc-list">
-            <li>1 página, até 5 seções</li>
-            <li>Responsivo (celular e desktop)</li>
-            <li>Botão de WhatsApp fixo</li>
-            <li>Localização no Google Maps</li>
-            <li>Entrega em até 10 dias úteis*</li>
+            <li data-pt="1 página, até 5 seções" data-en="1 page, up to 5 sections">1 página, até 5 seções</li>
+            <li data-pt="Responsivo (celular e desktop)" data-en="Responsive (mobile and desktop)">Responsivo (celular e desktop)</li>
+            <li data-pt="Botão de WhatsApp fixo" data-en="Fixed WhatsApp button">Botão de WhatsApp fixo</li>
+            <li data-pt="Localização no Google Maps" data-en="Google Maps location">Localização no Google Maps</li>
+            <li data-pt="Entrega em até 10 dias úteis*" data-en="Delivery in up to 10 business days*">Entrega em até 10 dias úteis*</li>
           </ul>
-          <button onclick="window.open('https://wa.me/5511978332614?text=Ol%C3%A1%20Camilla!%20Tenho%20interesse%20no%20pacote%20Site%20Vitrine.', '_blank')" class="biz-btn-price" style="border:none;cursor:pointer;width:100%;">Pedir esta proposta</button>
+          <button onclick="window.open('https://wa.me/5511978332614?text=Ol%C3%A1%20Camilla!%20Tenho%20interesse%20no%20pacote%20Site%20Vitrine.', '_blank')" class="biz-btn-price" style="border:none;cursor:pointer;width:100%;" data-pt="Pedir esta proposta" data-en="Request this proposal">Pedir esta proposta</button>
         </div>
         <div class="biz-price-card featured">
-          <span class="biz-pc-badge">Completo</span>
-          <h3>Presença Digital</h3>
-          <div class="biz-pc-sub">Site + visibilidade no Google desde o primeiro dia</div>
+          <span class="biz-pc-badge" data-pt="Completo" data-en="Complete">Completo</span>
+          <h3 data-pt="Presença Digital" data-en="Digital Presence">Presença Digital</h3>
+          <div class="biz-pc-sub" data-pt="Site + visibilidade no Google desde o primeiro dia" data-en="Website + Google visibility from day one">Site + visibilidade no Google desde o primeiro dia</div>
           <div class="biz-pc-price">R$ 370</div>
-          <div class="biz-pc-note">domínio próprio incluso · 1 ano</div>
+          <div class="biz-pc-note" data-pt="domínio próprio incluso · 1 ano" data-en="own domain included · 1 year">domínio próprio incluso · 1 ano</div>
           <ul class="biz-pc-list">
-            <li>Tudo do Site Vitrine</li>
-            <li>Configuração do Google Meu Negócio</li>
-            <li>SEO básico (título, descrição, palavras-chave)</li>
-            <li>Mapa e endereço indexados ao Google</li>
-            <li>Entrega em até 15 dias úteis*</li>
+            <li data-pt="Tudo do Site Vitrine" data-en="Everything in Showcase Website">Tudo do Site Vitrine</li>
+            <li data-pt="Configuração do Google Meu Negócio" data-en="Google Business Profile setup">Configuração do Google Meu Negócio</li>
+            <li data-pt="SEO básico (título, descrição, palavras-chave)" data-en="Basic SEO (title, description, keywords)">SEO básico (título, descrição, palavras-chave)</li>
+            <li data-pt="Mapa e endereço indexados ao Google" data-en="Map and address indexed on Google">Mapa e endereço indexados ao Google</li>
+            <li data-pt="Entrega em até 15 dias úteis*" data-en="Delivery in up to 15 business days*">Entrega em até 15 dias úteis*</li>
           </ul>
-          <button onclick="window.open('https://wa.me/5511978332614?text=Ol%C3%A1%20Camilla!%20Tenho%20interesse%20no%20pacote%20Presen%C3%A7a%20Digital.', '_blank')" class="biz-btn-price" style="border:none;cursor:pointer;width:100%;">Pedir esta proposta</button>
+          <button onclick="window.open('https://wa.me/5511978332614?text=Ol%C3%A1%20Camilla!%20Tenho%20interesse%20no%20pacote%20Presen%C3%A7a%20Digital.', '_blank')" class="biz-btn-price" style="border:none;cursor:pointer;width:100%;" data-pt="Pedir esta proposta" data-en="Request this proposal">Pedir esta proposta</button>
         </div>
       </div>
 
       <div class="biz-pricing-extra">
-        <div class="biz-pricing-extra-item"><span class="biz-e-label">Ajuste pontual (foto, texto, preço)</span><span class="biz-e-price">R$ 50</span></div>
-        <div class="biz-pricing-extra-item"><span class="biz-e-label">Inclusão de nova seção</span><span class="biz-e-price">R$ 80</span></div>
-        <div class="biz-pricing-extra-item"><span class="biz-e-label">Manutenção mensal (2 ajustes/mês)</span><span class="biz-e-price">R$ 79/mês</span></div>
-        <div class="biz-pricing-extra-item"><span class="biz-e-label">Renovação de domínio (2º ano)</span><span class="biz-e-price">R$ 60</span></div>
+        <div class="biz-pricing-extra-item"><span class="biz-e-label" data-pt="Ajuste pontual (foto, texto, preço)" data-en="One-time update (photo, text, price)">Ajuste pontual (foto, texto, preço)</span><span class="biz-e-price">R$ 50</span></div>
+        <div class="biz-pricing-extra-item"><span class="biz-e-label" data-pt="Inclusão de nova seção" data-en="New section addition">Inclusão de nova seção</span><span class="biz-e-price">R$ 80</span></div>
+        <div class="biz-pricing-extra-item"><span class="biz-e-label" data-pt="Manutenção mensal (2 ajustes/mês)" data-en="Monthly maintenance (2 updates/month)">Manutenção mensal (2 ajustes/mês)</span><span class="biz-e-price">R$ 79/mês</span></div>
+        <div class="biz-pricing-extra-item"><span class="biz-e-label" data-pt="Renovação de domínio (2º ano)" data-en="Domain renewal (2nd year)">Renovação de domínio (2º ano)</span><span class="biz-e-price">R$ 60</span></div>
       </div>
-      <div class="biz-pricing-foot-note">Emito nota fiscal — CNPJ ativo em serviços de design e desenvolvimento</div>
-      <div class="biz-pricing-foot-note no-icon" style="margin-top:10px;">*Prazo contado a partir do recebimento de todo o material (textos, fotos e logo)</div>
+      <div class="biz-pricing-foot-note" data-pt="Emito nota fiscal — CNPJ ativo em serviços de design e desenvolvimento" data-en="Invoice issued — active CNPJ in design and development services">Emito nota fiscal — CNPJ ativo em serviços de design e desenvolvimento</div>
+      <div class="biz-pricing-foot-note no-icon" style="margin-top:10px;" data-pt="*Prazo contado a partir do recebimento de todo o material (textos, fotos e logo)" data-en="*Timeline starts upon receipt of all materials (texts, photos and logo)">*Prazo contado a partir do recebimento de todo o material (textos, fotos e logo)</div>
     </section>
 
     <!-- 5. CTA FINAL -->
     <section class="biz-final-cta">
-      <h2>Seu negócio merece estar no Google.</h2>
-      <p>Vamos colocar seu site no ar — com domínio próprio, design profissional e suporte para tirar dúvidas.</p>
-      <button onclick="showPage('contato')" class="btn-primary" style="background:var(--white);color:var(--black);border:none;cursor:pointer;">Falar comigo →</button>
+      <h2 data-pt="Seu negócio merece estar no Google." data-en="Your business deserves to be on Google.">Seu negócio merece estar no Google.</h2>
+      <p data-pt="Vamos colocar seu site no ar — com domínio próprio, design profissional e suporte para tirar dúvidas." data-en="Let's get your website live — with your own domain, professional design and support along the way.">Vamos colocar seu site no ar — com domínio próprio, design profissional e suporte para tirar dúvidas.</p>
+      <button onclick="showPage('contato')" class="btn-primary" style="background:var(--white);color:var(--black);border:none;cursor:pointer;" data-pt="Falar comigo →" data-en="Get in touch →">Falar comigo →</button>
     </section>
 
   </div>
@@ -912,7 +932,7 @@
   </div>
 
   <div class="projects-wrap">
-    <div class="projects-label">Trabalhos selecionados</div>
+    <div class="projects-label" data-pt="Trabalhos selecionados" data-en="Selected work">Trabalhos selecionados</div>
 
     <div class="projects-grid">
 
@@ -998,8 +1018,8 @@
       </div>
 
       <div>
-        <div class="about-tag">Sobre mim</div>
-        <h2 class="about-title">Do detalhe,<br><em>à interface</em></h2>
+        <div class="about-tag" data-pt="Sobre mim" data-en="About me">Sobre mim</div>
+        <h2 class="about-title" data-pt="Do detalhe,&lt;br&gt;&lt;em&gt;à interface&lt;/em&gt;" data-en="From detail,&lt;br&gt;&lt;em&gt;to interface&lt;/em&gt;">Do detalhe,<br><em>à interface</em></h2>
 
         <div class="about-text">
           <p>Designer desde 2009, com trajetória em design gráfico, comunicação visual, editorial e social media.
@@ -1020,13 +1040,13 @@
 <div class="page" id="page-contato">
   <div class="contact-page">
     <div class="contact-header">
-      <div class="contact-tag">Contato</div>
-      <h2 class="contact-title">Vamos criar algo<br><em>juntos?</em></h2>
+      <div class="contact-tag" data-pt="Contato" data-en="Contact">Contato</div>
+      <h2 class="contact-title" data-pt="Vamos criar algo&lt;br&gt;&lt;em&gt;juntos?&lt;/em&gt;" data-en="Let's create something&lt;br&gt;&lt;em&gt;together?&lt;/em&gt;">Vamos criar algo<br><em>juntos?</em></h2>
     </div>
 
     <div class="contact-grid">
       <div class="contact-intro">
-        <p>Entre design e tecnologia, sigo aberta a novos desafios e oportunidades.</p>
+        <p data-pt="Entre design e tecnologia, sigo aberta a novos desafios e oportunidades." data-en="Between design and technology, I remain open to new challenges and opportunities.">Entre design e tecnologia, sigo aberta a novos desafios e oportunidades.</p>
 
         <div class="contact-links">
           <a href="https://linkedin.com/in/camilla-pestana" target="_blank" class="contact-link-row">
@@ -1179,6 +1199,29 @@ Este projeto de UX Research investiga as dores reais desse sistema, com foco em 
   }
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
+  // IDIOMA
+  function setLang(lang) {
+    document.querySelectorAll('[data-pt]').forEach(el => {
+      const text = el.getAttribute('data-' + lang);
+      if (text) el.innerHTML = text;
+    });
+    document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('lang', lang);
+    document.documentElement.setAttribute('lang', lang === 'en' ? 'en' : 'pt-BR');
+  }
+
+  // Restaurar idioma salvo
+  document.addEventListener('DOMContentLoaded', function() {
+    const savedLang = localStorage.getItem('lang') || 'pt';
+    if (savedLang === 'en') setLang('en');
+  });
+
+  window.addEventListener('load', function() {
+    const savedLang = localStorage.getItem('lang') || 'pt';
+    if (savedLang === 'en') setLang('en');
+  });
+
   // HAMBÚRGUER
   function toggleMenu() {
     const nav = document.getElementById('nav-links');
@@ -1211,13 +1254,13 @@ Este projeto de UX Research investiga as dores reais desse sistema, com foco em 
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
       <path d="M7 12V2M2 7l5-5 5 5"/>
     </svg>
-    Voltar ao topo
+    <span data-pt="Voltar ao topo" data-en="Back to top">Voltar ao topo</span>
   </button>
 </div>
 
 <footer>
   <p>© 2026 Camilla Pestana — CNPJ 36.151.883/0001-88</p>
-  <p>Desenvolvido com <span>♥</span> e muito Frappé</p>
+  <p data-pt="Desenvolvido com ♥ e muito Frappé" data-en="Crafted with ♥ and a lot of Frappé"><span data-pt="Desenvolvido com " data-en="Crafted with ">Desenvolvido com </span><span>♥</span><span data-pt=" e muito Frappé" data-en=" and a lot of Frappé"> e muito Frappé</span></p>
 </footer>
 
 </body>

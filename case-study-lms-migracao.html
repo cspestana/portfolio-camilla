@@ -199,256 +199,298 @@
     .hero-meta { gap: 24px; }
     .shot-gallery-row { grid-template-columns: 1fr; gap: 28px; }
   }
+
+  .lang-toggle {
+    display: flex; gap: 0; align-items: center;
+    font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+  }
+  .lang-btn {
+    background: none; border: none; padding: 5px 8px; cursor: pointer;
+    color: var(--gray); font-family: var(--mono); font-size: 10px;
+    font-weight: 600; letter-spacing: 0.1em; transition: color 0.2s;
+  }
+  .lang-btn.active { color: var(--pink); }
+  .lang-divider { color: var(--gray-border); font-size: 10px; }
+
 </style>
 </head>
 <body>
 
 <nav>
   <a href="index.html" class="nav-logo">Camilla <span>Pestana</span></a>
-  <a href="index.html" class="nav-back">← Voltar ao portfólio</a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-pt" onclick="setLang('pt')">PT</button>
+      <span class="lang-divider">|</span>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="index.html" class="nav-back" data-pt="← Voltar ao portfólio" data-en="← Back to portfolio">← Voltar ao portfólio</a>
+  </div>
 </nav>
 
 <section class="case-hero">
-  <div class="hero-eyebrow">Case Study · UX/UI</div>
-  <h1 class="hero-title">Do estudo herdado <em>à plataforma em produção</em></h1>
+  <div class="hero-eyebrow" data-pt="Case Study · UX/UI" data-en="Case Study · UX/UI">Case Study · UX/UI</div>
+  <h1 class="hero-title" data-pt="Do estudo herdado &lt;em&gt;à plataforma em produção&lt;/em&gt;" data-en="From inherited study &lt;em&gt;to a production platform&lt;/em&gt;">Do estudo herdado <em>à plataforma em produção</em></h1>
 
   <div class="hero-meta">
     <div class="meta-item">
-      <span class="meta-label">Empresa</span>
+      <span class="meta-label" data-pt="Empresa" data-en="Company">Empresa</span>
       <span class="meta-value">Fênix Educação</span>
     </div>
     <div class="meta-item">
-      <span class="meta-label">Produto</span>
+      <span class="meta-label" data-pt="Produto" data-en="Product">Produto</span>
       <span class="meta-value">Escola Aberta do Terceiro Setor · on-Hive</span>
     </div>
     <div class="meta-item">
-      <span class="meta-label">Papel</span>
-      <span class="meta-value">UX/UI Designer · CLT</span>
+      <span class="meta-label" data-pt="Papel" data-en="Role">Papel</span>
+      <span class="meta-value" data-pt="UX/UI Designer · CLT" data-en="UX/UI Designer · Full-time">UX/UI Designer · CLT</span>
     </div>
     <div class="meta-item">
-      <span class="meta-label">Ferramentas</span>
+      <span class="meta-label" data-pt="Ferramentas" data-en="Tools">Ferramentas</span>
       <span class="meta-value">Figma · Microsoft Clarity</span>
     </div>
     <div class="meta-item">
-      <span class="meta-label">Site ao vivo</span>
+      <span class="meta-label" data-pt="Site ao vivo" data-en="Live site">Site ao vivo</span>
       <span class="meta-value"><a href="https://eats.onhive.org.br/login" target="_blank">eats.onhive.org.br ↗</a></span>
     </div>
     <div class="meta-item">
-      <span class="meta-label">Código</span>
+      <span class="meta-label" data-pt="Código" data-en="Code">Código</span>
       <span class="meta-value"><a href="https://github.com/FJPN-OnHive/OnHive-Backend" target="_blank">Open source · GPL-2.0 ↗</a></span>
     </div>
   </div>
 </section>
 
 <div class="toc-wrap">
-  <div class="toc-label">Neste case</div>
+  <div class="toc-label" data-pt="Neste case" data-en="In this case">Neste case</div>
   <div class="toc-grid">
-    <a href="#contexto" class="toc-item"><span class="toc-num">01</span> Contexto</a>
-    <a href="#desafio" class="toc-item"><span class="toc-num">02</span> Desafio</a>
-    <a href="#papel" class="toc-item"><span class="toc-num">03</span> Meu papel</a>
-    <a href="#processo" class="toc-item"><span class="toc-num">04</span> Processo</a>
-    <a href="#decisao" class="toc-item"><span class="toc-num">05</span> Decisão de design</a>
-    <a href="#resultados" class="toc-item"><span class="toc-num">06</span> Resultados</a>
-    <a href="#aprendizados" class="toc-item"><span class="toc-num">07</span> Aprendizados</a>
+    <a href="#contexto" class="toc-item" data-pt="Contexto" data-en="Context"><span class="toc-num">01</span> <span data-pt="Contexto" data-en="Context">Contexto</span></a>
+    <a href="#desafio" class="toc-item" data-pt="Desafio" data-en="Challenge"><span class="toc-num">02</span> <span data-pt="Desafio" data-en="Challenge">Desafio</span></a>
+    <a href="#papel" class="toc-item" data-pt="Meu papel" data-en="My role"><span class="toc-num">03</span> <span data-pt="Meu papel" data-en="My role">Meu papel</span></a>
+    <a href="#processo" class="toc-item" data-pt="Processo" data-en="Process"><span class="toc-num">04</span> <span data-pt="Processo" data-en="Process">Processo</span></a>
+    <a href="#decisao" class="toc-item" data-pt="Decisão de design" data-en="Design decision"><span class="toc-num">05</span> <span data-pt="Decisão de design" data-en="Design decision">Decisão de design</span></a>
+    <a href="#resultados" class="toc-item" data-pt="Resultados" data-en="Results"><span class="toc-num">06</span> <span data-pt="Resultados" data-en="Results">Resultados</span></a>
+    <a href="#aprendizados" class="toc-item" data-pt="Aprendizados" data-en="Learnings"><span class="toc-num">07</span> <span data-pt="Aprendizados" data-en="Learnings">Aprendizados</span></a>
   </div>
 </div>
 
 <section class="case-section" id="contexto">
-  <div class="section-eyebrow"><span class="section-num">01</span><span class="section-label">Contexto</span></div>
-  <h2 class="section-title">Um estudo herdado, <em>antes da implementação</em></h2>
+  <div class="section-eyebrow"><span class="section-num">01</span><span class="section-label" data-pt="Contexto" data-en="Context">Contexto</span></div>
+  <h2 class="section-title" data-pt="Um estudo herdado, &lt;em&gt;antes da implementação&lt;/em&gt;" data-en="An inherited study, &lt;em&gt;before implementation&lt;/em&gt;">Um estudo herdado, <em>antes da implementação</em></h2>
   <div class="section-body">
-    <p>Antes da minha entrada na empresa, já existia um estudo de design para uma nova plataforma de cursos: fluxos e telas pensados, mas nunca implementados. Até então, os alunos estudavam por uma <strong>plataforma terceirizada</strong>, sem nenhuma solução própria no ar.</p>
-    <p>Entrei como UX/UI Designer, na minha primeira posição na função e em regime CLT, para dar continuidade a esse estudo junto com a equipe de desenvolvimento. O objetivo era claro: <strong>migrar a base de alunos para uma plataforma própria</strong>, construída a partir daquele material herdado.</p>
+    <p data-pt="Antes da minha entrada na empresa, já existia um estudo de design para uma nova plataforma de cursos: fluxos e telas pensados, mas nunca implementados. Até então, os alunos estudavam por uma &lt;strong&gt;plataforma terceirizada&lt;/strong&gt;, sem nenhuma solução própria no ar." data-en="Before I joined the company, a design study already existed for a new course platform: flows and screens conceived but never implemented. Until then, students were studying through a &lt;strong&gt;third-party platform&lt;/strong&gt;, with no proprietary solution live.">Antes da minha entrada na empresa, já existia um estudo de design para uma nova plataforma de cursos: fluxos e telas pensados, mas nunca implementados. Até então, os alunos estudavam por uma <strong>plataforma terceirizada</strong>, sem nenhuma solução própria no ar.</p>
+    <p data-pt="Entrei como UX/UI Designer, na minha primeira posição na função e em regime CLT, para dar continuidade a esse estudo junto com a equipe de desenvolvimento. O objetivo era claro: &lt;strong&gt;migrar a base de alunos para uma plataforma própria&lt;/strong&gt;, construída a partir daquele material herdado." data-en="I joined as a UX/UI Designer — my first role in the field, as a full-time employee — to continue this study alongside the development team. The goal was clear: &lt;strong&gt;migrate the student base to a proprietary platform&lt;/strong&gt;, built on that inherited material.">Entrei como UX/UI Designer, na minha primeira posição na função e em regime CLT, para dar continuidade a esse estudo junto com a equipe de desenvolvimento. O objetivo era claro: <strong>migrar a base de alunos para uma plataforma própria</strong>, construída a partir daquele material herdado.</p>
   </div>
 </section>
 
 <section class="case-section" id="desafio">
-  <div class="section-eyebrow"><span class="section-num">02</span><span class="section-label">Desafio</span></div>
-  <h2 class="section-title">Validar na prática <em>um estudo que só existia no papel</em></h2>
+  <div class="section-eyebrow"><span class="section-num">02</span><span class="section-label" data-pt="Desafio" data-en="Challenge">Desafio</span></div>
+  <h2 class="section-title" data-pt="Validar na prática &lt;em&gt;um estudo que só existia no papel&lt;/em&gt;" data-en="Validating in practice &lt;em&gt;a study that only existed on paper&lt;/em&gt;">Validar na prática <em>um estudo que só existia no papel</em></h2>
   <div class="section-body">
-    <p>O desafio não era desenhar do zero. Era transformar protótipo em produto real, o que trazia três frentes de risco:</p>
+    <p data-pt="O desafio não era desenhar do zero. Era transformar protótipo em produto real, o que trazia três frentes de risco:" data-en="The challenge was not to design from scratch. It was to turn a prototype into a real product, which brought three risk fronts:">O desafio não era desenhar do zero. Era transformar protótipo em produto real, o que trazia três frentes de risco:</p>
   </div>
   <div class="insight-grid">
     <div class="insight-card">
-      <div class="insight-card-label">Risco 01</div>
-      <div class="insight-card-text">Garantir que os fluxos desenhados funcionassem com usuários reais, não só em protótipo no Figma.</div>
+      <div class="insight-card-label" data-pt="Risco 01" data-en="Risk 01">Risco 01</div>
+      <div class="insight-card-text" data-pt="Garantir que os fluxos desenhados funcionassem com usuários reais, não só em protótipo no Figma." data-en="Ensuring the designed flows worked with real users, not just as a Figma prototype.">Garantir que os fluxos desenhados funcionassem com usuários reais, não só em protótipo no Figma.</div>
     </div>
     <div class="insight-card">
-      <div class="insight-card-label">Risco 02</div>
-      <div class="insight-card-text">Encontrar problemas de usabilidade que só apareceriam em uso real, depois do lançamento.</div>
+      <div class="insight-card-label" data-pt="Risco 02" data-en="Risk 02">Risco 02</div>
+      <div class="insight-card-text" data-pt="Encontrar problemas de usabilidade que só apareceriam em uso real, depois do lançamento." data-en="Finding usability issues that would only surface in real use, after launch.">Encontrar problemas de usabilidade que só apareceriam em uso real, depois do lançamento.</div>
     </div>
     <div class="insight-card">
-      <div class="insight-card-label">Risco 03</div>
-      <div class="insight-card-text">Migrar uma base de alunos já acostumada com a plataforma terceirizada, sem perder gente pelo caminho.</div>
+      <div class="insight-card-label" data-pt="Risco 03" data-en="Risk 03">Risco 03</div>
+      <div class="insight-card-text" data-pt="Migrar uma base de alunos já acostumada com a plataforma terceirizada, sem perder gente pelo caminho." data-en="Migrating a student base already accustomed to the third-party platform, without losing people along the way.">Migrar uma base de alunos já acostumada com a plataforma terceirizada, sem perder gente pelo caminho.</div>
     </div>
     <div class="insight-card">
-      <div class="insight-card-label">Risco 04</div>
-      <div class="insight-card-text">Dar suporte contínuo à equipe de dev depois do go-live, quando os primeiros bugs e atritos aparecessem.</div>
+      <div class="insight-card-label" data-pt="Risco 04" data-en="Risk 04">Risco 04</div>
+      <div class="insight-card-text" data-pt="Dar suporte contínuo à equipe de dev depois do go-live, quando os primeiros bugs e atritos aparecessem." data-en="Providing ongoing support to the dev team after go-live, when the first bugs and friction points would appear.">Dar suporte contínuo à equipe de dev depois do go-live, quando os primeiros bugs e atritos aparecessem.</div>
     </div>
   </div>
 </section>
 
 <section class="case-section" id="papel">
-  <div class="section-eyebrow"><span class="section-num">03</span><span class="section-label">Meu papel</span></div>
-  <h2 class="section-title">Da orientação do PO <em>ao acompanhamento de dados reais</em></h2>
+  <div class="section-eyebrow"><span class="section-num">03</span><span class="section-label" data-pt="Meu papel" data-en="My role">Meu papel</span></div>
+  <h2 class="section-title" data-pt="Da orientação do PO &lt;em&gt;ao acompanhamento de dados reais&lt;/em&gt;" data-en="From PO guidance &lt;em&gt;to real data monitoring&lt;/em&gt;">Da orientação do PO <em>ao acompanhamento de dados reais</em></h2>
   <div class="section-body">
-    <p>Atuei sob orientação direta do Product Owner, contribuindo com sugestões de usabilidade e ideias de fluxo. Participei dos testes internos, dos ciclos de feedback e ajustes, até a aprovação da diretoria, e continuei acompanhando o produto depois que ele foi ao ar.</p>
+    <p data-pt="Atuei sob orientação direta do Product Owner, contribuindo com sugestões de usabilidade e ideias de fluxo. Participei dos testes internos, dos ciclos de feedback e ajustes, até a aprovação da diretoria, e continuei acompanhando o produto depois que ele foi ao ar." data-en="I worked under the direct guidance of the Product Owner, contributing usability suggestions and flow ideas. I took part in internal testing, feedback and adjustment cycles up to board approval, and continued monitoring the product after it went live.">Atuei sob orientação direta do Product Owner, contribuindo com sugestões de usabilidade e ideias de fluxo. Participei dos testes internos, dos ciclos de feedback e ajustes, até a aprovação da diretoria, e continuei acompanhando o produto depois que ele foi ao ar.</p>
   </div>
-  <blockquote class="pull-quote">"Aprendi a função fazendo parte dela, dentro de um produto que de fato foi ao ar."</blockquote>
+  <blockquote class="pull-quote" data-pt="&quot;Aprendi a função fazendo parte dela, dentro de um produto que de fato foi ao ar.&quot;" data-en="&quot;I learned the role by being part of it, inside a product that actually went live.&quot;">"Aprendi a função fazendo parte dela, dentro de um produto que de fato foi ao ar."</blockquote>
   <div class="section-body">
-    <p>Paralelamente, eu cursava <strong>UX Unicórnio</strong>. Cada conceito novo que aprendia em sala virava prática quase no mesmo dia, numa curva de aprendizado bem diferente da de quem só estuda em projetos de estudo.</p>
+    <p data-pt="Paralelamente, eu cursava &lt;strong&gt;UX Unicórnio&lt;/strong&gt;. Cada conceito novo que aprendia em sala virava prática quase no mesmo dia, numa curva de aprendizado bem diferente da de quem só estuda em projetos de estudo." data-en="In parallel, I was taking the &lt;strong&gt;UX Unicórnio&lt;/strong&gt; course. Each new concept I learned in class turned into practice almost the same day — a very different learning curve from someone who only studies through fictional projects.">Paralelamente, eu cursava <strong>UX Unicórnio</strong>. Cada conceito novo que aprendia em sala virava prática quase no mesmo dia, numa curva de aprendizado bem diferente da de quem só estuda em projetos de estudo.</p>
   </div>
 </section>
 
 <section class="case-section" id="processo">
-  <div class="section-eyebrow"><span class="section-num">04</span><span class="section-label">Processo</span></div>
-  <h2 class="section-title">Do estudo herdado <em>ao primeiro acesso real</em></h2>
-  <div class="section-body"><p>A linha do tempo do projeto, da herança do estudo ao monitoramento pós-lançamento:</p></div>
+  <div class="section-eyebrow"><span class="section-num">04</span><span class="section-label" data-pt="Processo" data-en="Process">Processo</span></div>
+  <h2 class="section-title" data-pt="Do estudo herdado &lt;em&gt;ao primeiro acesso real&lt;/em&gt;" data-en="From inherited study &lt;em&gt;to first real access&lt;/em&gt;">Do estudo herdado <em>ao primeiro acesso real</em></h2>
+  <div class="section-body"><p data-pt="A linha do tempo do projeto, da herança do estudo ao monitoramento pós-lançamento:" data-en="The project timeline, from inheriting the study to post-launch monitoring:">A linha do tempo do projeto, da herança do estudo ao monitoramento pós-lançamento:</p></div>
   <div class="process-list">
     <div class="process-item">
-      <span class="process-date">Estudo</span>
-      <span class="process-text"><strong>Ponto de partida:</strong> fluxos e protótipos desenhados antes da minha chegada, sem implementação.</span>
+      <span class="process-date" data-pt="Estudo" data-en="Study">Estudo</span>
+      <span class="process-text" data-pt="&lt;strong&gt;Ponto de partida:&lt;/strong&gt; fluxos e protótipos desenhados antes da minha chegada, sem implementação." data-en="&lt;strong&gt;Starting point:&lt;/strong&gt; flows and prototypes designed before I arrived, with no implementation."><strong>Ponto de partida:</strong> fluxos e protótipos desenhados antes da minha chegada, sem implementação.</span>
     </div>
     <div class="process-item">
-      <span class="process-date">Entrada</span>
-      <span class="process-text"><strong>Continuidade com a equipe:</strong> revisão do estudo com PO e devs, viabilizando tecnicamente o que tinha sido desenhado.</span>
+      <span class="process-date" data-pt="Entrada" data-en="Onboarding">Entrada</span>
+      <span class="process-text" data-pt="&lt;strong&gt;Continuidade com a equipe:&lt;/strong&gt; revisão do estudo com PO e devs, viabilizando tecnicamente o que tinha sido desenhado." data-en="&lt;strong&gt;Continuity with the team:&lt;/strong&gt; reviewing the study with the PO and devs, making what had been designed technically viable."><strong>Continuidade com a equipe:</strong> revisão do estudo com PO e devs, viabilizando tecnicamente o que tinha sido desenhado.</span>
     </div>
     <div class="process-item">
-      <span class="process-date">Testes</span>
-      <span class="process-text"><strong>Validação interna:</strong> ciclos de feedback e ajustes de fluxo, até a aprovação final da diretoria.</span>
+      <span class="process-date" data-pt="Testes" data-en="Testing">Testes</span>
+      <span class="process-text" data-pt="&lt;strong&gt;Validação interna:&lt;/strong&gt; ciclos de feedback e ajustes de fluxo, até a aprovação final da diretoria." data-en="&lt;strong&gt;Internal validation:&lt;/strong&gt; feedback cycles and flow adjustments, up to final board approval."><strong>Validação interna:</strong> ciclos de feedback e ajustes de fluxo, até a aprovação final da diretoria.</span>
     </div>
     <div class="process-item">
-      <span class="process-date">Go-live</span>
-      <span class="process-text"><strong>Lançamento:</strong> migração da base de alunos da plataforma terceirizada para a plataforma própria.</span>
+      <span class="process-date" data-pt="Go-live" data-en="Go-live">Go-live</span>
+      <span class="process-text" data-pt="&lt;strong&gt;Lançamento:&lt;/strong&gt; migração da base de alunos da plataforma terceirizada para a plataforma própria." data-en="&lt;strong&gt;Launch:&lt;/strong&gt; migration of the student base from the third-party platform to the proprietary one."><strong>Lançamento:</strong> migração da base de alunos da plataforma terceirizada para a plataforma própria.</span>
     </div>
     <div class="process-item">
-      <span class="process-date">Pós-ar</span>
-      <span class="process-text"><strong>Monitoramento contínuo:</strong> acompanhamento dos primeiros acessos via Microsoft Clarity, para captar bugs e atritos reais.</span>
+      <span class="process-date" data-pt="Pós-ar" data-en="Post-launch">Pós-ar</span>
+      <span class="process-text" data-pt="&lt;strong&gt;Monitoramento contínuo:&lt;/strong&gt; acompanhamento dos primeiros acessos via Microsoft Clarity, para captar bugs e atritos reais." data-en="&lt;strong&gt;Continuous monitoring:&lt;/strong&gt; tracking the first accesses via Microsoft Clarity to capture real bugs and friction points."><strong>Monitoramento contínuo:</strong> acompanhamento dos primeiros acessos via Microsoft Clarity, para captar bugs e atritos reais.</span>
     </div>
   </div>
 
   <div class="section-body" style="margin-top:32px;">
-    <p>O fluxo de entrada do aluno na nova plataforma, do cadastro à conta ativa:</p>
+    <p data-pt="O fluxo de entrada do aluno na nova plataforma, do cadastro à conta ativa:" data-en="The student onboarding flow on the new platform, from registration to active account:">O fluxo de entrada do aluno na nova plataforma, do cadastro à conta ativa:</p>
   </div>
 
   <figure class="shot-frame">
     <img src="images/tela-3.jpg" alt="Tela de cadastro com validação de senha e dados pessoais" style="max-width: 400px;">
-    <figcaption>Cadastro de novo aluno na plataforma própria</figcaption>
+    <figcaption data-pt="Cadastro de novo aluno na plataforma própria" data-en="New student registration on the platform">Cadastro de novo aluno na plataforma própria</figcaption>
   </figure>
 
   <div class="shot-gallery-row">
     <figure class="shot-frame">
       <img src="images/tela-4.jpg" alt="Tela de inserção do código de ativação enviado por e-mail">
-      <figcaption>Código de ativação enviado por e-mail</figcaption>
+      <figcaption data-pt="Código de ativação enviado por e-mail" data-en="Activation code sent by email">Código de ativação enviado por e-mail</figcaption>
     </figure>
     <figure class="shot-frame">
       <img src="images/tela-5.jpg" alt="Tela de boas-vindas após cadastro efetuado com sucesso">
-      <figcaption>Confirmação e boas-vindas à plataforma</figcaption>
+      <figcaption data-pt="Confirmação e boas-vindas à plataforma" data-en="Confirmation and welcome to the platform">Confirmação e boas-vindas à plataforma</figcaption>
     </figure>
   </div>
 
   <figure class="shot-frame">
     <img src="images/tela-6.jpg" alt="Tela de dados pessoais para inserir, corrigir ou completar informações">
-    <figcaption>Área da conta · dados pessoais a completar ou corrigir</figcaption>
+    <figcaption data-pt="Área da conta · dados pessoais a completar ou corrigir" data-en="Account area · personal data to complete or correct">Área da conta · dados pessoais a completar ou corrigir</figcaption>
   </figure>
 </section>
 
 <section class="case-section" id="decisao">
-  <div class="section-eyebrow"><span class="section-num">05</span><span class="section-label">Decisão de design</span></div>
-  <h2 class="section-title">Reduzindo o atrito de <em>uma migração de plataforma</em></h2>
+  <div class="section-eyebrow"><span class="section-num">05</span><span class="section-label" data-pt="Decisão de design" data-en="Design decision">Decisão de design</span></div>
+  <h2 class="section-title" data-pt="Reduzindo o atrito de &lt;em&gt;uma migração de plataforma&lt;/em&gt;" data-en="Reducing friction &lt;em&gt;in a platform migration&lt;/em&gt;">Reduzindo o atrito de <em>uma migração de plataforma</em></h2>
   <div class="section-body">
-    <p>Antes da migração, os alunos acessavam os cursos por uma <strong>plataforma terceirizada</strong>. Migrar de plataforma é, por natureza, um momento de atrito: o aluno precisa entender onde estão seus cursos, como acessar, e por que tudo mudou.</p>
-    <p>Para reduzir esse atrito, criei um <strong>vídeo tutorial passo a passo</strong>, orientando os alunos sobre como recuperar o acesso e migrar da plataforma antiga para a nova. Propus à equipe de dev a inclusão de um <strong>botão de destaque "Recuperar acesso"</strong> na própria tela de login, dando acesso direto a esse vídeo no momento em que o aluno mais precisaria dessa orientação, antes de qualquer dúvida ou abandono.</p>
+    <p data-pt="Antes da migração, os alunos acessavam os cursos por uma &lt;strong&gt;plataforma terceirizada&lt;/strong&gt;. Migrar de plataforma é, por natureza, um momento de atrito: o aluno precisa entender onde estão seus cursos, como acessar, e por que tudo mudou." data-en="Before the migration, students accessed courses through a &lt;strong&gt;third-party platform&lt;/strong&gt;. Platform migration is, by nature, a moment of friction: the student needs to understand where their courses are, how to access them, and why everything changed.">Antes da migração, os alunos acessavam os cursos por uma <strong>plataforma terceirizada</strong>. Migrar de plataforma é, por natureza, um momento de atrito: o aluno precisa entender onde estão seus cursos, como acessar, e por que tudo mudou.</p>
+    <p data-pt="Para reduzir esse atrito, criei um &lt;strong&gt;vídeo tutorial passo a passo&lt;/strong&gt;, orientando os alunos sobre como recuperar o acesso e migrar da plataforma antiga para a nova. Propus à equipe de dev a inclusão de um &lt;strong&gt;botão de destaque &quot;Recuperar acesso&quot;&lt;/strong&gt; na própria tela de login, dando acesso direto a esse vídeo no momento em que o aluno mais precisaria dessa orientação, antes de qualquer dúvida ou abandono." data-en="To reduce this friction, I created a &lt;strong&gt;step-by-step tutorial video&lt;/strong&gt;, guiding students on how to recover access and migrate from the old platform to the new one. I proposed to the dev team the addition of a &lt;strong&gt;highlighted &quot;Recover access&quot; button&lt;/strong&gt; on the login screen itself, giving direct access to this video at the exact moment the student would most need that guidance, before any doubt or drop-off.">Para reduzir esse atrito, criei um <strong>vídeo tutorial passo a passo</strong>, orientando os alunos sobre como recuperar o acesso e migrar da plataforma antiga para a nova. Propus à equipe de dev a inclusão de um <strong>botão de destaque "Recuperar acesso"</strong> na própria tela de login, dando acesso direto a esse vídeo no momento em que o aluno mais precisaria dessa orientação, antes de qualquer dúvida ou abandono.</p>
   </div>
   <figure class="shot-frame">
     <img src="images/botao-recuperar-acesso.jpg" alt="Tela de login com botão de destaque Recuperar acesso" style="max-width: 400px;">
-    <figcaption>Botão "Recuperar acesso" incluído na tela de login</figcaption>
+    <figcaption data-pt="Botão &quot;Recuperar acesso&quot; incluído na tela de login" data-en="&quot;Recover access&quot; button added to the login screen">Botão "Recuperar acesso" incluído na tela de login</figcaption>
   </figure>
   <figure class="shot-frame">
     <img src="images/tela2.jpg" alt="Vídeo tutorial de recuperação de acesso reproduzido sobre a tela de login">
-    <figcaption>Vídeo tutorial "Recuperar acesso", acionado direto da tela de login</figcaption>
+    <figcaption data-pt="Vídeo tutorial &quot;Recuperar acesso&quot;, acionado direto da tela de login" data-en="Tutorial video &quot;Recover access&quot;, triggered directly from the login screen">Vídeo tutorial "Recuperar acesso", acionado direto da tela de login</figcaption>
   </figure>
 
   <div class="section-body" style="margin-top:32px;">
-    <p>Dentro de cada curso, os módulos podiam reunir diferentes formatos de conteúdo — videoaulas, links externos, avaliações e anexos —, sempre com indicação clara do progresso do aluno:</p>
+    <p data-pt="Dentro de cada curso, os módulos podiam reunir diferentes formatos de conteúdo — videoaulas, links externos, avaliações e anexos —, sempre com indicação clara do progresso do aluno:" data-en="Within each course, modules could combine different content formats — video lessons, external links, assessments and attachments — always with a clear indication of the student's progress:">Dentro de cada curso, os módulos podiam reunir diferentes formatos de conteúdo — videoaulas, links externos, avaliações e anexos —, sempre com indicação clara do progresso do aluno:</p>
   </div>
   <figure class="shot-frame">
     <img src="images/tela-8.jpg" alt="Player de vídeo do módulo do curso com lista de aulas, links, avaliação e anexos">
-    <figcaption>Player de aula e estrutura de módulos com diferentes formatos de conteúdo</figcaption>
+    <figcaption data-pt="Player de aula e estrutura de módulos com diferentes formatos de conteúdo" data-en="Lesson player and module structure with different content formats">Player de aula e estrutura de módulos com diferentes formatos de conteúdo</figcaption>
   </figure>
   <figure class="shot-frame">
     <img src="images/tela-8_1.jpg" alt="Tela de cursos sem nenhuma matrícula, com link para cursos disponíveis">
-    <figcaption>Estado sem matrícula, com direcionamento para o catálogo de cursos</figcaption>
+    <figcaption data-pt="Estado sem matrícula, com direcionamento para o catálogo de cursos" data-en="Empty state, with a link to the course catalogue">Estado sem matrícula, com direcionamento para o catálogo de cursos</figcaption>
   </figure>
 </section>
 
 <section class="case-section" id="resultados">
-  <div class="section-eyebrow"><span class="section-num">06</span><span class="section-label">Resultados</span></div>
-  <h2 class="section-title">Do estudo no papel <em>ao produto em produção</em></h2>
-  <div class="section-body"><p>O projeto foi aprovado pela diretoria e lançado com sucesso, com acompanhamento contínuo nas primeiras semanas:</p></div>
+  <div class="section-eyebrow"><span class="section-num">06</span><span class="section-label" data-pt="Resultados" data-en="Results">Resultados</span></div>
+  <h2 class="section-title" data-pt="Do estudo no papel &lt;em&gt;ao produto em produção&lt;/em&gt;" data-en="From study on paper &lt;em&gt;to product in production&lt;/em&gt;">Do estudo no papel <em>ao produto em produção</em></h2>
+  <div class="section-body"><p data-pt="O projeto foi aprovado pela diretoria e lançado com sucesso, com acompanhamento contínuo nas primeiras semanas:" data-en="The project was approved by the board and launched successfully, with continuous monitoring in the first weeks:">O projeto foi aprovado pela diretoria e lançado com sucesso, com acompanhamento contínuo nas primeiras semanas:</p></div>
   <div class="results-grid">
-    <div class="result-stat"><div class="result-num">Aprovado</div><div class="result-label">Validado pela diretoria antes do go-live</div></div>
-    <div class="result-stat"><div class="result-num">2</div><div class="result-label">Problemas reais de uso identificados e corrigidos via Clarity após o lançamento</div></div>
-    <div class="result-stat"><div class="result-num">1</div><div class="result-label">Vídeo tutorial criado para reduzir abandono na migração de plataforma</div></div>
-    <div class="result-stat"><div class="result-num">1ª</div><div class="result-label">Minha primeira posição em UX/UI, aprendendo Figma dentro de um produto real</div></div>
+    <div class="result-stat"><div class="result-num">Aprovado</div><div class="result-label" data-pt="Validado pela diretoria antes do go-live" data-en="Approved by the board before go-live">Validado pela diretoria antes do go-live</div></div>
+    <div class="result-stat"><div class="result-num">2</div><div class="result-label" data-pt="Problemas reais de uso identificados e corrigidos via Clarity após o lançamento" data-en="Real usage issues identified and fixed via Clarity after launch">Problemas reais de uso identificados e corrigidos via Clarity após o lançamento</div></div>
+    <div class="result-stat"><div class="result-num">1</div><div class="result-label" data-pt="Vídeo tutorial criado para reduzir abandono na migração de plataforma" data-en="Tutorial video created to reduce drop-off during platform migration">Vídeo tutorial criado para reduzir abandono na migração de plataforma</div></div>
+    <div class="result-stat"><div class="result-num">1ª</div><div class="result-label" data-pt="Minha primeira posição em UX/UI, aprendendo Figma dentro de um produto real" data-en="My first UX/UI role, learning Figma inside a real product">Minha primeira posição em UX/UI, aprendendo Figma dentro de um produto real</div></div>
   </div>
   <div class="section-body" style="margin-top:32px;">
-    <p>Além desses pontos, o resultado mais relevante foi de processo: o ciclo entre <strong>design, dados e desenvolvimento</strong> se fechou de verdade, com problemas que não apareceram nos testes internos capturados e corrigidos com dados reais de uso, não com suposições. Hoje, inclusive, o backend da plataforma é <strong>open source</strong> (licença GPL-2.0), disponível publicamente no GitHub.</p>
+    <p data-pt="Além desses pontos, o resultado mais relevante foi de processo: o ciclo entre &lt;strong&gt;design, dados e desenvolvimento&lt;/strong&gt; se fechou de verdade, com problemas que não apareceram nos testes internos capturados e corrigidos com dados reais de uso, não com suposições. Hoje, inclusive, o backend da plataforma é &lt;strong&gt;open source&lt;/strong&gt; (licença GPL-2.0), disponível publicamente no GitHub." data-en="Beyond these points, the most relevant outcome was process-related: the cycle between &lt;strong&gt;design, data and development&lt;/strong&gt; truly closed, with issues that did not appear in internal testing captured and corrected with real usage data, not assumptions. Today, the platform backend is even &lt;strong&gt;open source&lt;/strong&gt; (GPL-2.0 licence), publicly available on GitHub.">Além desses pontos, o resultado mais relevante foi de processo: o ciclo entre <strong>design, dados e desenvolvimento</strong> se fechou de verdade, com problemas que não apareceram nos testes internos capturados e corrigidos com dados reais de uso, não com suposições. Hoje, inclusive, o backend da plataforma é <strong>open source</strong> (licença GPL-2.0), disponível publicamente no GitHub.</p>
   </div>
 
   <div class="section-body" style="margin-top:32px;">
-    <p>A jornada do aluno após a migração, do primeiro curso à conclusão com certificado:</p>
+    <p data-pt="A jornada do aluno após a migração, do primeiro curso à conclusão com certificado:" data-en="The student journey after migration, from the first course to completion with certificate:">A jornada do aluno após a migração, do primeiro curso à conclusão com certificado:</p>
   </div>
   <figure class="shot-frame">
     <img src="images/tela-7.jpg" alt="Tela Meus Cursos com três exemplos: curso novo, em andamento e finalizado com certificado">
-    <figcaption>Meus Cursos · curso novo, em andamento e concluído</figcaption>
+    <figcaption data-pt="Meus Cursos · curso novo, em andamento e concluído" data-en="My Courses · new, in progress and completed course">Meus Cursos · curso novo, em andamento e concluído</figcaption>
   </figure>
   <div class="shot-gallery-row">
     <figure class="shot-frame">
       <img src="images/tela-9.jpg" alt="Tela Meus Certificados sem nenhum certificado disponível ainda">
-      <figcaption>Meus Certificados · estado vazio, antes da conclusão</figcaption>
+      <figcaption data-pt="Meus Certificados · estado vazio, antes da conclusão" data-en="My Certificates · empty state, before completion">Meus Certificados · estado vazio, antes da conclusão</figcaption>
     </figure>
     <figure class="shot-frame">
       <img src="images/tela-10.jpg" alt="Tela Meus Certificados com certificado disponível para download">
-      <figcaption>Meus Certificados · certificado liberado após conclusão</figcaption>
+      <figcaption data-pt="Meus Certificados · certificado liberado após conclusão" data-en="My Certificates · certificate available after completion">Meus Certificados · certificado liberado após conclusão</figcaption>
     </figure>
   </div>
 </section>
 
 <section class="case-section" id="aprendizados">
-  <div class="section-eyebrow"><span class="section-num">07</span><span class="section-label">Aprendizados</span></div>
-  <h2 class="section-title">O que esse projeto me ensinou <em>sobre ser UX/UI Designer</em></h2>
-  <div class="section-body"><p>Esse foi meu primeiro contato real com a função e com o Figma dentro de um produto que de fato foi ao ar. Três aprendizados centrais:</p></div>
+  <div class="section-eyebrow"><span class="section-num">07</span><span class="section-label" data-pt="Aprendizados" data-en="Learnings">Aprendizados</span></div>
+  <h2 class="section-title" data-pt="O que esse projeto me ensinou &lt;em&gt;sobre ser UX/UI Designer&lt;/em&gt;" data-en="What this project taught me &lt;em&gt;about being a UX/UI Designer&lt;/em&gt;">O que esse projeto me ensinou <em>sobre ser UX/UI Designer</em></h2>
+  <div class="section-body"><p data-pt="Esse foi meu primeiro contato real com a função e com o Figma dentro de um produto que de fato foi ao ar. Três aprendizados centrais:" data-en="This was my first real experience with the UX/UI role and with Figma inside a product that actually went live. Three core learnings:">Esse foi meu primeiro contato real com a função e com o Figma dentro de um produto que de fato foi ao ar. Três aprendizados centrais:</p></div>
   <div class="insight-grid">
     <div class="insight-card">
-      <div class="insight-card-label">Aprendizado 01</div>
-      <div class="insight-card-text">Aprender na prática, em paralelo à teoria do UX Unicórnio, acelerou minha curva de aprendizado de um jeito que nenhum projeto fictício teria feito.</div>
+      <div class="insight-card-label" data-pt="Aprendizado 01" data-en="Learning 01">Aprendizado 01</div>
+      <div class="insight-card-text" data-pt="Aprender na prática, em paralelo à teoria do UX Unicórnio, acelerou minha curva de aprendizado de um jeito que nenhum projeto fictício teria feito." data-en="Learning in practice, in parallel with the theory from UX Unicórnio, accelerated my learning curve in a way no fictional project could have.">Aprender na prática, em paralelo à teoria do UX Unicórnio, acelerou minha curva de aprendizado de um jeito que nenhum projeto fictício teria feito.</div>
     </div>
     <div class="insight-card">
-      <div class="insight-card-label">Aprendizado 02</div>
-      <div class="insight-card-text">O design não termina quando a tela vai ao ar. Ele continua sendo validado (e corrigido) com dados reais de uso, como mostrou o monitoramento via <code>Microsoft Clarity</code>.</div>
+      <div class="insight-card-label" data-pt="Aprendizado 02" data-en="Learning 02">Aprendizado 02</div>
+      <div class="insight-card-text" data-pt="O design não termina quando a tela vai ao ar. Ele continua sendo validado (e corrigido) com dados reais de uso, como mostrou o monitoramento via Microsoft Clarity." data-en="Design does not end when the screen goes live. It continues to be validated (and corrected) with real usage data, as the Microsoft Clarity monitoring showed.">O design não termina quando a tela vai ao ar. Ele continua sendo validado (e corrigido) com dados reais de uso, como mostrou o monitoramento via <code>Microsoft Clarity</code>.</div>
     </div>
     <div class="insight-card">
-      <div class="insight-card-label">Aprendizado 03</div>
-      <div class="insight-card-text">Trabalhar lado a lado com PO e devs exige traduzir intenção de design em decisões viáveis tecnicamente, dentro do que já existia.</div>
+      <div class="insight-card-label" data-pt="Aprendizado 03" data-en="Learning 03">Aprendizado 03</div>
+      <div class="insight-card-text" data-pt="Trabalhar lado a lado com PO e devs exige traduzir intenção de design em decisões viáveis tecnicamente, dentro do que já existia." data-en="Working side by side with the PO and devs requires translating design intent into technically viable decisions, within what already existed.">Trabalhar lado a lado com PO e devs exige traduzir intenção de design em decisões viáveis tecnicamente, dentro do que já existia.</div>
     </div>
   </div>
 </section>
 
 <section class="case-cta">
-  <div class="section-eyebrow" style="justify-content:center;"><span class="section-label">Próximo passo</span></div>
-  <h2 class="section-title">Quer saber mais <em>sobre esse projeto?</em></h2>
+  <div class="section-eyebrow" style="justify-content:center;"><span class="section-label" data-pt="Próximo passo" data-en="Next step">Próximo passo</span></div>
+  <h2 class="section-title" data-pt="Quer saber mais &lt;em&gt;sobre esse projeto?&lt;/em&gt;" data-en="Want to know more &lt;em&gt;about this project?&lt;/em&gt;">Quer saber mais <em>sobre esse projeto?</em></h2>
   <div class="cta-links">
-    <a href="https://eats.onhive.org.br/login" target="_blank" class="btn-cta-primary">Visitar o site →</a>
-    <a href="index.html" class="btn-cta-ghost">Voltar ao portfólio</a>
+    <a href="https://eats.onhive.org.br/login" target="_blank" class="btn-cta-primary" data-pt="Visitar o site →" data-en="Visit the website →">Visitar o site →</a>
+    <a href="index.html" class="btn-cta-ghost" data-pt="Voltar ao portfólio" data-en="Back to portfolio">Voltar ao portfólio</a>
   </div>
-  <p style="font-size:13px;color:var(--gray);font-style:italic;margin-top:22px;">O link leva à tela de login real da plataforma. O acesso ao conteúdo interno requer cadastro de aluno.</p>
+  <p style="font-size:13px;color:var(--gray);font-style:italic;margin-top:22px;" data-pt="O link leva à tela de login real da plataforma. O acesso ao conteúdo interno requer cadastro de aluno." data-en="The link leads to the real login screen of the platform. Access to the internal content requires student registration.">O link leva à tela de login real da plataforma. O acesso ao conteúdo interno requer cadastro de aluno.</p>
 </section>
 
 <footer>
   <p>© 2026 Camilla Pestana</p>
-  <p>Case study · UX/UI</p>
+  <p data-pt="Case study · UX/UI" data-en="Case study · UX/UI">Case study · UX/UI</p>
 </footer>
+
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('[data-pt]').forEach(el => {
+      const text = el.getAttribute('data-' + lang);
+      if (text !== null) el.innerHTML = text;
+    });
+    document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('lang', lang);
+    document.documentElement.setAttribute('lang', lang === 'en' ? 'en' : 'pt-BR');
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    const saved = localStorage.getItem('lang') || 'pt';
+    if (saved === 'en') setLang('en');
+  });
+  window.addEventListener('load', function() {
+    const saved = localStorage.getItem('lang') || 'pt';
+    if (saved === 'en') setLang('en');
+  });
+</script>
 
 </body>
 </html>

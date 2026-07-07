@@ -202,153 +202,173 @@
     .ds-showcase { padding: 28px; }
     .hero-meta { gap: 24px; }
   }
+
+  .lang-toggle {
+    display: flex; gap: 0; align-items: center;
+    font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+  }
+  .lang-btn {
+    background: none; border: none; padding: 5px 8px; cursor: pointer;
+    color: var(--gray); font-family: var(--mono); font-size: 10px;
+    font-weight: 600; letter-spacing: 0.1em; transition: color 0.2s;
+  }
+  .lang-btn.active { color: var(--pink); }
+  .lang-divider { color: var(--gray-border); font-size: 10px; }
+
 </style>
 </head>
 <body>
 
 <nav>
   <a href="index.html" class="nav-logo">Camilla <span>Pestana</span></a>
-  <a href="index.html" class="nav-back">← Voltar ao portfólio</a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-pt" onclick="setLang('pt')">PT</button>
+      <span class="lang-divider">|</span>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="index.html" class="nav-back" data-pt="← Voltar ao portfólio" data-en="← Back to portfolio">← Voltar ao portfólio</a>
+  </div>
 </nav>
 
 <section class="case-hero">
-  <div class="hero-eyebrow">Case Study · Design & Front-end</div>
-  <h1 class="hero-title">Como construí a presença digital de um personal trainer: <em>site, marca e analytics</em></h1>
+  <div class="hero-eyebrow" data-pt="Case Study · Design &amp; Front-end" data-en="Case Study · Design &amp; Front-end">Case Study · Design &amp; Front-end</div>
+  <h1 class="hero-title" data-pt="Como construí a presença digital de um personal trainer: &lt;em&gt;site, marca e analytics&lt;/em&gt;" data-en="How I built the digital presence of a personal trainer: &lt;em&gt;website, brand and analytics&lt;/em&gt;">Como construí a presença digital de um personal trainer: <em>site, marca e analytics</em></h1>
 
   <div class="hero-meta">
     <div class="meta-item">
-      <span class="meta-label">Cliente</span>
+      <span class="meta-label" data-pt="Cliente" data-en="Client">Cliente</span>
       <span class="meta-value">Daniel Noffs · Personal Trainer</span>
     </div>
     <div class="meta-item">
-      <span class="meta-label">Papel</span>
+      <span class="meta-label" data-pt="Papel" data-en="Role">Papel</span>
       <span class="meta-value">Design + Front-end (solo)</span>
     </div>
     <div class="meta-item">
-      <span class="meta-label">Stack</span>
+      <span class="meta-label" data-pt="Stack" data-en="Stack">Stack</span>
       <span class="meta-value">HTML · CSS · JS · GitHub Pages</span>
     </div>
     <div class="meta-item">
-      <span class="meta-label">Site ao vivo</span>
+      <span class="meta-label" data-pt="Site ao vivo" data-en="Live site">Site ao vivo</span>
       <span class="meta-value"><a href="https://danielnoffs.com.br" target="_blank">danielnoffs.com.br ↗</a></span>
     </div>
   </div>
 </section>
 
 <div class="toc-wrap">
-  <div class="toc-label">Neste case</div>
+  <div class="toc-label" data-pt="Neste case" data-en="In this case">Neste case</div>
   <div class="toc-grid">
-    <a href="#contexto" class="toc-item"><span class="toc-num">01</span> Contexto</a>
-    <a href="#problema" class="toc-item"><span class="toc-num">02</span> Problema</a>
-    <a href="#pesquisa" class="toc-item"><span class="toc-num">03</span> Pesquisa</a>
-    <a href="#sintese" class="toc-item"><span class="toc-num">04</span> Síntese</a>
-    <a href="#ideacao" class="toc-item"><span class="toc-num">05</span> Ideação</a>
-    <a href="#solucao" class="toc-item"><span class="toc-num">06</span> Solução</a>
-    <a href="#validacao" class="toc-item"><span class="toc-num">07</span> Validação</a>
-    <a href="#implementacao" class="toc-item"><span class="toc-num">08</span> Implementação</a>
-    <a href="#resultados" class="toc-item"><span class="toc-num">09</span> Resultados</a>
-    <a href="#aprendizados" class="toc-item"><span class="toc-num">10</span> Aprendizados</a>
+    <a href="#contexto" class="toc-item" data-pt="Contexto" data-en="Context"><span class="toc-num">01</span> <span data-pt="Contexto" data-en="Context">Contexto</span></a>
+    <a href="#problema" class="toc-item" data-pt="Problema" data-en="Problem"><span class="toc-num">02</span> <span data-pt="Problema" data-en="Problem">Problema</span></a>
+    <a href="#pesquisa" class="toc-item" data-pt="Pesquisa" data-en="Research"><span class="toc-num">03</span> <span data-pt="Pesquisa" data-en="Research">Pesquisa</span></a>
+    <a href="#sintese" class="toc-item" data-pt="Síntese" data-en="Synthesis"><span class="toc-num">04</span> <span data-pt="Síntese" data-en="Synthesis">Síntese</span></a>
+    <a href="#ideacao" class="toc-item" data-pt="Ideação" data-en="Ideation"><span class="toc-num">05</span> <span data-pt="Ideação" data-en="Ideation">Ideação</span></a>
+    <a href="#solucao" class="toc-item" data-pt="Solução" data-en="Solution"><span class="toc-num">06</span> <span data-pt="Solução" data-en="Solution">Solução</span></a>
+    <a href="#validacao" class="toc-item" data-pt="Validação" data-en="Validation"><span class="toc-num">07</span> <span data-pt="Validação" data-en="Validation">Validação</span></a>
+    <a href="#implementacao" class="toc-item" data-pt="Implementação" data-en="Implementation"><span class="toc-num">08</span> <span data-pt="Implementação" data-en="Implementation">Implementação</span></a>
+    <a href="#resultados" class="toc-item" data-pt="Resultados" data-en="Results"><span class="toc-num">09</span> <span data-pt="Resultados" data-en="Results">Resultados</span></a>
+    <a href="#aprendizados" class="toc-item" data-pt="Aprendizados" data-en="Learnings"><span class="toc-num">10</span> <span data-pt="Aprendizados" data-en="Learnings">Aprendizados</span></a>
   </div>
 </div>
 
 <section class="case-section" id="contexto">
-  <div class="section-eyebrow"><span class="section-num">01</span><span class="section-label">Contexto</span></div>
-  <h2 class="section-title">Um profissional real, sem presença digital nenhuma</h2>
+  <div class="section-eyebrow"><span class="section-num">01</span><span class="section-label" data-pt="Contexto" data-en="Context">Contexto</span></div>
+  <h2 class="section-title" data-pt="Um profissional real, sem presença digital nenhuma" data-en="A real professional, with no digital presence at all">Um profissional real, sem presença digital nenhuma</h2>
   <div class="section-body">
-    <p>Daniel Noffs é personal trainer com mais de 20 anos de experiência e pós-graduação em fisiologia do exercício, atuando em Santo André e na região do Grande ABC. Apesar da experiência sólida, toda a captação de novos alunos dependia de indicação pessoal e WhatsApp, sem site, sem domínio próprio, sem nenhum canal que comunicasse profissionalismo para quem ainda não o conhecia.</p>
-    <p>Esse projeto nasceu de uma necessidade concreta: <strong>quando alguém pedia informações sobre valores e serviços, não havia nada para enviar além de uma mensagem de texto solta.</strong> Não existia um lugar único que reunisse planos, formas de contato e prova social.</p>
+    <p data-pt="Daniel Noffs é personal trainer com mais de 20 anos de experiência e pós-graduação em fisiologia do exercício, atuando em Santo André e na região do Grande ABC. Apesar da experiência sólida, toda a captação de novos alunos dependia de indicação pessoal e WhatsApp, sem site, sem domínio próprio, sem nenhum canal que comunicasse profissionalismo para quem ainda não o conhecia." data-en="Daniel Noffs is a personal trainer with over 20 years of experience and a postgraduate degree in exercise physiology, based in Santo André and the Greater ABC region. Despite his solid track record, every new student came through personal referrals and WhatsApp — no website, no own domain, no channel that communicated professionalism to anyone who didn't already know him.">Daniel Noffs é personal trainer com mais de 20 anos de experiência e pós-graduação em fisiologia do exercício, atuando em Santo André e na região do Grande ABC. Apesar da experiência sólida, toda a captação de novos alunos dependia de indicação pessoal e WhatsApp, sem site, sem domínio próprio, sem nenhum canal que comunicasse profissionalismo para quem ainda não o conhecia.</p>
+    <p data-pt="Esse projeto nasceu de uma necessidade concreta: &lt;strong&gt;quando alguém pedia informações sobre valores e serviços, não havia nada para enviar além de uma mensagem de texto solta.&lt;/strong&gt; Não existia um lugar único que reunisse planos, formas de contato e prova social." data-en="This project came from a concrete need: &lt;strong&gt;when someone asked about pricing and services, there was nothing to send but a loose text message.&lt;/strong&gt; There was no single place that brought together plans, contact options and social proof.">Esse projeto nasceu de uma necessidade concreta: <strong>quando alguém pedia informações sobre valores e serviços, não havia nada para enviar além de uma mensagem de texto solta.</strong> Não existia um lugar único que reunisse planos, formas de contato e prova social.</p>
   </div>
 </section>
 
 <section class="case-section" id="problema">
-  <div class="section-eyebrow"><span class="section-num">02</span><span class="section-label">Problema</span></div>
-  <h2 class="section-title">Sem presença própria, <em>cada lead se perdia</em> na conversa</h2>
+  <div class="section-eyebrow"><span class="section-num">02</span><span class="section-label" data-pt="Problema" data-en="Problem">Problema</span></div>
+  <h2 class="section-title" data-pt="Sem presença própria, &lt;em&gt;cada lead se perdia&lt;/em&gt; na conversa" data-en="Without an online presence, &lt;em&gt;every lead got lost&lt;/em&gt; in conversation">Sem presença própria, <em>cada lead se perdia</em> na conversa</h2>
   <div class="section-body">
-    <p>Ao mapear o fluxo real de um possível aluno entrando em contato, identifiquei quatro fricções principais que custavam conversão:</p>
+    <p data-pt="Ao mapear o fluxo real de um possível aluno entrando em contato, identifiquei quatro fricções principais que custavam conversão:" data-en="By mapping the real flow of a potential student getting in touch, I identified four main friction points that were costing conversions:">Ao mapear o fluxo real de um possível aluno entrando em contato, identifiquei quatro fricções principais que custavam conversão:</p>
   </div>
   <div class="insight-grid">
     <div class="insight-card">
       <div class="insight-card-label">Fricção 01</div>
-      <div class="insight-card-text">Sem link único para enviar, cada explicação de plano e preço era redigitada manualmente no WhatsApp, de forma inconsistente e lenta.</div>
+      <div class="insight-card-text" data-pt="Sem link único para enviar, cada explicação de plano e preço era redigitada manualmente no WhatsApp, de forma inconsistente e lenta." data-en="Without a single link to share, every plan and pricing explanation was manually retyped on WhatsApp — inconsistently and slowly.">Sem link único para enviar, cada explicação de plano e preço era redigitada manualmente no WhatsApp, de forma inconsistente e lenta.</div>
     </div>
     <div class="insight-card">
       <div class="insight-card-label">Fricção 02</div>
-      <div class="insight-card-text">Nenhuma prova social visível. Depoimentos existiam, mas estavam dispersos em conversas privadas, nunca centralizados.</div>
+      <div class="insight-card-text" data-pt="Nenhuma prova social visível. Depoimentos existiam, mas estavam dispersos em conversas privadas, nunca centralizados." data-en="No visible social proof. Testimonials existed but were scattered across private conversations, never centralized.">Nenhuma prova social visível. Depoimentos existiam, mas estavam dispersos em conversas privadas, nunca centralizados.</div>
     </div>
     <div class="insight-card">
       <div class="insight-card-label">Fricção 03</div>
-      <div class="insight-card-text">Zero presença em buscas no Google: quem procurava "personal trainer Santo André" não encontrava o Daniel.</div>
+      <div class="insight-card-text" data-pt="Zero presença em buscas no Google: quem procurava &quot;personal trainer Santo André&quot; não encontrava o Daniel." data-en="Zero presence in Google searches: anyone looking for &quot;personal trainer Santo André&quot; would never find Daniel.">Zero presença em buscas no Google: quem procurava "personal trainer Santo André" não encontrava o Daniel.</div>
     </div>
     <div class="insight-card">
       <div class="insight-card-label">Fricção 04</div>
-      <div class="insight-card-text">Produtos digitais (planilhas de treino) recém-criados na Kiwify não tinham nenhuma vitrine além do próprio checkout.</div>
+      <div class="insight-card-text" data-pt="Produtos digitais (planilhas de treino) recém-criados na Kiwify não tinham nenhuma vitrine além do próprio checkout." data-en="Digital products (training spreadsheets) recently created on Kiwify had no showcase beyond the checkout page itself.">Produtos digitais (planilhas de treino) recém-criados na Kiwify não tinham nenhuma vitrine além do próprio checkout.</div>
     </div>
   </div>
 </section>
 
 <section class="case-section" id="pesquisa">
-  <div class="section-eyebrow"><span class="section-num">03</span><span class="section-label">Pesquisa</span></div>
-  <h2 class="section-title">Entendendo o cliente real e o público que ele atende</h2>
+  <div class="section-eyebrow"><span class="section-num">03</span><span class="section-label" data-pt="Pesquisa" data-en="Research">Pesquisa</span></div>
+  <h2 class="section-title" data-pt="Entendendo o cliente real e o público que ele atende" data-en="Understanding the real client and the audience he serves">Entendendo o cliente real e o público que ele atende</h2>
   <div class="section-body">
-    <p>A pesquisa aqui não foi um processo formal com múltiplos usuários. Foi uma <strong>pesquisa de contexto direta com o próprio Daniel</strong>, como stakeholder e usuário principal do produto, somada à observação do comportamento real do público dele.</p>
-    <p>Levantei três frentes:</p>
+    <p data-pt="A pesquisa aqui não foi um processo formal com múltiplos usuários. Foi uma &lt;strong&gt;pesquisa de contexto direta com o próprio Daniel&lt;/strong&gt;, como stakeholder e usuário principal do produto, somada à observação do comportamento real do público dele." data-en="The research here was not a formal process with multiple users. It was a &lt;strong&gt;direct context interview with Daniel himself&lt;/strong&gt;, as the main stakeholder and user of the product, combined with observation of his audience's real behaviour.">A pesquisa aqui não foi um processo formal com múltiplos usuários. Foi uma <strong>pesquisa de contexto direta com o próprio Daniel</strong>, como stakeholder e usuário principal do produto, somada à observação do comportamento real do público dele.</p>
+    <p data-pt="Levantei três frentes:" data-en="I mapped three fronts:">Levantei três frentes:</p>
   </div>
   <div class="process-list">
     <div class="process-item">
-      <span class="process-date">Negócio</span>
-      <span class="process-text"><strong>Modelo de atendimento real:</strong> presencial, online, e produtos digitais, três frentes distintas que precisariam de comunicação diferente, mas convivendo num único lugar.</span>
+      <span class="process-date" data-pt="Negócio" data-en="Business">Negócio</span>
+      <span class="process-text" data-pt="&lt;strong&gt;Modelo de atendimento real:&lt;/strong&gt; presencial, online, e produtos digitais, três frentes distintas que precisariam de comunicação diferente, mas convivendo num único lugar." data-en="&lt;strong&gt;Real service model:&lt;/strong&gt; in-person, online, and digital products — three distinct fronts that needed different messaging, all coexisting in one place."><strong>Modelo de atendimento real:</strong> presencial, online, e produtos digitais, três frentes distintas que precisariam de comunicação diferente, mas convivendo num único lugar.</span>
     </div>
     <div class="process-item">
-      <span class="process-date">Público</span>
-      <span class="process-text"><strong>Dois perfis de aluno muito diferentes:</strong> público 50+ (que busca por indicação, médicos e Google, não redes sociais) e público mais jovem (que descobre via Instagram/TikTok).</span>
+      <span class="process-date" data-pt="Público" data-en="Audience">Público</span>
+      <span class="process-text" data-pt="&lt;strong&gt;Dois perfis de aluno muito diferentes:&lt;/strong&gt; público 50+ (que busca por indicação, médicos e Google, não redes sociais) e público mais jovem (que descobre via Instagram/TikTok)." data-en="&lt;strong&gt;Two very different student profiles:&lt;/strong&gt; 50+ audience (who search through referrals, doctors and Google, not social media) and younger audience (who discover through Instagram/TikTok)."><strong>Dois perfis de aluno muito diferentes:</strong> público 50+ (que busca por indicação, médicos e Google, não redes sociais) e público mais jovem (que descobre via Instagram/TikTok).</span>
     </div>
     <div class="process-item">
-      <span class="process-date">Concorrência</span>
-      <span class="process-text"><strong>Benchmark informal</strong> de páginas de outros personal trainers e plataformas como Treinar.me e PersonalGO, entendendo o que comunicava confiança e o que parecia genérico.</span>
+      <span class="process-date" data-pt="Concorrência" data-en="Competition">Concorrência</span>
+      <span class="process-text" data-pt="&lt;strong&gt;Benchmark informal&lt;/strong&gt; de páginas de outros personal trainers e plataformas como Treinar.me e PersonalGO, entendendo o que comunicava confiança e o que parecia genérico." data-en="&lt;strong&gt;Informal benchmark&lt;/strong&gt; of other personal trainer pages and platforms like Treinar.me and PersonalGO, identifying what communicated trust and what felt generic."><strong>Benchmark informal</strong> de páginas de outros personal trainers e plataformas como Treinar.me e PersonalGO, entendendo o que comunicava confiança e o que parecia genérico.</span>
     </div>
   </div>
 </section>
 
 <section class="case-section" id="sintese">
-  <div class="section-eyebrow"><span class="section-num">04</span><span class="section-label">Síntese</span></div>
-  <h2 class="section-title">Três frentes de oferta, <em>uma única narrativa</em></h2>
+  <div class="section-eyebrow"><span class="section-num">04</span><span class="section-label" data-pt="Síntese" data-en="Synthesis">Síntese</span></div>
+  <h2 class="section-title" data-pt="Três frentes de oferta, &lt;em&gt;uma única narrativa&lt;/em&gt;" data-en="Three service lines, &lt;em&gt;one single narrative&lt;/em&gt;">Três frentes de oferta, <em>uma única narrativa</em></h2>
   <div class="section-body">
-    <p>Cruzando os achados da pesquisa, ficou claro que o site não podia ser uma "página de vendas" genérica. Precisava comunicar autoridade (20+ anos de experiência, pós-graduação) e, ao mesmo tempo, ser simples o bastante para conduzir qualquer visitante até o WhatsApp.</p>
+    <p data-pt="Cruzando os achados da pesquisa, ficou claro que o site não podia ser uma &quot;página de vendas&quot; genérica. Precisava comunicar autoridade (20+ anos de experiência, pós-graduação) e, ao mesmo tempo, ser simples o bastante para conduzir qualquer visitante até o WhatsApp." data-en="Cross-referencing the research findings, it became clear the website could not be a generic &quot;sales page&quot;. It needed to communicate authority (20+ years of experience, postgraduate degree) while being simple enough to guide any visitor straight to WhatsApp.">Cruzando os achados da pesquisa, ficou claro que o site não podia ser uma "página de vendas" genérica. Precisava comunicar autoridade (20+ anos de experiência, pós-graduação) e, ao mesmo tempo, ser simples o bastante para conduzir qualquer visitante até o WhatsApp.</p>
   </div>
-  <blockquote class="pull-quote">"O problema não era falta de competência do Daniel. Era falta de um lugar que provasse essa competência antes da primeira conversa."</blockquote>
-  <div class="section-body"><p>Defini três pilares que guiariam toda decisão de design a partir daqui:</p></div>
+  <blockquote class="pull-quote" data-pt="&quot;O problema não era falta de competência do Daniel. Era falta de um lugar que provasse essa competência antes da primeira conversa.&quot;" data-en="&quot;The problem wasn't a lack of competence on Daniel's part. It was the lack of a place that proved that competence before the first conversation.&quot;">"O problema não era falta de competência do Daniel. Era falta de um lugar que provasse essa competência antes da primeira conversa."</blockquote>
+  <div class="section-body"><p data-pt="Defini três pilares que guiariam toda decisão de design a partir daqui:" data-en="I defined three pillars that would guide every design decision from this point on:">Defini três pilares que guiariam toda decisão de design a partir daqui:</p></div>
   <div class="insight-grid">
     <div class="insight-card">
-      <div class="insight-card-label">Pilar 1: Autoridade</div>
-      <div class="insight-card-text">Visual sério, escuro, com tipografia de impacto, nada de clichê fitness colorido e genérico.</div>
+      <div class="insight-card-label" data-pt="Pilar 1: Autoridade" data-en="Pillar 1: Authority">Pilar 1: Autoridade</div>
+      <div class="insight-card-text" data-pt="Visual sério, escuro, com tipografia de impacto, nada de clichê fitness colorido e genérico." data-en="Serious, dark visual with bold typography — no colourful, generic fitness clichés.">Visual sério, escuro, com tipografia de impacto, nada de clichê fitness colorido e genérico.</div>
     </div>
     <div class="insight-card">
-      <div class="insight-card-label">Pilar 2: Clareza de oferta</div>
-      <div class="insight-card-text">Presencial, online e produtos digitais navegáveis em abas, sem misturar contextos de compra diferentes.</div>
+      <div class="insight-card-label" data-pt="Pilar 2: Clareza de oferta" data-en="Pillar 2: Offer clarity">Pilar 2: Clareza de oferta</div>
+      <div class="insight-card-text" data-pt="Presencial, online e produtos digitais navegáveis em abas, sem misturar contextos de compra diferentes." data-en="In-person, online and digital products browsable in tabs, without mixing different purchasing contexts.">Presencial, online e produtos digitais navegáveis em abas, sem misturar contextos de compra diferentes.</div>
     </div>
     <div class="insight-card">
-      <div class="insight-card-label">Pilar 3: Conversão direta</div>
-      <div class="insight-card-text">Todo caminho do site termina no mesmo lugar: um clique de distância do WhatsApp.</div>
+      <div class="insight-card-label" data-pt="Pilar 3: Conversão direta" data-en="Pillar 3: Direct conversion">Pilar 3: Conversão direta</div>
+      <div class="insight-card-text" data-pt="Todo caminho do site termina no mesmo lugar: um clique de distância do WhatsApp." data-en="Every path on the site ends in the same place: one click away from WhatsApp.">Todo caminho do site termina no mesmo lugar: um clique de distância do WhatsApp.</div>
     </div>
     <div class="insight-card">
-      <div class="insight-card-label">Pilar 4: Prova social viva</div>
-      <div class="insight-card-text">Depoimentos não podiam ser estáticos. Precisavam crescer com o negócio, sem depender de mim para atualizar o código.</div>
+      <div class="insight-card-label" data-pt="Pilar 4: Prova social viva" data-en="Pillar 4: Live social proof">Pilar 4: Prova social viva</div>
+      <div class="insight-card-text" data-pt="Depoimentos não podiam ser estáticos. Precisavam crescer com o negócio, sem depender de mim para atualizar o código." data-en="Testimonials could not be static. They needed to grow with the business, without depending on me to update the code.">Depoimentos não podiam ser estáticos. Precisavam crescer com o negócio, sem depender de mim para atualizar o código.</div>
     </div>
   </div>
 </section>
 
 <section class="case-section" id="ideacao">
-  <div class="section-eyebrow"><span class="section-num">05</span><span class="section-label">Ideação</span></div>
-  <h2 class="section-title">De wireframe de papel a <em>design system codificado</em></h2>
+  <div class="section-eyebrow"><span class="section-num">05</span><span class="section-label" data-pt="Ideação" data-en="Ideation">Ideação</span></div>
+  <h2 class="section-title" data-pt="De wireframe de papel a &lt;em&gt;design system codificado&lt;/em&gt;" data-en="From paper wireframe to &lt;em&gt;coded design system&lt;/em&gt;">De wireframe de papel a <em>design system codificado</em></h2>
   <div class="section-body">
-    <p>Como design engineer, pensei a ideação já em termos de componentes reutilizáveis. Cada bloco do site (cards de planos, abas, depoimentos) foi desenhado para se repetir com consistência visual, não como telas isoladas.</p>
-    <p>Decisões de identidade visual tomadas nesta fase, consolidadas no design system abaixo:</p>
+    <p data-pt="Como design engineer, pensei a ideação já em termos de componentes reutilizáveis. Cada bloco do site (cards de planos, abas, depoimentos) foi desenhado para se repetir com consistência visual, não como telas isoladas." data-en="As a design engineer, I approached ideation in terms of reusable components. Each site block (plan cards, tabs, testimonials) was designed to repeat with visual consistency, not as isolated screens.">Como design engineer, pensei a ideação já em termos de componentes reutilizáveis. Cada bloco do site (cards de planos, abas, depoimentos) foi desenhado para se repetir com consistência visual, não como telas isoladas.</p>
+    <p data-pt="Decisões de identidade visual tomadas nesta fase, consolidadas no design system abaixo:" data-en="Visual identity decisions made at this stage, consolidated in the design system below:">Decisões de identidade visual tomadas nesta fase, consolidadas no design system abaixo:</p>
   </div>
 
   <div class="ds-showcase">
     <div class="ds-row-label" style="font-size:13px; color:var(--dn-gold); margin-bottom:28px; letter-spacing:0.15em;">Design System — Daniel Noffs</div>
     <div class="ds-row">
-      <div class="ds-row-label">Paleta de cores</div>
+      <div class="ds-row-label" data-pt="Paleta de cores" data-en="Color palette">Paleta de cores</div>
       <div class="ds-swatches">
         <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--dn-black);"></div><span class="ds-swatch-name">#252528</span></div>
         <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--dn-yellow);"></div><span class="ds-swatch-name">#ffcf05</span></div>
@@ -359,183 +379,205 @@
     </div>
 
     <div class="ds-row">
-      <div class="ds-row-label">Tipografia · Bebas Neue</div>
+      <div class="ds-row-label" data-pt="Tipografia · Bebas Neue" data-en="Typography · Bebas Neue">Tipografia · Bebas Neue</div>
       <div class="ds-type-sample">
         <div class="ds-type-row">
           <span class="ds-type-row-tag">H1</span>
           <div>
             <span class="ds-type-h1">Daniel Noffs</span>
-            <div class="ds-type-meta">52px · uppercase · letter-spacing 0.02em</div>
+            <div class="ds-type-meta" data-pt="52px · uppercase · letter-spacing 0.02em" data-en="52px · uppercase · letter-spacing 0.02em">52px · uppercase · letter-spacing 0.02em</div>
           </div>
         </div>
         <div class="ds-type-row">
           <span class="ds-type-row-tag">H2</span>
           <div>
             <span class="ds-type-h2">Transforme seu corpo</span>
-            <div class="ds-type-meta">34px · uppercase · letter-spacing 0.02em</div>
+            <div class="ds-type-meta" data-pt="34px · uppercase · letter-spacing 0.02em" data-en="34px · uppercase · letter-spacing 0.02em">34px · uppercase · letter-spacing 0.02em</div>
           </div>
         </div>
         <div class="ds-type-row">
           <span class="ds-type-row-tag">H3</span>
           <div>
             <span class="ds-type-h3">Plano Online</span>
-            <div class="ds-type-meta">22px · uppercase · cor de destaque (gold)</div>
+            <div class="ds-type-meta" data-pt="22px · uppercase · cor de destaque (gold)" data-en="22px · uppercase · highlight color (gold)">22px · uppercase · cor de destaque (gold)</div>
           </div>
         </div>
         <div class="ds-type-row">
           <span class="ds-type-row-tag">Body</span>
           <div>
-            <span class="ds-type-body">Treinamento personalizado para todas as idades.</span>
-            <div class="ds-type-meta">DM Sans 16px · peso 300</div>
+            <span class="ds-type-body" data-pt="Treinamento personalizado para todas as idades." data-en="Personalized training for all ages.">Treinamento personalizado para todas as idades.</span>
+            <div class="ds-type-meta" data-pt="DM Sans 16px · peso 300" data-en="DM Sans 16px · weight 300">DM Sans 16px · peso 300</div>
           </div>
         </div>
         <div class="ds-type-row">
           <span class="ds-type-row-tag">Caption</span>
           <div>
             <span class="ds-type-caption">PÓS-GRADUADO · MUSCULAÇÃO · FUNCIONAL</span>
-            <div class="ds-type-meta">DM Mono 11px · uppercase</div>
+            <div class="ds-type-meta" data-pt="DM Mono 11px · uppercase" data-en="DM Mono 11px · uppercase">DM Mono 11px · uppercase</div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="ds-row">
-      <div class="ds-row-label">Componentes base</div>
+      <div class="ds-row-label" data-pt="Componentes base" data-en="Base components">Componentes base</div>
       <div class="ds-components">
         <button class="ds-btn-primary">Falar no WhatsApp</button>
         <button class="ds-btn-ghost">Adquirir agora</button>
-        <div class="ds-card-mini">Card de plano · reutilizável nas 3 abas</div>
+        <div class="ds-card-mini" data-pt="Card de plano · reutilizável nas 3 abas" data-en="Plan card · reusable across 3 tabs">Card de plano · reutilizável nas 3 abas</div>
       </div>
     </div>
   </div>
 </section>
 
 <section class="case-section" id="solucao">
-  <div class="section-eyebrow"><span class="section-num">06</span><span class="section-label">Solução</span></div>
-  <h2 class="section-title">Um site de página única, <em>com três camadas de oferta</em></h2>
-  <div class="section-body"><p>A solução final estrutura a jornada em blocos sequenciais, todos levando à mesma ação final:</p></div>
+  <div class="section-eyebrow"><span class="section-num">06</span><span class="section-label" data-pt="Solução" data-en="Solution">Solução</span></div>
+  <h2 class="section-title" data-pt="Um site de página única, &lt;em&gt;com três camadas de oferta&lt;/em&gt;" data-en="A one-page website, &lt;em&gt;with three service layers&lt;/em&gt;">Um site de página única, <em>com três camadas de oferta</em></h2>
+  <div class="section-body"><p data-pt="A solução final estrutura a jornada em blocos sequenciais, todos levando à mesma ação final:" data-en="The final solution structures the journey in sequential blocks, all leading to the same final action:">A solução final estrutura a jornada em blocos sequenciais, todos levando à mesma ação final:</p></div>
   <div class="process-list">
     <div class="process-item">
-      <span class="process-date">Hero</span>
-      <span class="process-text">Nome, autoridade e badges de especialidade: primeira impressão de profissionalismo em segundos.</span>
+      <span class="process-date" data-pt="Hero" data-en="Hero">Hero</span>
+      <span class="process-text" data-pt="Nome, autoridade e badges de especialidade: primeira impressão de profissionalismo em segundos." data-en="Name, authority and specialty badges: first impression of professionalism in seconds.">Nome, autoridade e badges de especialidade: primeira impressão de profissionalismo em segundos.</span>
     </div>
     <div class="process-item">
-      <span class="process-date">Bio</span>
-      <span class="process-text">Formação, anos de experiência e foto, humaniza antes de vender.</span>
+      <span class="process-date" data-pt="Bio" data-en="Bio">Bio</span>
+      <span class="process-text" data-pt="Formação, anos de experiência e foto, humaniza antes de vender." data-en="Education, years of experience and photo — humanises before selling.">Formação, anos de experiência e foto, humaniza antes de vender.</span>
     </div>
     <div class="process-item">
-      <span class="process-date">Investimento</span>
-      <span class="process-text">Sistema de abas (Produtos Digitais / Presencial / Online), cada modelo de negócio com sua própria lógica de preço e oferta, sem confundir o visitante.</span>
+      <span class="process-date" data-pt="Investimento" data-en="Investment">Investimento</span>
+      <span class="process-text" data-pt="Sistema de abas (Produtos Digitais / Presencial / Online), cada modelo de negócio com sua própria lógica de preço e oferta, sem confundir o visitante." data-en="Tab system (Digital Products / In-person / Online), each business model with its own pricing and offer logic, without confusing the visitor.">Sistema de abas (Produtos Digitais / Presencial / Online), cada modelo de negócio com sua própria lógica de preço e oferta, sem confundir o visitante.</span>
     </div>
     <div class="process-item">
-      <span class="process-date">Depoimentos</span>
-      <span class="process-text">Carrossel dinâmico puxando dados direto de uma planilha Google. O Daniel aprova um depoimento marcando "SIM" numa célula, e ele aparece no site automaticamente.</span>
+      <span class="process-date" data-pt="Depoimentos" data-en="Testimonials">Depoimentos</span>
+      <span class="process-text" data-pt="Carrossel dinâmico puxando dados direto de uma planilha Google. O Daniel aprova um depoimento marcando &quot;SIM&quot; numa célula, e ele aparece no site automaticamente." data-en="Dynamic carousel pulling data directly from a Google Sheet. Daniel approves a testimonial by marking &quot;YES&quot; in a cell, and it appears on the site automatically.">Carrossel dinâmico puxando dados direto de uma planilha Google. O Daniel aprova um depoimento marcando "SIM" numa célula, e ele aparece no site automaticamente.</span>
     </div>
     <div class="process-item">
-      <span class="process-date">CTA final</span>
-      <span class="process-text">Botão de WhatsApp com mensagem pré-formatada, e link discreto para o Instagram.</span>
+      <span class="process-date" data-pt="CTA final" data-en="Final CTA">CTA final</span>
+      <span class="process-text" data-pt="Botão de WhatsApp com mensagem pré-formatada, e link discreto para o Instagram." data-en="WhatsApp button with a pre-formatted message, and a subtle link to Instagram.">Botão de WhatsApp com mensagem pré-formatada, e link discreto para o Instagram.</span>
     </div>
   </div>
 </section>
 
 <section class="case-section" id="validacao">
-  <div class="section-eyebrow"><span class="section-num">07</span><span class="section-label">Validação</span></div>
-  <h2 class="section-title">Testando com o usuário real <em>antes do código final</em></h2>
+  <div class="section-eyebrow"><span class="section-num">07</span><span class="section-label" data-pt="Validação" data-en="Validation">Validação</span></div>
+  <h2 class="section-title" data-pt="Testando com o usuário real &lt;em&gt;antes do código final&lt;/em&gt;" data-en="Testing with the real user &lt;em&gt;before the final code&lt;/em&gt;">Testando com o usuário real <em>antes do código final</em></h2>
   <div class="section-body">
-    <p>A validação aconteceu em ciclos curtos e reais. Cada versão publicada era testada pelo próprio Daniel e por mim, em diferentes dispositivos, com ajustes imediatos. Alguns problemas só apareceram em uso real:</p>
+    <p data-pt="A validação aconteceu em ciclos curtos e reais. Cada versão publicada era testada pelo próprio Daniel e por mim, em diferentes dispositivos, com ajustes imediatos. Alguns problemas só apareceram em uso real:" data-en="Validation happened in short, real cycles. Each published version was tested by Daniel himself and by me, on different devices, with immediate adjustments. Some issues only appeared in real use:">A validação aconteceu em ciclos curtos e reais. Cada versão publicada era testada pelo próprio Daniel e por mim, em diferentes dispositivos, com ajustes imediatos. Alguns problemas só apareceram em uso real:</p>
   </div>
   <div class="insight-grid">
     <div class="insight-card">
-      <div class="insight-card-label">Bug 01: Mobile</div>
+      <div class="insight-card-label" data-pt="Bug 01: Mobile" data-en="Bug 01: Mobile">Bug 01: Mobile</div>
       <div class="insight-card-text">A imagem de fundo usava <code>background-attachment: fixed</code>, que quebra em iOS. Corrigido com uma camada fixa separada via pseudo-elemento.</div>
     </div>
     <div class="insight-card">
-      <div class="insight-card-label">Bug 02: CORS</div>
+      <div class="insight-card-label" data-pt="Bug 02: CORS" data-en="Bug 02: CORS">Bug 02: CORS</div>
       <div class="insight-card-text">Depoimentos não carregavam ao testar localmente (<code>file://</code>) por política de CORS do navegador. Funcionava perfeitamente após o deploy real.</div>
     </div>
     <div class="insight-card">
-      <div class="insight-card-label">Ajuste 03: Hierarquia</div>
+      <div class="insight-card-label" data-pt="Ajuste 03: Hierarquia" data-en="Fix 03: Hierarchy">Ajuste 03: Hierarquia</div>
       <div class="insight-card-text">Badges de especialidade pareciam botões clicáveis sem ser. Redesenhados como texto simples com separadores.</div>
     </div>
     <div class="insight-card">
-      <div class="insight-card-label">Ajuste 04: Escaneabilidade</div>
+      <div class="insight-card-label" data-pt="Ajuste 04: Escaneabilidade" data-en="Fix 04: Scannability">Ajuste 04: Escaneabilidade</div>
       <div class="insight-card-text">Seção inicial ocupava 100% da viewport, escondendo que havia mais conteúdo. Reduzida para deixar a próxima seção parcialmente visível.</div>
     </div>
   </div>
 </section>
 
 <section class="case-section" id="implementacao">
-  <div class="section-eyebrow"><span class="section-num">08</span><span class="section-label">Implementação</span></div>
-  <h2 class="section-title">Código, deploy e <em>infraestrutura própria</em></h2>
-  <div class="section-body"><p>Implementei o site inteiro em HTML, CSS e JavaScript vanilla, sem framework, priorizando performance e simplicidade de manutenção para um projeto de página única. A versão final inclui:</p></div>
+  <div class="section-eyebrow"><span class="section-num">08</span><span class="section-label" data-pt="Implementação" data-en="Implementation">Implementação</span></div>
+  <h2 class="section-title" data-pt="Código, deploy e &lt;em&gt;infraestrutura própria&lt;/em&gt;" data-en="Code, deploy and &lt;em&gt;own infrastructure&lt;/em&gt;">Código, deploy e <em>infraestrutura própria</em></h2>
+  <div class="section-body"><p data-pt="Implementei o site inteiro em HTML, CSS e JavaScript vanilla, sem framework, priorizando performance e simplicidade de manutenção para um projeto de página única. A versão final inclui:" data-en="I built the entire site in HTML, CSS and vanilla JavaScript, no framework, prioritising performance and maintenance simplicity for a single-page project. The final version includes:">Implementei o site inteiro em HTML, CSS e JavaScript vanilla, sem framework, priorizando performance e simplicidade de manutenção para um projeto de página única. A versão final inclui:</p></div>
   <div class="process-list">
     <div class="process-item">
-      <span class="process-date">Front-end</span>
+      <span class="process-date" data-pt="Front-end" data-en="Front-end">Front-end</span>
       <span class="process-text">HTML5 semântico, CSS com custom properties (design tokens), JavaScript para sistema de abas e carrossel.</span>
     </div>
     <div class="process-item">
-      <span class="process-date">Integração</span>
+      <span class="process-date" data-pt="Integração" data-en="Integration">Integração</span>
       <span class="process-text">Google Sheets como CMS leve para depoimentos, via Google Visualization API, sem backend próprio.</span>
     </div>
     <div class="process-item">
-      <span class="process-date">Deploy</span>
+      <span class="process-date" data-pt="Deploy" data-en="Deploy">Deploy</span>
       <span class="process-text">Versionamento com Git/GitHub Desktop, publicação via GitHub Pages.</span>
     </div>
     <div class="process-item">
-      <span class="process-date">Domínio & SEO</span>
+      <span class="process-date" data-pt="Domínio &amp; SEO" data-en="Domain &amp; SEO">Domínio & SEO</span>
       <span class="process-text">Domínio próprio (danielnoffs.com.br) configurado via DNS, Google Search Console verificado e indexação solicitada.</span>
     </div>
   </div>
 </section>
 
 <section class="case-section" id="resultados">
-  <div class="section-eyebrow"><span class="section-num">09</span><span class="section-label">Resultados</span></div>
-  <h2 class="section-title">Dados reais, <em>primeiras semanas no ar</em></h2>
-  <div class="section-body"><p>Com o Google Analytics e Search Console configurados desde o lançamento, foi possível medir tração real desde a primeira semana publicada:</p></div>
+  <div class="section-eyebrow"><span class="section-num">09</span><span class="section-label" data-pt="Resultados" data-en="Results">Resultados</span></div>
+  <h2 class="section-title" data-pt="Dados reais, &lt;em&gt;primeiras semanas no ar&lt;/em&gt;" data-en="Real data, &lt;em&gt;first weeks live&lt;/em&gt;">Dados reais, <em>primeiras semanas no ar</em></h2>
+  <div class="section-body"><p data-pt="Com o Google Analytics e Search Console configurados desde o lançamento, foi possível medir tração real desde a primeira semana publicada:" data-en="With Google Analytics and Search Console set up from launch, it was possible to measure real traction from the very first week live:">Com o Google Analytics e Search Console configurados desde o lançamento, foi possível medir tração real desde a primeira semana publicada:</p></div>
   <div class="results-grid">
-    <div class="result-stat"><div class="result-num">41+</div><div class="result-label">Usuários ativos nos primeiros 28 dias</div></div>
-    <div class="result-stat"><div class="result-num">3</div><div class="result-label">Camadas de oferta unificadas num único site (presencial, online, digital)</div></div>
-    <div class="result-stat"><div class="result-num">100%</div><div class="result-label">Indexado e verificado no Google Search Console</div></div>
-    <div class="result-stat"><div class="result-num">0→1</div><div class="result-label">Domínio próprio: de inexistente a ativo com HTTPS</div></div>
+    <div class="result-stat"><div class="result-num">41+</div><div class="result-label" data-pt="Usuários ativos nos primeiros 28 dias" data-en="Active users in the first 28 days">Usuários ativos nos primeiros 28 dias</div></div>
+    <div class="result-stat"><div class="result-num">3</div><div class="result-label" data-pt="Camadas de oferta unificadas num único site (presencial, online, digital)" data-en="Service layers unified in one website (in-person, online, digital)">Camadas de oferta unificadas num único site (presencial, online, digital)</div></div>
+    <div class="result-stat"><div class="result-num">100%</div><div class="result-label" data-pt="Indexado e verificado no Google Search Console" data-en="Indexed and verified in Google Search Console">Indexado e verificado no Google Search Console</div></div>
+    <div class="result-stat"><div class="result-num">0→1</div><div class="result-label" data-pt="Domínio próprio: de inexistente a ativo com HTTPS" data-en="Own domain: from nonexistent to active with HTTPS">Domínio próprio: de inexistente a ativo com HTTPS</div></div>
   </div>
   <div class="section-body" style="margin-top:32px;">
-    <p>Além dos números, o resultado qualitativo mais relevante foi operacional: o Daniel passou a ter <strong>um único link para enviar</strong> sempre que alguém pergunta sobre valores, substituindo respostas manuais e inconsistentes no WhatsApp.</p>
+    <p data-pt="Além dos números, o resultado qualitativo mais relevante foi operacional: o Daniel passou a ter &lt;strong&gt;um único link para enviar&lt;/strong&gt; sempre que alguém pergunta sobre valores, substituindo respostas manuais e inconsistentes no WhatsApp." data-en="Beyond the numbers, the most relevant qualitative outcome was operational: Daniel now has &lt;strong&gt;a single link to share&lt;/strong&gt; whenever someone asks about pricing, replacing manual and inconsistent WhatsApp replies.">Além dos números, o resultado qualitativo mais relevante foi operacional: o Daniel passou a ter <strong>um único link para enviar</strong> sempre que alguém pergunta sobre valores, substituindo respostas manuais e inconsistentes no WhatsApp.</p>
   </div>
 </section>
 
 <section class="case-section" id="aprendizados">
-  <div class="section-eyebrow"><span class="section-num">10</span><span class="section-label">Aprendizados</span></div>
-  <h2 class="section-title">O que esse projeto me ensinou <em>sobre ser design engineer</em></h2>
-  <div class="section-body"><p>Esse foi meu primeiro projeto end-to-end como designer e desenvolvedora ao mesmo tempo, desenhando e codificando sem entregar para outra pessoa implementar. Três aprendizados centrais:</p></div>
+  <div class="section-eyebrow"><span class="section-num">10</span><span class="section-label" data-pt="Aprendizados" data-en="Learnings">Aprendizados</span></div>
+  <h2 class="section-title" data-pt="O que esse projeto me ensinou &lt;em&gt;sobre ser design engineer&lt;/em&gt;" data-en="What this project taught me &lt;em&gt;about being a design engineer&lt;/em&gt;">O que esse projeto me ensinou <em>sobre ser design engineer</em></h2>
+  <div class="section-body"><p data-pt="Esse foi meu primeiro projeto end-to-end como designer e desenvolvedora ao mesmo tempo, desenhando e codificando sem entregar para outra pessoa implementar. Três aprendizados centrais:" data-en="This was my first end-to-end project as both designer and developer, designing and coding without handing off to someone else to implement. Three core learnings:">Esse foi meu primeiro projeto end-to-end como designer e desenvolvedora ao mesmo tempo, desenhando e codificando sem entregar para outra pessoa implementar. Três aprendizados centrais:</p></div>
   <div class="insight-grid">
     <div class="insight-card">
-      <div class="insight-card-label">Aprendizado 01</div>
-      <div class="insight-card-text">Design tokens em CSS (variáveis de cor, espaçamento) tornam qualquer ajuste de marca uma mudança de minutos, não de horas. Vivi isso na prática ao trocar a paleta inteira do site uma vez sem reescrever nenhum componente.</div>
+      <div class="insight-card-label" data-pt="Aprendizado 01" data-en="Learning 01">Aprendizado 01</div>
+      <div class="insight-card-text" data-pt="Design tokens em CSS (variáveis de cor, espaçamento) tornam qualquer ajuste de marca uma mudança de minutos, não de horas. Vivi isso na prática ao trocar a paleta inteira do site uma vez sem reescrever nenhum componente." data-en="CSS design tokens (colour and spacing variables) turn any brand adjustment into a matter of minutes, not hours. I experienced this first-hand when I swapped the entire site palette without rewriting a single component.">Design tokens em CSS (variáveis de cor, espaçamento) tornam qualquer ajuste de marca uma mudança de minutos, não de horas. Vivi isso na prática ao trocar a paleta inteira do site uma vez sem reescrever nenhum componente.</div>
     </div>
     <div class="insight-card">
-      <div class="insight-card-label">Aprendizado 02</div>
-      <div class="insight-card-text">Testar só no ambiente local (<code>file://</code>) escondeu um bug real de CORS que só apareceu após o deploy. Validação em produção é insubstituível.</div>
+      <div class="insight-card-label" data-pt="Aprendizado 02" data-en="Learning 02">Aprendizado 02</div>
+      <div class="insight-card-text" data-pt="Testar só no ambiente local (file://) escondeu um bug real de CORS que só apareceu após o deploy. Validação em produção é insubstituível." data-en="Testing only in the local environment (file://) hid a real CORS bug that only appeared after deploy. Production validation is irreplaceable.">Testar só no ambiente local (<code>file://</code>) escondeu um bug real de CORS que só apareceu após o deploy. Validação em produção é insubstituível.</div>
     </div>
     <div class="insight-card">
-      <div class="insight-card-label">Aprendizado 03</div>
-      <div class="insight-card-text">Um MVP simples (HTML/CSS/JS sem framework) foi suficiente para entregar valor real e medível. A complexidade técnica deve seguir a necessidade do negócio, não o contrário.</div>
+      <div class="insight-card-label" data-pt="Aprendizado 03" data-en="Learning 03">Aprendizado 03</div>
+      <div class="insight-card-text" data-pt="Um MVP simples (HTML/CSS/JS sem framework) foi suficiente para entregar valor real e medível. A complexidade técnica deve seguir a necessidade do negócio, não o contrário." data-en="A simple MVP (HTML/CSS/JS without a framework) was enough to deliver real, measurable value. Technical complexity should follow business need, not the other way around.">Um MVP simples (HTML/CSS/JS sem framework) foi suficiente para entregar valor real e medível. A complexidade técnica deve seguir a necessidade do negócio, não o contrário.</div>
     </div>
   </div>
 </section>
 
 <section class="case-cta">
-  <div class="section-eyebrow" style="justify-content:center;"><span class="section-label">Próximo passo</span></div>
-  <h2 class="section-title">Quer ver o resultado <em>ao vivo?</em></h2>
+  <div class="section-eyebrow" style="justify-content:center;"><span class="section-label" data-pt="Próximo passo" data-en="Next step">Próximo passo</span></div>
+  <h2 class="section-title" data-pt="Quer ver o resultado &lt;em&gt;ao vivo?&lt;/em&gt;" data-en="Want to see the result &lt;em&gt;live?&lt;/em&gt;">Quer ver o resultado <em>ao vivo?</em></h2>
   <div class="cta-links">
-    <a href="https://danielnoffs.com.br" target="_blank" class="btn-cta-primary">Visitar o site →</a>
-    <a href="index.html" class="btn-cta-ghost">Voltar ao portfólio</a>
+    <a href="https://danielnoffs.com.br" target="_blank" class="btn-cta-primary" data-pt="Visitar o site →" data-en="Visit the website →">Visitar o site →</a>
+    <a href="index.html" class="btn-cta-ghost" data-pt="Voltar ao portfólio" data-en="Back to portfolio">Voltar ao portfólio</a>
   </div>
 </section>
 
 <footer>
   <p>© 2026 Camilla Pestana</p>
-  <p>Case study · UX/UI & Front-end</p>
+  <p data-pt="Case study · UX/UI &amp; Front-end" data-en="Case study · UX/UI &amp; Front-end">Case study · UX/UI &amp; Front-end</p>
 </footer>
+
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('[data-pt]').forEach(el => {
+      const text = el.getAttribute('data-' + lang);
+      if (text !== null) el.innerHTML = text;
+    });
+    document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('lang', lang);
+    document.documentElement.setAttribute('lang', lang === 'en' ? 'en' : 'pt-BR');
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    const saved = localStorage.getItem('lang') || 'pt';
+    if (saved === 'en') setLang('en');
+  });
+  window.addEventListener('load', function() {
+    const saved = localStorage.getItem('lang') || 'pt';
+    if (saved === 'en') setLang('en');
+  });
+</script>
 
 </body>
 </html>
