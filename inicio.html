@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sites profissionais para o seu negócio — camilla.pestana</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111110'/%3E%3Ctext x='32' y='40' font-family='Georgia, serif' font-size='26' font-weight='300' fill='%23E8547A' text-anchor='middle'%3ECP%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white: #FAFAF8;
+    --black: #111110;
+    --gray: #6B6B6B;
+    --gray-light: #F2F1ED;
+    --gray-border: #E4E2DC;
+    --pink: #E8547A;
+    --pink-light: #FBE9ED;
+    --pink-mid: #F2A9BB;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  body { background: var(--white); color: var(--black); font-family: var(--sans); overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 22px 6vw; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250,250,248,0.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--gray-border);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 19px; font-weight: 400; letter-spacing: 0.01em; }
+  .nav-logo span { color: var(--pink); font-style: italic; }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .nav-back {
+    font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--gray); transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--pink); }
+  .lang-toggle { display: flex; align-items: center; }
+  .lang-btn {
+    background: none; border: none; padding: 5px 8px; cursor: pointer;
+    font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+    color: var(--gray); transition: color 0.2s;
+  }
+  .lang-btn.active { color: var(--pink); }
+  .lang-divider { color: var(--gray-border); font-size: 10px; }
+
+  section { padding: 100px 6vw; max-width: 1280px; margin: 0 auto; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--pink); margin-bottom: 20px;
+  }
+  .eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--pink); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+    padding-top: 140px !important;
+  }
+  .hero-title {
+    font-family: var(--serif); font-weight: 300; line-height: 1.04;
+    font-size: clamp(38px, 6vw, 88px); max-width: 920px; letter-spacing: -0.01em;
+  }
+  .hero-title em { font-style: italic; color: var(--pink); }
+  .hero-sub { font-size: clamp(16px,1.6vw,19px); color: var(--gray); max-width: 560px; margin-top: 28px; line-height: 1.6; font-weight: 300; }
+  .hero-actions { display: flex; gap: 16px; margin-top: 44px; flex-wrap: wrap; align-items: center; }
+  .btn-primary {
+    background: var(--black); color: var(--white); border: none;
+    padding: 16px 32px; font-size: 13px; font-weight: 500; letter-spacing: 0.04em;
+    cursor: pointer; display: inline-flex; align-items: center; gap: 10px;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--pink); }
+  .btn-ghost-link {
+    font-size: 13px; font-weight: 600; color: var(--black);
+    display: inline-flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid var(--black); padding-bottom: 4px;
+    background: none; border-top: none; border-left: none; border-right: none;
+    cursor: pointer; font-family: var(--sans); transition: gap 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .btn-ghost-link:hover { gap: 12px; color: var(--pink); border-color: var(--pink); }
+  .hero-proof { display: flex; gap: 40px; margin-top: 64px; padding-top: 28px; border-top: 1px solid var(--gray-border); flex-wrap: wrap; }
+  .proof-num { font-family: var(--serif); font-size: 30px; font-weight: 300; color: var(--pink); display: block; }
+  .proof-label { font-size: 11px; color: var(--gray); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+
+  /* COMO FUNCIONA */
+  .how { background: var(--gray-light); }
+  .how h2 { font-family: var(--serif); font-size: clamp(28px,3.6vw,46px); font-weight: 300; line-height: 1.1; margin-bottom: 56px; }
+  .how-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--gray-border); border: 1px solid var(--gray-border); }
+  .how-step { background: var(--white); padding: 40px 32px; }
+  .how-num { font-family: var(--serif); font-size: 44px; font-weight: 300; color: var(--pink-mid); line-height: 1; }
+  .how-step h3 { font-size: 16px; font-weight: 600; margin-top: 20px; margin-bottom: 10px; }
+  .how-step p { font-size: 13.5px; color: var(--gray); line-height: 1.6; font-weight: 300; }
+
+  /* PACOTES */
+  .pricing { background: var(--black); color: var(--white); }
+  .pricing .eyebrow { color: var(--pink-mid); }
+  .pricing .eyebrow::before { background: var(--pink-mid); }
+  .pricing h2 { font-family: var(--serif); font-size: clamp(28px,3.6vw,46px); font-weight: 300; line-height: 1.1; color: var(--white); margin-bottom: 12px; }
+  .pricing-sub { color: rgba(255,255,255,0.55); font-size: 14.5px; font-weight: 300; line-height: 1.7; max-width: 540px; margin-bottom: 48px; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1px; background: rgba(255,255,255,0.12); }
+  .price-card { background: var(--black); padding: 44px; }
+  .price-card.featured { background: #181715; }
+  .pc-badge { display: inline-block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pink); border: 1px solid var(--pink); padding: 5px 12px; margin-bottom: 22px; }
+  .price-card h3 { font-family: var(--serif); font-size: 24px; font-weight: 400; margin-bottom: 6px; }
+  .pc-sub { font-size: 12.5px; color: rgba(255,255,255,0.45); margin-bottom: 26px; }
+  .pc-price { font-family: var(--serif); font-size: 42px; font-weight: 300; margin-bottom: 4px; }
+  .pc-note { font-size: 11.5px; color: rgba(255,255,255,0.4); margin-bottom: 28px; }
+  .pc-list { list-style: none; display: flex; flex-direction: column; gap: 13px; margin-bottom: 32px; padding: 0; }
+  .pc-list li { font-size: 13.5px; color: rgba(255,255,255,0.8); display: flex; gap: 10px; font-weight: 300; }
+  .pc-list li::before { content: '—'; color: var(--pink); flex-shrink: 0; }
+  .btn-price {
+    display: flex; justify-content: center; align-items: center; width: 100%;
+    background: var(--white); color: var(--black); padding: 14px; font-size: 12.5px;
+    font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; border: none;
+    cursor: pointer; transition: background 0.2s, color 0.2s;
+  }
+  .price-card.featured .btn-price { background: var(--pink); color: var(--white); }
+  .btn-price:hover { background: var(--pink-mid); color: var(--black); }
+  .price-card.featured .btn-price:hover { background: var(--pink-mid); color: var(--black); }
+  .pricing-extra { margin-top: 1px; background: #181715; padding: 32px 44px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; align-items: center; }
+  .pricing-extra-item { display: flex; gap: 12px; align-items: center; }
+  .e-label { font-size: 13px; color: rgba(255,255,255,0.7); font-weight: 300; }
+  .e-price { font-family: var(--serif); font-size: 17px; color: var(--pink-mid); white-space: nowrap; flex-shrink: 0; }
+  .pricing-footnote { margin-top: 28px; font-size: 12px; color: rgba(255,255,255,0.4); display: flex; gap: 8px; align-items: center; }
+  .pricing-footnote::before { content: '✓'; color: var(--pink-mid); }
+  .pricing-footnote.no-icon::before { content: none; }
+
+  /* CTA FINAL */
+  .final-cta { background: var(--pink); color: var(--white); text-align: center; padding: 110px 6vw !important; }
+  .final-cta h2 { font-family: var(--serif); font-size: clamp(30px,5vw,58px); font-weight: 300; max-width: 760px; margin: 0 auto 28px; line-height: 1.1; }
+  .final-cta p { font-size: 16px; opacity: 0.92; max-width: 480px; margin: 0 auto 40px; font-weight: 300; }
+  .final-cta .btn-primary { background: var(--white); color: var(--black); }
+  .final-cta .btn-primary:hover { background: var(--black); color: var(--white); }
+
+  footer { padding: 36px 6vw; display: flex; justify-content: space-between; font-size: 11.5px; color: var(--gray); flex-wrap: wrap; gap: 10px; border-top: 1px solid var(--gray-border); }
+
+  @media (max-width: 900px) {
+    .how-grid { grid-template-columns: 1fr 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 64px 6vw; }
+    .hero { padding-top: 110px !important; }
+    .how-grid { grid-template-columns: 1fr; }
+    .pricing-extra { flex-direction: column; align-items: flex-start; padding: 28px 24px; }
+    .pricing-extra-item { width: 100%; justify-content: space-between; }
+    .e-label { font-size: 12px; }
+    .e-price { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">camilla<span>.pestana</span></a>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-pt" onclick="setLang('pt')">PT</button>
+      <span class="lang-divider">|</span>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="index.html" class="nav-back" data-pt="← Portfólio" data-en="← Portfolio">← Portfólio</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow" data-pt="Design + desenvolvimento" data-en="Design + development">Design + desenvolvimento</div>
+  <h1 class="hero-title" data-pt="Sites profissionais,&lt;br&gt;do design ao &lt;em&gt;código&lt;/em&gt;,&lt;br&gt;para o seu negócio." data-en="Professional websites,&lt;br&gt;from design to &lt;em&gt;code&lt;/em&gt;,&lt;br&gt;for your business.">Sites profissionais,<br>do design ao <em>código</em>,<br>para o seu negócio.</h1>
+  <p class="hero-sub" data-pt="Projeto, identidade visual e desenvolvimento em um só lugar — com domínio próprio incluso e no ar em até 10 a 15 dias úteis, dependendo do pacote." data-en="Design, visual identity and development in one place — with your own domain included and live in 10 to 15 business days, depending on the package.">Projeto, identidade visual e desenvolvimento em um só lugar — com domínio próprio incluso e no ar em até 10 a 15 dias úteis, dependendo do pacote.</p>
+  <div class="hero-actions">
+    <a href="https://wa.me/5511978332614?text=Ol%C3%A1%20Camilla!%20Quero%20saber%20mais%20sobre%20os%20pacotes%20de%20site." target="_blank" class="btn-primary" data-pt="Pedir uma proposta →" data-en="Request a proposal →">Pedir uma proposta →</a>
+    <a href="index.html" class="btn-ghost-link" data-pt="Ver portfólio" data-en="See portfolio">Ver portfólio</a>
+  </div>
+  <div class="hero-proof">
+    <div><span class="proof-num">10-15</span><span class="proof-label" data-pt="Dias úteis até o ar" data-en="Business days to go live">Dias úteis até o ar</span></div>
+    <div><span class="proof-num">100%</span><span class="proof-label" data-pt="Responsivo" data-en="Responsive">Responsivo</span></div>
+    <div><span class="proof-num">CNPJ</span><span class="proof-label" data-pt="Nota fiscal" data-en="Invoice issued">Nota fiscal</span></div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="how">
+  <div class="eyebrow" data-pt="Como funciona" data-en="How it works">Como funciona</div>
+  <h2 data-pt="Do briefing ao site no ar,&lt;br&gt;em 4 etapas simples." data-en="From briefing to launch,&lt;br&gt;in 4 simple steps.">Do briefing ao site no ar,<br>em 4 etapas simples.</h2>
+  <div class="how-grid">
+    <div class="how-step">
+      <span class="how-num">01</span>
+      <h3 data-pt="Briefing" data-en="Briefing">Briefing</h3>
+      <p data-pt="Você me conta sobre o negócio: serviços, fotos, contato e o que não pode faltar na página." data-en="You tell me about your business: services, photos, contact info and everything that needs to be on the page.">Você me conta sobre o negócio: serviços, fotos, contato e o que não pode faltar na página.</p>
+    </div>
+    <div class="how-step">
+      <span class="how-num">02</span>
+      <h3 data-pt="Proposta" data-en="Proposal">Proposta</h3>
+      <p data-pt="Te envio a proposta do site para você aprovar ou ajustar antes de seguirmos." data-en="I send you the site proposal for you to approve or adjust before we move forward.">Te envio a proposta do site para você aprovar ou ajustar antes de seguirmos.</p>
+    </div>
+    <div class="how-step">
+      <span class="how-num">03</span>
+      <h3 data-pt="Desenvolvimento" data-en="Development">Desenvolvimento</h3>
+      <p data-pt="Construo o site do design ao código, com domínio próprio já configurado." data-en="I build the site from design to code, with your own domain already set up.">Construo o site do design ao código, com domínio próprio já configurado.</p>
+    </div>
+    <div class="how-step">
+      <span class="how-num">04</span>
+      <h3 data-pt="Entrega" data-en="Delivery">Entrega</h3>
+      <p data-pt="Site no ar, testado no celular e no computador, pronto para receber clientes." data-en="Site live, tested on mobile and desktop, ready to welcome customers.">Site no ar, testado no celular e no computador, pronto para receber clientes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PACOTES -->
+<section class="pricing">
+  <div class="eyebrow" data-pt="Pacotes" data-en="Packages">Pacotes</div>
+  <h2 data-pt="Um valor justo,&lt;br&gt;sem mensalidade obrigatória." data-en="Fair pricing,&lt;br&gt;no mandatory monthly fee.">Um valor justo,<br>sem mensalidade obrigatória.</h2>
+  <p class="pricing-sub" data-pt="Todo pacote já inclui domínio próprio por 1 ano. Sem letra pequena, sem custo escondido depois da entrega." data-en="Every package already includes your own domain for 1 year. No fine print, no hidden costs after delivery.">Todo pacote já inclui domínio próprio por 1 ano. Sem letra pequena, sem custo escondido depois da entrega.</p>
+
+  <div class="pricing-grid">
+    <div class="price-card">
+      <span class="pc-badge" data-pt="Essencial" data-en="Essential">Essencial</span>
+      <h3 data-pt="Site Vitrine" data-en="Showcase Website">Site Vitrine</h3>
+      <div class="pc-sub" data-pt="Para apresentar o negócio com profissionalismo" data-en="To present your business professionally">Para apresentar o negócio com profissionalismo</div>
+      <div class="pc-price">R$ 297</div>
+      <div class="pc-note" data-pt="domínio próprio incluso · 1 ano" data-en="own domain included · 1 year">domínio próprio incluso · 1 ano</div>
+      <ul class="pc-list">
+        <li data-pt="1 página, até 5 seções" data-en="1 page, up to 5 sections">1 página, até 5 seções</li>
+        <li data-pt="Responsivo (celular e desktop)" data-en="Responsive (mobile and desktop)">Responsivo (celular e desktop)</li>
+        <li data-pt="Botão de WhatsApp fixo" data-en="Fixed WhatsApp button">Botão de WhatsApp fixo</li>
+        <li data-pt="Localização no Google Maps" data-en="Google Maps location">Localização no Google Maps</li>
+        <li data-pt="Entrega em até 10 dias úteis*" data-en="Delivery in up to 10 business days*">Entrega em até 10 dias úteis*</li>
+      </ul>
+      <button class="btn-price" onclick="window.open('https://wa.me/5511978332614?text=Ol%C3%A1%20Camilla!%20Tenho%20interesse%20no%20pacote%20Site%20Vitrine.','_blank')" data-pt="Pedir esta proposta" data-en="Request this proposal">Pedir esta proposta</button>
+    </div>
+    <div class="price-card featured">
+      <span class="pc-badge" data-pt="Completo" data-en="Complete">Completo</span>
+      <h3 data-pt="Presença Digital" data-en="Digital Presence">Presença Digital</h3>
+      <div class="pc-sub" data-pt="Site + visibilidade no Google desde o primeiro dia" data-en="Website + Google visibility from day one">Site + visibilidade no Google desde o primeiro dia</div>
+      <div class="pc-price">R$ 370</div>
+      <div class="pc-note" data-pt="domínio próprio incluso · 1 ano" data-en="own domain included · 1 year">domínio próprio incluso · 1 ano</div>
+      <ul class="pc-list">
+        <li data-pt="Tudo do Site Vitrine" data-en="Everything in Showcase Website">Tudo do Site Vitrine</li>
+        <li data-pt="Configuração do Google Meu Negócio" data-en="Google Business Profile setup">Configuração do Google Meu Negócio</li>
+        <li data-pt="SEO básico (título, descrição, palavras-chave)" data-en="Basic SEO (title, description, keywords)">SEO básico (título, descrição, palavras-chave)</li>
+        <li data-pt="Mapa e endereço indexados ao Google" data-en="Map and address indexed on Google">Mapa e endereço indexados ao Google</li>
+        <li data-pt="Entrega em até 15 dias úteis*" data-en="Delivery in up to 15 business days*">Entrega em até 15 dias úteis*</li>
+      </ul>
+      <button class="btn-price" onclick="window.open('https://wa.me/5511978332614?text=Ol%C3%A1%20Camilla!%20Tenho%20interesse%20no%20pacote%20Presen%C3%A7a%20Digital.','_blank')" data-pt="Pedir esta proposta" data-en="Request this proposal">Pedir esta proposta</button>
+    </div>
+  </div>
+
+  <div class="pricing-extra">
+    <div class="pricing-extra-item"><span class="e-label" data-pt="Ajuste pontual (foto, texto, preço)" data-en="One-time update (photo, text, price)">Ajuste pontual (foto, texto, preço)</span><span class="e-price">R$ 50</span></div>
+    <div class="pricing-extra-item"><span class="e-label" data-pt="Inclusão de nova seção" data-en="New section addition">Inclusão de nova seção</span><span class="e-price">R$ 80</span></div>
+    <div class="pricing-extra-item"><span class="e-label" data-pt="Manutenção mensal (2 ajustes/mês)" data-en="Monthly maintenance (2 updates/month)">Manutenção mensal (2 ajustes/mês)</span><span class="e-price">R$ 79/mês</span></div>
+    <div class="pricing-extra-item"><span class="e-label" data-pt="Renovação de domínio (2º ano)" data-en="Domain renewal (2nd year)">Renovação de domínio (2º ano)</span><span class="e-price">R$ 60</span></div>
+  </div>
+  <div class="pricing-footnote" data-pt="Emito nota fiscal — CNPJ 36.151.883/0001-88" data-en="Invoice issued — CNPJ 36.151.883/0001-88">Emito nota fiscal — CNPJ 36.151.883/0001-88</div>
+  <div class="pricing-footnote no-icon" style="margin-top:10px;" data-pt="*Prazo contado a partir do recebimento de todo o material (textos, fotos e logo)" data-en="*Timeline starts upon receipt of all materials (texts, photos and logo)">*Prazo contado a partir do recebimento de todo o material (textos, fotos e logo)</div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="final-cta">
+  <h2 data-pt="Seu negócio merece estar no Google." data-en="Your business deserves to be on Google.">Seu negócio merece estar no Google.</h2>
+  <p data-pt="Vamos colocar seu site no ar — com domínio próprio, design profissional e suporte para tirar dúvidas." data-en="Let's get your website live — with your own domain, professional design and support along the way.">Vamos colocar seu site no ar — com domínio próprio, design profissional e suporte para tirar dúvidas.</p>
+  <a href="https://wa.me/5511978332614?text=Ol%C3%A1%20Camilla!%20Quero%20saber%20mais%20sobre%20os%20pacotes%20de%20site." target="_blank" class="btn-primary" data-pt="Falar no WhatsApp →" data-en="Message on WhatsApp →">Falar no WhatsApp →</a>
+</section>
+
+<footer>
+  <span>© 2026 Camilla Pestana — CNPJ 36.151.883/0001-88</span>
+  <span data-pt="Santo André, SP" data-en="Santo André, SP">Santo André, SP</span>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('[data-pt]').forEach(el => {
+      const text = el.getAttribute('data-' + lang);
+      if (text) el.innerHTML = text;
+    });
+    document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('lang', lang);
+    document.documentElement.setAttribute('lang', lang === 'en' ? 'en' : 'pt-BR');
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    const saved = localStorage.getItem('lang') || 'pt';
+    if (saved === 'en') setLang('en');
+  });
+  window.addEventListener('load', function() {
+    const saved = localStorage.getItem('lang') || 'pt';
+    if (saved === 'en') setLang('en');
+  });
+</script>
+</body>
+</html>
