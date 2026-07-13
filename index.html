@@ -739,7 +739,7 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo" onclick="showPage('inicio'); return false;">camilla<span>.pestana</span></a>
+  <a href="#" class="nav-logo" onclick="showPage('projetos'); return false;">camilla<span>.pestana</span></a>
   <div style="display:flex;align-items:center;gap:8px;">
     <div class="lang-toggle">
       <button class="lang-btn active" id="btn-pt" onclick="setLang('pt')">PT</button>
@@ -751,15 +751,14 @@
     </button>
   </div>
   <ul class="nav-links" id="nav-links">
-    <li><div class="nav-tab active" onclick="showPage('inicio')" data-pt="Início" data-en="Home">Início</div></li>
-    <li><div class="nav-tab" onclick="showPage('projetos')" data-pt="Projetos" data-en="Projects">Projetos</div></li>
+    <li><div class="nav-tab active" onclick="showPage('projetos')" data-pt="Projetos" data-en="Projects">Projetos</div></li>
     <li><div class="nav-tab" onclick="showPage('sobre')" data-pt="Sobre" data-en="About">Sobre</div></li>
     <li><div class="nav-tab" onclick="showPage('contato')" data-pt="Contato" data-en="Contact">Contato</div></li>
   </ul>
 </nav>
 
 <!-- PAGE: INÍCIO -->
-<div class="page active" id="page-inicio">
+<div class="page" id="page-inicio">
   <div class="biz-wrap">
 
     <!-- 1. HERO -->
@@ -870,7 +869,7 @@
 </div>
 
 <!-- PAGE: PROJETOS -->
-<div class="page" id="page-projetos">
+<div class="page active" id="page-projetos">
 
   <div class="hero">
     <div class="hero-content">
@@ -903,8 +902,26 @@
             <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
           </div>
           <div class="skill-item">
-            <span>Visual Identity</span>
+            <span data-pt="Identidade Visual" data-en="Visual Identity">Identidade Visual</span>
             <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+          </div>
+
+          <div class="skill-category" style="margin-top:14px;" data-pt="Ferramentas" data-en="Tools">Ferramentas</div>
+          <div class="skill-item">
+            <span>Figma</span>
+            <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+          </div>
+          <div class="skill-item">
+            <span>Photoshop</span>
+            <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+          </div>
+          <div class="skill-item">
+            <span>Illustrator</span>
+            <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+          </div>
+          <div class="skill-item">
+            <span>InDesign</span>
+            <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
           </div>
 
           <div class="skill-category" style="margin-top:14px;">Front-end</div>
@@ -1000,7 +1017,7 @@
           </div>
           <div class="project-name" data-pt="Seu projeto aqui?" data-en="Your project here?">Seu projeto aqui?</div>
           <p class="project-desc" data-pt="Estou disponível para novos projetos. Entre em contato e vamos conversar!" data-en="I'm available for new projects. Get in touch and let's talk!">Estou disponível para novos projetos. Entre em contato e vamos conversar!</p>
-          <button class="project-link" onclick="showPage('contato')" style="background:none;border:none;padding:0;font-family:var(--sans);cursor:pointer;" data-pt="Fale comigo" data-en="Get in touch">Fale comigo</button>
+          <a href="inicio.html" target="_blank" class="project-link" data-pt="Quero um site" data-en="I want a website">Quero um site</a>
         </div>
       </div>
 
@@ -1241,7 +1258,7 @@ Este projeto de UX Research investiga as dores reais desse sistema, com foco em 
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
     document.getElementById('page-' + name).classList.add('active');
-    const matchMap = { inicio: 'iníc', projetos: 'proj', sobre: 'sobr', contato: 'cont' };
+    const matchMap = { projetos: 'proj', sobre: 'sobr', contato: 'cont' };
     document.querySelectorAll('.nav-tab').forEach(t => {
       if (t.textContent.toLowerCase().includes(matchMap[name])) {
         t.classList.add('active');
