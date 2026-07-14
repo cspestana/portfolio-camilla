@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: Festança da Jana | Camilla Pestana</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111110'/%3E%3Ctext x='32' y='40' font-family='Georgia, serif' font-size='26' font-weight='300' fill='%23E8547A' text-anchor='middle'%3ECP%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white: #FAFAF8;
+    --black: #111110;
+    --pink: #E8547A;
+    --pink-light: #FDF0F3;
+    --pink-mid: #F4C5D0;
+    --gray: #6B6B6B;
+    --gray-light: #F0EFED;
+    --gray-border: #E4E3E0;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { background: var(--white); color: var(--black); font-family: var(--sans); overflow-x: hidden; }
+  a { color: inherit; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 22px 6vw; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250,250,248,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-border);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 19px; font-weight: 400; color: var(--black); text-decoration: none; }
+  .nav-logo span { color: var(--pink); font-style: italic; }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .nav-back {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gray); text-decoration: none; transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--pink); }
+  .lang-toggle { display: flex; align-items: center; }
+  .lang-btn { background: none; border: none; padding: 5px 8px; cursor: pointer; font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.1em; color: var(--gray); transition: color 0.2s; }
+  .lang-btn.active { color: var(--pink); }
+  .lang-divider { color: var(--gray-border); font-size: 10px; }
+
+  /* HERO */
+  .case-hero { padding: 140px 6vw 80px; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--gray-border); }
+  .hero-eyebrow { display: flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pink); margin-bottom: 28px; }
+  .hero-eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--pink); }
+  .hero-title { font-family: var(--serif); font-weight: 300; font-size: clamp(36px, 5.5vw, 72px); line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 48px; max-width: 820px; }
+  .hero-title em { font-style: italic; color: var(--pink); }
+  .hero-meta { display: flex; gap: 48px; flex-wrap: wrap; }
+  .meta-item { display: flex; flex-direction: column; gap: 4px; }
+  .meta-label { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); }
+  .meta-value { font-size: 14px; font-weight: 400; }
+
+  /* TOC */
+  .toc-wrap { padding: 48px 6vw; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--gray-border); }
+  .toc-label { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); margin-bottom: 20px; }
+  .toc-list { display: flex; gap: 8px; flex-wrap: wrap; }
+  .toc-item { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border: 1px solid var(--gray-border); font-size: 12px; font-weight: 500; text-decoration: none; color: var(--black); transition: border-color 0.2s, color 0.2s, background 0.2s; }
+  .toc-item:hover { border-color: var(--pink); color: var(--pink); background: var(--pink-light); }
+  .toc-num { font-family: var(--mono); font-size: 11px; color: var(--pink); }
+
+  /* SECTIONS */
+  .case-section { padding: 90px 6vw; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--gray-border); }
+  .section-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+  .section-num { font-family: var(--mono); font-size: 13px; color: var(--pink); font-weight: 500; }
+  .section-label { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); }
+  .section-title { font-family: var(--serif); font-weight: 300; font-size: clamp(26px, 3.6vw, 44px); line-height: 1.1; margin-bottom: 32px; }
+  .section-title em { font-style: italic; color: var(--pink); }
+  .section-body { max-width: 680px; }
+  .section-body p { font-size: 15px; line-height: 1.8; color: var(--gray); margin-bottom: 18px; font-weight: 300; }
+  .section-body p strong { color: var(--black); font-weight: 600; }
+
+  /* INSIGHT CARDS */
+  .insight-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--gray-border); border: 1px solid var(--gray-border); margin-top: 40px; }
+  .insight-card { background: var(--white); padding: 32px; }
+  .insight-card-label { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--pink); margin-bottom: 12px; }
+  .insight-card-text { font-size: 14px; line-height: 1.7; color: var(--gray); font-weight: 300; }
+  .insight-card-text strong { color: var(--black); font-weight: 600; }
+
+  /* PULL QUOTE */
+  blockquote.pull-quote {
+    border-left: 2px solid var(--pink); padding: 20px 28px;
+    margin: 40px 0; font-family: var(--serif); font-size: clamp(18px, 2.4vw, 26px);
+    font-weight: 300; font-style: italic; line-height: 1.5; color: var(--black);
+  }
+
+  /* PROCESS TIMELINE */
+  .process-list { display: flex; flex-direction: column; gap: 0; margin-top: 40px; border: 1px solid var(--gray-border); }
+  .process-item { display: flex; gap: 0; border-bottom: 1px solid var(--gray-border); }
+  .process-item:last-child { border-bottom: none; }
+  .process-date { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pink); padding: 20px 24px; min-width: 130px; border-right: 1px solid var(--gray-border); display: flex; align-items: flex-start; }
+  .process-text { font-size: 14px; line-height: 1.7; color: var(--gray); padding: 20px 24px; font-weight: 300; }
+  .process-text strong { color: var(--black); font-weight: 600; }
+
+  /* RESULTS GRID */
+  .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--gray-border); border: 1px solid var(--gray-border); margin-top: 40px; }
+  .result-stat { background: var(--white); padding: 32px 24px; }
+  .result-num { font-family: var(--serif); font-size: 36px; font-weight: 300; color: var(--pink); display: block; margin-bottom: 8px; }
+  .result-label { font-size: 12.5px; line-height: 1.5; color: var(--gray); font-weight: 300; }
+
+  /* SHOT FRAME */
+  .shot-frame { margin-top: 32px; }
+  .shot-frame img { width: 100%; display: block; border: 1px solid var(--gray-border); }
+  .shot-frame figcaption { font-family: var(--mono); font-size: 11px; color: var(--gray); margin-top: 10px; letter-spacing: 0.04em; }
+  .shot-filename { font-family: var(--mono); font-size: 10px; color: var(--gray); background: var(--gray-light); padding: 4px 10px; display: inline-block; margin-top: 8px; }
+  .shot-gallery-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+  .shot-gallery-row .shot-frame { margin-top: 0; }
+
+  /* NOTE */
+  .case-note { background: var(--pink-light); border-left: 2px solid var(--pink); padding: 16px 24px; margin-top: 32px; font-size: 13px; color: var(--gray); font-style: italic; line-height: 1.7; }
+
+  /* CTA */
+  .case-cta { padding: 80px 6vw; max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 40px; flex-wrap: wrap; }
+  .cta-text h2 { font-family: var(--serif); font-size: clamp(24px, 3vw, 38px); font-weight: 300; line-height: 1.2; margin-bottom: 10px; }
+  .cta-text p { font-size: 14px; color: var(--gray); font-weight: 300; }
+  .cta-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .btn-cta-primary { background: var(--black); color: var(--white); padding: 14px 28px; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-decoration: none; transition: background 0.2s; }
+  .btn-cta-primary:hover { background: var(--pink); }
+  .btn-cta-ghost { border: 1px solid var(--gray-border); color: var(--black); padding: 13px 28px; font-size: 13px; font-weight: 500; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
+  .btn-cta-ghost:hover { border-color: var(--pink); color: var(--pink); }
+
+  /* FOOTER */
+  footer { padding: 32px 6vw; border-top: 1px solid var(--gray-border); display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--gray); flex-wrap: wrap; gap: 12px; }
+
+  @media (max-width: 600px) {
+    .case-hero, .toc-wrap, .case-section, .case-cta { padding-left: 24px; padding-right: 24px; }
+    .hero-meta { gap: 24px; }
+    .insight-grid { grid-template-columns: 1fr; }
+    .results-grid { grid-template-columns: 1fr 1fr; }
+    .shot-gallery-row { grid-template-columns: 1fr; gap: 28px; }
+    .case-cta { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">camilla<span>.pestana</span></a>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-pt" onclick="setLang('pt')">PT</button>
+      <span class="lang-divider">|</span>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="index.html" class="nav-back" data-pt="← Voltar ao portfólio" data-en="← Back to portfolio">← Voltar ao portfólio</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="case-hero">
+  <div class="hero-eyebrow" data-pt="Case Study · Front-end · UI Design" data-en="Case Study · Front-end · UI Design">Case Study · Front-end · UI Design</div>
+  <h1 class="hero-title" data-pt="Uma LP elegante para transformar talento em &lt;em&gt;presença digital&lt;/em&gt;" data-en="An elegant LP to turn talent into &lt;em&gt;digital presence&lt;/em&gt;">Uma LP elegante para transformar talento em <em>presença digital</em></h1>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-label" data-pt="Projeto" data-en="Project">Projeto</span>
+      <span class="meta-value">Festança da Jana</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label" data-pt="Tipo" data-en="Type">Tipo</span>
+      <span class="meta-value" data-pt="Landing Page · Portfólio" data-en="Landing Page · Portfolio">Landing Page · Portfólio</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label" data-pt="Papel" data-en="Role">Papel</span>
+      <span class="meta-value" data-pt="UI Design · Front-end" data-en="UI Design · Front-end">UI Design · Front-end</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label" data-pt="Stack" data-en="Stack">Stack</span>
+      <span class="meta-value">HTML · CSS · JS</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label" data-pt="Site ao vivo" data-en="Live site">Site ao vivo</span>
+      <span class="meta-value"><a href="https://cspestana.github.io/LP-festadecor/" target="_blank" style="color:var(--pink);">cspestana.github.io/LP-festadecor</a></span>
+    </div>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc-wrap">
+  <div class="toc-label" data-pt="Neste case" data-en="In this case">Neste case</div>
+  <div class="toc-list">
+    <a href="#contexto" class="toc-item"><span class="toc-num">01</span> <span data-pt="Contexto" data-en="Context">Contexto</span></a>
+    <a href="#problema" class="toc-item"><span class="toc-num">02</span> <span data-pt="Problema" data-en="Problem">Problema</span></a>
+    <a href="#decisoes" class="toc-item"><span class="toc-num">03</span> <span data-pt="Decisões de design" data-en="Design decisions">Decisões de design</span></a>
+    <a href="#solucao" class="toc-item"><span class="toc-num">04</span> <span data-pt="Solução" data-en="Solution">Solução</span></a>
+    <a href="#resultados" class="toc-item"><span class="toc-num">05</span> <span data-pt="Resultados" data-en="Results">Resultados</span></a>
+    <a href="#aprendizados" class="toc-item"><span class="toc-num">06</span> <span data-pt="Aprendizados" data-en="Learnings">Aprendizados</span></a>
+  </div>
+</div>
+
+<!-- 01 CONTEXTO -->
+<section class="case-section" id="contexto">
+  <div class="section-eyebrow"><span class="section-num">01</span><span class="section-label" data-pt="Contexto" data-en="Context">Contexto</span></div>
+  <h2 class="section-title" data-pt="Um talento real, &lt;em&gt;sem nenhuma presença digital&lt;/em&gt;" data-en="A real talent, &lt;em&gt;with no digital presence at all&lt;/em&gt;">Um talento real, <em>sem nenhuma presença digital</em></h2>
+  <div class="section-body">
+    <p data-pt="Janaina é uma profissional com talento genuíno para decoração de festas: monta mesas temáticas, cria ambientações e entrega experiências visuais que encantam. Mas toda a sua visibilidade dependia exclusivamente do boca a boca — sem nenhum canal digital que apresentasse o trabalho de forma organizada e profissional." data-en="Janaina is a professional with a genuine talent for party decoration: she sets up themed tables, creates atmospheres and delivers visual experiences that delight. But all her visibility depended exclusively on word of mouth — with no digital channel to present her work in an organised and professional way.">Janaina é uma profissional com talento genuíno para decoração de festas: monta mesas temáticas, cria ambientações e entrega experiências visuais que encantam. Mas toda a sua visibilidade dependia exclusivamente do boca a boca — sem nenhum canal digital que apresentasse o trabalho de forma organizada e profissional.</p>
+    <p data-pt="Este projeto nasceu como iniciativa de portfólio: criar uma LP real, com permissão dela, usando dados fictícios que preservam a privacidade enquanto demonstram o potencial do serviço. A Janaina aprovou o resultado e a publicação." data-en="This project started as a portfolio initiative: creating a real LP, with her permission, using fictional data that preserves privacy while demonstrating the service's potential. Janaina approved the result and its publication.">Este projeto nasceu como iniciativa de portfólio: criar uma LP real, com permissão dela, usando dados fictícios que preservam a privacidade enquanto demonstram o potencial do serviço. A Janaina aprovou o resultado e a publicação.</p>
+  </div>
+  <div class="case-note" data-pt="⚠ Projeto de portfólio com dados fictícios. Desenvolvido com permissão da profissional citada, que aprovou o uso público." data-en="⚠ Portfolio project with fictional data. Developed with permission from the referenced professional, who approved public use.">⚠ Projeto de portfólio com dados fictícios. Desenvolvido com permissão da profissional citada, que aprovou o uso público.</div>
+</section>
+
+<!-- 02 PROBLEMA -->
+<section class="case-section" id="problema">
+  <div class="section-eyebrow"><span class="section-num">02</span><span class="section-label" data-pt="Problema" data-en="Problem">Problema</span></div>
+  <h2 class="section-title" data-pt="Sem presença online, &lt;em&gt;cada novo cliente começava do zero&lt;/em&gt;" data-en="Without an online presence, &lt;em&gt;every new client started from scratch&lt;/em&gt;">Sem presença online, <em>cada novo cliente começava do zero</em></h2>
+  <div class="section-body">
+    <p data-pt="Quem ouvia falar do trabalho da Janaina por indicação precisava confiar apenas na palavra de quem recomendou — não havia fotos organizadas, não havia uma página para compartilhar, não havia forma de mostrar o serviço antes da primeira conversa." data-en="Anyone who heard about Janaina's work through a referral had to trust only the recommender's word — there were no organised photos, no page to share, no way to show the service before the first conversation.">Quem ouvia falar do trabalho da Janaina por indicação precisava confiar apenas na palavra de quem recomendou — não havia fotos organizadas, não havia uma página para compartilhar, não havia forma de mostrar o serviço antes da primeira conversa.</p>
+    <p data-pt="O objetivo era resolver isso com o mínimo de fricção: uma página única, visualmente elegante, que apresentasse o serviço, mostrasse o trabalho e convertesse diretamente para o WhatsApp." data-en="The goal was to solve this with minimal friction: a single page, visually elegant, that would present the service, show the work and convert directly to WhatsApp.">O objetivo era resolver isso com o mínimo de fricção: uma página única, visualmente elegante, que apresentasse o serviço, mostrasse o trabalho e convertesse diretamente para o WhatsApp.</p>
+  </div>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Fricção 01" data-en="Friction 01">Fricção 01</div>
+      <div class="insight-card-text" data-pt="Sem página pública, não havia como compartilhar o portfólio de trabalhos numa mensagem rápida de WhatsApp ou Instagram." data-en="Without a public page, there was no way to share the work portfolio in a quick WhatsApp or Instagram message.">Sem página pública, não havia como compartilhar o portfólio de trabalhos numa mensagem rápida de WhatsApp ou Instagram.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Fricção 02" data-en="Friction 02">Fricção 02</div>
+      <div class="insight-card-text" data-pt="A ausência de identidade visual própria dificultava passar uma imagem profissional consistente para potenciais clientes." data-en="The absence of a visual identity made it difficult to convey a consistent professional image to potential clients.">A ausência de identidade visual própria dificultava passar uma imagem profissional consistente para potenciais clientes.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Fricção 03" data-en="Friction 03">Fricção 03</div>
+      <div class="insight-card-text" data-pt="O contato inicial dependia de que alguém passasse o número manualmente — um link de WhatsApp num site facilita e acelera esse primeiro passo." data-en="Initial contact depended on someone passing the number along manually — a WhatsApp link on a website simplifies and speeds up that first step.">O contato inicial dependia de que alguém passasse o número manualmente — um link de WhatsApp num site facilita e acelera esse primeiro passo.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Oportunidade" data-en="Opportunity">Oportunidade</div>
+      <div class="insight-card-text" data-pt="O serviço de decoração de festas é altamente visual. Uma galeria bem apresentada, com fotos reais do trabalho, tem o poder de convencer por si só." data-en="Party decoration is a highly visual service. A well-presented gallery with real photos of the work has the power to convince on its own.">O serviço de decoração de festas é altamente visual. Uma galeria bem apresentada, com fotos reais do trabalho, tem o poder de convencer por si só.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 DECISÕES DE DESIGN -->
+<section class="case-section" id="decisoes">
+  <div class="section-eyebrow"><span class="section-num">03</span><span class="section-label" data-pt="Decisões de design" data-en="Design decisions">Decisões de design</span></div>
+  <h2 class="section-title" data-pt="Elegante e festiva — &lt;em&gt;sem ser genérica&lt;/em&gt;" data-en="Elegant and festive — &lt;em&gt;without being generic&lt;/em&gt;">Elegante e festiva — <em>sem ser genérica</em></h2>
+  <div class="section-body">
+    <p data-pt="O maior risco de uma LP para o segmento de festas é cair no clichê: balões coloridos, tipografia cursiva sem critério, e excesso de elementos decorativos que disputam atenção. A direção escolhida foi oposta: elegância como base, com festivo como sotaque." data-en="The biggest risk of an LP for the events segment is falling into cliché: colourful balloons, arbitrary cursive typography, and an excess of decorative elements competing for attention. The chosen direction was the opposite: elegance as a foundation, with festive as an accent.">O maior risco de uma LP para o segmento de festas é cair no clichê: balões coloridos, tipografia cursiva sem critério, e excesso de elementos decorativos que disputam atenção. A direção escolhida foi oposta: elegância como base, com festivo como sotaque.</p>
+  </div>
+
+  <blockquote class="pull-quote" data-pt='"O serviço já é festivo por natureza. A LP precisava ser elegante o suficiente para que o trabalho dela falasse mais alto que o design."' data-en='"The service is already festive by nature. The LP needed to be elegant enough for her work to speak louder than the design."'>"O serviço já é festivo por natureza. A LP precisava ser elegante o suficiente para que o trabalho dela falasse mais alto que o design."</blockquote>
+
+  <div class="section-body">
+    <p data-pt="As principais decisões tomadas:" data-en="The main decisions made:">As principais decisões tomadas:</p>
+  </div>
+  <div class="process-list">
+    <div class="process-item">
+      <span class="process-date" data-pt="Tipografia" data-en="Typography">Tipografia</span>
+      <span class="process-text" data-pt="Combinação de &lt;strong&gt;Poppins&lt;/strong&gt; (títulos fortes, modernos) com &lt;strong&gt;Quicksand&lt;/strong&gt; (corpo leve e amigável). A dupla comunica profissionalismo sem frieza, e simpatia sem infantilidade." data-en="Combination of &lt;strong&gt;Poppins&lt;/strong&gt; (strong, modern headings) with &lt;strong&gt;Quicksand&lt;/strong&gt; (light and friendly body text). The pairing communicates professionalism without coldness, and warmth without naivety.">Combinação de <strong>Poppins</strong> (títulos fortes, modernos) com <strong>Quicksand</strong> (corpo leve e amigável). A dupla comunica profissionalismo sem frieza, e simpatia sem infantilidade.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Paleta" data-en="Palette">Paleta</span>
+      <span class="process-text" data-pt="Rosa vibrante como cor de ação, amarelo e azul como acentos festivos pontuais. Fundo em creme suave (&lt;strong&gt;#fbf7ff&lt;/strong&gt;) que aquece sem pesar. Contraste equilibrado entre celebração e sofisticação." data-en="Vibrant pink as the action colour, yellow and blue as occasional festive accents. A soft cream background (&lt;strong&gt;#fbf7ff&lt;/strong&gt;) that warms without weighing. Balanced contrast between celebration and sophistication.">Rosa vibrante como cor de ação, amarelo e azul como acentos festivos pontuais. Fundo em creme suave (<strong>#fbf7ff</strong>) que aquece sem pesar. Contraste equilibrado entre celebração e sofisticação.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Estrutura" data-en="Structure">Estrutura</span>
+      <span class="process-text" data-pt="&lt;strong&gt;Hero → Serviços → Galeria → WhatsApp.&lt;/strong&gt; Cada seção tem uma função única: apresentar, detalhar, provar visualmente e converter. Sem ruído entre o visitante e o botão de contato." data-en="&lt;strong&gt;Hero → Services → Gallery → WhatsApp.&lt;/strong&gt; Each section has a single job: present, detail, prove visually and convert. No friction between the visitor and the contact button."><strong>Hero → Serviços → Galeria → WhatsApp.</strong> Cada seção tem uma função única: apresentar, detalhar, provar visualmente e converter. Sem ruído entre o visitante e o botão de contato.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Conversão" data-en="Conversion">Conversão</span>
+      <span class="process-text" data-pt="Botão de WhatsApp &lt;strong&gt;fixo na tela&lt;/strong&gt; durante todo o scroll, com mensagem pré-formatada. A decisão de contato nunca espera o visitante chegar ao final da página." data-en="WhatsApp button &lt;strong&gt;fixed on screen&lt;/strong&gt; throughout the scroll, with a pre-formatted message. The contact decision never waits for the visitor to reach the end of the page.">Botão de WhatsApp <strong>fixo na tela</strong> durante todo o scroll, com mensagem pré-formatada. A decisão de contato nunca espera o visitante chegar ao final da página.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Mobile first" data-en="Mobile first">Mobile first</span>
+      <span class="process-text" data-pt="O público-alvo acessa principalmente pelo celular. Todo o layout foi pensado primeiro para telas pequenas: botões grandes, galeria em grid adaptável e tipografia legível em qualquer tamanho." data-en="The target audience accesses primarily by mobile. The entire layout was designed for small screens first: large buttons, an adaptable grid gallery and typography readable at any size.">O público-alvo acessa principalmente pelo celular. Todo o layout foi pensado primeiro para telas pequenas: botões grandes, galeria em grid adaptável e tipografia legível em qualquer tamanho.</span>
+    </div>
+  </div>
+</section>
+
+<!-- 04 SOLUÇÃO -->
+<section class="case-section" id="solucao">
+  <div class="section-eyebrow"><span class="section-num">04</span><span class="section-label" data-pt="Solução" data-en="Solution">Solução</span></div>
+  <h2 class="section-title" data-pt="Uma página única, &lt;em&gt;do talento à conversa no WhatsApp&lt;/em&gt;" data-en="A single page, &lt;em&gt;from talent to WhatsApp conversation&lt;/em&gt;">Uma página única, <em>do talento à conversa no WhatsApp</em></h2>
+  <div class="section-body">
+    <p data-pt="A LP entregue é leve, responsiva e independente de qualquer plataforma: HTML, CSS e JavaScript puro, publicada via GitHub Pages. Sem custos de hospedagem, sem dependência de terceiros, sem manutenção complexa." data-en="The delivered LP is lightweight, responsive and independent of any platform: pure HTML, CSS and JavaScript, published via GitHub Pages. No hosting costs, no third-party dependencies, no complex maintenance.">A LP entregue é leve, responsiva e independente de qualquer plataforma: HTML, CSS e JavaScript puro, publicada via GitHub Pages. Sem custos de hospedagem, sem dependência de terceiros, sem manutenção complexa.</p>
+    <p data-pt="A estrutura final em 4 seções:" data-en="The final structure in 4 sections:">A estrutura final em 4 seções:</p>
+  </div>
+  <div class="process-list">
+    <div class="process-item">
+      <span class="process-date">Hero</span>
+      <span class="process-text" data-pt="Apresentação imediata: nome, proposta de valor em uma frase e chamada para ação. Primeira impressão de profissionalismo em segundos." data-en="Immediate presentation: name, value proposition in one sentence and call to action. First impression of professionalism in seconds.">Apresentação imediata: nome, proposta de valor em uma frase e chamada para ação. Primeira impressão de profissionalismo em segundos.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Serviços" data-en="Services">Serviços</span>
+      <span class="process-text" data-pt="Cards descritivos dos tipos de decoração oferecidos — mesas temáticas, ambientação completa, eventos corporativos. Clareza sobre o que o cliente pode contratar antes de entrar em contato." data-en="Descriptive cards of the types of decoration offered — themed tables, full ambience, corporate events. Clarity on what the client can hire before getting in touch.">Cards descritivos dos tipos de decoração oferecidos — mesas temáticas, ambientação completa, eventos corporativos. Clareza sobre o que o cliente pode contratar antes de entrar em contato.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Galeria" data-en="Gallery">Galeria</span>
+      <span class="process-text" data-pt="Grid responsivo de fotos reais do trabalho — a seção mais importante da página. Imagens bem apresentadas convencem mais do que qualquer texto." data-en="Responsive grid of real work photos — the most important section of the page. Well-presented images convince more than any text.">Grid responsivo de fotos reais do trabalho — a seção mais importante da página. Imagens bem apresentadas convencem mais do que qualquer texto.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date">WhatsApp</span>
+      <span class="process-text" data-pt="CTA final reforçando o contato, com botão flutuante presente em toda a navegação. Mensagem pré-preenchida reduz a fricção do primeiro contato." data-en="Final CTA reinforcing contact, with a floating button present throughout navigation. A pre-filled message reduces the friction of first contact.">CTA final reforçando o contato, com botão flutuante presente em toda a navegação. Mensagem pré-preenchida reduz a fricção do primeiro contato.</span>
+    </div>
+  </div>
+
+  <figure class="shot-frame" style="margin-top:40px;">
+    <img src="images/lp-festadecor.png" alt="LP Festança da Jana — visão geral">
+    <figcaption data-pt="LP Festança da Jana · página completa" data-en="LP Festança da Jana · full page view">LP Festança da Jana · página completa</figcaption>
+    <span class="shot-filename">lp-festadecor.png</span>
+  </figure>
+</section>
+
+<!-- 05 RESULTADOS -->
+<section class="case-section" id="resultados">
+  <div class="section-eyebrow"><span class="section-num">05</span><span class="section-label" data-pt="Resultados" data-en="Results">Resultados</span></div>
+  <h2 class="section-title" data-pt="De talento invisível &lt;em&gt;a presença digital profissional&lt;/em&gt;" data-en="From invisible talent &lt;em&gt;to professional digital presence&lt;/em&gt;">De talento invisível <em>a presença digital profissional</em></h2>
+  <div class="section-body">
+    <p data-pt="A Janaina passou a ter um link único para compartilhar com potenciais clientes — substituindo descrições verbais por uma experiência visual completa do serviço." data-en="Janaina now has a single link to share with potential clients — replacing verbal descriptions with a complete visual experience of the service.">A Janaina passou a ter um link único para compartilhar com potenciais clientes — substituindo descrições verbais por uma experiência visual completa do serviço.</p>
+  </div>
+  <div class="results-grid">
+    <div class="result-stat">
+      <span class="result-num">0→1</span>
+      <span class="result-label" data-pt="Presença digital criada do zero" data-en="Digital presence created from scratch">Presença digital criada do zero</span>
+    </div>
+    <div class="result-stat">
+      <span class="result-num">4</span>
+      <span class="result-label" data-pt="Seções com função única e clara para o visitante" data-en="Sections with a single clear function for the visitor">Seções com função única e clara para o visitante</span>
+    </div>
+    <div class="result-stat">
+      <span class="result-num">100%</span>
+      <span class="result-label" data-pt="Responsivo, testado em mobile e desktop" data-en="Responsive, tested on mobile and desktop">Responsivo, testado em mobile e desktop</span>
+    </div>
+    <div class="result-stat">
+      <span class="result-num">R$0</span>
+      <span class="result-label" data-pt="Custo de hospedagem via GitHub Pages" data-en="Hosting cost via GitHub Pages">Custo de hospedagem via GitHub Pages</span>
+    </div>
+  </div>
+</section>
+
+<!-- 06 APRENDIZADOS -->
+<section class="case-section" id="aprendizados">
+  <div class="section-eyebrow"><span class="section-num">06</span><span class="section-label" data-pt="Aprendizados" data-en="Learnings">Aprendizados</span></div>
+  <h2 class="section-title" data-pt="O que esse projeto me ensinou &lt;em&gt;sobre LP para pequenos negócios&lt;/em&gt;" data-en="What this project taught me &lt;em&gt;about LPs for small businesses&lt;/em&gt;">O que esse projeto me ensinou <em>sobre LP para pequenos negócios</em></h2>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Aprendizado 01" data-en="Learning 01">Aprendizado 01</div>
+      <div class="insight-card-text" data-pt="Para serviços visuais, a galeria de fotos vale mais do que qualquer texto. O investimento de design deve ser desproporcional nessa seção." data-en="For visual services, the photo gallery is worth more than any text. The design investment should be disproportionately focused on this section.">Para serviços visuais, a galeria de fotos vale mais do que qualquer texto. O investimento de design deve ser desproporcional nessa seção.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Aprendizado 02" data-en="Learning 02">Aprendizado 02</div>
+      <div class="insight-card-text" data-pt="Resistir ao clichê do segmento é uma decisão de posicionamento. Uma LP de festas elegante diferencia quem a tem de toda a concorrência que segue o padrão colorido e ruidoso." data-en="Resisting the segment's cliché is a positioning decision. An elegant party LP sets its owner apart from every competitor who follows the loud, colourful standard.">Resistir ao clichê do segmento é uma decisão de posicionamento. Uma LP de festas elegante diferencia quem a tem de toda a concorrência que segue o padrão colorido e ruidoso.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Aprendizado 03" data-en="Learning 03">Aprendizado 03</div>
+      <div class="insight-card-text" data-pt="O botão de WhatsApp fixo é o componente mais importante de uma LP de conversão direta. Ele precisa estar sempre visível, nunca competir com outros elementos." data-en="The fixed WhatsApp button is the most important component of a direct-conversion LP. It needs to always be visible, never competing with other elements.">O botão de WhatsApp fixo é o componente mais importante de uma LP de conversão direta. Ele precisa estar sempre visível, nunca competir com outros elementos.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Aprendizado 04" data-en="Learning 04">Aprendizado 04</div>
+      <div class="insight-card-text" data-pt="HTML/CSS/JS puro com GitHub Pages é a solução ideal para esse tipo de cliente: custo zero de hospedagem, fácil manutenção e entrega rápida." data-en="Pure HTML/CSS/JS with GitHub Pages is the ideal solution for this type of client: zero hosting cost, easy maintenance and fast delivery.">HTML/CSS/JS puro com GitHub Pages é a solução ideal para esse tipo de cliente: custo zero de hospedagem, fácil manutenção e entrega rápida.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="case-cta">
+  <div class="cta-text">
+    <h2 data-pt="Quer ver o resultado &lt;em&gt;ao vivo?&lt;/em&gt;" data-en="Want to see the result &lt;em&gt;live?&lt;/em&gt;">Quer ver o resultado <em>ao vivo?</em></h2>
+    <p data-pt="A LP está publicada e funcionando." data-en="The LP is published and live.">A LP está publicada e funcionando.</p>
+  </div>
+  <div class="cta-actions">
+    <a href="https://cspestana.github.io/LP-festadecor/" target="_blank" class="btn-cta-primary" data-pt="Visitar a LP →" data-en="Visit the LP →">Visitar a LP →</a>
+    <a href="index.html" class="btn-cta-ghost" data-pt="Voltar ao portfólio" data-en="Back to portfolio">Voltar ao portfólio</a>
+  </div>
+</div>
+
+<footer>
+  <span>camilla<span style="color:var(--pink);font-style:italic;">.pestana</span></span>
+  <p data-pt="Case study · Front-end · UI Design" data-en="Case study · Front-end · UI Design">Case study · Front-end · UI Design</p>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('[data-pt]').forEach(el => {
+      const text = el.getAttribute('data-' + lang);
+      if (text !== null) el.innerHTML = text;
+    });
+    document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('lang', lang);
+    document.documentElement.setAttribute('lang', lang === 'en' ? 'en' : 'pt-BR');
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    const saved = localStorage.getItem('lang') || 'pt';
+    if (saved === 'en') setLang('en');
+  });
+  window.addEventListener('load', function() {
+    const saved = localStorage.getItem('lang') || 'pt';
+    if (saved === 'en') setLang('en');
+  });
+</script>
+</body>
+</html>
