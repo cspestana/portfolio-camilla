@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: FilaFavo | Camilla Pestana</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111110'/%3E%3Ctext x='32' y='40' font-family='Georgia, serif' font-size='26' font-weight='300' fill='%23E8547A' text-anchor='middle'%3ECP%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white: #FAFAF8;
+    --black: #111110;
+    --pink: #E8547A;
+    --pink-light: #FDF0F3;
+    --pink-mid: #F4C5D0;
+    --yellow: #F5C800;
+    --yellow-light: #FFFBEA;
+    --gray: #6B6B6B;
+    --gray-light: #F0EFED;
+    --gray-border: #E4E3E0;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { background: var(--white); color: var(--black); font-family: var(--sans); overflow-x: hidden; }
+  a { color: inherit; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 22px 6vw; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250,250,248,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-border);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 19px; font-weight: 400; color: var(--black); text-decoration: none; }
+  .nav-logo span { color: var(--pink); font-style: italic; }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .nav-back { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+  .nav-back:hover { color: var(--pink); }
+  .lang-toggle { display: flex; align-items: center; }
+  .lang-btn { background: none; border: none; padding: 5px 8px; cursor: pointer; font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.1em; color: var(--gray); transition: color 0.2s; }
+  .lang-btn.active { color: var(--pink); }
+  .lang-divider { color: var(--gray-border); font-size: 10px; }
+
+  /* HERO */
+  .case-hero { padding: 140px 6vw 80px; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--gray-border); }
+  .hero-eyebrow { display: flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pink); margin-bottom: 28px; }
+  .hero-eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--pink); }
+  .hero-title { font-family: var(--serif); font-weight: 300; font-size: clamp(36px, 5.5vw, 72px); line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 48px; max-width: 820px; }
+  .hero-title em { font-style: italic; color: var(--pink); }
+  .hero-meta { display: flex; gap: 48px; flex-wrap: wrap; }
+  .meta-item { display: flex; flex-direction: column; gap: 4px; }
+  .meta-label { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); }
+  .meta-value { font-size: 14px; font-weight: 400; }
+
+  /* BANNER IMAGE */
+  .case-banner { width: 100%; max-height: 420px; overflow: hidden; border-bottom: 1px solid var(--gray-border); }
+  .case-banner img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; }
+
+  /* TOC */
+  .toc-wrap { padding: 48px 6vw; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--gray-border); }
+  .toc-label { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); margin-bottom: 20px; }
+  .toc-list { display: flex; gap: 8px; flex-wrap: wrap; }
+  .toc-item { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border: 1px solid var(--gray-border); font-size: 12px; font-weight: 500; text-decoration: none; color: var(--black); transition: border-color 0.2s, color 0.2s, background 0.2s; }
+  .toc-item:hover { border-color: var(--pink); color: var(--pink); background: var(--pink-light); }
+  .toc-num { font-family: var(--mono); font-size: 11px; color: var(--pink); }
+
+  /* SECTIONS */
+  .case-section { padding: 90px 6vw; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--gray-border); }
+  .section-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+  .section-num { font-family: var(--mono); font-size: 13px; color: var(--pink); font-weight: 500; }
+  .section-label { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); }
+  .section-title { font-family: var(--serif); font-weight: 300; font-size: clamp(26px, 3.6vw, 44px); line-height: 1.1; margin-bottom: 32px; }
+  .section-title em { font-style: italic; color: var(--pink); }
+  .section-body { max-width: 680px; }
+  .section-body p { font-size: 15px; line-height: 1.8; color: var(--gray); margin-bottom: 18px; font-weight: 300; }
+  .section-body p strong { color: var(--black); font-weight: 600; }
+
+  /* INSIGHT CARDS */
+  .insight-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--gray-border); border: 1px solid var(--gray-border); margin-top: 40px; }
+  .insight-card { background: var(--white); padding: 32px; }
+  .insight-card-label { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--pink); margin-bottom: 12px; }
+  .insight-card-text { font-size: 14px; line-height: 1.7; color: var(--gray); font-weight: 300; }
+  .insight-card-text strong { color: var(--black); font-weight: 600; }
+
+  /* PULL QUOTE */
+  blockquote.pull-quote {
+    border-left: 2px solid var(--pink); padding: 20px 28px;
+    margin: 40px 0; font-family: var(--serif); font-size: clamp(18px, 2.4vw, 26px);
+    font-weight: 300; font-style: italic; line-height: 1.5; color: var(--black);
+  }
+
+  /* PROCESS TIMELINE */
+  .process-list { display: flex; flex-direction: column; gap: 0; margin-top: 40px; border: 1px solid var(--gray-border); }
+  .process-item { display: flex; gap: 0; border-bottom: 1px solid var(--gray-border); }
+  .process-item:last-child { border-bottom: none; }
+  .process-date { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pink); padding: 20px 24px; min-width: 160px; border-right: 1px solid var(--gray-border); display: flex; align-items: flex-start; }
+  .process-text { font-size: 14px; line-height: 1.7; color: var(--gray); padding: 20px 24px; font-weight: 300; }
+  .process-text strong { color: var(--black); font-weight: 600; }
+
+  /* RESULTS GRID */
+  .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--gray-border); border: 1px solid var(--gray-border); margin-top: 40px; }
+  .result-stat { background: var(--white); padding: 32px 24px; }
+  .result-num { font-family: var(--serif); font-size: 36px; font-weight: 300; color: var(--pink); display: block; margin-bottom: 8px; }
+  .result-label { font-size: 12.5px; line-height: 1.5; color: var(--gray); font-weight: 300; }
+
+  /* NAMING CARD */
+  .naming-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--gray-border); border: 1px solid var(--gray-border); margin-top: 40px; }
+  .naming-card { background: var(--white); padding: 32px; }
+  .naming-word { font-family: var(--serif); font-size: 28px; font-weight: 300; font-style: italic; color: var(--pink); margin-bottom: 10px; display: block; }
+  .naming-label { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); margin-bottom: 10px; display: block; }
+  .naming-desc { font-size: 13.5px; line-height: 1.7; color: var(--gray); font-weight: 300; }
+
+  /* PRODUCT GRID */
+  .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--gray-border); border: 1px solid var(--gray-border); margin-top: 40px; }
+  .product-card { background: var(--white); padding: 32px; }
+  .product-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+  .product-name { font-family: var(--serif); font-size: 20px; font-weight: 300; margin-bottom: 8px; }
+  .product-desc { font-size: 13.5px; line-height: 1.7; color: var(--gray); font-weight: 300; }
+
+  /* SHOT FRAME */
+  .shot-frame { margin-top: 40px; border: 1px solid var(--gray-border); overflow: hidden; }
+  .shot-frame img { width: 100%; display: block; }
+  .shot-frame figcaption { font-family: var(--mono); font-size: 10px; color: var(--gray); padding: 12px 16px; border-top: 1px solid var(--gray-border); letter-spacing: 0.08em; }
+
+  /* CASE NOTE */
+  .case-note { font-family: var(--mono); font-size: 11px; color: var(--gray); line-height: 1.6; margin-top: 24px; padding: 16px; background: var(--gray-light); border-left: 2px solid var(--gray-border); }
+
+  /* STATUS BADGE */
+  .status-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid var(--yellow); background: var(--yellow-light); font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #8B6F00; margin-bottom: 28px; }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); animation: blink 2s infinite; }
+  @keyframes blink { 0%,100%{opacity:1;}50%{opacity:.3;} }
+
+  /* CTA */
+  .case-cta { padding: 80px 6vw; border-top: 1px solid var(--gray-border); display: flex; justify-content: space-between; align-items: center; gap: 40px; flex-wrap: wrap; max-width: 1100px; margin: 0 auto; }
+  .cta-text h2 { font-family: var(--serif); font-size: clamp(24px, 3vw, 36px); font-weight: 300; line-height: 1.2; margin-bottom: 8px; }
+  .cta-text h2 em { font-style: italic; color: var(--pink); }
+  .cta-text p { font-size: 14px; color: var(--gray); font-weight: 300; }
+  .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-cta-primary { display: inline-flex; align-items: center; padding: 14px 28px; background: var(--black); color: var(--white); font-size: 13px; font-weight: 600; letter-spacing: 0.05em; text-decoration: none; transition: background 0.2s; }
+  .btn-cta-primary:hover { background: var(--pink); }
+  .btn-cta-ghost { display: inline-flex; align-items: center; padding: 14px 28px; border: 1px solid var(--gray-border); color: var(--gray); font-size: 13px; font-weight: 500; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
+  .btn-cta-ghost:hover { border-color: var(--pink); color: var(--pink); }
+
+  /* FOOTER */
+  footer { padding: 32px 6vw; border-top: 1px solid var(--gray-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  footer span { font-family: var(--serif); font-size: 16px; }
+  footer p { font-family: var(--mono); font-size: 10px; color: var(--gray); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .case-hero { padding: 120px 6vw 60px; }
+    .hero-meta { gap: 24px; }
+    .insight-grid, .naming-grid, .product-grid { grid-template-columns: 1fr; }
+    .results-grid { grid-template-columns: repeat(2, 1fr); }
+    .case-cta { flex-direction: column; align-items: flex-start; }
+    .process-date { min-width: 110px; font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">camilla<span>.pestana</span></a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-back" data-pt="← Portfólio" data-en="← Portfolio">← Portfólio</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-pt" onclick="setLang('pt')">PT</button>
+      <span class="lang-divider">|</span>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="case-hero">
+  <div class="status-badge">
+    <span class="status-dot"></span>
+    <span data-pt="Projeto em desenvolvimento" data-en="Project in development">Projeto em desenvolvimento</span>
+  </div>
+  <p class="hero-eyebrow" data-pt="Produto Digital · Branding · Front-end" data-en="Digital Product · Branding · Front-end">Produto Digital · Branding · Front-end</p>
+  <h1 class="hero-title" data-pt="FilaFavo  de uma necessidade real &lt;em&gt;a um negócio de lembrancinhas em 3D&lt;/em&gt;" data-en="FilaFavo  from a real need &lt;em&gt;to a 3D party favour business&lt;/em&gt;">FilaFavo  de uma necessidade real <em>a um negócio de lembrancinhas em 3D</em></h1>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-label" data-pt="Tipo" data-en="Type">Tipo</span>
+      <span class="meta-value" data-pt="Produto próprio (fictício)" data-en="Own product (fictional)">Produto próprio (fictício)</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label" data-pt="Período" data-en="Period">Período</span>
+      <span class="meta-value">2025</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label" data-pt="Papel" data-en="Role">Papel</span>
+      <span class="meta-value" data-pt="UX, UI, Naming, Front-end" data-en="UX, UI, Naming, Front-end">UX, UI, Naming, Front-end</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Stack</span>
+      <span class="meta-value">HTML · CSS · JS · GitHub Pages</span>
+    </div>
+  </div>
+</header>
+
+<!-- BANNER -->
+<div class="case-banner">
+  <img src="FilaFavo/Images/banner.png" alt="FilaFavo  lembrancinhas em impressão 3D">
+</div>
+
+<!-- TOC -->
+<div class="toc-wrap">
+  <p class="toc-label" data-pt="Neste case study" data-en="In this case study">Neste case study</p>
+  <div class="toc-list">
+    <a href="#origem" class="toc-item"><span class="toc-num">01</span> <span data-pt="Origem" data-en="Origin">Origem</span></a>
+    <a href="#pesquisa" class="toc-item"><span class="toc-num">02</span> <span data-pt="Pesquisa" data-en="Research">Pesquisa</span></a>
+    <a href="#naming" class="toc-item"><span class="toc-num">03</span> <span data-pt="Naming & Identidade" data-en="Naming & Identity">Naming & Identidade</span></a>
+    <a href="#produto" class="toc-item"><span class="toc-num">04</span> <span data-pt="Produto & Arquitetura" data-en="Product & Architecture">Produto & Arquitetura</span></a>
+    <a href="#design" class="toc-item"><span class="toc-num">05</span> <span data-pt="Design & Desenvolvimento" data-en="Design & Development">Design & Desenvolvimento</span></a>
+    <a href="#resultados" class="toc-item"><span class="toc-num">06</span> <span data-pt="Resultados" data-en="Results">Resultados</span></a>
+    <a href="#aprendizados" class="toc-item"><span class="toc-num">07</span> <span data-pt="Aprendizados" data-en="Learnings">Aprendizados</span></a>
+  </div>
+</div>
+
+<!-- 01 ORIGEM -->
+<section class="case-section" id="origem">
+  <div class="section-eyebrow"><span class="section-num">01</span><span class="section-label" data-pt="Origem" data-en="Origin">Origem</span></div>
+  <h2 class="section-title" data-pt="A Lara tinha menos de um ano. &lt;em&gt;E eu não queria dar balas pra ninguém.&lt;/em&gt;" data-en="Lara was under a year old. &lt;em&gt;And I didn't want to give candy to anyone.&lt;/em&gt;">A Lara tinha menos de um ano. <em>E eu não queria dar balas pra ninguém.</em></h2>
+  <div class="section-body">
+    <p data-pt="Quando comecei a planejar o primeiro aniversário da minha filha, esbarrei numa limitação que todo pai de bebê conhece: as lembrancinhas de festa infantil são, quase por definição, guloseimas. Balinhas, chocolatinhos, pirulitos. Coisas que um bebê de menos de um ano não pode  e não deveria  comer." data-en="When I started planning my daughter's first birthday, I ran into a limitation every parent of a baby knows: children's party favours are, almost by definition, sweets. Little candies, chocolates, lollipops. Things a baby under one year old cannot  and shouldn't  eat.">Quando comecei a planejar o primeiro aniversário da minha filha, esbarrei numa limitação que todo pai de bebê conhece: as lembrancinhas de festa infantil são, quase por definição, guloseimas. Balinhas, chocolatinhos, pirulitos. Coisas que um bebê de menos de um ano não pode  e não deveria  comer.</p>
+    <p data-pt="Pesquisei muito. Queria algo que as crianças convidadas pudessem usar, tocar, brincar. Algo que não fosse mais uma embalagem jogada fora no dia seguinte. A dificuldade em encontrar isso me ficou na cabeça  mesmo depois que a Lara cresceu e passou a ter acesso a doces como qualquer outra criança." data-en="I searched a lot. I wanted something the invited children could use, touch, play with. Something that wouldn't be just another package thrown away the next day. The difficulty in finding this stayed with me  even after Lara grew up and started eating sweets like any other child.">Pesquisei muito. Queria algo que as crianças convidadas pudessem usar, tocar, brincar. Algo que não fosse mais uma embalagem jogada fora no dia seguinte. A dificuldade em encontrar isso me ficou na cabeça  mesmo depois que a Lara cresceu e passou a ter acesso a doces como qualquer outra criança.</p>
+    <p data-pt="Hoje ela tem 3 anos. E eu continuo acreditando que uma lembrancinha de festa pode ser mais criativa, mais personalizada, mais temática  e que as crianças vão gostar mais de algo que elas possam brincar do que de mais uma bala. A FilaFavo nasceu exatamente dessa crença." data-en="Today she is 3 years old. And I still believe that a party favour can be more creative, more personalised, more thematic  and that children will enjoy something they can play with more than yet another piece of candy. FilaFavo was born from exactly that belief.">Hoje ela tem 3 anos. E eu continuo acreditando que uma lembrancinha de festa pode ser mais criativa, mais personalizada, mais temática  e que as crianças vão gostar mais de algo que elas possam brincar do que de mais uma bala. A FilaFavo nasceu exatamente dessa crença.</p>
+  </div>
+
+  <blockquote class="pull-quote" data-pt="Não queria que a lembrancinha do primeiro aniversário da Lara fosse uma bala. Queria algo que as crianças pudessem levar pra casa e continuar usando." data-en="I didn't want Lara's first birthday favour to be a piece of candy. I wanted something children could take home and keep using.">"Não queria que a lembrancinha do primeiro aniversário da Lara fosse uma bala. Queria algo que as crianças pudessem levar pra casa e continuar usando."</blockquote>
+</section>
+
+<!-- 02 PESQUISA -->
+<section class="case-section" id="pesquisa">
+  <div class="section-eyebrow"><span class="section-num">02</span><span class="section-label" data-pt="Pesquisa" data-en="Research">Pesquisa</span></div>
+  <h2 class="section-title" data-pt="A pesquisa aconteceu &lt;em&gt;nas conversas do dia a dia.&lt;/em&gt;" data-en="The research happened &lt;em&gt;in everyday conversations.&lt;/em&gt;">A pesquisa aconteceu <em>nas conversas do dia a dia.</em></h2>
+  <div class="section-body">
+    <p data-pt="Como mãe de uma criança pequena, tenho acesso natural a um grupo de pesquisa que a maioria dos designers precisaria recrutar: outras mães. Em conversas no parquinho, no grupo de WhatsApp da escola, nas festinhas de colegas da Lara, fui percebendo padrões recorrentes que validavam o problema que eu mesma tinha vivido." data-en="As a mother of a young child, I have natural access to a research group that most designers would need to recruit: other mothers. In conversations at the playground, in the school WhatsApp group, at Lara's friends' birthday parties, I noticed recurring patterns that validated the problem I had experienced myself.">Como mãe de uma criança pequena, tenho acesso natural a um grupo de pesquisa que a maioria dos designers precisaria recrutar: outras mães. Em conversas no parquinho, no grupo de WhatsApp da escola, nas festinhas de colegas da Lara, fui percebendo padrões recorrentes que validavam o problema que eu mesma tinha vivido.</p>
+    <p data-pt="A pesquisa foi etnográfica e orgânica  não havia formulário, não havia roteiro fixo. Mas havia escuta ativa. E as conclusões foram consistentes o suficiente para embasar as decisões de produto." data-en="The research was ethnographic and organic  no forms, no fixed script. But there was active listening. And the conclusions were consistent enough to support product decisions.">A pesquisa foi etnográfica e orgânica  não havia formulário, não havia roteiro fixo. Mas havia escuta ativa. E as conclusões foram consistentes o suficiente para embasar as decisões de produto.</p>
+  </div>
+
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Insight 01  O problema" data-en="Insight 01  The problem">Insight 01  O problema</div>
+      <div class="insight-card-text" data-pt="A maioria das mães quer lembrancinhas &lt;strong&gt;diferentes de guloseimas&lt;/strong&gt;, mas encontra poucas opções acessíveis e personalizáveis no mercado. A saída costuma ser ceder ao padrão  ou pagar caro por itens artesanais únicos." data-en="Most mothers want party favours &lt;strong&gt;other than sweets&lt;/strong&gt;, but find few accessible and customisable options on the market. The usual outcome is giving in to the standard  or paying dearly for unique handmade items.">A maioria das mães quer lembrancinhas <strong>diferentes de guloseimas</strong>, mas encontra poucas opções acessíveis e personalizáveis no mercado. A saída costuma ser ceder ao padrão  ou pagar caro por itens artesanais únicos.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Insight 02  O tema importa" data-en="Insight 02  Theme matters">Insight 02  O tema importa</div>
+      <div class="insight-card-text" data-pt="Mães planejam festas com temas muito específicos (dinossauros, unicórnios, Bluey, Sonic) e querem que &lt;strong&gt;tudo  inclusive a lembrancinha  reflita esse tema.&lt;/strong&gt; Um item genérico quebra a coerência visual da festa." data-en="Mothers plan parties with very specific themes (dinosaurs, unicorns, Bluey, Sonic) and want &lt;strong&gt;everything  including the favour  to reflect that theme.&lt;/strong&gt; A generic item breaks the visual coherence of the party.">Mães planejam festas com temas muito específicos (dinossauros, unicórnios, Bluey, Sonic) e querem que <strong>tudo  inclusive a lembrancinha  reflita esse tema.</strong> Um item genérico quebra a coerência visual da festa.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Insight 03  A criança é a usuária" data-en="Insight 03  The child is the user">Insight 03  A criança é a usuária</div>
+      <div class="insight-card-text" data-pt="A mãe compra, mas a criança usa. A lembrancinha ideal precisa &lt;strong&gt;encantar quem recebe&lt;/strong&gt;  e brinquedos articulados, itens colecionáveis e atividades criativas performam muito melhor que consumíveis nesse critério." data-en="The mother buys, but the child uses. The ideal favour needs to &lt;strong&gt;delight the recipient&lt;/strong&gt;  and articulated toys, collectible items and creative activities perform much better than consumables on this criterion.">A mãe compra, mas a criança usa. A lembrancinha ideal precisa <strong>encantar quem recebe</strong>  e brinquedos articulados, itens colecionáveis e atividades criativas performam muito melhor que consumíveis nesse critério.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Insight 04  O kit resolve" data-en="Insight 04  The kit solves it">Insight 04  O kit resolve</div>
+      <div class="insight-card-text" data-pt="Mães não querem montar a lembrancinha  querem &lt;strong&gt;receber pronto.&lt;/strong&gt; O modelo de kit com quantidade mínima facilita o planejamento, garante padronização e permite precificação clara para quem vende." data-en="Mothers don't want to assemble the favour  they want to &lt;strong&gt;receive it ready.&lt;/strong&gt; The kit model with a minimum quantity simplifies planning, ensures standardisation and allows clear pricing for the seller.">Mães não querem montar a lembrancinha  querem <strong>receber pronto.</strong> O modelo de kit com quantidade mínima facilita o planejamento, garante padronização e permite precificação clara para quem vende.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 NAMING & IDENTIDADE -->
+<section class="case-section" id="naming">
+  <div class="section-eyebrow"><span class="section-num">03</span><span class="section-label" data-pt="Naming & Identidade" data-en="Naming & Identity">Naming & Identidade</span></div>
+  <h2 class="section-title" data-pt="Um nome que &lt;em&gt;aconteceu por acidente  e ficou perfeito.&lt;/em&gt;" data-en="A name that &lt;em&gt;happened by accident  and was perfect.&lt;/em&gt;">Um nome que <em>aconteceu por acidente  e ficou perfeito.</em></h2>
+  <div class="section-body">
+    <p data-pt="O naming surgiu de uma brincadeira com palavras, mas com raízes muito claras em tudo que o produto representa. Cada fragmento do nome carrega um significado  e a combinação criou algo único, fácil de lembrar e com profundidade de marca inesperada para um projeto que nasceu de uma conversa informal." data-en="The name emerged from wordplay, but with very clear roots in everything the product represents. Each fragment carries meaning  and the combination created something unique, easy to remember and with unexpected brand depth for a project born from an informal conversation.">O naming surgiu de uma brincadeira com palavras, mas com raízes muito claras em tudo que o produto representa. Cada fragmento do nome carrega um significado  e a combinação criou algo único, fácil de lembrar e com profundidade de marca inesperada para um projeto que nasceu de uma conversa informal.</p>
+  </div>
+
+  <div class="naming-grid">
+    <div class="naming-card">
+      <span class="naming-label" data-pt="Fragmento 01" data-en="Fragment 01">Fragmento 01</span>
+      <span class="naming-word">Fila</span>
+      <p class="naming-desc" data-pt="De &lt;strong&gt;filamento&lt;/strong&gt;  o material usado na impressão 3D. A matéria-prima que transforma o projeto digital em objeto físico e tangível. A essência técnica do produto." data-en="From &lt;strong&gt;filament&lt;/strong&gt;  the material used in 3D printing. The raw material that transforms the digital project into a physical, tangible object. The technical essence of the product.">De <strong>filamento</strong>  o material usado na impressão 3D. A matéria-prima que transforma o projeto digital em objeto físico e tangível. A essência técnica do produto.</p>
+    </div>
+    <div class="naming-card">
+      <span class="naming-label" data-pt="Fragmento 02" data-en="Fragment 02">Fragmento 02</span>
+      <span class="naming-word">Favo</span>
+      <p class="naming-desc" data-pt="De &lt;strong&gt;favor&lt;/strong&gt; (lembrancinha em inglês)  o produto em si. Mas favo também é &lt;strong&gt;favo de mel&lt;/strong&gt;, a estrutura hexagonal da colmeia. Uma coincidência que virou conceito visual: a logo é um favo de mel feito de hexágonos amarelos." data-en="From &lt;strong&gt;favor&lt;/strong&gt; (party favour in English)  the product itself. But favo also means &lt;strong&gt;honeycomb&lt;/strong&gt; in Portuguese, the hexagonal beehive structure. A coincidence that became a visual concept: the logo is a honeycomb made of yellow hexagons.">De <strong>favor</strong> (lembrancinha em inglês)  o produto em si. Mas favo também é <strong>favo de mel</strong>, a estrutura hexagonal da colmeia. Uma coincidência que virou conceito visual: a logo é um favo de mel feito de hexágonos amarelos.</p>
+    </div>
+    <div class="naming-card">
+      <span class="naming-label" data-pt="Resultado" data-en="Result">Resultado</span>
+      <span class="naming-word">FilaFavo</span>
+      <p class="naming-desc" data-pt="Curto, sonoro, fácil de pronunciar em português e inglês. Funciona como handle de Instagram, domínio e nome de marca. A coincidência do favo de mel deu à logo um elemento visual forte e memorável  &lt;strong&gt;sem que precisássemos forçar nada.&lt;/strong&gt;" data-en="Short, sonorous, easy to pronounce in both Portuguese and English. Works as an Instagram handle, domain and brand name. The honeycomb coincidence gave the logo a strong, memorable visual element  &lt;strong&gt;without forcing anything.&lt;/strong&gt;">Curto, sonoro, fácil de pronunciar em português e inglês. Funciona como handle de Instagram, domínio e nome de marca. A coincidência do favo de mel deu à logo um elemento visual forte e memorável  <strong>sem que precisássemos forçar nada.</strong></p>
+    </div>
+  </div>
+
+  <blockquote class="pull-quote" data-pt="Fila de filamento, favo de favor  e ainda favo de mel. Foi uma mistura, uma coincidência que deu certo." data-en="Fila from filament, favo from favour  and also honeycomb. It was a mix, a coincidence that worked out.">"Fila de filamento, favo de favor  e ainda favo de mel. Foi uma mistura, uma coincidência que deu certo."</blockquote>
+</section>
+
+<!-- 04 PRODUTO & ARQUITETURA -->
+<section class="case-section" id="produto">
+  <div class="section-eyebrow"><span class="section-num">04</span><span class="section-label" data-pt="Produto & Arquitetura" data-en="Product & Architecture">Produto & Arquitetura</span></div>
+  <h2 class="section-title" data-pt="Kits com mínimo de 10  &lt;em&gt;simples de comprar, fácil de escalar.&lt;/em&gt;" data-en="Kits with a minimum of 10  &lt;em&gt;simple to buy, easy to scale.&lt;/em&gt;">Kits com mínimo de 10  <em>simples de comprar, fácil de escalar.</em></h2>
+  <div class="section-body">
+    <p data-pt="A decisão de vender exclusivamente em kits com quantidade mínima de 10 unidades não foi aleatória. Ela reflete tanto a realidade da produção (cada peça tem um custo de tempo e filamento) quanto o comportamento do cliente-alvo (festas infantis geralmente têm de 10 a 50 convidados)." data-en="The decision to sell exclusively in kits with a minimum of 10 units was not random. It reflects both the production reality (each piece has a time and filament cost) and the target customer's behaviour (children's parties typically have 10 to 50 guests).">A decisão de vender exclusivamente em kits com quantidade mínima de 10 unidades não foi aleatória. Ela reflete tanto a realidade da produção (cada peça tem um custo de tempo e filamento) quanto o comportamento do cliente-alvo (festas infantis geralmente têm de 10 a 50 convidados).</p>
+    <p data-pt="Os produtos do catálogo foram escolhidos por dois critérios: viabilidade de impressão em escala e apelo comprovado com o público infantil. Cada categoria tem modelos já produzidos  com custo conhecido e preço definido  e uma porta aberta para temas personalizados sob consulta." data-en="The catalogue products were chosen by two criteria: viability of scaled printing and proven appeal with young children. Each category has already produced models  with known costs and defined prices  and an open door for custom themes on request.">Os produtos do catálogo foram escolhidos por dois critérios: viabilidade de impressão em escala e apelo comprovado com o público infantil. Cada categoria tem modelos já produzidos  com custo conhecido e preço definido  e uma porta aberta para temas personalizados sob consulta.</p>
+  </div>
+
+  <div class="product-grid">
+    <div class="product-card">
+      <span class="product-icon">🔑</span>
+      <p class="product-name" data-pt="Chaveiro personalizado" data-en="Personalised keychain">Chaveiro personalizado</p>
+      <p class="product-desc" data-pt="Leve, colorido e com o nome da criança em relevo. O modelo mais acessível do catálogo e o que tem mais variações temáticas disponíveis." data-en="Light, colourful and with the child's name in relief. The most accessible model in the catalogue and the one with the most thematic variations available.">Leve, colorido e com o nome da criança em relevo. O modelo mais acessível do catálogo e o que tem mais variações temáticas disponíveis.</p>
+    </div>
+    <div class="product-card">
+      <span class="product-icon">🦕</span>
+      <p class="product-name" data-pt="Mini brinquedo articulado" data-en="Mini articulated toy">Mini brinquedo articulado</p>
+      <p class="product-desc" data-pt="Dinossauros, dragões, cobras e outros bichos impressos em segmentos que se articulam. O produto com maior potencial de viralização  crianças adoram mostrar pra todo mundo." data-en="Dinosaurs, dragons, snakes and other creatures printed in articulating segments. The product with the greatest virality potential  children love showing them to everyone.">Dinossauros, dragões, cobras e outros bichos impressos em segmentos que se articulam. O produto com maior potencial de viralização  crianças adoram mostrar pra todo mundo.</p>
+    </div>
+    <div class="product-card">
+      <span class="product-icon">🎨</span>
+      <p class="product-name" data-pt="Plaquinha para colorir" data-en="Colouring plaque">Plaquinha para colorir</p>
+      <p class="product-desc" data-pt="Atividade e lembrança em um só produto. As crianças pintam durante a festa e levam para casa. Reduz o custo de entretenimento e entrega uma lembrança única." data-en="Activity and keepsake in one product. Children paint during the party and take it home. Reduces entertainment costs and delivers a unique memento.">Atividade e lembrança em um só produto. As crianças pintam durante a festa e levam para casa. Reduz o custo de entretenimento e entrega uma lembrança única.</p>
+    </div>
+    <div class="product-card">
+      <span class="product-icon">🌸</span>
+      <p class="product-name" data-pt="Forminha para massinha" data-en="Play-dough mould">Forminha para massinha</p>
+      <p class="product-desc" data-pt="Brinquedo que vira lembrança. As forminhas temáticas acompanham massinha e criam uma experiência de criatividade durante a festa  e entretenimento em casa depois." data-en="Toy that becomes a keepsake. The thematic moulds come with play-dough and create a creativity experience during the party  and entertainment at home afterwards.">Brinquedo que vira lembrança. As forminhas temáticas acompanham massinha e criam uma experiência de criatividade durante a festa  e entretenimento em casa depois.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 05 DESIGN & DESENVOLVIMENTO -->
+<section class="case-section" id="design">
+  <div class="section-eyebrow"><span class="section-num">05</span><span class="section-label" data-pt="Design & Desenvolvimento" data-en="Design & Development">Design & Desenvolvimento</span></div>
+  <h2 class="section-title" data-pt="Uma vitrine que converte &lt;em&gt;direto para o WhatsApp.&lt;/em&gt;" data-en="A storefront that converts &lt;em&gt;directly to WhatsApp.&lt;/em&gt;">Uma vitrine que converte <em>direto para o WhatsApp.</em></h2>
+  <div class="section-body">
+    <p data-pt="Para um negócio em estágio inicial com ticket médio baixo e público no Instagram, a arquitetura mais eficiente não é uma loja virtual completa  é uma landing page de catálogo que elimina fricção e leva o cliente diretamente à conversa. Com isso em mente, o site foi concebido como vitrine, não como e-commerce." data-en="For an early-stage business with a low average ticket and an Instagram audience, the most efficient architecture is not a full online store  it's a catalogue landing page that eliminates friction and takes the customer directly to the conversation. With that in mind, the site was conceived as a storefront, not an e-commerce.">Para um negócio em estágio inicial com ticket médio baixo e público no Instagram, a arquitetura mais eficiente não é uma loja virtual completa  é uma landing page de catálogo que elimina fricção e leva o cliente diretamente à conversa. Com isso em mente, o site foi concebido como vitrine, não como e-commerce.</p>
+    <p data-pt="O sistema de design foi construído do zero com HTML, CSS e JavaScript puro  sem frameworks, sem dependências externas além das fontes. A paleta combina roxo elétrico, pink e amarelo âmbar, criando um visual que equilibra o apelo infantil com sofisticação tech." data-en="The design system was built from scratch with pure HTML, CSS and JavaScript  no frameworks, no external dependencies beyond fonts. The palette combines electric purple, pink and amber yellow, creating a visual that balances child appeal with tech sophistication.">O sistema de design foi construído do zero com HTML, CSS e JavaScript puro  sem frameworks, sem dependências externas além das fontes. A paleta combina roxo elétrico, pink e amarelo âmbar, criando um visual que equilibra o apelo infantil com sofisticação tech.</p>
+  </div>
+
+  <div class="process-list">
+    <div class="process-item">
+      <span class="process-date" data-pt="Arquitetura" data-en="Architecture">Arquitetura</span>
+      <span class="process-text" data-pt="5 páginas HTML interligadas: página principal com as 4 categorias + 4 sub-páginas de catálogo com modelos já precificados. A separação permite adicionar novos modelos sem alterar a estrutura principal." data-en="5 interlinked HTML pages: main page with 4 categories + 4 catalogue sub-pages with already priced models. The separation allows adding new models without changing the main structure.">5 páginas HTML interligadas: página principal com as 4 categorias + 4 sub-páginas de catálogo com modelos já precificados. A separação permite adicionar novos modelos sem alterar a estrutura principal.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Sistema visual" data-en="Visual system">Sistema visual</span>
+      <span class="process-text" data-pt="&lt;strong&gt;Space Grotesk + Inter&lt;/strong&gt; como dupla tipográfica. Space Grotesk traz personalidade geométrica e tech; Inter garante legibilidade nos textos de corpo. Paleta: roxo #7C3AED, pink #F72585, mint #00C896, amarelo #FFD60A." data-en="&lt;strong&gt;Space Grotesk + Inter&lt;/strong&gt; as the typographic pair. Space Grotesk brings geometric and tech personality; Inter ensures readability in body text. Palette: purple #7C3AED, pink #F72585, mint #00C896, yellow #FFD60A."><strong>Space Grotesk + Inter</strong> como dupla tipográfica. Space Grotesk traz personalidade geométrica e tech; Inter garante legibilidade nos textos de corpo. Paleta: roxo #7C3AED, pink #F72585, mint #00C896, amarelo #FFD60A.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Elemento-assinatura" data-en="Signature element">Elemento-assinatura</span>
+      <span class="process-text" data-pt="Cada card de produto tem uma barra colorida na base que &lt;strong&gt;'imprime' da esquerda para a direita no hover&lt;/strong&gt;  referência direta ao processo da impressora 3D, sutil e memorável. Um detalhe de interação que conecta a estética ao produto." data-en="Each product card has a coloured bar at the base that &lt;strong&gt;'prints' from left to right on hover&lt;/strong&gt;  a direct and subtle reference to the 3D printer process. An interaction detail that connects the aesthetic to the product.">Cada card de produto tem uma barra colorida na base que <strong>'imprime' da esquerda para a direita no hover</strong>  referência direta ao processo da impressora 3D, sutil e memorável. Um detalhe de interação que conecta a estética ao produto.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Banner" data-en="Banner">Banner</span>
+      <span class="process-text" data-pt="Hero full-width com imagem real de produtos impressos em 3D. Overlay gradiente branco da esquerda para a direita garante legibilidade do texto sem esconder a fotografia. Responsivo com ajuste de &lt;strong&gt;object-position&lt;/strong&gt; para mobile." data-en="Full-width hero with a real image of 3D printed products. White gradient overlay from left to right ensures text readability without hiding the photograph. Responsive with &lt;strong&gt;object-position&lt;/strong&gt; adjustment for mobile.">Hero full-width com imagem real de produtos impressos em 3D. Overlay gradiente branco da esquerda para a direita garante legibilidade do texto sem esconder a fotografia. Responsivo com ajuste de <strong>object-position</strong> para mobile.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Fluxo de compra" data-en="Purchase flow">Fluxo de compra</span>
+      <span class="process-text" data-pt="Cada botão abre o WhatsApp com mensagem &lt;strong&gt;pré-preenchida com o modelo específico&lt;/strong&gt;. Pagamento via link do Nu Empresas  sem checkout próprio, sem servidor, sem custo de plataforma." data-en="Each button opens WhatsApp with a message &lt;strong&gt;pre-filled with the specific model.&lt;/strong&gt; Payment via Nu Empresas link  no own checkout, no server, no platform cost.">Cada botão abre o WhatsApp com mensagem <strong>pré-preenchida com o modelo específico</strong>. Pagamento via link do Nu Empresas  sem checkout próprio, sem servidor, sem custo de plataforma.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Hospedagem" data-en="Hosting">Hospedagem</span>
+      <span class="process-text" data-pt="GitHub Pages  custo zero, deploy via push, domínio personalizado disponível quando necessário. A mesma solução usada no site do Daniel Noffs e no portfólio pessoal." data-en="GitHub Pages  zero cost, deploy via push, custom domain available when needed. The same solution used on Daniel Noffs' site and the personal portfolio.">GitHub Pages  custo zero, deploy via push, domínio personalizado disponível quando necessário. A mesma solução usada no site do Daniel Noffs e no portfólio pessoal.</span>
+    </div>
+  </div>
+
+  <div class="case-note" data-pt="✦ Este é um projeto fictício em desenvolvimento ativo. As imagens de produtos exibidas foram produzidas pela própria designer como parte do processo de validação da ideia." data-en="✦ This is a fictional project in active development. The product images displayed were produced by the designer herself as part of the idea validation process.">✦ Este é um projeto fictício em desenvolvimento ativo. As imagens de produtos exibidas foram produzidas pela própria designer como parte do processo de validação da ideia.</div>
+</section>
+
+<!-- 06 RESULTADOS -->
+<section class="case-section" id="resultados">
+  <div class="section-eyebrow"><span class="section-num">06</span><span class="section-label" data-pt="Resultados" data-en="Results">Resultados</span></div>
+  <h2 class="section-title" data-pt="De ideia numa conversa &lt;em&gt;a produto digital completo.&lt;/em&gt;" data-en="From an idea in a conversation &lt;em&gt;to a complete digital product.&lt;/em&gt;">De ideia numa conversa <em>a produto digital completo.</em></h2>
+  <div class="section-body">
+    <p data-pt="Em poucas semanas, a FilaFavo passou de um insight pessoal para um produto digital com identidade, catálogo, sistema de vendas e presença online. A estrutura está pronta para receber produtos reais assim que a impressora 3D for adquirida." data-en="In a few weeks, FilaFavo went from a personal insight to a digital product with identity, catalogue, sales system and online presence. The structure is ready to receive real products as soon as the 3D printer is acquired.">Em poucas semanas, a FilaFavo passou de um insight pessoal para um produto digital com identidade, catálogo, sistema de vendas e presença online. A estrutura está pronta para receber produtos reais assim que a impressora 3D for adquirida.</p>
+  </div>
+  <div class="results-grid">
+    <div class="result-stat">
+      <span class="result-num">0→1</span>
+      <span class="result-label" data-pt="Da ideia ao produto digital completo" data-en="From idea to complete digital product">Da ideia ao produto digital completo</span>
+    </div>
+    <div class="result-stat">
+      <span class="result-num">5</span>
+      <span class="result-label" data-pt="Páginas HTML interligadas e responsivas" data-en="Interlinked and responsive HTML pages">Páginas HTML interligadas e responsivas</span>
+    </div>
+    <div class="result-stat">
+      <span class="result-num">16</span>
+      <span class="result-label" data-pt="Modelos de produto no catálogo inicial" data-en="Product models in the initial catalogue">Modelos de produto no catálogo inicial</span>
+    </div>
+    <div class="result-stat">
+      <span class="result-num">R$0</span>
+      <span class="result-label" data-pt="Custo de hospedagem via GitHub Pages" data-en="Hosting cost via GitHub Pages">Custo de hospedagem via GitHub Pages</span>
+    </div>
+  </div>
+</section>
+
+<!-- 07 APRENDIZADOS -->
+<section class="case-section" id="aprendizados">
+  <div class="section-eyebrow"><span class="section-num">07</span><span class="section-label" data-pt="Aprendizados" data-en="Learnings">Aprendizados</span></div>
+  <h2 class="section-title" data-pt="O que esse projeto me ensinou &lt;em&gt;sobre construir do zero.&lt;/em&gt;" data-en="What this project taught me &lt;em&gt;about building from scratch.&lt;/em&gt;">O que esse projeto me ensinou <em>sobre construir do zero.</em></h2>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Aprendizado 01" data-en="Learning 01">Aprendizado 01</div>
+      <div class="insight-card-text" data-pt="&lt;strong&gt;Necessidade pessoal é o melhor ponto de partida.&lt;/strong&gt; Quando o problema é seu, a empatia com o usuário é natural  e a validação acontece em conversas que você já tem no dia a dia, sem precisar de formulários formais." data-en="&lt;strong&gt;Personal need is the best starting point.&lt;/strong&gt; When the problem is yours, empathy with the user is natural  and validation happens in conversations you already have every day, with no need for formal surveys."><strong>Necessidade pessoal é o melhor ponto de partida.</strong> Quando o problema é seu, a empatia com o usuário é natural  e a validação acontece em conversas que você já tem no dia a dia, sem precisar de formulários formais.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Aprendizado 02" data-en="Learning 02">Aprendizado 02</div>
+      <div class="insight-card-text" data-pt="&lt;strong&gt;Naming com camadas tem mais vida útil.&lt;/strong&gt; FilaFavo tem três leituras (filamento, favor, favo de mel)  e essa ambiguidade construtiva cria profundidade de marca sem esforço de comunicação adicional." data-en="&lt;strong&gt;Naming with layers has more shelf life.&lt;/strong&gt; FilaFavo has three readings (filament, favour, honeycomb)  and this constructive ambiguity creates brand depth without additional communication effort."><strong>Naming com camadas tem mais vida útil.</strong> FilaFavo tem três leituras (filamento, favor, favo de mel)  e essa ambiguidade construtiva cria profundidade de marca sem esforço de comunicação adicional.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Aprendizado 03" data-en="Learning 03">Aprendizado 03</div>
+      <div class="insight-card-text" data-pt="&lt;strong&gt;A estrutura de catálogo com sub-páginas escala bem.&lt;/strong&gt; Novos modelos entram em uma sub-página sem quebrar a navegação principal. A arquitetura foi pensada para crescer junto com o negócio." data-en="&lt;strong&gt;The catalogue structure with sub-pages scales well.&lt;/strong&gt; New models are added to a sub-page without breaking the main navigation. The architecture was designed to grow alongside the business."><strong>A estrutura de catálogo com sub-páginas escala bem.</strong> Novos modelos entram em uma sub-página sem quebrar a navegação principal. A arquitetura foi pensada para crescer junto com o negócio.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Aprendizado 04" data-en="Learning 04">Aprendizado 04</div>
+      <div class="insight-card-text" data-pt="&lt;strong&gt;Detalhes de interação constroem a identidade da marca.&lt;/strong&gt; A barra que 'imprime' no hover é um micro-detalhe  mas é o tipo de coisa que diferencia um template de um projeto com intenção. Vale o tempo investido." data-en="&lt;strong&gt;Interaction details build brand identity.&lt;/strong&gt; The bar that 'prints' on hover is a micro-detail  but it's the kind of thing that sets a template apart from a project with intention. The time invested is worth it."><strong>Detalhes de interação constroem a identidade da marca.</strong> A barra que 'imprime' no hover é um micro-detalhe  mas é o tipo de coisa que diferencia um template de um projeto com intenção. Vale o tempo investido.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="case-cta">
+  <div class="cta-text">
+    <h2 data-pt="Quer ver o site &lt;em&gt;ao vivo?&lt;/em&gt;" data-en="Want to see the site &lt;em&gt;live?&lt;/em&gt;">Quer ver o site <em>ao vivo?</em></h2>
+    <p data-pt="O catálogo está publicado e funcionando no GitHub Pages." data-en="The catalogue is published and live on GitHub Pages.">O catálogo está publicado e funcionando no GitHub Pages.</p>
+  </div>
+  <div class="cta-actions">
+    <a href="https://cspestana.github.io/FilaFavo/" target="_blank" class="btn-cta-primary" data-pt="Visitar o site →" data-en="Visit the site →">Visitar o site →</a>
+    <a href="index.html" class="btn-cta-ghost" data-pt="Voltar ao portfólio" data-en="Back to portfolio">Voltar ao portfólio</a>
+  </div>
+</div>
+
+<footer>
+  <span>camilla<span style="color:var(--pink);font-style:italic;">.pestana</span></span>
+  <p data-pt="Case study · UX Design · Front-end · Naming" data-en="Case study · UX Design · Front-end · Naming">Case study · UX Design · Front-end · Naming</p>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('[data-pt]').forEach(el => {
+      const text = el.getAttribute('data-' + lang);
+      if (text !== null) el.innerHTML = text;
+    });
+    document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('lang', lang);
+    document.documentElement.setAttribute('lang', lang === 'en' ? 'en' : 'pt-BR');
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    const saved = localStorage.getItem('lang') || 'pt';
+    if (saved === 'en') setLang('en');
+  });
+</script>
+</body>
+</html>
