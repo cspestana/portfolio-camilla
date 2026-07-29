@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Case Study: Festança da Jana | Camilla Pestana</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111110'/%3E%3Ctext x='32' y='40' font-family='Georgia, serif' font-size='26' font-weight='300' fill='%23E8547A' text-anchor='middle'%3ECP%3C/text%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Poppins:wght@600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -137,6 +137,29 @@
     .shot-gallery-row { grid-template-columns: 1fr; gap: 28px; }
     .case-cta { flex-direction: column; align-items: flex-start; }
   }
+  /* DESIGN SYSTEM SHOWCASE */
+  .ds-showcase { background: #2A1526; padding: 48px; margin-top: 40px; border-radius: 2px; }
+  .ds-row { margin-bottom: 36px; }
+  .ds-row:last-child { margin-bottom: 0; }
+  .ds-row-label { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px; }
+  .ds-swatches { display: flex; gap: 12px; flex-wrap: wrap; }
+  .ds-swatch { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+  .ds-swatch-color { width: 64px; height: 64px; border-radius: 2px; border: 1px solid rgba(255,255,255,0.08); }
+  .ds-swatch-name { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.5); }
+  .ds-type-sample { display: flex; flex-direction: column; gap: 22px; }
+  .ds-type-row { display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; }
+  .ds-type-row-tag { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.5); width: 56px; flex-shrink: 0; text-transform: uppercase; letter-spacing: 0.05em; }
+  .ds-type-h1 { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 46px; color: #fff; line-height: 1.05; }
+  .ds-type-h2 { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 32px; color: #fff; line-height: 1.1; }
+  .ds-type-h3 { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 22px; color: #FF4FA3; line-height: 1.1; }
+  .ds-type-body { font-family: 'Quicksand', sans-serif; font-size: 16px; color: rgba(255,255,255,0.7); font-weight: 500; }
+  .ds-type-caption { font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 12px; color: rgba(255,255,255,0.6); letter-spacing: 0.08em; text-transform: uppercase; }
+  .ds-type-meta { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+  .ds-components { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .ds-btn-primary { background: #FF4FA3; color: #fff; font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; padding: 14px 24px; border: none; border-radius: 30px; }
+  .ds-btn-ghost { background: transparent; color: #FFD23F; font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; padding: 14px 24px; border: 1px solid #FFD23F; border-radius: 30px; }
+  .ds-card-mini { background: rgba(255,255,255,0.06); padding: 20px 24px; font-family: 'Quicksand', sans-serif; font-size: 12px; color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; }
+  @media (max-width: 600px) { .ds-showcase { padding: 28px; } }
 </style>
 </head>
 <body>
@@ -266,6 +289,70 @@
     <div class="process-item">
       <span class="process-date" data-pt="Mobile first" data-en="Mobile first">Mobile first</span>
       <span class="process-text" data-pt="O público-alvo acessa principalmente pelo celular. Todo o layout foi pensado primeiro para telas pequenas: botões grandes, galeria em grid adaptável e tipografia legível em qualquer tamanho." data-en="The target audience accesses primarily by mobile. The entire layout was designed for small screens first: large buttons, an adaptable grid gallery and typography readable at any size.">O público-alvo acessa principalmente pelo celular. Todo o layout foi pensado primeiro para telas pequenas: botões grandes, galeria em grid adaptável e tipografia legível em qualquer tamanho.</span>
+    </div>
+  </div>
+
+  <div class="ds-showcase">
+    <div class="ds-row-label" style="font-size:13px; color:#FF4FA3; margin-bottom:28px; letter-spacing:0.15em;">Design System — Festança da Jana</div>
+    <div class="ds-row">
+      <div class="ds-row-label" data-pt="Paleta de cores" data-en="Color palette">Paleta de cores</div>
+      <div class="ds-swatches">
+        <div class="ds-swatch"><div class="ds-swatch-color" style="background:#FF4FA3;"></div><span class="ds-swatch-name">#FF4FA3</span></div>
+        <div class="ds-swatch"><div class="ds-swatch-color" style="background:#FFD23F;"></div><span class="ds-swatch-name">#FFD23F</span></div>
+        <div class="ds-swatch"><div class="ds-swatch-color" style="background:#4FC3F7;"></div><span class="ds-swatch-name">#4FC3F7</span></div>
+        <div class="ds-swatch"><div class="ds-swatch-color" style="background:#fbf7ff;"></div><span class="ds-swatch-name">#fbf7ff</span></div>
+        <div class="ds-swatch"><div class="ds-swatch-color" style="background:#2A1526;"></div><span class="ds-swatch-name">#2A1526</span></div>
+      </div>
+    </div>
+
+    <div class="ds-row">
+      <div class="ds-row-label" data-pt="Tipografia · Poppins + Quicksand" data-en="Typography · Poppins + Quicksand">Tipografia · Poppins + Quicksand</div>
+      <div class="ds-type-sample">
+        <div class="ds-type-row">
+          <span class="ds-type-row-tag">H1</span>
+          <div>
+            <span class="ds-type-h1">Festança da Jana</span>
+            <div class="ds-type-meta" data-pt="Poppins 46px · peso 800" data-en="Poppins 46px · weight 800">Poppins 46px · peso 800</div>
+          </div>
+        </div>
+        <div class="ds-type-row">
+          <span class="ds-type-row-tag">H2</span>
+          <div>
+            <span class="ds-type-h2">Festas que viram lembrança</span>
+            <div class="ds-type-meta" data-pt="Poppins 32px · peso 700" data-en="Poppins 32px · weight 700">Poppins 32px · peso 700</div>
+          </div>
+        </div>
+        <div class="ds-type-row">
+          <span class="ds-type-row-tag">H3</span>
+          <div>
+            <span class="ds-type-h3">Mesas temáticas</span>
+            <div class="ds-type-meta" data-pt="Poppins 22px · peso 600 · cor de destaque" data-en="Poppins 22px · weight 600 · highlight color">Poppins 22px · peso 600 · cor de destaque</div>
+          </div>
+        </div>
+        <div class="ds-type-row">
+          <span class="ds-type-row-tag">Body</span>
+          <div>
+            <span class="ds-type-body" data-pt="Decoração personalizada para o seu dia especial." data-en="Custom decoration for your special day.">Decoração personalizada para o seu dia especial.</span>
+            <div class="ds-type-meta" data-pt="Quicksand 16px · peso 500" data-en="Quicksand 16px · weight 500">Quicksand 16px · peso 500</div>
+          </div>
+        </div>
+        <div class="ds-type-row">
+          <span class="ds-type-row-tag">Caption</span>
+          <div>
+            <span class="ds-type-caption">Aniversários · Chás · Comemorações</span>
+            <div class="ds-type-meta" data-pt="Quicksand 12px · peso 700 · uppercase" data-en="Quicksand 12px · weight 700 · uppercase">Quicksand 12px · peso 700 · uppercase</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-row">
+      <div class="ds-row-label" data-pt="Componentes base" data-en="Base components">Componentes base</div>
+      <div class="ds-components">
+        <button class="ds-btn-primary">Falar no WhatsApp</button>
+        <button class="ds-btn-ghost">Ver galeria</button>
+        <div class="ds-card-mini" data-pt="Card de serviço · reutilizável na galeria" data-en="Service card · reusable in the gallery">Card de serviço · reutilizável na galeria</div>
+      </div>
     </div>
   </div>
 </section>
