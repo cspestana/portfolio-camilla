@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Case Study: Pousada Beira Verde | Camilla Pestana</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111110'/%3E%3Ctext x='32' y='40' font-family='Georgia, serif' font-size='26' font-weight='300' fill='%23E8547A' text-anchor='middle'%3ECP%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white: #FAFAF8;
+    --black: #111110;
+    --pink: #E8547A;
+    --pink-light: #FDF0F3;
+    --pink-mid: #F4C5D0;
+    --yellow: #F5C800;
+    --yellow-light: #FFFBEA;
+    --gray: #6B6B6B;
+    --gray-light: #F0EFED;
+    --gray-border: #E4E3E0;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { background: var(--white); color: var(--black); font-family: var(--sans); overflow-x: hidden; }
+  a { color: inherit; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 22px 6vw; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250,250,248,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-border);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 19px; font-weight: 400; color: var(--black); text-decoration: none; }
+  .nav-logo span { color: var(--pink); font-style: italic; }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .nav-back { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+  .nav-back:hover { color: var(--pink); }
+  .lang-toggle { display: flex; align-items: center; }
+  .lang-btn { background: none; border: none; padding: 5px 8px; cursor: pointer; font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.1em; color: var(--gray); transition: color 0.2s; }
+  .lang-btn.active { color: var(--pink); }
+  .lang-divider { color: var(--gray-border); font-size: 10px; }
+
+  /* HERO */
+  .case-hero { padding: 140px 6vw 80px; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--gray-border); }
+  .hero-eyebrow { display: flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pink); margin-bottom: 28px; }
+  .hero-eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--pink); }
+  .hero-title { font-family: var(--serif); font-weight: 300; font-size: clamp(36px, 5.5vw, 72px); line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 48px; max-width: 820px; }
+  .hero-title em { font-style: italic; color: var(--pink); }
+  .hero-meta { display: flex; gap: 48px; flex-wrap: wrap; }
+  .meta-item { display: flex; flex-direction: column; gap: 4px; }
+  .meta-label { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); }
+  .meta-value { font-size: 14px; font-weight: 400; }
+
+  /* BANNER IMAGE */
+  .case-banner { width: 100%; max-height: 420px; overflow: hidden; border-bottom: 1px solid var(--gray-border); }
+  .case-banner img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; }
+
+  /* TOC */
+  .toc-wrap { padding: 48px 6vw; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--gray-border); }
+  .toc-label { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); margin-bottom: 20px; }
+  .toc-list { display: flex; gap: 8px; flex-wrap: wrap; }
+  .toc-item { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border: 1px solid var(--gray-border); font-size: 12px; font-weight: 500; text-decoration: none; color: var(--black); transition: border-color 0.2s, color 0.2s, background 0.2s; }
+  .toc-item:hover { border-color: var(--pink); color: var(--pink); background: var(--pink-light); }
+  .toc-num { font-family: var(--mono); font-size: 11px; color: var(--pink); }
+
+  /* SECTIONS */
+  .case-section { padding: 90px 6vw; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--gray-border); }
+  .section-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+  .section-num { font-family: var(--mono); font-size: 13px; color: var(--pink); font-weight: 500; }
+  .section-label { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); }
+  .section-title { font-family: var(--serif); font-weight: 300; font-size: clamp(26px, 3.6vw, 44px); line-height: 1.1; margin-bottom: 32px; }
+  .section-title em { font-style: italic; color: var(--pink); }
+  .section-body { max-width: 680px; }
+  .section-body p { font-size: 15px; line-height: 1.8; color: var(--gray); margin-bottom: 18px; font-weight: 300; }
+  .section-body p strong { color: var(--black); font-weight: 600; }
+
+  /* INSIGHT CARDS */
+  .insight-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--gray-border); border: 1px solid var(--gray-border); margin-top: 40px; }
+  .insight-card { background: var(--white); padding: 32px; }
+  .insight-card-label { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--pink); margin-bottom: 12px; }
+  .insight-card-text { font-size: 14px; line-height: 1.7; color: var(--gray); font-weight: 300; }
+  .insight-card-text strong { color: var(--black); font-weight: 600; }
+
+  /* PULL QUOTE */
+  blockquote.pull-quote {
+    border-left: 2px solid var(--pink); padding: 20px 28px;
+    margin: 40px 0; font-family: var(--serif); font-size: clamp(18px, 2.4vw, 26px);
+    font-weight: 300; font-style: italic; line-height: 1.5; color: var(--black);
+  }
+
+  /* PROCESS TIMELINE */
+  .process-list { display: flex; flex-direction: column; gap: 0; margin-top: 40px; border: 1px solid var(--gray-border); }
+  .process-item { display: flex; gap: 0; border-bottom: 1px solid var(--gray-border); }
+  .process-item:last-child { border-bottom: none; }
+  .process-date { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pink); padding: 20px 24px; min-width: 160px; border-right: 1px solid var(--gray-border); display: flex; align-items: flex-start; }
+  .process-text { font-size: 14px; line-height: 1.7; color: var(--gray); padding: 20px 24px; font-weight: 300; }
+  .process-text strong { color: var(--black); font-weight: 600; }
+
+  /* RESULTS GRID */
+  .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--gray-border); border: 1px solid var(--gray-border); margin-top: 40px; }
+  .result-stat { background: var(--white); padding: 32px 24px; }
+  .result-num { font-family: var(--serif); font-size: 36px; font-weight: 300; color: var(--pink); display: block; margin-bottom: 8px; }
+  .result-label { font-size: 12.5px; line-height: 1.5; color: var(--gray); font-weight: 300; }
+
+  /* NAMING CARD */
+  .naming-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--gray-border); border: 1px solid var(--gray-border); margin-top: 40px; }
+  .naming-card { background: var(--white); padding: 32px; }
+  .naming-word { font-family: var(--serif); font-size: 28px; font-weight: 300; font-style: italic; color: var(--pink); margin-bottom: 10px; display: block; }
+  .naming-label { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); margin-bottom: 10px; display: block; }
+  .naming-desc { font-size: 13.5px; line-height: 1.7; color: var(--gray); font-weight: 300; }
+
+  /* PRODUCT GRID */
+  .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--gray-border); border: 1px solid var(--gray-border); margin-top: 40px; }
+  .product-card { background: var(--white); padding: 32px; }
+  .product-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+  .product-name { font-family: var(--serif); font-size: 20px; font-weight: 300; margin-bottom: 8px; }
+  .product-desc { font-size: 13.5px; line-height: 1.7; color: var(--gray); font-weight: 300; }
+
+  /* SHOT FRAME */
+  .shot-frame { margin-top: 40px; border: 1px solid var(--gray-border); overflow: hidden; }
+  .shot-frame img { width: 100%; display: block; }
+  .shot-frame figcaption { font-family: var(--mono); font-size: 10px; color: var(--gray); padding: 12px 16px; border-top: 1px solid var(--gray-border); letter-spacing: 0.08em; }
+
+  /* CASE NOTE */
+  .case-note { font-family: var(--mono); font-size: 11px; color: var(--gray); line-height: 1.6; margin-top: 24px; padding: 16px; background: var(--gray-light); border-left: 2px solid var(--gray-border); }
+
+  /* STATUS BADGE */
+  .status-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid var(--yellow); background: var(--yellow-light); font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #8B6F00; margin-bottom: 28px; }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); animation: blink 2s infinite; }
+  @keyframes blink { 0%,100%{opacity:1;}50%{opacity:.3;} }
+
+  /* CTA */
+  .case-cta { padding: 80px 6vw; border-top: 1px solid var(--gray-border); display: flex; justify-content: space-between; align-items: center; gap: 40px; flex-wrap: wrap; max-width: 1100px; margin: 0 auto; }
+  .cta-text h2 { font-family: var(--serif); font-size: clamp(24px, 3vw, 36px); font-weight: 300; line-height: 1.2; margin-bottom: 8px; }
+  .cta-text h2 em { font-style: italic; color: var(--pink); }
+  .cta-text p { font-size: 14px; color: var(--gray); font-weight: 300; }
+  .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-cta-primary { display: inline-flex; align-items: center; padding: 14px 28px; background: var(--black); color: var(--white); font-size: 13px; font-weight: 600; letter-spacing: 0.05em; text-decoration: none; transition: background 0.2s; }
+  .btn-cta-primary:hover { background: var(--pink); }
+  .btn-cta-ghost { display: inline-flex; align-items: center; padding: 14px 28px; border: 1px solid var(--gray-border); color: var(--gray); font-size: 13px; font-weight: 500; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
+  .btn-cta-ghost:hover { border-color: var(--pink); color: var(--pink); }
+
+  /* FOOTER */
+  footer { padding: 32px 6vw; border-top: 1px solid var(--gray-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  footer span { font-family: var(--serif); font-size: 16px; }
+  footer p { font-family: var(--mono); font-size: 10px; color: var(--gray); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .case-hero { padding: 120px 6vw 60px; }
+    .hero-meta { gap: 24px; }
+    .insight-grid, .naming-grid, .product-grid { grid-template-columns: 1fr; }
+    .results-grid { grid-template-columns: repeat(2, 1fr); }
+    .case-cta { flex-direction: column; align-items: flex-start; }
+    .process-date { min-width: 110px; font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">camilla<span>.pestana</span></a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-back" data-pt="← Portfólio" data-en="← Portfolio">← Portfólio</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-pt" onclick="setLang('pt')">PT</button>
+      <span class="lang-divider">|</span>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="case-hero">
+  <div class="status-badge">
+    <span class="status-dot"></span>
+    <span data-pt="Projeto de prospecção · fictício" data-en="Prospecting project · fictional">Projeto de prospecção · fictício</span>
+  </div>
+  <p class="hero-eyebrow" data-pt="Landing Page · UI Design · Front-end" data-en="Landing Page · UI Design · Front-end">Landing Page · UI Design · Front-end</p>
+  <h1 class="hero-title" data-pt="Pousada Beira Verde — uma LP para dar &lt;em&gt;presença digital a quem só tem o Instagram&lt;/em&gt;" data-en="Pousada Beira Verde — a landing page to give &lt;em&gt;digital presence to those who only have Instagram&lt;/em&gt;">Pousada Beira Verde — uma LP para dar <em>presença digital a quem só tem o Instagram</em></h1>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-label" data-pt="Tipo" data-en="Type">Tipo</span>
+      <span class="meta-value" data-pt="LP de prospecção (fictícia)" data-en="Prospecting LP (fictional)">LP de prospecção (fictícia)</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label" data-pt="Período" data-en="Period">Período</span>
+      <span class="meta-value">2026</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label" data-pt="Papel" data-en="Role">Papel</span>
+      <span class="meta-value" data-pt="UX, UI, Front-end" data-en="UX, UI, Front-end">UX, UI, Front-end</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Stack</span>
+      <span class="meta-value">HTML · CSS · JS · GitHub Pages</span>
+    </div>
+  </div>
+</header>
+
+<!-- BANNER -->
+<div class="case-banner">
+  <img src="images/lp-pousada.png" alt="Pousada Beira Verde — praia e natureza em Barra do Sul">
+</div>
+
+<!-- TOC -->
+<div class="toc-wrap">
+  <p class="toc-label" data-pt="Neste case study" data-en="In this case study">Neste case study</p>
+  <div class="toc-list">
+    <a href="#contexto" class="toc-item"><span class="toc-num">01</span> <span data-pt="Contexto" data-en="Context">Contexto</span></a>
+    <a href="#problema" class="toc-item"><span class="toc-num">02</span> <span data-pt="Problema" data-en="Problem">Problema</span></a>
+    <a href="#estrategia" class="toc-item"><span class="toc-num">03</span> <span data-pt="Estratégia" data-en="Strategy">Estratégia</span></a>
+    <a href="#decisoes" class="toc-item"><span class="toc-num">04</span> <span data-pt="Decisões de design" data-en="Design decisions">Decisões de design</span></a>
+    <a href="#solucao" class="toc-item"><span class="toc-num">05</span> <span data-pt="Solução" data-en="Solution">Solução</span></a>
+    <a href="#resultados" class="toc-item"><span class="toc-num">06</span> <span data-pt="Resultados" data-en="Results">Resultados</span></a>
+    <a href="#aprendizados" class="toc-item"><span class="toc-num">07</span> <span data-pt="Aprendizados" data-en="Learnings">Aprendizados</span></a>
+  </div>
+</div>
+
+<!-- 01 CONTEXTO -->
+<section class="case-section" id="contexto">
+  <div class="section-eyebrow"><span class="section-num">01</span><span class="section-label" data-pt="Contexto" data-en="Context">Contexto</span></div>
+  <h2 class="section-title" data-pt="Pequenos comércios têm o talento, &lt;em&gt;mas só têm o Instagram.&lt;/em&gt;" data-en="Small businesses have the talent, &lt;em&gt;but only have Instagram.&lt;/em&gt;">Pequenos comércios têm o talento, <em>mas só têm o Instagram.</em></h2>
+  <div class="section-body">
+    <p data-pt="Muitas pousadas pequenas, familiares, com um charme genuíno, dependem exclusivamente do Instagram para se apresentar. O perfil funciona como vitrine, catálogo e canal de contato ao mesmo tempo — mas tem limites claros: as fotos se perdem no feed, não há uma narrativa organizada do lugar, e o processo de reserva depende de trocar mensagens no direct." data-en="Many small, family-run guesthouses with genuine charm rely exclusively on Instagram to present themselves. The profile works as showcase, catalogue and contact channel all at once — but it has clear limits: photos get lost in the feed, there's no organised narrative of the place, and the booking process depends on exchanging DMs.">Muitas pousadas pequenas, familiares, com um charme genuíno, dependem exclusivamente do Instagram para se apresentar. O perfil funciona como vitrine, catálogo e canal de contato ao mesmo tempo — mas tem limites claros: as fotos se perdem no feed, não há uma narrativa organizada do lugar, e o processo de reserva depende de trocar mensagens no direct.</p>
+    <p data-pt="A Pousada Beira Verde é um projeto fictício, com todas as imagens geradas por IA. Ela foi criada como peça de prospecção: uma LP-modelo que demonstra, na prática, o quanto uma página bem construída pode valorizar um comércio simples e facilitar a conversão de visitantes em hóspedes." data-en="Pousada Beira Verde is a fictional project, with all images generated by AI. It was created as a prospecting piece: a model LP that demonstrates, in practice, how much a well-built page can add value to a simple business and make it easier to convert visitors into guests.">A Pousada Beira Verde é um projeto fictício, com todas as imagens geradas por IA. Ela foi criada como peça de prospecção: uma LP-modelo que demonstra, na prática, o quanto uma página bem construída pode valorizar um comércio simples e facilitar a conversão de visitantes em hóspedes.</p>
+  </div>
+  <div class="case-note" data-pt="⚠ Projeto fictício criado para prospecção de clientes. A pousada não existe e todas as imagens foram geradas por inteligência artificial." data-en="⚠ Fictional project created for client prospecting. The guesthouse does not exist and all images were generated by artificial intelligence.">⚠ Projeto fictício criado para prospecção de clientes. A pousada não existe e todas as imagens foram geradas por inteligência artificial.</div>
+</section>
+
+<!-- 02 PROBLEMA -->
+<section class="case-section" id="problema">
+  <div class="section-eyebrow"><span class="section-num">02</span><span class="section-label" data-pt="Problema" data-en="Problem">Problema</span></div>
+  <h2 class="section-title" data-pt="O Instagram mostra, &lt;em&gt;mas não convence sozinho.&lt;/em&gt;" data-en="Instagram shows, &lt;em&gt;but doesn't convince on its own.&lt;/em&gt;">O Instagram mostra, <em>mas não convence sozinho.</em></h2>
+  <div class="section-body">
+    <p data-pt="Quando alguém pesquisa uma pousada para uma viagem, quer confiança: entender onde fica, o que está incluso, como são os quartos, o que outros hóspedes acharam e como reservar sem burocracia. O perfil de Instagram, sozinho, deixa muitas dessas perguntas no ar." data-en="When someone searches for a guesthouse for a trip, they want confidence: to understand where it is, what's included, what the rooms are like, what other guests thought and how to book without hassle. An Instagram profile alone leaves many of these questions unanswered.">Quando alguém pesquisa uma pousada para uma viagem, quer confiança: entender onde fica, o que está incluso, como são os quartos, o que outros hóspedes acharam e como reservar sem burocracia. O perfil de Instagram, sozinho, deixa muitas dessas perguntas no ar.</p>
+  </div>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Fricção 01 — Fotos dispersas" data-en="Friction 01 — Scattered photos">Fricção 01 — Fotos dispersas</div>
+      <div class="insight-card-text" data-pt="No feed, as fotos do lugar se misturam a posts do dia a dia e promoções antigas. Não há uma &lt;strong&gt;apresentação curada&lt;/strong&gt; que conte a história do lugar de forma sequencial." data-en="In the feed, photos of the place mix with everyday posts and old promotions. There's no &lt;strong&gt;curated presentation&lt;/strong&gt; telling the story of the place in a sequential way.">No feed, as fotos do lugar se misturam a posts do dia a dia e promoções antigas. Não há uma <strong>apresentação curada</strong> que conte a história do lugar de forma sequencial.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Fricção 02 — Sem informação clara" data-en="Friction 02 — No clear info">Fricção 02 — Sem informação clara</div>
+      <div class="insight-card-text" data-pt="Detalhes essenciais — tipos de acomodação, o que está incluso, localização — ficam &lt;strong&gt;espalhados em stories antigos&lt;/strong&gt; ou só são respondidos no direct, um a um." data-en="Essential details — types of accommodation, what's included, location — end up &lt;strong&gt;scattered in old stories&lt;/strong&gt; or only answered in the DMs, one by one.">Detalhes essenciais — tipos de acomodação, o que está incluso, localização — ficam <strong>espalhados em stories antigos</strong> ou só são respondidos no direct, um a um.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Fricção 03 — Reserva burocrática" data-en="Friction 03 — Clunky booking">Fricção 03 — Reserva burocrática</div>
+      <div class="insight-card-text" data-pt="Sem um botão de reserva claro, o hóspede precisa &lt;strong&gt;iniciar a conversa do zero&lt;/strong&gt;, perguntar disponibilidade e esperar resposta — um atrito que faz muita gente desistir." data-en="Without a clear booking button, the guest has to &lt;strong&gt;start the conversation from scratch&lt;/strong&gt;, ask about availability and wait — friction that makes many people give up.">Sem um botão de reserva claro, o hóspede precisa <strong>iniciar a conversa do zero</strong>, perguntar disponibilidade e esperar resposta — um atrito que faz muita gente desistir.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Oportunidade" data-en="Opportunity">Oportunidade</div>
+      <div class="insight-card-text" data-pt="Uma LP resolve tudo isso num só lugar: apresenta o lugar com fotos curadas, organiza as informações e leva direto ao WhatsApp — &lt;strong&gt;dando um ar profissional&lt;/strong&gt; mesmo a um comércio simples." data-en="A landing page solves all this in one place: it presents the place with curated photos, organises the information and leads straight to WhatsApp — &lt;strong&gt;giving a professional feel&lt;/strong&gt; even to a simple business.">Uma LP resolve tudo isso num só lugar: apresenta o lugar com fotos curadas, organiza as informações e leva direto ao WhatsApp — <strong>dando um ar profissional</strong> mesmo a um comércio simples.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 ESTRATÉGIA -->
+<section class="case-section" id="estrategia">
+  <div class="section-eyebrow"><span class="section-num">03</span><span class="section-label" data-pt="Estratégia" data-en="Strategy">Estratégia</span></div>
+  <h2 class="section-title" data-pt="Uma LP-modelo que &lt;em&gt;vende a si mesma como serviço.&lt;/em&gt;" data-en="A model LP that &lt;em&gt;sells itself as a service.&lt;/em&gt;">Uma LP-modelo que <em>vende a si mesma como serviço.</em></h2>
+  <div class="section-body">
+    <p data-pt="A Pousada Beira Verde tem uma função dupla. Primeiro, é uma peça de portfólio que demonstra minha capacidade de criar LPs de alta conversão. Segundo, e mais importante, é uma ferramenta de prospecção: ao abordar pequenos comércios que só têm Instagram, posso mostrar essa LP como exemplo concreto do que entrego — em vez de descrever em palavras." data-en="Pousada Beira Verde has a dual function. First, it's a portfolio piece that demonstrates my ability to create high-conversion LPs. Second, and more importantly, it's a prospecting tool: when approaching small businesses that only have Instagram, I can show this LP as a concrete example of what I deliver — instead of describing it in words.">A Pousada Beira Verde tem uma função dupla. Primeiro, é uma peça de portfólio que demonstra minha capacidade de criar LPs de alta conversão. Segundo, e mais importante, é uma ferramenta de prospecção: ao abordar pequenos comércios que só têm Instagram, posso mostrar essa LP como exemplo concreto do que entrego — em vez de descrever em palavras.</p>
+  </div>
+  <blockquote class="pull-quote" data-pt="Em vez de dizer para o cliente 'imagina uma página bonita para o seu negócio', eu mostro uma pronta. O exemplo vende melhor que a promessa." data-en="Instead of telling the client 'imagine a beautiful page for your business', I show a finished one. The example sells better than the promise.">"Em vez de dizer para o cliente 'imagina uma página bonita para o seu negócio', eu mostro uma pronta. O exemplo vende melhor que a promessa."</blockquote>
+  <div class="section-body">
+    <p data-pt="Escolhi o segmento de pousadas justamente porque é altamente visual e emocional — o tipo de negócio em que uma boa apresentação faz diferença direta na decisão de compra. Usar imagens geradas por IA me permitiu construir um lugar coeso e atraente sem depender de um cliente real, mantendo total liberdade criativa." data-en="I chose the guesthouse segment precisely because it is highly visual and emotional — the kind of business where good presentation directly affects the buying decision. Using AI-generated images let me build a cohesive and attractive place without depending on a real client, keeping full creative freedom.">Escolhi o segmento de pousadas justamente porque é altamente visual e emocional — o tipo de negócio em que uma boa apresentação faz diferença direta na decisão de compra. Usar imagens geradas por IA me permitiu construir um lugar coeso e atraente sem depender de um cliente real, mantendo total liberdade criativa.</p>
+  </div>
+</section>
+
+<!-- 04 DECISÕES DE DESIGN -->
+<section class="case-section" id="decisoes">
+  <div class="section-eyebrow"><span class="section-num">04</span><span class="section-label" data-pt="Decisões de design" data-en="Design decisions">Decisões de design</span></div>
+  <h2 class="section-title" data-pt="Natureza, aconchego e &lt;em&gt;um caminho claro até a reserva.&lt;/em&gt;" data-en="Nature, comfort and &lt;em&gt;a clear path to booking.&lt;/em&gt;">Natureza, aconchego e <em>um caminho claro até a reserva.</em></h2>
+  <div class="section-body">
+    <p data-pt="Cada decisão foi guiada por dois objetivos que caminham juntos: transmitir a sensação do lugar (natureza, mar, tranquilidade) e conduzir o visitante, sem esforço, até o botão de reserva no WhatsApp." data-en="Every decision was guided by two goals that go hand in hand: conveying the feeling of the place (nature, sea, tranquillity) and guiding the visitor, effortlessly, to the WhatsApp booking button.">Cada decisão foi guiada por dois objetivos que caminham juntos: transmitir a sensação do lugar (natureza, mar, tranquilidade) e conduzir o visitante, sem esforço, até o botão de reserva no WhatsApp.</p>
+  </div>
+  <div class="process-list">
+    <div class="process-item">
+      <span class="process-date" data-pt="Paleta" data-en="Palette">Paleta</span>
+      <span class="process-text" data-pt="Tons de &lt;strong&gt;verde natureza e areia&lt;/strong&gt;, remetendo à mata e à praia. Cores que acalmam e reforçam a proposta de descanso, sem competir com as fotos do lugar." data-en="Shades of &lt;strong&gt;nature green and sand&lt;/strong&gt;, evoking the woods and the beach. Colours that soothe and reinforce the promise of rest, without competing with the photos of the place.">Tons de <strong>verde natureza e areia</strong>, remetendo à mata e à praia. Cores que acalmam e reforçam a proposta de descanso, sem competir com as fotos do lugar.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Hero + carrossel" data-en="Hero + carousel">Hero + carrossel</span>
+      <span class="process-text" data-pt="Logo de abertura, um &lt;strong&gt;carrossel de imagens&lt;/strong&gt; do lugar já impacta antes de qualquer texto. Em um negócio visual, a primeira impressão precisa ser a própria beleza do local." data-en="Right at the start, an &lt;strong&gt;image carousel&lt;/strong&gt; of the place makes an impact before any text. In a visual business, the first impression must be the beauty of the place itself.">Logo de abertura, um <strong>carrossel de imagens</strong> do lugar já impacta antes de qualquer texto. Em um negócio visual, a primeira impressão precisa ser a própria beleza do local.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Acomodações" data-en="Accommodation">Acomodações</span>
+      <span class="process-text" data-pt="Cards claros diferenciando &lt;strong&gt;quarto e camping&lt;/strong&gt;, com o que está incluso em cada um. O visitante entende rápido as opções e se identifica com o perfil de estadia que procura." data-en="Clear cards differentiating &lt;strong&gt;room and camping&lt;/strong&gt;, with what's included in each. The visitor quickly understands the options and identifies with the type of stay they're looking for.">Cards claros diferenciando <strong>quarto e camping</strong>, com o que está incluso em cada um. O visitante entende rápido as opções e se identifica com o perfil de estadia que procura.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Prova social" data-en="Social proof">Prova social</span>
+      <span class="process-text" data-pt="Seção de &lt;strong&gt;depoimentos&lt;/strong&gt; (&quot;Quem foi, voltou&quot;) para construir confiança — um elemento que o Instagram tem dificuldade de organizar e que pesa muito na decisão de reservar." data-en="A &lt;strong&gt;testimonials&lt;/strong&gt; section (&quot;Those who went, came back&quot;) to build trust — an element Instagram struggles to organise and that weighs heavily on the booking decision.">Seção de <strong>depoimentos</strong> ("Quem foi, voltou") para construir confiança — um elemento que o Instagram tem dificuldade de organizar e que pesa muito na decisão de reservar.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Conversão" data-en="Conversion">Conversão</span>
+      <span class="process-text" data-pt="Botão de &lt;strong&gt;reserva pelo WhatsApp&lt;/strong&gt; repetido em pontos estratégicos e com mensagem pré-formatada. A decisão de reservar nunca fica a mais de um clique de distância." data-en="A &lt;strong&gt;WhatsApp booking button&lt;/strong&gt; repeated at strategic points and with a pre-formatted message. The decision to book is never more than one click away.">Botão de <strong>reserva pelo WhatsApp</strong> repetido em pontos estratégicos e com mensagem pré-formatada. A decisão de reservar nunca fica a mais de um clique de distância.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Mobile first" data-en="Mobile first">Mobile first</span>
+      <span class="process-text" data-pt="Quem pesquisa viagem faz isso majoritariamente pelo celular. Toda a LP foi construída &lt;strong&gt;primeiro para telas pequenas&lt;/strong&gt;: galeria adaptável, botões grandes e leitura fluida." data-en="People researching trips do it mostly on mobile. The entire LP was built &lt;strong&gt;for small screens first&lt;/strong&gt;: adaptable gallery, large buttons and smooth reading.">Quem pesquisa viagem faz isso majoritariamente pelo celular. Toda a LP foi construída <strong>primeiro para telas pequenas</strong>: galeria adaptável, botões grandes e leitura fluida.</span>
+    </div>
+  </div>
+</section>
+
+<!-- 05 SOLUÇÃO -->
+<section class="case-section" id="solucao">
+  <div class="section-eyebrow"><span class="section-num">05</span><span class="section-label" data-pt="Solução" data-en="Solution">Solução</span></div>
+  <h2 class="section-title" data-pt="Uma página que faz o &lt;em&gt;lugar simples parecer irresistível.&lt;/em&gt;" data-en="A page that makes the &lt;em&gt;simple place look irresistible.&lt;/em&gt;">Uma página que faz o <em>lugar simples parecer irresistível.</em></h2>
+  <div class="section-body">
+    <p data-pt="A LP entregue é leve, responsiva e publicada via GitHub Pages, sem custo de hospedagem. A estrutura conduz o visitante numa jornada natural: encantar, informar, provar e converter." data-en="The delivered LP is lightweight, responsive and published via GitHub Pages, with no hosting cost. The structure guides the visitor through a natural journey: delight, inform, prove and convert.">A LP entregue é leve, responsiva e publicada via GitHub Pages, sem custo de hospedagem. A estrutura conduz o visitante numa jornada natural: encantar, informar, provar e converter.</p>
+    <p data-pt="A estrutura final:" data-en="The final structure:">A estrutura final:</p>
+  </div>
+  <div class="process-list">
+    <div class="process-item">
+      <span class="process-date">Hero</span>
+      <span class="process-text" data-pt="Carrossel de imagens do lugar com a frase &quot;Um cantinho entre o mar e a natureza&quot; e chamada imediata para reserva." data-en="Image carousel of the place with the line &quot;A little corner between the sea and nature&quot; and an immediate booking call.">Carrossel de imagens do lugar com a frase "Um cantinho entre o mar e a natureza" e chamada imediata para reserva.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Acomodações" data-en="Accommodation">Acomodações</span>
+      <span class="process-text" data-pt="&quot;Onde você quer ficar?&quot; — cards do Quarto Beira Verde e da Área de Camping, cada um com o que está incluso." data-en="&quot;Where do you want to stay?&quot; — cards for the Beira Verde Room and the Camping Area, each with what's included.">"Onde você quer ficar?" — cards do Quarto Beira Verde e da Área de Camping, cada um com o que está incluso.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Galeria" data-en="Gallery">Galeria</span>
+      <span class="process-text" data-pt="&quot;Veja como é bonito&quot; — grid de fotos que transmite a experiência completa do lugar, da vista ao café da manhã." data-en="&quot;See how beautiful it is&quot; — a photo grid conveying the full experience of the place, from the view to breakfast.">"Veja como é bonito" — grid de fotos que transmite a experiência completa do lugar, da vista ao café da manhã.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Depoimentos" data-en="Testimonials">Depoimentos</span>
+      <span class="process-text" data-pt="&quot;Quem foi, voltou&quot; — prova social que reforça a confiança antes do passo final da reserva." data-en="&quot;Those who went, came back&quot; — social proof reinforcing trust before the final booking step.">"Quem foi, voltou" — prova social que reforça a confiança antes do passo final da reserva.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Reserva" data-en="Booking">Reserva</span>
+      <span class="process-text" data-pt="&quot;Reserve agora pelo WhatsApp&quot; — CTA final direto, fechando a jornada no canal mais prático para o hóspede." data-en="&quot;Book now on WhatsApp&quot; — a direct final CTA, closing the journey in the most convenient channel for the guest.">"Reserve agora pelo WhatsApp" — CTA final direto, fechando a jornada no canal mais prático para o hóspede.</span>
+    </div>
+  </div>
+  </figure>
+</section>
+
+<!-- 06 RESULTADOS -->
+<section class="case-section" id="resultados">
+  <div class="section-eyebrow"><span class="section-num">06</span><span class="section-label" data-pt="Resultados" data-en="Results">Resultados</span></div>
+  <h2 class="section-title" data-pt="Uma peça de prospecção &lt;em&gt;que fala por si.&lt;/em&gt;" data-en="A prospecting piece &lt;em&gt;that speaks for itself.&lt;/em&gt;">Uma peça de prospecção <em>que fala por si.</em></h2>
+  <div class="section-body">
+    <p data-pt="Mais do que um exercício visual, a LP se tornou uma ferramenta concreta de vendas: um exemplo tangível que uso para mostrar a pequenos comércios o valor de sair do Instagram e ter uma presença digital própria." data-en="More than a visual exercise, the LP became a concrete sales tool: a tangible example I use to show small businesses the value of going beyond Instagram and having their own digital presence.">Mais do que um exercício visual, a LP se tornou uma ferramenta concreta de vendas: um exemplo tangível que uso para mostrar a pequenos comércios o valor de sair do Instagram e ter uma presença digital própria.</p>
+  </div>
+  <div class="results-grid">
+    <div class="result-stat">
+      <span class="result-num">1</span>
+      <span class="result-label" data-pt="LP-modelo pronta para prospecção de clientes" data-en="Model LP ready for client prospecting">LP-modelo pronta para prospecção de clientes</span>
+    </div>
+    <div class="result-stat">
+      <span class="result-num">5</span>
+      <span class="result-label" data-pt="Seções conduzindo o visitante da descoberta à reserva" data-en="Sections guiding the visitor from discovery to booking">Seções conduzindo o visitante da descoberta à reserva</span>
+    </div>
+    <div class="result-stat">
+      <span class="result-num">100%</span>
+      <span class="result-label" data-pt="Responsivo, testado em mobile e desktop" data-en="Responsive, tested on mobile and desktop">Responsivo, testado em mobile e desktop</span>
+    </div>
+    <div class="result-stat">
+      <span class="result-num">IA</span>
+      <span class="result-label" data-pt="Imagens geradas por IA, sem depender de cliente real" data-en="AI-generated images, without depending on a real client">Imagens geradas por IA, sem depender de cliente real</span>
+    </div>
+  </div>
+</section>
+
+<!-- 07 APRENDIZADOS -->
+<section class="case-section" id="aprendizados">
+  <div class="section-eyebrow"><span class="section-num">07</span><span class="section-label" data-pt="Aprendizados" data-en="Learnings">Aprendizados</span></div>
+  <h2 class="section-title" data-pt="O que esse projeto me ensinou &lt;em&gt;sobre vender design.&lt;/em&gt;" data-en="What this project taught me &lt;em&gt;about selling design.&lt;/em&gt;">O que esse projeto me ensinou <em>sobre vender design.</em></h2>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Aprendizado 01" data-en="Learning 01">Aprendizado 01</div>
+      <div class="insight-card-text" data-pt="Um exemplo pronto vende mais que qualquer portfólio genérico. Criar uma peça específica para o segmento que quero prospectar torna a abordagem muito mais concreta e convincente." data-en="A finished example sells more than any generic portfolio. Creating a piece specific to the segment I want to prospect makes the pitch far more concrete and convincing.">Um exemplo pronto vende mais que qualquer portfólio genérico. Criar uma peça específica para o segmento que quero prospectar torna a abordagem muito mais concreta e convincente.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Aprendizado 02" data-en="Learning 02">Aprendizado 02</div>
+      <div class="insight-card-text" data-pt="Imagens geradas por IA são uma ferramenta poderosa para projetos fictícios: permitem construir um universo visual coeso e realista sem depender de fotografia ou de um cliente real." data-en="AI-generated images are a powerful tool for fictional projects: they let you build a cohesive, realistic visual universe without depending on photography or a real client.">Imagens geradas por IA são uma ferramenta poderosa para projetos fictícios: permitem construir um universo visual coeso e realista sem depender de fotografia ou de um cliente real.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Aprendizado 03" data-en="Learning 03">Aprendizado 03</div>
+      <div class="insight-card-text" data-pt="Para negócios visuais e emocionais como pousadas, a LP não substitui o Instagram — ela o complementa, oferecendo a estrutura, a informação e a confiança que o feed sozinho não entrega." data-en="For visual, emotional businesses like guesthouses, the LP doesn't replace Instagram — it complements it, offering the structure, information and trust the feed alone can't deliver.">Para negócios visuais e emocionais como pousadas, a LP não substitui o Instagram — ela o complementa, oferecendo a estrutura, a informação e a confiança que o feed sozinho não entrega.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Aprendizado 04" data-en="Learning 04">Aprendizado 04</div>
+      <div class="insight-card-text" data-pt="Resistir ao excesso é uma decisão de design. Uma paleta calma e uma estrutura enxuta fazem um lugar simples parecer mais sofisticado do que efeitos e elementos em excesso jamais fariam." data-en="Resisting excess is a design decision. A calm palette and a lean structure make a simple place look more sophisticated than an overload of effects and elements ever would.">Resistir ao excesso é uma decisão de design. Uma paleta calma e uma estrutura enxuta fazem um lugar simples parecer mais sofisticado do que efeitos e elementos em excesso jamais fariam.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="case-cta">
+  <div class="cta-text">
+    <h2 data-pt="Quer ver a LP &lt;em&gt;ao vivo?&lt;/em&gt;" data-en="Want to see the LP &lt;em&gt;live?&lt;/em&gt;">Quer ver a LP <em>ao vivo?</em></h2>
+    <p data-pt="A página está publicada e navegável." data-en="The page is published and browsable.">A página está publicada e navegável.</p>
+  </div>
+  <div class="cta-actions">
+    <a href="https://cspestana.github.io/pousada-beira-verde/" target="_blank" class="btn-cta-primary" data-pt="Visitar a LP →" data-en="Visit the LP →">Visitar a LP →</a>
+    <a href="index.html" class="btn-cta-ghost" data-pt="Voltar ao portfólio" data-en="Back to portfolio">Voltar ao portfólio</a>
+  </div>
+</div>
+
+<footer>
+  <span>camilla<span style="color:var(--pink);font-style:italic;">.pestana</span></span>
+  <p data-pt="Case study · Landing Page · UI Design" data-en="Case study · Landing Page · UI Design">Case study · Landing Page · UI Design</p>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('[data-pt]').forEach(el => {
+      const text = el.getAttribute('data-' + lang);
+      if (text !== null) el.innerHTML = text;
+    });
+    document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('lang', lang);
+    document.documentElement.setAttribute('lang', lang === 'en' ? 'en' : 'pt-BR');
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    const saved = localStorage.getItem('lang') || 'pt';
+    if (saved === 'en') setLang('en');
+  });
+  window.addEventListener('load', function() {
+    const saved = localStorage.getItem('lang') || 'pt';
+    if (saved === 'en') setLang('en');
+  });
+</script>
+</body>
+</html>
