@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframe — Daniel Noffs LP</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #F2F2F2;
+    font-family: 'Arial', sans-serif;
+    padding: 32px;
+    color: #111;
+  }
+
+  /* HEADER DA PÁGINA */
+  .page-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 32px;
+  }
+  .page-title { font-size: 13px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #666; }
+  .page-legend { display: flex; gap: 20px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #888; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 2px; }
+
+  /* LAYOUT PRINCIPAL */
+  .wireframes-wrap {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 32px;
+    align-items: start;
+  }
+
+  /* LABEL DE VERSÃO */
+  .version-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase; color: #999; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .version-label::after { content: ''; flex: 1; height: 1px; background: #DDD; }
+
+  /* FRAME CONTAINER */
+  .frame {
+    background: white;
+    border: 1.5px solid #CCC;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* COMPONENTES DE WIREFRAME */
+  .wf-section {
+    border-bottom: 1px solid #E0E0E0;
+    padding: 0;
+    position: relative;
+  }
+
+  .wf-section:last-child { border-bottom: none; }
+
+  /* ANOTAÇÃO LATERAL */
+  .annotation {
+    position: absolute;
+    right: -140px; top: 50%;
+    transform: translateY(-50%);
+    width: 120px;
+    font-size: 10px; color: #888; line-height: 1.4;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .annotation::before {
+    content: '';
+    width: 20px; height: 1px; background: #CCC; flex-shrink: 0;
+  }
+
+  /* BLOCOS GENÉRICOS */
+  .wf-placeholder {
+    background: #E8E8E8;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: #999; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+
+  .wf-img-placeholder {
+    background: repeating-linear-gradient(
+      45deg, #E8E8E8, #E8E8E8 4px, #F0F0F0 4px, #F0F0F0 8px
+    );
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: #AAA; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+
+  .wf-text-line {
+    height: 10px; background: #E0E0E0; border-radius: 2px; margin-bottom: 8px;
+  }
+  .wf-text-line.short { width: 60%; }
+  .wf-text-line.medium { width: 80%; }
+  .wf-text-line.full { width: 100%; }
+  .wf-text-line.xshort { width: 40%; }
+
+  .wf-title-line {
+    height: 28px; background: #CACACA; border-radius: 2px; margin-bottom: 10px;
+  }
+  .wf-title-line.lg { height: 44px; }
+  .wf-title-line.sm { height: 18px; }
+
+  .wf-btn {
+    background: #333; color: white;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 10px 20px;
+    display: inline-block; margin-top: 4px;
+  }
+  .wf-btn.ghost {
+    background: none; border: 1.5px solid #555; color: #555;
+  }
+  .wf-btn.sm { padding: 7px 14px; font-size: 9px; }
+
+  .wf-badge {
+    display: inline-block; border: 1px solid #CCC;
+    padding: 4px 10px; font-size: 9px; color: #999;
+    letter-spacing: 0.1em; text-transform: uppercase; margin-right: 6px; margin-top: 6px;
+  }
+
+  .wf-tag {
+    display: inline-block; border: 1.5px solid #555;
+    padding: 3px 10px; font-size: 9px; color: #555;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .wf-label {
+    font-size: 9px; color: #999; letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 8px; font-weight: 700;
+  }
+
+  .wf-divider { height: 1px; background: #E0E0E0; margin: 12px 0; }
+
+  /* =================== DESKTOP =================== */
+
+  /* NAV */
+  .d-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 28px; border-bottom: 1px solid #E0E0E0; background: #F8F8F8;
+  }
+  .d-nav-logo { display: flex; flex-direction: column; gap: 3px; }
+  .d-nav-links { display: flex; gap: 16px; }
+  .d-nav-link { width: 48px; height: 8px; background: #DDD; border-radius: 2px; }
+  .d-nav-cta { width: 80px; height: 28px; background: #333; border-radius: 2px; }
+
+  /* HERO */
+  .d-hero {
+    position: relative; height: 420px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 32px 28px; overflow: hidden;
+  }
+  .d-hero-video {
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      -45deg, #D0D0D0, #D0D0D0 4px, #C4C4C4 4px, #C4C4C4 10px
+    );
+  }
+  .d-hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 60%, transparent 100%);
+  }
+  .d-hero-content { position: relative; z-index: 1; }
+  .d-hero-tag { display: inline-block; border: 1px solid rgba(255,255,255,0.5); padding: 4px 10px; font-size: 9px; color: white; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px; }
+  .d-hero-name-1 { font-size: 60px; font-weight: 900; color: white; line-height: 0.9; letter-spacing: -0.02em; }
+  .d-hero-name-2 { font-size: 60px; font-weight: 900; color: #DDD; line-height: 0.9; letter-spacing: -0.02em; display: block; }
+  .d-hero-sub { margin-top: 12px; }
+  .d-hero-badges { display: flex; gap: 6px; margin-top: 16px; flex-wrap: wrap; }
+  .d-hero-badge { border: 1px solid rgba(255,255,255,0.3); padding: 3px 8px; font-size: 8px; color: rgba(255,255,255,0.7); letter-spacing: 0.1em; text-transform: uppercase; }
+  .d-hero-scroll { position: absolute; bottom: 16px; right: 28px; font-size: 9px; color: rgba(255,255,255,0.5); writing-mode: vertical-rl; letter-spacing: 0.15em; text-transform: uppercase; }
+
+  /* STRIP */
+  .d-strip {
+    display: flex; gap: 0; border-bottom: 1px solid #E0E0E0; background: #F8F8F8;
+  }
+  .d-strip-item {
+    flex: 1; padding: 16px 20px; border-right: 1px solid #E0E0E0;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .d-strip-item:last-child { border-right: none; }
+  .d-strip-icon { width: 20px; height: 20px; background: #DDD; border-radius: 50%; flex-shrink: 0; }
+  .d-strip-text { display: flex; flex-direction: column; gap: 3px; }
+  .d-strip-line { height: 7px; background: #CCC; border-radius: 2px; }
+
+  /* BIO */
+  .d-bio {
+    display: grid; grid-template-columns: 240px 1fr;
+    gap: 0; min-height: 280px;
+  }
+  .d-bio-img { background: repeating-linear-gradient(45deg, #E0E0E0, #E0E0E0 4px, #E8E8E8 4px, #E8E8E8 10px); display: flex; align-items: center; justify-content: center; font-size: 9px; color: #BBB; letter-spacing: 0.1em; text-transform: uppercase; }
+  .d-bio-text { padding: 32px 28px; display: flex; flex-direction: column; gap: 10px; justify-content: center; }
+
+  /* STATS */
+  .d-stats {
+    display: flex; border-top: 1px solid #E0E0E0; margin-top: 16px; gap: 0;
+  }
+  .d-stat {
+    flex: 1; padding: 16px 20px; border-right: 1px solid #E0E0E0;
+    display: flex; flex-direction: column; gap: 4px;
+    align-items: center; text-align: center;
+  }
+  .d-stat:last-child { border-right: none; }
+  .d-stat-num { width: 48px; height: 24px; background: #CACACA; border-radius: 2px; }
+  .d-stat-label { width: 40px; height: 7px; background: #E0E0E0; border-radius: 2px; }
+
+  /* PLANOS */
+  .d-plans-tabs {
+    display: flex; border-bottom: 1px solid #E0E0E0; padding: 0 28px;
+  }
+  .d-tab { padding: 12px 20px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #999; border-bottom: 2px solid transparent; }
+  .d-tab.active { color: #333; border-bottom-color: #333; }
+
+  .d-plans-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px; background: #E0E0E0; margin: 24px 28px;
+  }
+  .d-plan-card { background: white; padding: 20px; }
+  .d-plan-card.featured { background: #F8F8F8; border: 1.5px solid #333; }
+  .d-plan-price { width: 60px; height: 32px; background: #CCC; border-radius: 2px; margin: 10px 0; }
+
+  /* CARROSSEL */
+  .d-carousel-wrap {
+    display: flex; align-items: center; gap: 12px; padding: 24px 28px;
+  }
+  .d-carousel-btn { width: 36px; height: 36px; border: 1px solid #CCC; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #CCC; flex-shrink: 0; }
+  .d-carousel-card { flex: 1; border: 1px solid #E0E0E0; padding: 24px; }
+  .d-stars { display: flex; gap: 3px; margin-bottom: 10px; }
+  .d-star { width: 10px; height: 10px; background: #CCC; border-radius: 50%; }
+  .d-carousel-dots { display: flex; gap: 6px; justify-content: center; margin-top: 12px; padding-bottom: 4px; }
+  .d-dot { width: 6px; height: 6px; background: #CCC; border-radius: 50%; }
+  .d-dot.active { width: 18px; border-radius: 3px; background: #888; }
+
+  /* CTA */
+  .d-cta {
+    padding: 48px 28px; text-align: center;
+    background: #F8F8F8; display: flex; flex-direction: column; align-items: center; gap: 12px;
+  }
+
+  /* FOOTER */
+  .d-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 28px; border-top: 1px solid #E0E0E0; background: #F0F0F0;
+  }
+  .d-footer-line { height: 8px; background: #DDD; border-radius: 2px; }
+
+  /* WPP FLUTUANTE */
+  .d-wpp {
+    position: absolute; bottom: 20px; right: 20px; z-index: 10;
+  }
+  .d-wpp-btn {
+    width: 44px; height: 44px; border-radius: 50%; background: #555;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .d-wpp-icon { width: 22px; height: 22px; background: white; border-radius: 50%; }
+
+  /* =================== MOBILE =================== */
+
+  .m-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 16px; border-bottom: 1px solid #E0E0E0; background: #F8F8F8;
+  }
+  .m-hamburger { display: flex; flex-direction: column; gap: 4px; }
+  .m-hamburger span { width: 18px; height: 2px; background: #555; }
+
+  .m-hero {
+    position: relative; height: 280px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 16px; overflow: hidden;
+  }
+  .m-hero-video {
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(-45deg, #D0D0D0, #D0D0D0 4px, #C4C4C4 4px, #C4C4C4 10px);
+  }
+  .m-hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 70%, transparent 100%);
+  }
+  .m-hero-content { position: relative; z-index: 1; }
+  .m-hero-tag { display: inline-block; border: 1px solid rgba(255,255,255,0.4); padding: 3px 8px; font-size: 8px; color: white; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px; }
+  .m-hero-name { font-size: 42px; font-weight: 900; color: white; line-height: 0.9; letter-spacing: -0.02em; }
+  .m-hero-name span { display: block; color: #DDD; }
+  .m-hero-sub { margin-top: 8px; }
+  .m-hero-sub .wf-text-line { background: rgba(255,255,255,0.3); height: 7px; }
+  .m-hero-badges { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 10px; }
+  .m-hero-badge { border: 1px solid rgba(255,255,255,0.3); padding: 2px 6px; font-size: 7px; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  .m-strip { border-bottom: 1px solid #E0E0E0; }
+  .m-strip-item { padding: 12px 16px; border-bottom: 1px solid #E0E0E0; display: flex; align-items: center; gap: 8px; }
+  .m-strip-item:last-child { border-bottom: none; }
+  .m-strip-icon { width: 16px; height: 16px; background: #DDD; border-radius: 50%; flex-shrink: 0; }
+
+  .m-bio-img { height: 180px; background: repeating-linear-gradient(45deg, #E0E0E0, #E0E0E0 4px, #E8E8E8 4px, #E8E8E8 10px); display: flex; align-items: center; justify-content: center; font-size: 8px; color: #BBB; letter-spacing: 0.1em; text-transform: uppercase; }
+  .m-bio-text { padding: 20px 16px; display: flex; flex-direction: column; gap: 8px; }
+
+  .m-stats { display: flex; border-top: 1px solid #E0E0E0; border-bottom: 1px solid #E0E0E0; }
+  .m-stat { flex: 1; padding: 12px 8px; text-align: center; border-right: 1px solid #E0E0E0; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .m-stat:last-child { border-right: none; }
+  .m-stat-num { width: 36px; height: 18px; background: #CACACA; border-radius: 2px; }
+  .m-stat-label { width: 30px; height: 6px; background: #E0E0E0; border-radius: 2px; }
+
+  .m-tabs { display: flex; overflow-x: auto; border-bottom: 1px solid #E0E0E0; padding: 0 16px; }
+  .m-tab { padding: 10px 14px; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: #999; border-bottom: 2px solid transparent; white-space: nowrap; }
+  .m-tab.active { color: #333; border-bottom-color: #333; }
+
+  .m-plan-card { margin: 16px; border: 1px solid #E0E0E0; padding: 16px; }
+  .m-plan-card.featured { border-color: #333; border-width: 1.5px; }
+  .m-plan-price { width: 50px; height: 26px; background: #CCC; border-radius: 2px; margin: 8px 0; }
+
+  .m-carousel {
+    padding: 16px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .m-carousel-nav { display: flex; justify-content: space-between; align-items: center; }
+  .m-carousel-btn { width: 28px; height: 28px; border: 1px solid #CCC; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #CCC; }
+  .m-carousel-card { border: 1px solid #E0E0E0; padding: 16px; }
+  .m-dots { display: flex; gap: 5px; justify-content: center; }
+  .m-dot { width: 5px; height: 5px; background: #CCC; border-radius: 50%; }
+  .m-dot.active { width: 14px; border-radius: 2px; background: #888; }
+
+  .m-cta { padding: 32px 16px; text-align: center; background: #F8F8F8; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+
+  .m-footer { padding: 12px 16px; border-top: 1px solid #E0E0E0; background: #F0F0F0; display: flex; justify-content: space-between; }
+  .m-footer-line { height: 7px; background: #DDD; border-radius: 2px; }
+
+  .m-wpp { position: absolute; bottom: 16px; right: 16px; }
+  .m-wpp-btn { width: 38px; height: 38px; border-radius: 50%; background: #555; display: flex; align-items: center; justify-content: center; }
+  .m-wpp-icon { width: 18px; height: 18px; background: white; border-radius: 50%; }
+
+  /* SEÇÃO COM PADDING */
+  .wf-pad-lg { padding: 28px; }
+  .wf-pad-md { padding: 20px 16px; }
+  .wf-pad-sm { padding: 16px; }
+
+  /* ANOTAÇÕES DESKTOP */
+  .annotations-col {
+    position: absolute; right: -200px; top: 0;
+    display: flex; flex-direction: column;
+    gap: 0;
+  }
+
+  .section-note {
+    font-size: 10px; color: #888; line-height: 1.5;
+    padding: 8px 0; border-left: 2px solid #DDD; padding-left: 10px;
+  }
+
+  /* MAPA DE SEÇÕES */
+  .sections-map {
+    margin-top: 32px; padding: 20px 24px;
+    background: white; border: 1px solid #DDD;
+  }
+  .map-title { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #666; margin-bottom: 16px; }
+  .map-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; background: #E0E0E0; }
+  .map-item { background: white; padding: 12px; text-align: center; }
+  .map-num { font-size: 11px; font-weight: 700; color: #CCC; margin-bottom: 4px; }
+  .map-name { font-size: 10px; color: #666; letter-spacing: 0.05em; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="page-title">Wireframe — Daniel Noffs LP · Desktop & Mobile</div>
+  <div class="page-legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#E8E8E8; border: 1px solid #CCC;"></div> Bloco de conteúdo</div>
+    <div class="legend-item"><div class="legend-dot" style="background: repeating-linear-gradient(45deg,#E0E0E0,#E0E0E0 3px,#E8E8E8 3px,#E8E8E8 6px);"></div> Imagem / Vídeo</div>
+    <div class="legend-dot" style="background:#333; border-radius:2px; width:12px; height:12px;"></div><span style="font-size:11px; color:#888;">Botão / CTA</span>
+  </div>
+</div>
+
+<div class="wireframes-wrap">
+
+  <!-- DESKTOP -->
+  <div>
+    <div class="version-label">Desktop</div>
+    <div class="frame" style="position:relative;">
+
+      <!-- NAV -->
+      <div class="d-nav wf-section">
+        <div class="d-nav-logo">
+          <div class="wf-text-line" style="width:80px; height:14px; background:#CCC;"></div>
+          <div class="wf-text-line" style="width:50px; height:7px;"></div>
+        </div>
+        <div class="d-nav-links">
+          <div class="d-nav-link"></div>
+          <div class="d-nav-link"></div>
+          <div class="d-nav-link"></div>
+        </div>
+        <div class="d-nav-cta"></div>
+      </div>
+
+      <!-- HERO -->
+      <div class="wf-section" style="position:relative;">
+        <div class="d-hero">
+          <div class="d-hero-video"></div>
+          <div class="d-hero-overlay"></div>
+          <div class="d-hero-content">
+            <div class="d-hero-tag">Personal Trainer</div>
+            <div class="d-hero-name-1">DANIEL</div>
+            <div class="d-hero-name-2">NOFFS</div>
+            <div class="d-hero-sub">
+              <div class="wf-text-line medium" style="background:rgba(255,255,255,0.25); height:8px;"></div>
+              <div class="wf-text-line short" style="background:rgba(255,255,255,0.2); height:8px;"></div>
+            </div>
+            <div class="d-hero-badges">
+              <div class="d-hero-badge">Pós-Graduado</div>
+              <div class="d-hero-badge">Musculação</div>
+              <div class="d-hero-badge">+50 anos</div>
+              <div class="d-hero-badge">Emagrecimento</div>
+            </div>
+          </div>
+          <div class="d-hero-scroll">Scroll</div>
+        </div>
+        <div style="position:absolute; top:12px; right:-180px; font-size:10px; color:#888; line-height:1.6; border-left:2px solid #DDD; padding-left:10px; width:160px;">
+          🎬 Vídeo em loop<br>+ parallax no scroll<br>+ typewriter no nome
+        </div>
+      </div>
+
+      <!-- PROVA SOCIAL STRIP -->
+      <div class="wf-section" style="position:relative;">
+        <div class="d-strip">
+          <div class="d-strip-item">
+            <div class="d-strip-icon"></div>
+            <div class="d-strip-text">
+              <div class="d-strip-line" style="width:60px;"></div>
+              <div class="d-strip-line" style="width:40px; background:#E0E0E0; margin-top:3px;"></div>
+            </div>
+          </div>
+          <div class="d-strip-item">
+            <div class="d-strip-icon"></div>
+            <div class="d-strip-text">
+              <div class="d-strip-line" style="width:80px;"></div>
+              <div class="d-strip-line" style="width:50px; background:#E0E0E0; margin-top:3px;"></div>
+            </div>
+          </div>
+          <div class="d-strip-item">
+            <div class="d-strip-icon"></div>
+            <div class="d-strip-text">
+              <div class="d-strip-line" style="width:70px;"></div>
+              <div class="d-strip-line" style="width:45px; background:#E0E0E0; margin-top:3px;"></div>
+            </div>
+          </div>
+          <div class="d-strip-item">
+            <div class="d-strip-icon"></div>
+            <div class="d-strip-text">
+              <div class="d-strip-line" style="width:65px;"></div>
+              <div class="d-strip-line" style="width:42px; background:#E0E0E0; margin-top:3px;"></div>
+            </div>
+          </div>
+        </div>
+        <div style="position:absolute; top:50%; right:-180px; transform:translateY(-50%); font-size:10px; color:#888; line-height:1.6; border-left:2px solid #DDD; padding-left:10px; width:160px;">
+          4 selos de credencial<br>(anos, alunos, HTTPS, 48h)
+        </div>
+      </div>
+
+      <!-- BIO -->
+      <div class="wf-section" style="position:relative;">
+        <div class="d-bio">
+          <div class="d-bio-img">Foto Daniel</div>
+          <div class="d-bio-text">
+            <div class="wf-label">Quem é o Daniel</div>
+            <div class="wf-title-line" style="width:70%;"></div>
+            <div class="wf-text-line full"></div>
+            <div class="wf-text-line full"></div>
+            <div class="wf-text-line medium"></div>
+            <div class="wf-divider"></div>
+            <div class="wf-text-line full"></div>
+            <div class="wf-text-line short"></div>
+            <div class="d-stats">
+              <div class="d-stat"><div class="d-stat-num"></div><div class="d-stat-label"></div></div>
+              <div class="d-stat"><div class="d-stat-num"></div><div class="d-stat-label"></div></div>
+              <div class="d-stat"><div class="d-stat-num"></div><div class="d-stat-label"></div></div>
+            </div>
+          </div>
+        </div>
+        <div style="position:absolute; top:50%; right:-180px; transform:translateY(-50%); font-size:10px; color:#888; line-height:1.6; border-left:2px solid #DDD; padding-left:10px; width:160px;">
+          Foto + bio texto<br>Contadores animados<br>Reveal ao scrollar
+        </div>
+      </div>
+
+      <!-- PLANOS -->
+      <div class="wf-section wf-pad-lg" style="position:relative;">
+        <div class="wf-label">Investimento</div>
+        <div class="wf-title-line" style="width:40%;"></div>
+        <div class="d-plans-tabs" style="margin: 0 -28px 0;">
+          <div class="d-tab active">Produtos Digitais</div>
+          <div class="d-tab">Presencial</div>
+          <div class="d-tab">Online</div>
+        </div>
+        <div class="d-plans-grid">
+          <div class="d-plan-card">
+            <div class="wf-text-line xshort"></div>
+            <div class="d-plan-price"></div>
+            <div class="wf-text-line full"></div>
+            <div class="wf-text-line medium"></div>
+            <div style="margin-top:12px;"><div class="wf-btn ghost sm">Ver produto</div></div>
+          </div>
+          <div class="d-plan-card featured">
+            <div class="wf-text-line xshort"></div>
+            <div class="d-plan-price"></div>
+            <div class="wf-text-line full"></div>
+            <div class="wf-text-line medium"></div>
+            <div style="margin-top:12px;"><div class="wf-btn sm">Ver produto</div></div>
+          </div>
+          <div class="d-plan-card">
+            <div class="wf-text-line xshort"></div>
+            <div class="d-plan-price"></div>
+            <div class="wf-text-line full"></div>
+            <div class="wf-text-line medium"></div>
+            <div style="margin-top:12px;"><div class="wf-btn ghost sm">Ver produto</div></div>
+          </div>
+        </div>
+        <div style="position:absolute; top:50%; right:-180px; transform:translateY(-50%); font-size:10px; color:#888; line-height:1.6; border-left:2px solid #DDD; padding-left:10px; width:160px;">
+          3 abas de planos<br>Card em destaque<br>CTA para Kiwify
+        </div>
+      </div>
+
+      <!-- DEPOIMENTOS -->
+      <div class="wf-section" style="position:relative;">
+        <div class="wf-pad-lg" style="padding-bottom:0;">
+          <div class="wf-label">Resultados reais</div>
+          <div class="wf-title-line" style="width:50%;"></div>
+        </div>
+        <div class="d-carousel-wrap">
+          <div class="d-carousel-btn">‹</div>
+          <div class="d-carousel-card">
+            <div class="d-stars">
+              <div class="d-star"></div><div class="d-star"></div><div class="d-star"></div><div class="d-star"></div><div class="d-star"></div>
+            </div>
+            <div class="wf-text-line full"></div>
+            <div class="wf-text-line full"></div>
+            <div class="wf-text-line medium"></div>
+            <div class="wf-divider"></div>
+            <div class="wf-text-line xshort"></div>
+          </div>
+          <div class="d-carousel-btn">›</div>
+        </div>
+        <div class="d-carousel-dots">
+          <div class="d-dot active"></div>
+          <div class="d-dot"></div>
+          <div class="d-dot"></div>
+          <div class="d-dot"></div>
+        </div>
+        <div style="height:16px;"></div>
+        <div style="position:absolute; top:50%; right:-180px; transform:translateY(-50%); font-size:10px; color:#888; line-height:1.6; border-left:2px solid #DDD; padding-left:10px; width:160px;">
+          1 card centralizado<br>Setas laterais<br>Dots amarelos<br>Auto-avanço 4.5s
+        </div>
+      </div>
+
+      <!-- CTA FINAL -->
+      <div class="wf-section" style="position:relative;">
+        <div class="d-cta">
+          <div class="wf-label">Próximo passo</div>
+          <div class="wf-title-line" style="width:50%;"></div>
+          <div class="wf-text-line medium"></div>
+          <div style="display:flex; gap:12px; margin-top:8px;">
+            <div class="wf-btn">WhatsApp</div>
+            <div class="wf-btn ghost">Instagram</div>
+          </div>
+        </div>
+        <div style="position:absolute; top:50%; right:-180px; transform:translateY(-50%); font-size:10px; color:#888; line-height:1.6; border-left:2px solid #DDD; padding-left:10px; width:160px;">
+          CTA duplo<br>WhatsApp + Instagram<br>Fundo escuro gradiente
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="d-footer">
+        <div class="d-footer-line" style="width:120px;"></div>
+        <div class="d-footer-line" style="width:80px;"></div>
+      </div>
+
+      <!-- WPP FLUTUANTE -->
+      <div class="d-wpp">
+        <div class="d-wpp-btn"><div class="d-wpp-icon"></div></div>
+        <div style="font-size:8px; color:#999; text-align:center; margin-top:3px;">Chat</div>
+      </div>
+
+    </div><!-- fim frame desktop -->
+
+    <!-- MAPA DE SEÇÕES -->
+    <div class="sections-map">
+      <div class="map-title">Mapa de seções</div>
+      <div class="map-grid">
+        <div class="map-item"><div class="map-num">01</div><div class="map-name">Nav</div></div>
+        <div class="map-item"><div class="map-num">02</div><div class="map-name">Hero + Vídeo</div></div>
+        <div class="map-item"><div class="map-num">03</div><div class="map-name">Credenciais</div></div>
+        <div class="map-item"><div class="map-num">04</div><div class="map-name">Bio + Stats</div></div>
+        <div class="map-item"><div class="map-num">05</div><div class="map-name">Planos</div></div>
+        <div class="map-item"><div class="map-num">06</div><div class="map-name">Depoimentos</div></div>
+        <div class="map-item"><div class="map-num">07</div><div class="map-name">CTA Final</div></div>
+        <div class="map-item"><div class="map-num">08</div><div class="map-name">Footer</div></div>
+        <div class="map-item"><div class="map-num">★</div><div class="map-name">Chat WPP</div></div>
+        <div class="map-item"><div class="map-num">★</div><div class="map-name">Scroll Reveal</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOBILE -->
+  <div>
+    <div class="version-label">Mobile</div>
+    <div class="frame" style="position:relative; width:360px;">
+
+      <!-- NAV MOBILE -->
+      <div class="m-nav wf-section">
+        <div class="wf-text-line" style="width:60px; height:12px; background:#CCC;"></div>
+        <div class="m-hamburger">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <!-- HERO MOBILE -->
+      <div class="wf-section" style="position:relative;">
+        <div class="m-hero">
+          <div class="m-hero-video"></div>
+          <div class="m-hero-overlay"></div>
+          <div class="m-hero-content">
+            <div class="m-hero-tag">Personal Trainer</div>
+            <div class="m-hero-name">DANIEL<span>NOFFS</span></div>
+            <div class="m-hero-sub">
+              <div class="wf-text-line medium" style="background:rgba(255,255,255,0.25); height:7px;"></div>
+              <div class="wf-text-line short" style="background:rgba(255,255,255,0.2); height:7px;"></div>
+            </div>
+            <div class="m-hero-badges">
+              <div class="m-hero-badge">Pós-Graduado</div>
+              <div class="m-hero-badge">+50 anos</div>
+              <div class="m-hero-badge">Musculação</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STRIP MOBILE -->
+      <div class="wf-section m-strip">
+        <div class="m-strip-item">
+          <div class="m-strip-icon"></div>
+          <div style="flex:1;"><div class="wf-text-line" style="width:80%;"></div></div>
+        </div>
+        <div class="m-strip-item">
+          <div class="m-strip-icon"></div>
+          <div style="flex:1;"><div class="wf-text-line" style="width:70%;"></div></div>
+        </div>
+      </div>
+
+      <!-- BIO MOBILE -->
+      <div class="wf-section">
+        <div class="m-bio-img">Foto Daniel</div>
+        <div class="m-bio-text">
+          <div class="wf-label">Quem é o Daniel</div>
+          <div class="wf-title-line sm" style="width:80%;"></div>
+          <div class="wf-text-line full"></div>
+          <div class="wf-text-line full"></div>
+          <div class="wf-text-line medium"></div>
+          <div class="m-stats">
+            <div class="m-stat"><div class="m-stat-num"></div><div class="m-stat-label"></div></div>
+            <div class="m-stat"><div class="m-stat-num"></div><div class="m-stat-label"></div></div>
+            <div class="m-stat"><div class="m-stat-num"></div><div class="m-stat-label"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PLANOS MOBILE -->
+      <div class="wf-section">
+        <div class="wf-pad-sm">
+          <div class="wf-label">Investimento</div>
+          <div class="wf-title-line sm" style="width:70%;"></div>
+        </div>
+        <div class="m-tabs">
+          <div class="m-tab active">Digital</div>
+          <div class="m-tab">Presencial</div>
+          <div class="m-tab">Online</div>
+        </div>
+        <div class="m-plan-card featured">
+          <div class="wf-text-line xshort"></div>
+          <div class="m-plan-price"></div>
+          <div class="wf-text-line full"></div>
+          <div class="wf-text-line medium"></div>
+          <div style="margin-top:10px;"><div class="wf-btn" style="width:100%; text-align:center; padding:10px;">Ver produto</div></div>
+        </div>
+      </div>
+
+      <!-- DEPOIMENTOS MOBILE -->
+      <div class="wf-section">
+        <div class="wf-pad-sm">
+          <div class="wf-label">Resultados reais</div>
+          <div class="wf-title-line sm" style="width:80%;"></div>
+        </div>
+        <div class="m-carousel">
+          <div class="m-carousel-card">
+            <div class="d-stars" style="margin-bottom:8px;">
+              <div class="d-star"></div><div class="d-star"></div><div class="d-star"></div><div class="d-star"></div><div class="d-star"></div>
+            </div>
+            <div class="wf-text-line full"></div>
+            <div class="wf-text-line full"></div>
+            <div class="wf-text-line medium"></div>
+            <div class="wf-divider"></div>
+            <div class="wf-text-line xshort"></div>
+          </div>
+          <div class="m-carousel-nav">
+            <div class="m-carousel-btn">‹</div>
+            <div class="m-dots">
+              <div class="m-dot active"></div>
+              <div class="m-dot"></div>
+              <div class="m-dot"></div>
+            </div>
+            <div class="m-carousel-btn">›</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA MOBILE -->
+      <div class="wf-section">
+        <div class="m-cta">
+          <div class="wf-label">Próximo passo</div>
+          <div class="wf-title-line sm" style="width:80%;"></div>
+          <div class="wf-text-line medium"></div>
+          <div class="wf-btn" style="width:100%; text-align:center;">WhatsApp</div>
+          <div class="wf-btn ghost" style="width:100%; text-align:center;">Instagram</div>
+        </div>
+      </div>
+
+      <!-- FOOTER MOBILE -->
+      <div class="m-footer">
+        <div class="m-footer-line" style="width:80px;"></div>
+        <div class="m-footer-line" style="width:60px;"></div>
+      </div>
+
+      <!-- WPP FLUTUANTE MOBILE -->
+      <div class="m-wpp">
+        <div class="m-wpp-btn"><div class="m-wpp-icon"></div></div>
+      </div>
+
+    </div><!-- fim frame mobile -->
+  </div>
+
+</div><!-- fim wireframes-wrap -->
+
+</body>
+</html>
