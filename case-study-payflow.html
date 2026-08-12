@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: PayFlow · Módulo de Pagamento de Professores | Camilla Pestana</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111110'/%3E%3Ctext x='32' y='40' font-family='Georgia, serif' font-size='26' font-weight='300' fill='%23E8547A' text-anchor='middle'%3ECP%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white: #FAFAF8;
+    --black: #111110;
+    --pink: #E8547A;
+    --pink-light: #FDF0F3;
+    --pink-mid: #F4C5D0;
+    --gray: #6B6B6B;
+    --gray-light: #F0EFED;
+    --gray-border: #E4E3E0;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { background: var(--white); color: var(--black); font-family: var(--sans); overflow-x: hidden; }
+  a { color: inherit; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 22px 6vw;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-border);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 19px; font-weight: 400; color: var(--black); text-decoration: none; }
+  .nav-logo span { color: var(--pink); font-style: italic; }
+  .nav-back {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gray); text-decoration: none; display: flex; align-items: center; gap: 8px;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--pink); }
+
+  .case-hero { padding: 140px 6vw 64px; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--gray-border); }
+
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--pink); margin-bottom: 28px;
+  }
+  .hero-eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--pink); }
+
+  .hero-title {
+    font-family: var(--serif); font-weight: 300;
+    font-size: clamp(40px, 6vw, 76px); line-height: 1.05; letter-spacing: -0.01em;
+    max-width: 880px;
+  }
+  .hero-title em { font-style: italic; color: var(--pink); }
+
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 40px; margin-top: 48px; }
+  .meta-item { display: flex; flex-direction: column; gap: 6px; }
+  .meta-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray); }
+  .meta-value { font-size: 15px; color: var(--black); font-weight: 500; }
+  .meta-value a { color: var(--pink); text-decoration: none; border-bottom: 1px solid var(--pink-mid); }
+  .meta-value a:hover { border-color: var(--pink); }
+
+  .confidential-note {
+    margin-top: 28px; max-width: 640px;
+    font-size: 13px; font-style: italic; color: var(--gray); line-height: 1.6;
+    border-left: 2px solid var(--pink-mid); padding-left: 16px;
+  }
+
+  .toc-wrap { padding: 56px 6vw; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--gray-border); }
+  .toc-label { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray); margin-bottom: 24px; }
+  .toc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--gray-border); }
+  @media (max-width: 900px) { .toc-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .toc-grid { grid-template-columns: 1fr; } }
+
+  .toc-item {
+    padding: 16px 18px; text-decoration: none; color: var(--black);
+    border-right: 1px solid var(--gray-border); border-bottom: 1px solid var(--gray-border);
+    display: flex; align-items: center; gap: 10px;
+    transition: background 0.2s; font-size: 13px;
+  }
+  .toc-item:hover { background: var(--pink-light); }
+  .toc-item .toc-num { font-family: var(--mono); font-size: 11px; color: var(--pink); }
+
+  .case-section { padding: 90px 6vw; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--gray-border); }
+
+  .section-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+  .section-num { font-family: var(--mono); font-size: 13px; color: var(--pink); letter-spacing: 0.05em; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); }
+
+  .section-title {
+    font-family: var(--serif); font-weight: 300;
+    font-size: clamp(32px, 4vw, 48px); line-height: 1.1; letter-spacing: -0.01em;
+    margin-bottom: 36px; max-width: 700px;
+  }
+  .section-title em { font-style: italic; color: var(--pink); }
+
+  .section-body { max-width: 700px; }
+  .section-body p { font-size: 16px; line-height: 1.85; color: #4A4A48; margin-bottom: 20px; }
+  .section-body p strong { color: var(--black); font-weight: 600; }
+
+  .pull-quote {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(22px, 3vw, 30px); line-height: 1.4; color: var(--black);
+    border-left: 3px solid var(--pink); padding-left: 28px; margin: 36px 0; max-width: 640px;
+  }
+
+  .insight-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: var(--gray-border); margin-top: 32px; }
+  @media (max-width: 700px) { .insight-grid { grid-template-columns: 1fr; } }
+
+  .insight-card { background: var(--white); padding: 28px 30px; }
+  .insight-card-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--pink); margin-bottom: 10px; }
+  .insight-card-text { font-size: 14px; line-height: 1.7; color: #4A4A48; }
+
+  .process-list { display: flex; flex-direction: column; margin-top: 32px; }
+  .process-item { display: grid; grid-template-columns: 110px 1fr; gap: 24px; padding: 24px 0; border-top: 1px solid var(--gray-border); }
+  .process-item:last-child { border-bottom: 1px solid var(--gray-border); }
+  .process-date { font-family: var(--mono); font-size: 12px; color: var(--pink); }
+  .process-text { font-size: 14px; line-height: 1.7; color: #4A4A48; }
+  .process-text strong { color: var(--black); }
+
+  .shot-frame { margin-top: 32px; }
+  .shot-frame img { width: 100%; display: block; border: 1px solid var(--gray-border); border-radius: 4px; }
+  .shot-gallery-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+  .shot-gallery-row .shot-frame { margin-top: 0; }
+  .shot-frame figcaption { margin-top: 10px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray); }
+
+  .case-cta { padding: 90px 6vw 110px; max-width: 1100px; margin: 0 auto; text-align: center; }
+  .case-cta .section-title { margin: 0 auto 24px; }
+  .cta-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+  .btn-cta-primary { background: var(--pink); color: white; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 16px 32px; text-decoration: none; transition: transform 0.15s; display: inline-block; }
+  .btn-cta-primary:hover { transform: translateY(-2px); }
+  .btn-cta-ghost { border: 1px solid var(--gray-border); color: var(--black); font-size: 13px; font-weight: 600; letter-spacing: 0.05em; padding: 16px 32px; text-decoration: none; transition: border-color 0.2s; display: inline-block; }
+  .btn-cta-ghost:hover { border-color: var(--pink); color: var(--pink); }
+
+  footer {
+    padding: 28px 6vw; border-top: 1px solid var(--gray-border);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    max-width: 1100px; margin: 0 auto;
+  }
+  footer p { font-size: 12px; color: var(--gray); }
+
+  .lang-toggle { display: flex; gap: 0; align-items: center; font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.1em; }
+  .lang-btn { background: none; border: none; padding: 5px 8px; cursor: pointer; color: var(--gray); font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.1em; transition: color 0.2s; }
+  .lang-btn.active { color: var(--pink); }
+  .lang-divider { color: var(--gray-border); font-size: 10px; }
+
+  /* Design system showcase */
+  .ds-showcase { background: #001a33; padding: 48px; margin-top: 40px; border-radius: 2px; }
+  .ds-row { margin-bottom: 36px; }
+  .ds-row:last-child { margin-bottom: 0; }
+  .ds-row-label { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px; }
+  .ds-swatches { display: flex; gap: 12px; flex-wrap: wrap; }
+  .ds-swatch { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+  .ds-swatch-color { width: 64px; height: 64px; border-radius: 2px; border: 1px solid rgba(255,255,255,0.08); }
+  .ds-swatch-name { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.45); }
+  .ds-type-sample { display: flex; flex-direction: column; gap: 22px; }
+  .ds-type-row { display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; }
+  .ds-type-row-tag { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.45); width: 56px; flex-shrink: 0; text-transform: uppercase; letter-spacing: 0.05em; }
+  .ds-type-h1 { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 40px; color: #fff; line-height: 1.05; }
+  .ds-type-h2 { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 28px; color: #fff; line-height: 1.1; }
+  .ds-type-body { font-family: 'Manrope', sans-serif; font-size: 16px; color: rgba(255,255,255,0.65); font-weight: 400; }
+  .ds-type-caption { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; }
+  .ds-type-meta { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 2px; }
+  .ds-components { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .ds-btn-primary { background: #006699; color: #fff; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; padding: 12px 22px; border: none; border-radius: 8px; }
+  .ds-btn-ghost { background: transparent; color: #00CCCC; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; padding: 12px 22px; border: 1px solid #00CCCC; border-radius: 8px; }
+  .ds-tag { background: rgba(0,204,204,0.15); color: #00CCCC; font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.04em; }
+  .ds-tag-warn { background: rgba(251,146,60,0.15); color: #fb923c; font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
+  .ds-tag-ok { background: rgba(34,197,94,0.15); color: #22c55e; font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
+
+  @media (max-width: 600px) {
+    .ds-showcase { padding: 28px; }
+    .case-hero, .toc-wrap, .case-section, .case-cta { padding-left: 24px; padding-right: 24px; }
+    .hero-meta { gap: 24px; }
+    .shot-gallery-row { grid-template-columns: 1fr; gap: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Camilla <span>Pestana</span></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-pt" onclick="setLang('pt')">PT</button>
+      <span class="lang-divider">|</span>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="index.html" class="nav-back" data-pt="← Voltar ao portfólio" data-en="← Back to portfolio">← Voltar ao portfólio</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="case-hero">
+  <div class="hero-eyebrow" data-pt="Case Study · Product Design" data-en="Case Study · Product Design">Case Study · Product Design</div>
+  <h1 class="hero-title" data-pt="Do discovery ao protótipo: &lt;em&gt;fechamento de folha sem planilha&lt;/em&gt;" data-en="From discovery to prototype: &lt;em&gt;payroll closing without spreadsheets&lt;/em&gt;">Do discovery ao protótipo: <em>fechamento de folha sem planilha</em></h1>
+
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-label" data-pt="Produto" data-en="Product">Produto</span>
+      <span class="meta-value">PayFlow</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label" data-pt="Módulo" data-en="Module">Módulo</span>
+      <span class="meta-value" data-pt="Pagamento de Professores" data-en="Teacher Payment">Pagamento de Professores</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label" data-pt="Papel" data-en="Role">Papel</span>
+      <span class="meta-value">Product Designer</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label" data-pt="Ferramentas" data-en="Tools">Ferramentas</span>
+      <span class="meta-value">Figma</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label" data-pt="Protótipo" data-en="Prototype">Protótipo</span>
+      <span class="meta-value"><a href="https://tcspestana.github.io/Fraktal/" target="_blank" data-pt="Navegar no protótipo ↗" data-en="Open prototype ↗">Navegar no protótipo ↗</a></span>
+    </div>
+  </div>
+
+  <p class="confidential-note" data-pt="Projeto fictício desenvolvido como desafio técnico de processo seletivo. Nomes de empresa e personas foram alterados para publicação." data-en="Fictional project developed as a technical challenge for a selection process. Company and persona names were changed for publication.">Projeto fictício desenvolvido como desafio técnico de processo seletivo. Nomes de empresa e personas foram alterados para publicação.</p>
+</section>
+
+<!-- TOC -->
+<div class="toc-wrap">
+  <div class="toc-label" data-pt="Neste case" data-en="In this case">Neste case</div>
+  <div class="toc-grid">
+    <a href="#contexto" class="toc-item"><span class="toc-num">01</span> <span data-pt="Contexto" data-en="Context">Contexto</span></a>
+    <a href="#problema" class="toc-item"><span class="toc-num">02</span> <span data-pt="O problema" data-en="The problem">O problema</span></a>
+    <a href="#processo" class="toc-item"><span class="toc-num">03</span> <span data-pt="Processo" data-en="Process">Processo</span></a>
+    <a href="#decisoes" class="toc-item"><span class="toc-num">04</span> <span data-pt="Decisões de design" data-en="Design decisions">Decisões de design</span></a>
+    <a href="#telas" class="toc-item"><span class="toc-num">05</span> <span data-pt="As telas" data-en="The screens">As telas</span></a>
+    <a href="#sistema" class="toc-item"><span class="toc-num">06</span> <span data-pt="Identidade visual" data-en="Visual identity">Identidade visual</span></a>
+    <a href="#reflexoes" class="toc-item"><span class="toc-num">07</span> <span data-pt="Reflexões" data-en="Reflections">Reflexões</span></a>
+  </div>
+</div>
+
+<!-- 01 CONTEXTO -->
+<section class="case-section" id="contexto">
+  <div class="section-eyebrow"><span class="section-num">01</span><span class="section-label" data-pt="Contexto" data-en="Context">Contexto</span></div>
+  <h2 class="section-title" data-pt="Um sistema de gestão, &lt;em&gt;uma rotina que não escala&lt;/em&gt;" data-en="A management system, &lt;em&gt;a routine that doesn't scale&lt;/em&gt;">Um sistema de gestão, <em>uma rotina que não escala</em></h2>
+  <div class="section-body">
+    <p data-pt="PayFlow é um sistema fictício de gestão para escolas de dança e centros culturais. O desafio foi projetar do zero um módulo crítico: o &lt;strong&gt;fechamento mensal da folha de pagamento de professores&lt;/strong&gt;. Uma rotina sensível, repetida todo mês, em que qualquer erro chega ao financeiro sem rastreamento." data-en="PayFlow is a fictional management system for dance schools and cultural centers. The challenge was to design from scratch a critical module: the &lt;strong&gt;monthly payroll closing for teachers&lt;/strong&gt;. A sensitive, recurring routine where any error reaches finance untracked.">PayFlow é um sistema fictício de gestão para escolas de dança e centros culturais. O desafio foi projetar do zero um módulo crítico: o <strong>fechamento mensal da folha de pagamento de professores</strong>. Uma rotina sensível, repetida todo mês, em que qualquer erro chega ao financeiro sem rastreamento.</p>
+    <p data-pt="O projeto começou com anotações brutas de entrevistas, exatamente como surgem em campo, e precisava chegar a uma interface de alta fidelidade navegável. Sem requisitos prontos. Sem fluxo pré-definido. A estrutura tinha que vir do material bruto." data-en="The project started with raw interview notes, exactly as they appear in the field, and needed to reach a navigable high-fidelity interface. No ready-made requirements. No pre-defined flow. The structure had to come from the raw material.">O projeto começou com anotações brutas de entrevistas, exatamente como surgem em campo, e precisava chegar a uma interface de alta fidelidade navegável. Sem requisitos prontos. Sem fluxo pré-definido. A estrutura tinha que vir do material bruto.</p>
+  </div>
+</section>
+
+<!-- 02 PROBLEMA -->
+<section class="case-section" id="problema">
+  <div class="section-eyebrow"><span class="section-num">02</span><span class="section-label" data-pt="O problema" data-en="The problem">O problema</span></div>
+  <h2 class="section-title" data-pt="Fernanda para tudo &lt;em&gt;para fechar a folha de 20 professores&lt;/em&gt;" data-en="Fernanda stops everything &lt;em&gt;to close payroll for 20 teachers&lt;/em&gt;">Fernanda para tudo <em>para fechar a folha de 20 professores</em></h2>
+  <div class="section-body">
+    <p data-pt="Fernanda, Analista Administrativa, é responsável pelo pagamento mensal de cerca de 20 professores. Ela realiza todo o processo em uma planilha com várias abas, copiando dados do sistema de agenda. O problema não é o volume: é que qualquer erro passa despercebido e chega ao financeiro sem explicação." data-en="Fernanda, an Administrative Analyst, is responsible for the monthly payment of around 20 teachers. She runs the entire process in a multi-tab spreadsheet, copying data from the scheduling system. The problem isn't the volume: any error goes unnoticed and reaches finance without explanation.">Fernanda, Analista Administrativa, é responsável pelo pagamento mensal de cerca de 20 professores. Ela realiza todo o processo em uma planilha com várias abas, copiando dados do sistema de agenda. O problema não é o volume: é que qualquer erro passa despercebido e chega ao financeiro sem explicação.</p>
+  </div>
+
+  <blockquote class="pull-quote" data-pt="&quot;Se a Paula cobriu a aula da Marina, o valor tem que ir pra Paula. Isso eu vejo na mão e às vezes escapa.&quot;" data-en="&quot;If Paula covered Marina's class, the amount has to go to Paula. I check that manually and sometimes it slips through.&quot;">"Se a Paula cobriu a aula da Marina, o valor tem que ir pra Paula. Isso eu vejo na mão e às vezes escapa."</blockquote>
+
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Dor 01 — Substituições" data-en="Pain 01 — Substitutions">Dor 01 — Substituições</div>
+      <div class="insight-card-text" data-pt="Redirecionamento de valor feito manualmente. Erros passam despercebidos e o pagamento vai ao professor errado." data-en="Value redirection done manually. Errors go unnoticed and payment goes to the wrong teacher.">Redirecionamento de valor feito manualmente. Erros passam despercebidos e o pagamento vai ao professor errado.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Dor 02 — Faltas" data-en="Pain 02 — Absences">Dor 02 — Faltas</div>
+      <div class="insight-card-text" data-pt="Faltas não bloqueiam o pagamento automaticamente. Se não registradas a tempo, o valor é pago mesmo assim." data-en="Absences don't automatically block payment. If not logged in time, the amount is paid regardless.">Faltas não bloqueiam o pagamento automaticamente. Se não registradas a tempo, o valor é pago mesmo assim.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Dor 03 — Bônus e descontos" data-en="Pain 03 — Bonuses and deductions">Dor 03 — Bônus e descontos</div>
+      <div class="insight-card-text" data-pt="Bônus são inseridos manualmente, sem rastreamento de quem lançou ou quando. Descontos pré-cadastrados precisam ser lembrados caso a caso." data-en="Bonuses are entered manually with no tracking of who added them or when. Pre-registered deductions need to be remembered case by case.">Bônus são inseridos manualmente, sem rastreamento de quem lançou ou quando. Descontos pré-cadastrados precisam ser lembrados caso a caso.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Dor 04 — Financeiro sem breakdown" data-en="Pain 04 — Finance without breakdown">Dor 04 — Financeiro sem breakdown</div>
+      <div class="insight-card-text" data-pt="O relatório chega ao financeiro sem explicação dos valores. &quot;Precisamos entender por que o professor X ganhou diferente naquele mês.&quot;" data-en="The report reaches finance without explanation of the values. &quot;We need to understand why teacher X earned differently that month.&quot;">O relatório chega ao financeiro sem explicação dos valores. "Precisamos entender por que o professor X ganhou diferente naquele mês."</div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 PROCESSO -->
+<section class="case-section" id="processo">
+  <div class="section-eyebrow"><span class="section-num">03</span><span class="section-label" data-pt="Processo" data-en="Process">Processo</span></div>
+  <h2 class="section-title" data-pt="Das anotações brutas &lt;em&gt;ao fluxo de 7 telas&lt;/em&gt;" data-en="From raw notes &lt;em&gt;to a 7-screen flow&lt;/em&gt;">Das anotações brutas <em>ao fluxo de 7 telas</em></h2>
+  <div class="section-body">
+    <p data-pt="O ponto de partida era material de pesquisa bruto: falas diretas de Fernanda e do time financeiro, sem requisitos prontos. A estrutura do produto nasceu da interpretação dessas dores." data-en="The starting point was raw research material: direct quotes from Fernanda and the finance team, with no pre-defined requirements. The product structure was born from interpreting those pains.">O ponto de partida era material de pesquisa bruto: falas diretas de Fernanda e do time financeiro, sem requisitos prontos. A estrutura do produto nasceu da interpretação dessas dores.</p>
+  </div>
+
+  <div class="process-list">
+    <div class="process-item">
+      <span class="process-date" data-pt="Discovery" data-en="Discovery">Discovery</span>
+      <span class="process-text" data-pt="&lt;strong&gt;Leitura do material bruto:&lt;/strong&gt; identificação das dores centrais, separação do que é necessidade real do que é sintoma do processo atual." data-en="&lt;strong&gt;Reading the raw material:&lt;/strong&gt; identifying the core pains, separating genuine needs from symptoms of the current process."><strong>Leitura do material bruto:</strong> identificação das dores centrais, separação do que é necessidade real do que é sintoma do processo atual.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Síntese" data-en="Synthesis">Síntese</span>
+      <span class="process-text" data-pt="&lt;strong&gt;Documentação estruturada:&lt;/strong&gt; síntese do problema, mapeamento das modalidades de aula e regras de cálculo, definição do que o produto precisa resolver." data-en="&lt;strong&gt;Structured documentation:&lt;/strong&gt; problem synthesis, mapping of class modalities and calculation rules, definition of what the product needs to solve."><strong>Documentação estruturada:</strong> síntese do problema, mapeamento das modalidades de aula e regras de cálculo, definição do que o produto precisa resolver.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Arquitetura" data-en="Architecture">Arquitetura</span>
+      <span class="process-text" data-pt="&lt;strong&gt;5 telas definidas com fluxo:&lt;/strong&gt; para cada tela, funcionalidades, regras de negócio e critérios de aceite. Priorização MVP vs. futuro com justificativa." data-en="&lt;strong&gt;5 screens defined with flow:&lt;/strong&gt; for each screen, features, business rules and acceptance criteria. MVP vs. future prioritisation with rationale."><strong>5 telas definidas com fluxo:</strong> para cada tela, funcionalidades, regras de negócio e critérios de aceite. Priorização MVP vs. futuro com justificativa.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Interface" data-en="Interface">Interface</span>
+      <span class="process-text" data-pt="&lt;strong&gt;Alta fidelidade:&lt;/strong&gt; 7 telas construídas a partir da arquitetura, aplicando a identidade visual do sistema, incluindo estado vazio e confirmação de envio, além das 5 telas do fluxo principal." data-en="&lt;strong&gt;High fidelity:&lt;/strong&gt; 7 screens built from the architecture, applying the system's visual identity, including empty state and send confirmation, in addition to the 5 main flow screens."><strong>Alta fidelidade:</strong> 7 telas construídas a partir da arquitetura, aplicando a identidade visual do sistema, incluindo estado vazio e confirmação de envio, além das 5 telas do fluxo principal.</span>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Protótipo" data-en="Prototype">Protótipo</span>
+      <span class="process-text" data-pt="&lt;strong&gt;Fluxo navegável publicado:&lt;/strong&gt; protótipo em HTML/CSS/JS para simular a experiência real do fechamento mensal, acessível via link." data-en="&lt;strong&gt;Published navigable flow:&lt;/strong&gt; HTML/CSS/JS prototype to simulate the real monthly closing experience, accessible via link."><strong>Fluxo navegável publicado:</strong> protótipo em HTML/CSS/JS para simular a experiência real do fechamento mensal, acessível via link.</span>
+    </div>
+  </div>
+</section>
+
+<!-- 04 DECISÕES -->
+<section class="case-section" id="decisoes">
+  <div class="section-eyebrow"><span class="section-num">04</span><span class="section-label" data-pt="Decisões de design" data-en="Design decisions">Decisões de design</span></div>
+  <h2 class="section-title" data-pt="As escolhas que &lt;em&gt;definem o produto&lt;/em&gt;" data-en="The choices that &lt;em&gt;define the product&lt;/em&gt;">As escolhas que <em>definem o produto</em></h2>
+  <div class="section-body">
+    <p data-pt="Quatro decisões foram centrais, cada uma com um raciocínio claro:" data-en="Four decisions were central, each with clear reasoning:">Quatro decisões foram centrais, cada uma com um raciocínio claro:</p>
+  </div>
+
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Decisão 01" data-en="Decision 01">Decisão 01</div>
+      <div class="insight-card-text" data-pt="&lt;strong&gt;Estado "Pronto" por professor, não envio direto.&lt;/strong&gt; Em vez de um botão global de envio, cada professor precisa ter seu status marcado como Pronto antes do envio geral. Isso força a revisão caso a caso, sem depender da atenção da Fernanda para não esquecer ninguém." data-en="&lt;strong&gt;"Ready" status per teacher, not direct send.&lt;/strong&gt; Instead of a global send button, each teacher's status needs to be marked Ready before the general send. This forces case-by-case review, without relying on Fernanda's attention to not forget anyone."><strong>Estado "Pronto" por professor, não envio direto.</strong> Em vez de um botão global de envio, cada professor precisa ter seu status marcado como Pronto antes do envio geral. Isso força a revisão caso a caso, sem depender da atenção da Fernanda.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Decisão 02" data-en="Decision 02">Decisão 02</div>
+      <div class="insight-card-text" data-pt="&lt;strong&gt;Alerta de falta não coberta com CTA inline.&lt;/strong&gt; Quando há falta sem substituto registrado, um banner de alerta aparece no detalhe do professor com um botão direto para revisar substituições, sem navegação extra. O erro vai direto ao ponto de correção." data-en="&lt;strong&gt;Uncovered absence alert with inline CTA.&lt;/strong&gt; When there's an absence without a registered substitute, an alert banner appears in the teacher's detail with a direct button to review substitutions, no extra navigation. The error goes straight to the fix point."><strong>Alerta de falta não coberta com CTA inline.</strong> Quando há falta sem substituto registrado, um banner aparece no detalhe do professor com botão direto para revisão, sem navegação extra. O erro vai direto ao ponto de correção.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Decisão 03" data-en="Decision 03">Decisão 03</div>
+      <div class="insight-card-text" data-pt="&lt;strong&gt;Descontos em modo leitura, separados dos bônus.&lt;/strong&gt; Descontos são pré-cadastrados no perfil do professor e não podem ser editados no fechamento, evitando que uma edição equivocada apague um desconto configurado. Os bônus, por serem lançados manualmente, são editáveis." data-en="&lt;strong&gt;Deductions in read-only mode, separate from bonuses.&lt;/strong&gt; Deductions are pre-registered in the teacher's profile and cannot be edited during closing, preventing a mistaken edit from erasing a configured deduction. Bonuses, being manually entered, are editable."><strong>Descontos em modo leitura, separados dos bônus.</strong> Descontos são pré-cadastrados e não editáveis no fechamento, evitando que uma edição apague algo configurado. Bônus, lançados manualmente, são editáveis.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Decisão 04" data-en="Decision 04">Decisão 04</div>
+      <div class="insight-card-text" data-pt="&lt;strong&gt;Card de resumo financeiro no topo do detalhe.&lt;/strong&gt; A primeira coisa que Fernanda vê ao abrir o perfil de um professor é o total calculado, com o breakdown (subtotal de aulas + bônus − descontos). Resolve a dor do financeiro sem precisar de uma tela separada." data-en="&lt;strong&gt;Financial summary card at the top of the detail.&lt;/strong&gt; The first thing Fernanda sees when opening a teacher's profile is the calculated total, with the breakdown (class subtotal + bonuses − deductions). Solves finance's pain without needing a separate screen."><strong>Card de resumo financeiro no topo do detalhe.</strong> A primeira coisa que Fernanda vê ao abrir o perfil é o total calculado com o breakdown completo. Resolve a dor do financeiro sem tela separada.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 TELAS -->
+<section class="case-section" id="telas">
+  <div class="section-eyebrow"><span class="section-num">05</span><span class="section-label" data-pt="As telas" data-en="The screens">As telas</span></div>
+  <h2 class="section-title" data-pt="7 telas, &lt;em&gt;um fluxo fechado&lt;/em&gt;" data-en="7 screens, &lt;em&gt;one closed flow&lt;/em&gt;">7 telas, <em>um fluxo fechado</em></h2>
+  <div class="section-body">
+    <p data-pt="Do estado vazio do primeiro mês à confirmação de envio ao financeiro, o fluxo cobre todos os estados da rotina de Fernanda." data-en="From the empty state of the first month to the confirmation of sending to finance, the flow covers every state in Fernanda's routine.">Do estado vazio do primeiro mês à confirmação de envio ao financeiro, o fluxo cobre todos os estados da rotina de Fernanda.</p>
+  </div>
+
+  <!-- tela1 — Estado Vazio -->
+  <figure class="shot-frame">
+    <img src="images/telas_payflow/tela1.png" alt="Estado vazio — novo mês sem dados importados">
+    <figcaption data-pt="00 — Estado vazio · novo mês sem dados importados" data-en="00 — Empty state · new month with no data">00 — Estado vazio · novo mês sem dados importados</figcaption>
+  </figure>
+
+  <!-- tela2 — Fechamento Mensal -->
+  <figure class="shot-frame" style="margin-top:48px;">
+    <img src="images/telas_payflow/tela2.png" alt="Fechamento Mensal — lista de professores com status Pronto, Pendente e Revisão">
+    <figcaption data-pt="01 — Fechamento Mensal · lista de professores com status e filtros" data-en="01 — Monthly Closing · teacher list with status and filters">01 — Fechamento Mensal · lista de professores com status e filtros</figcaption>
+  </figure>
+
+  <!-- tela3 -->
+  <figure class="shot-frame" style="margin-top:48px;">
+    <img src="images/telas_payflow/tela3.png" alt="Detalhe do professor com card de resumo financeiro e lista de aulas">
+    <figcaption data-pt="02 — Detalhe do Professor · resumo financeiro e aulas do mês" data-en="02 — Teacher Detail · financial summary and monthly classes">02 — Detalhe do Professor · resumo financeiro e aulas do mês</figcaption>
+  </figure>
+
+  <!-- tela4 -->
+  <figure class="shot-frame" style="margin-top:48px;">
+    <img src="images/telas_payflow/tela4.png" alt="Revisão de Substituições — titular e substituto, valor a redirecionar">
+    <figcaption data-pt="03 — Revisão de Substituições · titular → substituto" data-en="03 — Substitution Review · regular teacher → substitute">03 — Revisão de Substituições · titular → substituto</figcaption>
+  </figure>
+
+  <!-- tela5 -->
+  <figure class="shot-frame" style="margin-top:48px;">
+    <img src="images/telas_payflow/tela5.png" alt="Bônus editáveis e descontos pré-cadastrados em modo leitura">
+    <figcaption data-pt="04 — Bônus e Descontos · editável vs. somente leitura" data-en="04 — Bonuses & Deductions · editable vs. read-only">04 — Bônus e Descontos · editável vs. somente leitura</figcaption>
+  </figure>
+
+  <!-- tela6 -->
+  <figure class="shot-frame" style="margin-top:48px;">
+    <img src="images/telas_payflow/tela6.png" alt="Relatório de Pagamento com breakdown por professor">
+    <figcaption data-pt="05 — Relatório de Pagamento · breakdown por professor" data-en="05 — Payment Report · breakdown per teacher for finance">05 — Relatório de Pagamento · breakdown por professor</figcaption>
+  </figure>
+
+  <!-- tela7 — Confirmação -->
+  <figure class="shot-frame" style="margin-top:48px;">
+    <img src="images/telas_payflow/tela7.png" alt="Confirmação de envio com total enviado, professores e data">
+    <figcaption data-pt="06 — Confirmação de Envio · folha enviada com sucesso ao financeiro" data-en="06 — Send Confirmation · payroll successfully sent to finance">06 — Confirmação de Envio · folha enviada com sucesso</figcaption>
+  </figure>
+</section>
+
+<!-- 06 IDENTIDADE -->
+<section class="case-section" id="sistema">
+  <div class="section-eyebrow"><span class="section-num">06</span><span class="section-label" data-pt="Identidade visual" data-en="Visual identity">Identidade visual</span></div>
+  <h2 class="section-title" data-pt="Sistema aplicado: &lt;em&gt;Manrope, azul e ciano&lt;/em&gt;" data-en="Applied system: &lt;em&gt;Manrope, blue and cyan&lt;/em&gt;">Sistema aplicado: <em>Manrope, azul e ciano</em></h2>
+  <div class="section-body">
+    <p data-pt="A identidade do PayFlow usa Manrope em ExtraBold para hierarquia forte e azul #006699 como cor primária. O ciano #00CCCC é reservado para tags de status e elementos de destaque, separando o que é navegação do que é informação de estado." data-en="PayFlow's identity uses Manrope ExtraBold for strong hierarchy and blue #006699 as the primary colour. Cyan #00CCCC is reserved for status tags and highlight elements, separating navigation from state information.">A identidade do PayFlow usa Manrope em ExtraBold para hierarquia forte e azul #006699 como cor primária. O ciano #00CCCC é reservado para tags de status e elementos de destaque, separando o que é navegação do que é informação de estado.</p>
+  </div>
+
+  <div class="ds-showcase">
+    <div style="font-family:var(--mono);font-size:13px;color:#00CCCC;margin-bottom:32px;letter-spacing:0.12em;">Design System · PayFlow</div>
+    <div class="ds-row">
+      <div class="ds-row-label" data-pt="Paleta de cores" data-en="Color palette">Paleta de cores</div>
+      <div class="ds-swatches">
+        <div class="ds-swatch"><div class="ds-swatch-color" style="background:#006699;"></div><span class="ds-swatch-name">#006699</span></div>
+        <div class="ds-swatch"><div class="ds-swatch-color" style="background:#00CCCC;"></div><span class="ds-swatch-name">#00CCCC</span></div>
+        <div class="ds-swatch"><div class="ds-swatch-color" style="background:#626871;"></div><span class="ds-swatch-name">#626871</span></div>
+        <div class="ds-swatch"><div class="ds-swatch-color" style="background:#F4F7F9;"></div><span class="ds-swatch-name">#F4F7F9</span></div>
+        <div class="ds-swatch"><div class="ds-swatch-color" style="background:#1A1F26;"></div><span class="ds-swatch-name">#1A1F26</span></div>
+      </div>
+    </div>
+    <div class="ds-row">
+      <div class="ds-row-label" data-pt="Tipografia · Manrope" data-en="Typography · Manrope">Tipografia · Manrope</div>
+      <div class="ds-type-sample">
+        <div class="ds-type-row"><span class="ds-type-row-tag">H1</span><div><span class="ds-type-h1">Fechamento Mensal</span><div class="ds-type-meta">Manrope 800 · 32px</div></div></div>
+        <div class="ds-type-row"><span class="ds-type-row-tag">H2</span><div><span class="ds-type-h2">Detalhe do Professor</span><div class="ds-type-meta">Manrope 700 · 22px</div></div></div>
+        <div class="ds-type-row"><span class="ds-type-row-tag">Body</span><div><span class="ds-type-body" data-pt="Gerencie e envie a folha de pagamento." data-en="Manage and send the payroll.">Gerencie e envie a folha de pagamento.</span><div class="ds-type-meta">Manrope 400 · 16px</div></div></div>
+        <div class="ds-type-row"><span class="ds-type-row-tag">Caption</span><div><span class="ds-type-caption">AULAS NO MÊS · STATUS</span><div class="ds-type-meta">Manrope 700 · 11px · uppercase</div></div></div>
+      </div>
+    </div>
+    <div class="ds-row">
+      <div class="ds-row-label" data-pt="Componentes base" data-en="Base components">Componentes base</div>
+      <div class="ds-components">
+        <button class="ds-btn-primary" data-pt="Enviar ao financeiro" data-en="Send to finance">Enviar ao financeiro</button>
+        <button class="ds-btn-ghost" data-pt="+ Adicionar bônus" data-en="+ Add bonus">+ Adicionar bônus</button>
+        <span class="ds-tag" data-pt="Revisão" data-en="Review">Revisão</span>
+        <span class="ds-tag-warn" data-pt="Pendente" data-en="Pending">Pendente</span>
+        <span class="ds-tag-ok" data-pt="Pronto" data-en="Ready">Pronto</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 REFLEXÕES -->
+<section class="case-section" id="reflexoes">
+  <div class="section-eyebrow"><span class="section-num">07</span><span class="section-label" data-pt="Reflexões" data-en="Reflections">Reflexões</span></div>
+  <h2 class="section-title" data-pt="O que validaria &lt;em&gt;com mais tempo&lt;/em&gt;" data-en="What I would validate &lt;em&gt;with more time&lt;/em&gt;">O que validaria <em>com mais tempo</em></h2>
+  <div class="section-body">
+    <p data-pt="A decisão mais importante foi criar o estado &quot;Pronto&quot; por professor antes de liberar o envio geral. Isso força a revisão de cada caso, mas torna o fluxo mais longo quando há muitas pendências. Para compensar, trabalhei com ações em lote e alertas que levam direto ao problema." data-en="The most important decision was creating the "Ready" status per teacher before enabling the general send. This forces case-by-case review, but makes the flow longer when there are many pending items. To compensate, I worked with batch actions and alerts that lead directly to the problem.">A decisão mais importante foi criar o estado "Pronto" por professor antes de liberar o envio geral. Isso força a revisão de cada caso, mas torna o fluxo mais longo quando há muitas pendências. Para compensar, trabalhei com ações em lote e alertas que levam direto ao problema.</p>
+    <p data-pt="Também optei por deixar os descontos em modo leitura, separados dos bônus. Eles já vêm pré-cadastrados e editar ali seria um erro fácil de cometer no momento errado." data-en="I also chose to keep deductions in read-only mode, separate from bonuses. They come pre-registered and editing them at closing time would be an easy mistake to make.">Também optei por deixar os descontos em modo leitura, separados dos bônus. Eles já vêm pré-cadastrados e editar ali seria um erro fácil de cometer no momento errado.</p>
+    <p data-pt="Se tivesse mais tempo, conversaria com a Fernanda sobre dois pontos: &lt;strong&gt;com que frequência aparecem faltas sem substituto registrado&lt;/strong&gt;, porque isso muda bastante a prioridade do alerta de falta. E &lt;strong&gt;se ela prefere revisar professor por professor ou numa visão consolidada&lt;/strong&gt;, onde ela resolve vários de uma vez, o que faria mais sentido nos dias com muitas pendências." data-en="With more time, I'd ask Fernanda about two things: &lt;strong&gt;how often absences appear without a registered substitute&lt;/strong&gt;, because that significantly changes the priority of the absence alert. And &lt;strong&gt;whether she prefers reviewing teacher by teacher or in a consolidated view&lt;/strong&gt;, where she handles several at once, which might make more sense on heavy-pending days.">Se tivesse mais tempo, conversaria com a Fernanda sobre dois pontos: <strong>com que frequência aparecem faltas sem substituto registrado</strong>, porque isso muda a prioridade do alerta. E <strong>se ela prefere revisar professor por professor ou numa visão consolidada</strong>, o que faria mais sentido nos dias com muitas pendências.</p>
+  </div>
+
+  <div class="insight-grid" style="margin-top:32px;">
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Pró" data-en="Pro">Pró</div>
+      <div class="insight-card-text" data-pt="O fluxo torna as pendências impossíveis de ignorar. Fernanda chega no fim do mês com um processo claro, não com um acúmulo de decisões para resolver do zero." data-en="The flow makes pending items impossible to ignore. Fernanda reaches month-end with a clear process, not an accumulation of decisions to resolve from scratch.">O fluxo torna as pendências impossíveis de ignorar. Fernanda chega no fim do mês com um processo claro, não com um acúmulo de decisões para resolver do zero.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Contra" data-en="Con">Contra</div>
+      <div class="insight-card-text" data-pt="O fluxo fica mais longo quando há muitas pendências. Num mês turbulento, a revisão professor por professor pode ser cansativa sem ações em lote eficientes." data-en="The flow gets longer when there are many pending items. In a month with many substitutions or absences, reviewing teacher by teacher can be tedious without efficient batch actions.">O fluxo fica mais longo quando há muitas pendências. Num mês turbulento, a revisão professor por professor pode ser cansativa sem ações em lote eficientes.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="case-cta">
+  <div class="section-eyebrow" style="justify-content:center;"><span class="section-label" data-pt="Ver o projeto" data-en="See the project">Ver o projeto</span></div>
+  <h2 class="section-title" data-pt="Quer explorar &lt;em&gt;o fluxo completo?&lt;/em&gt;" data-en="Want to explore &lt;em&gt;the full flow?&lt;/em&gt;">Quer explorar <em>o fluxo completo?</em></h2>
+  <div class="cta-links">
+    <a href="https://tcspestana.github.io/Fraktal/" target="_blank" class="btn-cta-primary" data-pt="Abrir protótipo navegável →" data-en="Open navigable prototype →">Abrir protótipo navegável →</a>
+    <a href="index.html" class="btn-cta-ghost" data-pt="Voltar ao portfólio" data-en="Back to portfolio">Voltar ao portfólio</a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Camilla Pestana</p>
+  <p data-pt="Case study · Product Design" data-en="Case study · Product Design">Case study · Product Design</p>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('[data-pt]').forEach(el => {
+      const text = el.getAttribute('data-' + lang);
+      if (text !== null) el.innerHTML = text;
+    });
+    document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('lang', lang);
+    document.documentElement.setAttribute('lang', lang === 'en' ? 'en' : 'pt-BR');
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    const saved = localStorage.getItem('lang') || 'pt';
+    if (saved === 'en') setLang('en');
+  });
+</script>
+
+</body>
+</html>
