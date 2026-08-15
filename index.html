@@ -166,7 +166,7 @@
 
   .hero-title {
     font-family: var(--serif);
-    font-size: clamp(48px, 6vw, 88px);
+    font-size: clamp(38px, 5vw, 68px);
     font-weight: 300; line-height: 1.0; letter-spacing: -0.02em;
   }
   .hero-title em { font-style: italic; color: var(--pink); }
@@ -255,13 +255,23 @@
   .projects-label::before { content: ''; width: 20px; height: 1px; background: var(--gray); }
 
   .projects-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 2px; background: var(--gray-border);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  @media (max-width: 900px) {
+    .projects-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  }
+
+  @media (max-width: 560px) {
+    .projects-grid { grid-template-columns: 1fr; gap: 16px; }
   }
 
   .project-card {
     background: var(--white); overflow: hidden;
     transition: background 0.3s;
+    border: 1px solid var(--gray-border);
   }
   .project-card:hover { background: var(--pink-light); }
 
@@ -313,6 +323,14 @@
   }
   .project-link-secondary:hover { gap: 14px; color: var(--black); }
   .project-link-secondary::after { content: '→'; }
+
+  /* CONTAINER CENTRALIZADO */
+  .page-wrapper {
+    max-width: 1280px;
+    margin: 0 auto;
+    min-height: 100vh;
+    position: relative;
+  }
 
   /* BACK TO TOP */
   .back-to-top {
@@ -413,8 +431,8 @@
   /* CONTATO */
   #page-contato {
     background-image: url('images/contato-bkg.jpg');
-    background-size: 100%;
-    background-position: center;
+    background-size: cover;
+    background-position: center top;
     background-repeat: no-repeat;
     position: relative;
   }
@@ -424,6 +442,7 @@
     inset: 0;
     background: rgba(255, 255, 255, 0.70);
     pointer-events: none;
+    z-index: 0;
   }
   .contact-page { padding: 60px 6vw 80px; position: relative; z-index: 1; }
 
@@ -767,7 +786,7 @@
     <section class="biz-hero">
       <div class="biz-eyebrow" data-pt="Design + desenvolvimento" data-en="Design + development">Design + desenvolvimento</div>
       <h1 class="biz-hero-title" data-pt="Sites profissionais,&lt;br&gt;do design ao &lt;em&gt;código&lt;/em&gt;,&lt;br&gt;para o seu negócio." data-en="Professional websites,&lt;br&gt;from design to &lt;em&gt;code&lt;/em&gt;,&lt;br&gt;for your business.">Sites profissionais,<br>do design ao <em>código</em>,<br>para o seu negócio.</h1>
-      <p class="biz-hero-sub" data-pt="Projeto, identidade visual e desenvolvimento em um só lugar — com domínio próprio incluso e no ar em até 10 a 15 dias úteis, dependendo do pacote." data-en="Design, visual identity and development in one place — with your own domain included and live in 10 to 15 business days, depending on the package.">Projeto, identidade visual e desenvolvimento em um só lugar — com domínio próprio incluso e no ar em até 10 a 15 dias úteis, dependendo do pacote.</p>
+      <p class="biz-hero-sub" data-pt="Projeto, identidade visual e desenvolvimento em um só lugar, com domínio próprio incluso e no ar em até 10 a 15 dias úteis, dependendo do pacote." data-en="Design, visual identity and development in one place, with your own domain included and live in 10 to 15 business days, depending on the package.">Projeto, identidade visual e desenvolvimento em um só lugar, com domínio próprio incluso e no ar em até 10 a 15 dias úteis, dependendo do pacote.</p>
       <div class="biz-hero-actions">
         <button onclick="showPage('contato')" class="btn-primary" style="border:none;cursor:pointer;" data-pt="Pedir uma proposta →" data-en="Request a proposal →">Pedir uma proposta →</button>
         <button onclick="showPage('projetos')" class="btn-ghost-link" style="background:none;border:none;border-bottom:1px solid var(--black);cursor:pointer;font-family:var(--sans);" data-pt="Ver trabalhos realizados" data-en="See completed work">Ver trabalhos realizados</button>
@@ -856,30 +875,31 @@
         <div class="biz-pricing-extra-item"><span class="biz-e-label" data-pt="Manutenção mensal (2 ajustes/mês)" data-en="Monthly maintenance (2 updates/month)">Manutenção mensal (2 ajustes/mês)</span><span class="biz-e-price">R$ 79/mês</span></div>
         <div class="biz-pricing-extra-item"><span class="biz-e-label" data-pt="Renovação de domínio (2º ano)" data-en="Domain renewal (2nd year)">Renovação de domínio (2º ano)</span><span class="biz-e-price">R$ 60</span></div>
       </div>
-      <div class="biz-pricing-foot-note" data-pt="Emito nota fiscal — CNPJ ativo em serviços de design e desenvolvimento" data-en="Invoice issued — active CNPJ in design and development services">Emito nota fiscal — CNPJ ativo em serviços de design e desenvolvimento</div>
+      <div class="biz-pricing-foot-note" data-pt="Emito nota fiscal. CNPJ ativo em serviços de design e desenvolvimento" data-en="Invoice issued. Active CNPJ in design and development services">Emito nota fiscal. CNPJ ativo em serviços de design e desenvolvimento</div>
       <div class="biz-pricing-foot-note no-icon" style="margin-top:10px;" data-pt="*Prazo contado a partir do recebimento de todo o material (textos, fotos e logo)" data-en="*Timeline starts upon receipt of all materials (texts, photos and logo)">*Prazo contado a partir do recebimento de todo o material (textos, fotos e logo)</div>
     </section>
 
     <!-- 5. CTA FINAL -->
     <section class="biz-final-cta">
       <h2 data-pt="Seu negócio merece estar no Google." data-en="Your business deserves to be on Google.">Seu negócio merece estar no Google.</h2>
-      <p data-pt="Vamos colocar seu site no ar — com domínio próprio, design profissional e suporte para tirar dúvidas." data-en="Let's get your website live — with your own domain, professional design and support along the way.">Vamos colocar seu site no ar — com domínio próprio, design profissional e suporte para tirar dúvidas.</p>
+      <p data-pt="Vamos colocar seu site no ar, com domínio próprio, design profissional e suporte para tirar dúvidas." data-en="Let's get your website live, with your own domain, professional design and support along the way.">Vamos colocar seu site no ar, com domínio próprio, design profissional e suporte para tirar dúvidas.</p>
       <button onclick="showPage('contato')" class="btn-primary" style="background:var(--white);color:var(--black);border:none;cursor:pointer;" data-pt="Falar comigo →" data-en="Get in touch →">Falar comigo →</button>
     </section>
 
   </div>
 </div>
 
+<div class="page-wrapper">
 <!-- PAGE: PROJETOS -->
 <div class="page active" id="page-projetos">
 
   <div class="hero">
     <div class="hero-content">
       <div class="hero-tag" data-pt="Disponível para projetos" data-en="Available for projects">Disponível para projetos</div>
-      <h1 class="hero-title" data-pt="Design &lt;em&gt;intuitivo&lt;/em&gt;&lt;br&gt;e funcional" data-en="Intuitive &lt;em&gt;design&lt;/em&gt;&lt;br&gt;and functional">
-        Design <em>intuitivo</em><br>e funcional
+      <h1 class="hero-title" data-pt="Do problema,&lt;br&gt;&lt;em&gt;à interface&lt;/em&gt;" data-en="From problem,&lt;br&gt;&lt;em&gt;to interface&lt;/em&gt;">
+        Do problema,<br><em>à interface</em>
       </h1>
-      <p class="hero-sub" data-pt="Interfaces pensadas para oferecer praticidade, &lt;br&gt;clareza e boa experiência." data-en="Interfaces designed to offer practicality, &lt;br&gt;clarity and a great experience.">Interfaces pensadas para oferecer praticidade, <br>clareza e boa experiência.</p>
+      <p class="hero-sub" data-pt="Transformo problemas de negócio e necessidades de usuário em interfaces que funcionam, escalam e são implementáveis." data-en="I turn business problems and user needs into interfaces that work, scale and can be implemented.">Transformo problemas de negócio e necessidades de usuário em interfaces que funcionam, escalam e são implementáveis.</p>
       <div class="hero-actions">
         <button class="btn-primary" onclick="showPage('contato')" data-pt="Entre em contato" data-en="Get in touch">Entre em contato</button>
         <button class="btn-ghost" onclick="showPage('sobre')" data-pt="Sobre mim" data-en="About me">Sobre mim</button>
@@ -893,40 +913,41 @@
 
           <div class="skill-group">
             <div class="skill-group-label">
-              <span data-pt="UX Design & Research" data-en="UX Design & Research">UX Design & Research</span>
+              <span data-pt="Product Design" data-en="Product Design">Product Design</span>
             </div>
             <div class="skill-pills">
-              <span class="skill-pill" data-pt="Personas" data-en="Personas">Personas</span>
-              <span class="skill-pill" data-pt="Jornadas do usuário" data-en="User journeys">Jornadas do usuário</span>
+              <span class="skill-pill" data-pt="Definição de problema" data-en="Problem definition">Definição de problema</span>
+              <span class="skill-pill" data-pt="Discovery" data-en="Discovery">Discovery</span>
               <span class="skill-pill" data-pt="User flows" data-en="User flows">User flows</span>
               <span class="skill-pill" data-pt="Wireframes" data-en="Wireframes">Wireframes</span>
               <span class="skill-pill" data-pt="Prototipagem" data-en="Prototyping">Prototipagem</span>
-              <span class="skill-pill" data-pt="Testes de usabilidade" data-en="Usability testing">Testes de usabilidade</span>
-              <span class="skill-pill" data-pt="Entrevistas" data-en="Interviews">Entrevistas</span>
-              <span class="skill-pill" data-pt="Análise de competidores" data-en="Competitive analysis">Análise de competidores</span>
               <span class="skill-pill" data-pt="Design System" data-en="Design System">Design System</span>
+              <span class="skill-pill" data-pt="Análise de métricas" data-en="Metrics analysis">Análise de métricas</span>
             </div>
           </div>
 
           <div class="skill-group">
             <div class="skill-group-label">
-              <span data-pt="Análise de dados" data-en="Data analysis">Análise de dados</span>
+              <span data-pt="UX Research" data-en="UX Research">UX Research</span>
             </div>
             <div class="skill-pills">
-              <span class="skill-pill">Google Analytics</span>
+              <span class="skill-pill" data-pt="Entrevistas" data-en="Interviews">Entrevistas</span>
+              <span class="skill-pill" data-pt="Jornadas do usuário" data-en="User journeys">Jornadas do usuário</span>
+              <span class="skill-pill" data-pt="Personas" data-en="Personas">Personas</span>
+              <span class="skill-pill" data-pt="Testes de usabilidade" data-en="Usability testing">Testes de usabilidade</span>
+              <span class="skill-pill" data-pt="Análise de competidores" data-en="Competitive analysis">Análise de competidores</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-group-label">
+              <span data-pt="Ferramentas" data-en="Tools">Ferramentas</span>
+            </div>
+            <div class="skill-pills">
+              <span class="skill-pill highlight">Figma</span>
               <span class="skill-pill">Microsoft Clarity</span>
-            </div>
-          </div>
-
-          <div class="skill-group">
-            <div class="skill-group-label">
-              <span data-pt="Ferramentas de design" data-en="Design tools">Ferramentas de design</span>
-            </div>
-            <div class="skill-pills">
-              <span class="skill-pill">Figma</span>
-              <span class="skill-pill">Photoshop</span>
-              <span class="skill-pill">Illustrator</span>
-              <span class="skill-pill">InDesign</span>
+              <span class="skill-pill">Google Analytics</span>
+              <span class="skill-pill" data-pt="Pacote Adobe" data-en="Adobe Suite">Pacote Adobe</span>
             </div>
           </div>
 
@@ -939,8 +960,6 @@
               <span class="skill-pill">CSS / SASS</span>
               <span class="skill-pill">JavaScript</span>
               <span class="skill-pill">React</span>
-              <span class="skill-pill">GitHub</span>
-              <span class="skill-pill" data-pt="Design responsivo" data-en="Responsive design">Design responsivo</span>
             </div>
           </div>
 
@@ -966,98 +985,13 @@
     <div class="projects-grid">
 
       <div class="project-card">
-        <div class="project-thumb">
-<img src="images/daniel-noffs.png" alt="Daniel Noffs — Personal Trainer">
-</div>
-        <div class="project-info">
-          <div class="project-tags">
-            <span class="project-tag">Front-end</span>
-            <span class="project-tag">UI Design</span>
-          </div>
-          <div class="project-name">Daniel Noffs — Personal Trainer</div>
-          <p class="project-desc" data-pt="Site completo com integração ao Google Sheets para depoimentos, design responsivo e publicado via GitHub Pages." data-en="Full website with Google Sheets integration for testimonials, responsive design and published via GitHub Pages.">Site completo com integração ao Google Sheets para depoimentos, design responsivo e publicado via GitHub Pages.</p>
-          <div class="project-links-row">
-            <a href="case-study-daniel-noffs.html" class="project-link-secondary" data-pt="Documentação" data-en="Case study">Documentação</a>
-            <a href="https://danielnoffs.com.br" target="_blank" class="project-link">Preview</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-thumb">
-<img src="images/eats.jpg" alt="Escola Aberta do Terceiro Setor — on-Hive">
-        </div>
-        <div class="project-info">
-          <div class="project-tags">
-            <span class="project-tag">UX/UI</span>
-            <span class="project-tag">Figma</span>
-          </div>
-          <div class="project-name">Escola Aberta do Terceiro Setor — on-Hive</div>
-          <p class="project-desc" data-pt="Migração de plataforma de cursos: de um estudo herdado à produção, com validação via Microsoft Clarity após o lançamento." data-en="Course platform migration: from an inherited study to production, validated via Microsoft Clarity after launch.">Migração de plataforma de cursos: de um estudo herdado à produção, com validação via Microsoft Clarity após o lançamento.</p>
-          <div class="project-links-row">
-            <a href="case-study-lms-migracao.html" class="project-link-secondary" data-pt="Documentação" data-en="Case study">Documentação</a>
-            <a href="https://eats.onhive.org.br/login" target="_blank" class="project-link">Preview</a>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="project-card">
-<div class="project-thumb">
-  <img src="images/case-ux.jpg" alt="Hábitos saudáveis na infância">
-</div>
-        <div class="project-info">
-          <div class="project-tags">
-            <span class="project-tag">UX Research</span>
-          </div>
-          <div class="project-name" data-pt="Cuidados com a saúde all-in-one" data-en="All-in-one healthcare">Cuidados com a saúde all-in-one</div>
-          <p class="project-desc" data-pt="Como os cuidadores lidam com a saúde dos filhos e as barreiras encontradas no acesso ao cuidado." data-en="How caregivers manage their children's health and the barriers they face in accessing care.">Como os cuidadores lidam com a saúde dos filhos e as barreiras encontradas no acesso ao cuidado.</p>
-          <div class="project-links-row">
-            <button onclick="openModal('ux')" class="project-link-secondary" style="background:none;border:none;padding:0;font-family:var(--sans);cursor:pointer;" data-pt="Documentação" data-en="Case study">Documentação</button>
-            <a href="#" class="project-link" onclick="return false;">Preview</a>
-          </div>
-        </div>
-      </div>
-
-<div class="project-card">
   <div class="project-thumb">
-    <img src="images/lp-filafavo.png" alt="FilaFavo — Lembrancinhas em 3D">
+    <img src="images/PayFlow.png" alt="PayFlow — Módulo de Pagamento de Professores">
   </div>
   <div class="project-info">
     <div class="project-tags">
-      <span class="project-tag">UX/UI</span>
-      <span class="project-tag">Front-end</span>
-    </div>
-    <div class="project-name"
-      data-pt="FilaFavo — Lembrancinhas em 3D"
-      data-en="FilaFavo — 3D Party Favours">
-      FilaFavo — Lembrancinhas em 3D
-    </div>
-    <p class="project-desc"
-      data-pt="De uma necessidade real a um produto próprio: naming, identidade visual e LP para negócio de lembrancinhas impressas em 3D."
-      data-en="From a real need to a product of my own: naming, visual identity and LP for a 3D printed party favour business.">
-      De uma necessidade real a um produto próprio: naming, identidade visual e LP para negócio de lembrancinhas impressas em 3D.
-    </p>
-    <div class="project-links-row">
-      <a href="case-study-filafavo.html"
-        class="project-link-secondary"
-        data-pt="Documentação" data-en="Case study">Documentação</a>
-      <a href="https://cspestana.github.io/FilaFavo/" target="_blank"
-        class="project-link"
-        data-pt="Preview" data-en="Preview">Preview</a>
-    </div>
-  </div>
-</div>
-
-<div class="project-card">
-  <div class="project-thumb">
-    <img src="images/PayFlow.png" alt="Nome do Projeto">
-  </div>
-  <div class="project-info">
-    <div class="project-tags">
-      <span class="project-tag">UX/UI</span>
       <span class="project-tag">Product Design</span>
-      <span class="project-tag">Figma</span>      
+      <span class="project-tag">UX/UI</span>      
     </div>
     <div class="project-name"
       data-pt="PayFlow — Módulo de Pagamento de Professores"
@@ -1080,16 +1014,100 @@
   </div>
 </div>
 
-      <div class="project-card" style="opacity:0.5;">
+      <div class="project-card">
         <div class="project-thumb">
-<img src="images/proximo-projeto.png" alt="Próximo projeto">        </div>
+<img src="images/eats.jpg" alt="Escola Aberta do Terceiro Setor — on-Hive">
+        </div>
         <div class="project-info">
           <div class="project-tags">
-            <span class="project-tag" data-pt="Próximo projeto" data-en="Next project">Próximo projeto</span>
+            <span class="project-tag">Product Design</span>
+            <span class="project-tag">UX/UI</span>
           </div>
-          <div class="project-name" data-pt="Seu projeto aqui?" data-en="Your project here?">Seu projeto aqui?</div>
-          <p class="project-desc" data-pt="Estou disponível para novos projetos. Entre em contato e vamos conversar!" data-en="I'm available for new projects. Get in touch and let's talk!">Estou disponível para novos projetos. Entre em contato e vamos conversar!</p>
-          <button class="project-link" onclick="showPage('contato')" style="background:none;border:none;padding:0;font-family:var(--sans);cursor:pointer;" data-pt="Fale comigo" data-en="Get in touch">Fale comigo</button>
+          <div class="project-name">Escola Aberta do Terceiro Setor — on-Hive</div>
+          <p class="project-desc" data-pt="40 mil usuários dependiam de uma plataforma de cursos com inconsistências herdadas e bugs críticos. Como única designer da equipe, migrei e padronizei o sistema: Design System com 80+ componentes, 3 ciclos de validação com Clarity e resolução de bugs em parceria direta com devs." data-en="40,000 users depended on a course platform with inherited inconsistencies and critical bugs. As the sole designer on the team, I migrated and standardised the system: Design System with 80+ components, 3 Clarity validation cycles and bug resolution in direct partnership with devs.">40 mil usuários dependiam de uma plataforma de cursos com inconsistências herdadas e bugs críticos. Como única designer da equipe, migrei e padronizei o sistema: Design System com 80+ componentes, 3 ciclos de validação com Clarity e resolução de bugs em parceria direta com devs.</p>
+          <div class="project-links-row">
+            <a href="case-study-lms-migracao.html" class="project-link-secondary" data-pt="Documentação" data-en="Case study">Documentação</a>
+            <a href="https://eats.onhive.org.br/login" target="_blank" class="project-link">Preview</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card" style="opacity:0.55;">
+        <div class="project-thumb">
+          <div class="project-thumb-placeholder">◻</div>
+        </div>
+        <div class="project-info">
+          <div class="project-tags">
+            <span class="project-tag">Mobile</span>
+            <span class="project-tag">UX/UI</span>
+          </div>
+          <div class="project-name" data-pt="Em breve" data-en="Coming soon">Em breve</div>
+        </div>
+      </div>
+
+      <div class="project-card">
+<div class="project-thumb">
+  <img src="images/case-ux.jpg" alt="Hábitos saudáveis na infância">
+</div>
+        <div class="project-info">
+          <div class="project-tags">
+            <span class="project-tag">UX Research</span>
+            <span class="project-tag">Product Design</span>
+          </div>
+          <div class="project-name" data-pt="Cuidados com a saúde all-in-one" data-en="All-in-one healthcare">Cuidados com a saúde all-in-one</div>
+          <p class="project-desc" data-pt="Cuidadores gerenciam a saúde dos filhos de forma fragmentada, sem uma solução centralizada. Conduzo pesquisa qualitativa para mapear as dores reais do sistema e definir as oportunidades de design." data-en="Caregivers manage their children's health in a fragmented way, with no centralised solution. I am conducting qualitative research to map the real pain points of the system and define design opportunities.">Cuidadores gerenciam a saúde dos filhos de forma fragmentada, sem uma solução centralizada. Conduzo pesquisa qualitativa para mapear as dores reais do sistema e definir as oportunidades de design.</p>
+          <div class="project-links-row">
+            <button onclick="openModal('ux')" class="project-link-secondary" style="background:none;border:none;padding:0;font-family:var(--sans);cursor:pointer;" data-pt="Documentação" data-en="Case study">Documentação</button>
+            <a href="#" class="project-link" onclick="return false;">Preview</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+  <div class="project-thumb">
+    <img src="images/lp-filafavo.png" alt="FilaFavo — Lembrancinhas em 3D">
+  </div>
+  <div class="project-info">
+    <div class="project-tags">
+      <span class="project-tag">UX/UI</span>
+      <span class="project-tag">Front-end</span>
+    </div>
+    <div class="project-name"
+      data-pt="FilaFavo — Lembrancinhas em 3D"
+      data-en="FilaFavo — 3D Party Favours">
+      FilaFavo — Lembrancinhas em 3D
+    </div>
+    <p class="project-desc"
+      data-pt="De uma necessidade real a um produto próprio: naming, identidade visual e landing page para negócio de lembrancinhas em 3D, do conceito ao ar em domínio próprio."
+      data-en="From a real need to a product of my own: naming, visual identity and landing page for a 3D party favour business, from concept to live on a custom domain.">
+      De uma necessidade real a um produto próprio: naming, identidade visual e landing page para negócio de lembrancinhas em 3D, do conceito ao ar em domínio próprio.
+    </p>
+    <div class="project-links-row">
+      <a href="case-study-filafavo.html"
+        class="project-link-secondary"
+        data-pt="Documentação" data-en="Case study">Documentação</a>
+      <a href="https://cspestana.github.io/FilaFavo/" target="_blank"
+        class="project-link"
+        data-pt="Preview" data-en="Preview">Preview</a>
+    </div>
+  </div>
+</div>
+
+      <div class="project-card">
+        <div class="project-thumb">
+<img src="images/daniel-noffs.png" alt="Daniel Noffs — Personal Trainer">
+</div>
+        <div class="project-info">
+          <div class="project-tags">
+            <span class="project-tag">UI Design</span>
+            <span class="project-tag">Front-end</span>
+          </div>
+          <div class="project-name">Daniel Noffs — Personal Trainer</div>
+          <p class="project-desc" data-pt="Personal trainer sem presença digital estruturada perdia visibilidade e oportunidades de captar clientes. Projetei e desenvolvi o site completo, com depoimentos em tempo real via Google Sheets, do zero ao domínio próprio." data-en="A personal trainer with no structured digital presence was losing visibility and client leads. I designed and developed the full website, with real-time testimonials via Google Sheets, from scratch to live domain.">Personal trainer sem presença digital estruturada perdia visibilidade e oportunidades de captar clientes. Projetei e desenvolvi o site completo, com depoimentos em tempo real via Google Sheets, do zero ao domínio próprio.</p>
+          <div class="project-links-row">
+            <a href="case-study-daniel-noffs.html" class="project-link-secondary" data-pt="Documentação" data-en="Case study">Documentação</a>
+            <a href="https://danielnoffs.com.br" target="_blank" class="project-link">Preview</a>
+          </div>
         </div>
       </div>
 
@@ -1111,10 +1129,10 @@
         <h2 class="about-title" data-pt="Do detalhe,&lt;br&gt;&lt;em&gt;à interface&lt;/em&gt;" data-en="From detail,&lt;br&gt;&lt;em&gt;to interface&lt;/em&gt;">Do detalhe,<br><em>à interface</em></h2>
 
         <div class="about-text">
-          <p data-pt="Designer desde 2009, com trajetória em design gráfico, comunicação visual, editorial e social media." data-en="Designer since 2009, with a background in graphic design, visual communication, editorial and social media.">Designer desde 2009, com trajetória em design gráfico, comunicação visual, editorial e social media.
-          <p data-pt="Hoje atuo em UX/UI e Front-end, projetando e desenvolvendo interfaces que equilibram experiência do usuário, desempenho e identidade visual." data-en="Today I work in UX/UI and Front-end, designing and developing interfaces that balance user experience, performance and visual identity.">Hoje atuo em UX/UI e Front-end, projetando e desenvolvendo interfaces que equilibram experiência do usuário, desempenho e identidade visual.
-          <p data-pt="Meu foco é criar interfaces intuitivas, funcionais e visualmente consistentes, equilibrando estética, experiência e funcionalidade em cada projeto desenvolvido." data-en="My focus is on creating intuitive, functional and visually consistent interfaces, balancing aesthetics, experience and functionality in every project.">Meu foco é criar interfaces intuitivas, funcionais e visualmente consistentes, equilibrando estética, experiência e funcionalidade em cada projeto desenvolvido.
-          <p data-pt="Incorporo IA generativa em pontos estratégicos do meu processo: na geração de variações de design, na aceleração de pesquisas exploratórias e na prototipagem rápida de interfaces. Decisões de UX, acessibilidade e o julgamento final de cada projeto permanecem sempre sob curadoria humana." data-en="I incorporate generative AI at strategic points in my process: generating design variations, accelerating exploratory research and rapid interface prototyping. UX decisions, accessibility and the final judgement of each project always remain under human curation.">Incorporo IA generativa em pontos estratégicos do meu processo: na geração de variações de design, na aceleração de pesquisas exploratórias e na prototipagem rápida de interfaces. Decisões de UX, acessibilidade e o julgamento final de cada projeto permanecem sempre sob curadoria humana.
+          <p data-pt="Com 14 anos de prática em design, trago para o produto precisão visual e atenção ao detalhe que só vêm com tempo de execução real." data-en="With 14 years of design practice, I bring to the product visual precision and attention to detail that only comes with real execution time.">Com 14 anos de prática em design, trago para o produto precisão visual e atenção ao detalhe que só vêm com tempo de execução real.
+          <p data-pt="Atuo em Product Design e UX/UI, do discovery à interface navegável, com domínio de front-end para implementar e colaborar diretamente com times de desenvolvimento." data-en="I work in Product Design and UX/UI, from discovery to navigable interface, with front-end skills to implement and collaborate directly with development teams.">Atuo em Product Design e UX/UI, do discovery à interface navegável, com domínio de front-end para implementar e colaborar diretamente com times de desenvolvimento.
+          <p data-pt="Cada decisão de interface parte de um entendimento claro do problema e do usuário." data-en="Every interface decision starts from a clear understanding of the problem and the user.">Cada decisão de interface parte de um entendimento claro do problema e do usuário.
+          <p data-pt="Uso IA como acelerador no meu processo, para ganhar velocidade nas etapas certas e chegar mais rápido ao que importa. O julgamento de design fica sempre comigo." data-en="I use AI as an accelerator in my process, to gain speed at the right stages and get to what matters faster. The design judgement always stays with me.">Uso IA como acelerador no meu processo, para ganhar velocidade nas etapas certas e chegar mais rápido ao que importa. O julgamento de design fica sempre comigo.
 </p>
 
           </div>
@@ -1122,8 +1140,6 @@
       </div>
     </div>
   </div>
-
-</div>
 
 <!-- PAGE: CONTATO -->
 <div class="page" id="page-contato">
@@ -1193,7 +1209,7 @@
         <div class="modal-sections">
           <div>
             <div class="modal-section-label">O projeto</div>
-            <p class="modal-section-text">O cuidado infantil funciona como um sistema distribuído — informações, responsabilidades e decisões circulam entre família, cuidadores e profissionais de saúde, mas raramente se encontram em um só lugar. Essa fragmentação gera sobrecarga mental para os cuidadores e dificulta a manutenção de hábitos saudáveis na rotina das crianças.
+            <p class="modal-section-text">O cuidado infantil funciona como um sistema distribuído: informações, responsabilidades e decisões circulam entre família, cuidadores e profissionais de saúde, mas raramente se encontram em um só lugar. Essa fragmentação gera sobrecarga mental para os cuidadores e dificulta a manutenção de hábitos saudáveis na rotina das crianças.
 Este projeto de UX Research investiga as dores reais desse sistema, com foco em identificar oportunidades para uma solução de cuidados infantis all-in-one centralizada, acessível e adequada à realidade de quem cuida.</p>
           </div>
           <div>
@@ -1202,7 +1218,7 @@ Este projeto de UX Research investiga as dores reais desse sistema, com foco em 
           </div>
           <div>
             <div class="modal-section-label">Resultado</div>
-            <p class="modal-section-text">Projeto em andamento. A desk research revelou três eixos de intervenção que estão orientando a pesquisa qualitativa. Atualmente na fase de entrevistas com cuidadores — os dados coletados serão sintetizados para definir o problema central e as oportunidades de design da solução.</p>
+            <p class="modal-section-text">Projeto em andamento. A desk research revelou três eixos de intervenção que estão orientando a pesquisa qualitativa. Atualmente na fase de entrevistas com cuidadores. Os dados coletados serão sintetizados para definir o problema central e as oportunidades de design da solução.</p>
           </div>
         </div>
       </div>
@@ -1351,9 +1367,10 @@ Este projeto de UX Research investiga as dores reais desse sistema, com foco em 
 </div>
 
 <footer>
-  <p>© 2026 Camilla Pestana — CNPJ 36.151.883/0001-88</p>
+  <p>© 2026 Camilla Pestana · CNPJ 36.151.883/0001-88</p>
   <p data-pt="Desenvolvido com ♥ e muito Frappé" data-en="Crafted with ♥ and a lot of Frappé"><span data-pt="Desenvolvido com " data-en="Crafted with ">Desenvolvido com </span><span>♥</span><span data-pt=" e muito Frappé" data-en=" and a lot of Frappé"> e muito Frappé</span></p>
 </footer>
+</div>
 
 </body>
 </html>
