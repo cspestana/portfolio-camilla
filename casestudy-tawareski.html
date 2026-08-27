@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: Tawareski | Direito Empresarial | Camilla Pestana</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111110'/%3E%3Ctext x='32' y='40' font-family='Georgia, serif' font-size='26' font-weight='300' fill='%23E8547A' text-anchor='middle'%3ECP%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white: #FAFAF8;
+    --black: #111110;
+    --pink: #E8547A;
+    --pink-light: #FDF0F3;
+    --pink-mid: #F4C5D0;
+    --gray: #6B6B6B;
+    --gray-light: #F0EFED;
+    --gray-border: #E4E3E0;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+
+    /* Tawareski Design System */
+    --tw-forest: #1B3D2A;
+    --tw-forest-mid: #2A5240;
+    --tw-copper: #B06830;
+    --tw-bg: #FAF9F6;
+    --tw-text: #1A2A1F;
+    --tw-muted: rgba(26,42,31,.52);
+  }
+
+  html { scroll-behavior: smooth; }
+  body { background: var(--white); color: var(--black); font-family: var(--sans); overflow-x: hidden; }
+  a { color: inherit; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 22px 6vw;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-border);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 19px; font-weight: 400; color: var(--black); text-decoration: none; }
+  .nav-logo span { color: var(--pink); font-style: italic; }
+  .nav-back {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gray); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--pink); }
+
+  /* HERO */
+  .case-hero { padding: 140px 6vw 80px; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--gray-border); }
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--pink); margin-bottom: 28px;
+  }
+  .hero-eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--pink); }
+  .hero-title {
+    font-family: var(--serif); font-weight: 300;
+    font-size: clamp(38px, 5.5vw, 72px); line-height: 1.05; letter-spacing: -0.01em;
+    max-width: 900px;
+  }
+  .hero-title em { font-style: italic; color: var(--pink); }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 40px; margin-top: 48px; }
+  .meta-item { display: flex; flex-direction: column; gap: 6px; }
+  .meta-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray); }
+  .meta-value { font-size: 15px; color: var(--black); font-weight: 500; }
+  .meta-value a { color: var(--pink); text-decoration: none; border-bottom: 1px solid var(--pink-mid); }
+  .meta-value a:hover { border-color: var(--pink); }
+
+  /* TOC */
+  .toc-wrap { padding: 56px 6vw; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--gray-border); }
+  .toc-label { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray); margin-bottom: 24px; }
+  .toc-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border: 1px solid var(--gray-border); }
+  @media (max-width: 900px) { .toc-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .toc-grid { grid-template-columns: 1fr; } }
+  .toc-item {
+    padding: 16px 18px; text-decoration: none; color: var(--black);
+    border-right: 1px solid var(--gray-border); border-bottom: 1px solid var(--gray-border);
+    display: flex; align-items: center; gap: 10px;
+    transition: background 0.2s; font-size: 13px;
+  }
+  .toc-item:hover { background: var(--pink-light); }
+  .toc-item .toc-num { font-family: var(--mono); font-size: 11px; color: var(--pink); }
+
+  /* SECTIONS */
+  .case-section { padding: 90px 6vw; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--gray-border); }
+  .section-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+  .section-num { font-family: var(--mono); font-size: 13px; color: var(--pink); letter-spacing: 0.05em; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); }
+  .section-title {
+    font-family: var(--serif); font-weight: 300;
+    font-size: clamp(30px, 3.8vw, 46px); line-height: 1.1; letter-spacing: -0.01em;
+    margin-bottom: 36px; max-width: 720px;
+  }
+  .section-title em { font-style: italic; color: var(--pink); }
+  .section-body { max-width: 700px; }
+  .section-body p { font-size: 16px; line-height: 1.85; color: #4A4A48; margin-bottom: 20px; }
+  .section-body p strong { color: var(--black); font-weight: 600; }
+  .section-body code {
+    background: var(--gray-light); padding: 2px 6px; border-radius: 3px;
+    font-family: var(--mono); font-size: 13px; color: var(--pink);
+  }
+
+  /* PULL QUOTE */
+  .pull-quote {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(20px, 2.8vw, 28px); line-height: 1.45; color: var(--black);
+    border-left: 3px solid var(--pink); padding-left: 28px; margin: 36px 0; max-width: 640px;
+  }
+
+  /* INSIGHT GRID */
+  .insight-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: var(--gray-border); margin-top: 32px; }
+  @media (max-width: 700px) { .insight-grid { grid-template-columns: 1fr; } }
+  .insight-card { background: var(--white); padding: 28px 30px; }
+  .insight-card-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--pink); margin-bottom: 10px; }
+  .insight-card-text { font-size: 14px; line-height: 1.7; color: #4A4A48; }
+  .insight-card-text code { background: var(--gray-light); padding: 1px 5px; border-radius: 3px; font-family: var(--mono); font-size: 12px; color: var(--pink); }
+
+  /* DESIGN SYSTEM SHOWCASE */
+  .ds-showcase { background: var(--tw-forest); padding: 48px; margin-top: 32px; border-radius: 2px; }
+  .ds-row { margin-bottom: 36px; }
+  .ds-row:last-child { margin-bottom: 0; }
+  .ds-row-label { font-family: var(--mono); font-size: 11px; color: rgba(210,235,215,.38); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px; }
+  .ds-swatches { display: flex; gap: 12px; flex-wrap: wrap; }
+  .ds-swatch { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+  .ds-swatch-color { width: 64px; height: 64px; border-radius: 2px; border: 1px solid rgba(255,255,255,0.08); }
+  .ds-swatch-name { font-family: var(--mono); font-size: 10px; color: rgba(210,235,215,.38); }
+  .ds-type-sample { display: flex; flex-direction: column; gap: 22px; }
+  .ds-type-row { display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; }
+  .ds-type-row-tag { font-family: var(--mono); font-size: 10px; color: rgba(210,235,215,.38); width: 56px; flex-shrink: 0; text-transform: uppercase; letter-spacing: 0.05em; }
+  .ds-type-h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; font-size: 48px; color: #F5F3EF; line-height: 1; letter-spacing: -0.01em; }
+  .ds-type-h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; font-size: 30px; color: #F5F3EF; line-height: 1; letter-spacing: -0.01em; }
+  .ds-type-h3 { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--tw-copper); text-transform: uppercase; letter-spacing: 0.18em; line-height: 1; }
+  .ds-type-body { font-family: 'DM Sans', sans-serif; font-size: 16px; color: rgba(210,235,215,.6); font-weight: 300; }
+  .ds-type-meta { font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.25); margin-top: 2px; }
+  .ds-components { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .ds-btn-primary { background: var(--tw-copper); color: #FAF9F6; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 14px 24px; border: none; cursor: pointer; }
+  .ds-btn-ghost { background: transparent; color: rgba(210,235,215,.7); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 14px 24px; border: 1px solid rgba(210,235,215,.22); cursor: pointer; }
+  .ds-card-mini { background: rgba(255,255,255,.05); padding: 20px 24px; font-size: 12px; color: rgba(210,235,215,.5); border: 1px solid rgba(255,255,255,.08); }
+
+  /* PROCESS LIST */
+  .process-list { display: flex; flex-direction: column; margin-top: 32px; }
+  .process-item { display: grid; grid-template-columns: 100px 1fr; gap: 24px; padding: 24px 0; border-top: 1px solid var(--gray-border); }
+  .process-item:last-child { border-bottom: 1px solid var(--gray-border); }
+  .process-date { font-family: var(--mono); font-size: 12px; color: var(--pink); padding-top: 2px; }
+  .process-text { font-size: 14px; line-height: 1.7; color: #4A4A48; }
+  .process-text strong { color: var(--black); }
+
+  /* RESULTS */
+  .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: var(--gray-border); margin-top: 32px; }
+  @media (max-width: 800px) { .results-grid { grid-template-columns: repeat(2, 1fr); } }
+  .result-stat { background: var(--white); padding: 32px 24px; }
+  .result-num { font-family: var(--serif); font-size: 44px; font-weight: 300; color: var(--pink); line-height: 1; }
+  .result-label { font-size: 12px; color: var(--gray); margin-top: 8px; line-height: 1.5; }
+
+  /* CTA */
+  .case-cta { padding: 90px 6vw 110px; max-width: 1100px; margin: 0 auto; text-align: center; }
+  .case-cta .section-title { margin: 0 auto 24px; }
+  .cta-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+  .btn-cta-primary { background: var(--pink); color: white; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 16px 32px; text-decoration: none; transition: transform 0.15s; display: inline-block; }
+  .btn-cta-primary:hover { transform: translateY(-2px); }
+  .btn-cta-ghost { border: 1px solid var(--gray-border); color: var(--black); font-size: 13px; font-weight: 600; letter-spacing: 0.05em; padding: 16px 32px; text-decoration: none; transition: border-color 0.2s; display: inline-block; }
+  .btn-cta-ghost:hover { border-color: var(--pink); color: var(--pink); }
+
+  /* FOOTER */
+  footer {
+    padding: 28px 6vw; border-top: 1px solid var(--gray-border);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    max-width: 1100px; margin: 0 auto;
+  }
+  footer p { font-size: 12px; color: var(--gray); }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .case-hero, .toc-wrap, .case-section, .case-cta { padding-left: 24px; padding-right: 24px; }
+    .ds-showcase { padding: 28px; }
+    .hero-meta { gap: 24px; }
+    .process-item { grid-template-columns: 1fr; gap: 8px; }
+    .results-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* LANG TOGGLE */
+  .lang-toggle { display: flex; gap: 0; align-items: center; font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.1em; }
+  .lang-btn { background: none; border: none; padding: 5px 8px; cursor: pointer; color: var(--gray); font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.1em; transition: color 0.2s; }
+  .lang-btn.active { color: var(--pink); }
+  .lang-divider { color: var(--gray-border); font-size: 10px; }
+
+  /* ACCESSIBILITY NOTE */
+  .a11y-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--gray-light); border: 1px solid var(--gray-border);
+    padding: 6px 12px; font-family: var(--mono); font-size: 11px; color: var(--gray);
+    margin-top: 24px;
+  }
+  .a11y-badge strong { color: var(--black); }
+
+  /* FIGMA TAG */
+  .tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+  .tag { font-family: var(--mono); font-size: 11px; color: var(--gray); background: var(--gray-light); padding: 5px 10px; letter-spacing: 0.06em; }
+
+  /* SKIP LINK (WCAG) */
+  .skip-link { position: absolute; left: -9999px; top: 0; font-size: 13px; padding: 8px 16px; background: var(--pink); color: white; }
+  .skip-link:focus { left: 0; z-index: 999; }
+
+  /* PAGE MAP */
+  .page-map { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--gray-border); margin-top: 32px; }
+  @media (max-width: 700px) { .page-map { grid-template-columns: repeat(2, 1fr); } }
+  .page-map-item { background: var(--white); padding: 20px 22px; }
+  .page-map-num { font-family: var(--mono); font-size: 10px; color: var(--pink); margin-bottom: 6px; }
+  .page-map-name { font-size: 14px; font-weight: 600; color: var(--black); margin-bottom: 4px; }
+  .page-map-desc { font-size: 12px; color: var(--gray); line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<a href="#contexto" class="skip-link" data-pt="Ir para o conteúdo" data-en="Skip to content">Ir para o conteúdo</a>
+
+<nav>
+  <a href="index.html" class="nav-logo">Camilla <span>Pestana</span></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-pt" onclick="setLang('pt')">PT</button>
+      <span class="lang-divider">|</span>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="index.html" class="nav-back" data-pt="← Voltar ao portfólio" data-en="← Back to portfolio">← Voltar ao portfólio</a>
+  </div>
+</nav>
+
+<section class="case-hero">
+  <div class="hero-eyebrow" data-pt="Case Study · UX/UI · Acessibilidade · Web Design" data-en="Case Study · UX/UI · Accessibility · Web Design">Case Study · UX/UI · Acessibilidade · Web Design</div>
+  <h1 class="hero-title" data-pt="Redesenhando a presença digital de um escritório de advocacia: &lt;em&gt;credibilidade, acessibilidade e conversão&lt;/em&gt;" data-en="Redesigning a law firm's digital presence: &lt;em&gt;credibility, accessibility and conversion&lt;/em&gt;">Redesenhando a presença digital de um escritório de advocacia: <em>credibilidade, acessibilidade e conversão</em></h1>
+
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-label" data-pt="Projeto" data-en="Project">Projeto</span>
+      <span class="meta-value">Tawareski · Direito Empresarial</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label" data-pt="Tipo" data-en="Type">Tipo</span>
+      <span class="meta-value" data-pt="Redesign · Portfólio" data-en="Redesign · Portfolio">Redesign · Portfólio</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label" data-pt="Papel" data-en="Role">Papel</span>
+      <span class="meta-value">UX/UI Design + Front-end (solo)</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label" data-pt="Stack" data-en="Stack">Stack</span>
+      <span class="meta-value">Figma · HTML · CSS · JS</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label" data-pt="Padrão" data-en="Standard">Padrão</span>
+      <span class="meta-value">WCAG 2.1 AA</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label" data-pt="Páginas" data-en="Pages">Páginas</span>
+      <span class="meta-value">7 páginas</span>
+    </div>
+  </div>
+</section>
+
+<div class="toc-wrap">
+  <div class="toc-label" data-pt="Neste case" data-en="In this case">Neste case</div>
+  <div class="toc-grid">
+    <a href="#contexto" class="toc-item"><span class="toc-num">01</span><span data-pt="Contexto" data-en="Context">Contexto</span></a>
+    <a href="#problema" class="toc-item"><span class="toc-num">02</span><span data-pt="Problema" data-en="Problem">Problema</span></a>
+    <a href="#pesquisa" class="toc-item"><span class="toc-num">03</span><span data-pt="Pesquisa" data-en="Research">Pesquisa</span></a>
+    <a href="#sintese" class="toc-item"><span class="toc-num">04</span><span data-pt="Síntese" data-en="Synthesis">Síntese</span></a>
+    <a href="#ideacao" class="toc-item"><span class="toc-num">05</span><span data-pt="Ideação" data-en="Ideation">Ideação</span></a>
+    <a href="#solucao" class="toc-item"><span class="toc-num">06</span><span data-pt="Solução" data-en="Solution">Solução</span></a>
+    <a href="#validacao" class="toc-item"><span class="toc-num">07</span><span data-pt="Validação" data-en="Validation">Validação</span></a>
+    <a href="#implementacao" class="toc-item"><span class="toc-num">08</span><span data-pt="Implementação" data-en="Implementation">Implementação</span></a>
+    <a href="#resultados" class="toc-item"><span class="toc-num">09</span><span data-pt="Resultados" data-en="Results">Resultados</span></a>
+    <a href="#aprendizados" class="toc-item"><span class="toc-num">10</span><span data-pt="Aprendizados" data-en="Learnings">Aprendizados</span></a>
+  </div>
+</div>
+
+<!-- 01 CONTEXTO -->
+<section class="case-section" id="contexto">
+  <div class="section-eyebrow"><span class="section-num">01</span><span class="section-label" data-pt="Contexto" data-en="Context">Contexto</span></div>
+  <h2 class="section-title" data-pt="Um escritório que precisa competir online com a mesma autoridade que tem offline" data-en="A law firm that needs to compete online with the same authority it has offline">Um escritório que precisa competir online com a mesma autoridade que tem offline</h2>
+  <div class="section-body">
+    <p data-pt="O escritório Tawareski | Direito Empresarial atua com advocacia corporativa: contratos, fusões, due diligence, consultoria para PMEs e startups. A banca tem histórico sólido e reputação construída por anos de relacionamento com clientes. Mas sua presença digital não refletia esse nível: site desatualizado, sem responsividade, com baixíssima taxa de conversão de visitantes para contato." data-en="Tawareski | Direito Empresarial is a corporate law firm specialising in contracts, mergers, due diligence, and consulting for SMEs and startups. The firm has a solid track record and a reputation built over years of client relationships. But its digital presence didn't reflect that level: an outdated site, not responsive, with very low visitor-to-contact conversion.">O escritório Tawareski | Direito Empresarial atua com advocacia corporativa: contratos, fusões, due diligence, consultoria para PMEs e startups. A banca tem histórico sólido e reputação construída por anos de relacionamento com clientes. Mas sua presença digital não refletia esse nível: site desatualizado, sem responsividade, com baixíssima taxa de conversão de visitantes para contato.</p>
+    <p data-pt="Este projeto é uma &lt;strong&gt;proposta de redesign completo&lt;/strong&gt;, criada como portfólio para demonstrar como eu abordo um briefing real: arquitetura de informação, design de interação, acessibilidade e implementação front-end, do wireframe ao código." data-en="This project is a &lt;strong&gt;complete redesign proposal&lt;/strong&gt;, created as portfolio work to demonstrate how I approach a real brief: information architecture, interaction design, accessibility and front-end implementation, from wireframe to code.">Este projeto é uma <strong>proposta de redesign completo</strong>, criada como portfólio para demonstrar como eu abordo um briefing real: arquitetura de informação, design de interação, acessibilidade e implementação front-end, do wireframe ao código.</p>
+    <p data-pt="O briefing que guiou o projeto definiu como resultados inegociáveis: &lt;strong&gt;site multi-página, 100% responsivo, WCAG 2.1 AA, CTAs e formulários estratégicos, WhatsApp flutuante, credibilidade e modernidade visual&lt;/strong&gt;." data-en="The brief guiding the project defined as non-negotiable outcomes: &lt;strong&gt;multi-page site, 100% responsive, WCAG 2.1 AA, strategic CTAs and forms, floating WhatsApp, visual credibility and modernity&lt;/strong&gt;.">O briefing que guiou o projeto definiu como resultados inegociáveis: <strong>site multi-página, 100% responsivo, WCAG 2.1 AA, CTAs e formulários estratégicos, WhatsApp flutuante, credibilidade e modernidade visual</strong>.</p>
+  </div>
+</section>
+
+<!-- 02 PROBLEMA -->
+<section class="case-section" id="problema">
+  <div class="section-eyebrow"><span class="section-num">02</span><span class="section-label" data-pt="Problema" data-en="Problem">Problema</span></div>
+  <h2 class="section-title" data-pt="Sites de advocacia que parecem de 2008: &lt;em&gt;inacessíveis, não-responsivos e sem geração de leads&lt;/em&gt;" data-en="Law firm websites that look like 2008: &lt;em&gt;inaccessible, unresponsive and generating no leads&lt;/em&gt;">Sites de advocacia que parecem de 2008: <em>inacessíveis, não-responsivos e sem geração de leads</em></h2>
+  <div class="section-body">
+    <p data-pt="Ao analisar benchmarks de sites de escritórios de advocacia brasileiros, identifiquei quatro problemas críticos que se repetem sistematicamente:" data-en="Analysing benchmarks of Brazilian law firm websites, I identified four critical problems that repeat systematically:">Ao analisar benchmarks de sites de escritórios de advocacia brasileiros, identifiquei quatro problemas críticos que se repetem sistematicamente:</p>
+  </div>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Problema 01 · Responsividade" data-en="Problem 01 · Responsiveness">Problema 01 · Responsividade</div>
+      <div class="insight-card-text" data-pt="A maioria dos sites de advocacia não é responsiva ou quebra em mobile. Mais de 60% do tráfego web hoje é mobile. Escritórios perdem leads no momento em que o potencial cliente tenta acessar pelo celular." data-en="Most law firm websites aren't responsive or break on mobile. Over 60% of web traffic today is mobile. Firms lose leads at the very moment a potential client tries to access from their phone.">A maioria dos sites de advocacia não é responsiva ou quebra em mobile. Mais de 60% do tráfego web hoje é mobile. Escritórios perdem leads no momento em que o potencial cliente tenta acessar pelo celular.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Problema 02 · Acessibilidade" data-en="Problem 02 · Accessibility">Problema 02 · Acessibilidade</div>
+      <div class="insight-card-text" data-pt="Nenhum dos sites analisados atingia o nível WCAG 2.1 AA: contraste insuficiente, sem rótulos ARIA, sem ordem de foco lógica, sem textos alternativos em imagens. O público-alvo de advocacia inclui faixa etária 40+, onde deficiências visuais são mais prevalentes." data-en="None of the analysed sites reached WCAG 2.1 AA level: insufficient contrast, no ARIA labels, no logical focus order, no image alt texts. The target audience of corporate law includes the 40+ age range, where visual impairments are more prevalent.">Nenhum dos sites analisados atingia o nível WCAG 2.1 AA: contraste insuficiente, sem rótulos ARIA, sem ordem de foco lógica, sem textos alternativos em imagens. O público-alvo de advocacia inclui faixa etária 40+, onde deficiências visuais são mais prevalentes.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Problema 03 · Conversão" data-en="Problem 03 · Conversion">Problema 03 · Conversão</div>
+      <div class="insight-card-text" data-pt="CTAs genéricos como &quot;Entre em contato&quot; ao final da página não convertem. A ausência de formulários rápidos, WhatsApp flutuante e ancoragem por área de atuação cria fricção desnecessária entre o interesse do visitante e a ação de contato." data-en="Generic CTAs like &quot;Contact us&quot; at the bottom of the page don't convert. The absence of quick forms, floating WhatsApp and anchoring by practice area creates unnecessary friction between visitor interest and the contact action.">CTAs genéricos como "Entre em contato" ao final da página não convertem. A ausência de formulários rápidos, WhatsApp flutuante e ancoragem por área de atuação cria fricção desnecessária entre o interesse do visitante e a ação de contato.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Problema 04 · Credibilidade visual" data-en="Problem 04 · Visual credibility">Problema 04 · Credibilidade visual</div>
+      <div class="insight-card-text" data-pt="Tipografia datada, paletas genéricas em azul-marinho e dourado, fotos de stock óbvias: o visual comunica mesmice, não diferenciação. O cliente corporativo que contrata advocacia de alto valor espera um parceiro que também invista em sua própria apresentação." data-en="Dated typography, generic navy-blue and gold palettes, obvious stock photos: the visual communicates sameness, not differentiation. The corporate client who hires high-value legal counsel expects a partner that also invests in its own presentation.">Tipografia datada, paletas genéricas em azul-marinho e dourado, fotos de stock óbvias: o visual comunica mesmice, não diferenciação. O cliente corporativo que contrata advocacia de alto valor espera um parceiro que também invista em sua própria apresentação.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 PESQUISA -->
+<section class="case-section" id="pesquisa">
+  <div class="section-eyebrow"><span class="section-num">03</span><span class="section-label" data-pt="Pesquisa" data-en="Research">Pesquisa</span></div>
+  <h2 class="section-title" data-pt="Entendendo o mercado, o usuário e as referências que comunicam autoridade" data-en="Understanding the market, the user and the references that communicate authority">Entendendo o mercado, o usuário e as referências que comunicam autoridade</h2>
+  <div class="section-body">
+    <p data-pt="A pesquisa foi conduzida em três frentes: benchmark de concorrentes diretos, análise do perfil de cliente-alvo (PMEs e startups em crescimento) e referências de design de escritórios internacionais com posicionamento premium." data-en="Research was conducted across three fronts: competitor benchmarking, target-client profile analysis (growing SMEs and startups), and design references from international premium-positioned law firms.">A pesquisa foi conduzida em três frentes: benchmark de concorrentes diretos, análise do perfil de cliente-alvo (PMEs e startups em crescimento) e referências de design de escritórios internacionais com posicionamento premium.</p>
+  </div>
+  <div class="process-list">
+    <div class="process-item">
+      <span class="process-date" data-pt="Benchmark" data-en="Benchmark">Benchmark</span>
+      <div class="process-text" data-pt="&lt;strong&gt;Análise de 8 escritórios brasileiros e 4 internacionais:&lt;/strong&gt; mapeei arquitetura de informação, CTAs, paletas, tipografia, uso de imagens reais vs. stock, e presença de acessibilidade. Nenhum dos nacionais tinha ARIA labels; todos quebravam em viewport abaixo de 400px." data-en="&lt;strong&gt;Analysis of 8 Brazilian and 4 international firms:&lt;/strong&gt; I mapped information architecture, CTAs, palettes, typography, use of real images vs. stock, and accessibility. None of the nationals had ARIA labels; all broke at viewports below 400px."><strong>Análise de 8 escritórios brasileiros e 4 internacionais:</strong> mapeei arquitetura de informação, CTAs, paletas, tipografia, uso de imagens reais vs. stock, e presença de acessibilidade. Nenhum dos nacionais tinha ARIA labels; todos quebravam em viewport abaixo de 400px.</div>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Público" data-en="Audience">Público</span>
+      <div class="process-text" data-pt="&lt;strong&gt;Perfil do cliente-alvo:&lt;/strong&gt; gestores de PMEs e fundadores de startups entre 30-55 anos. Buscam advogados por indicação ou Google. Esperam resposta rápida, clareza sobre especialização e facilidade de contato. WhatsApp é o canal preferido para primeiro contato." data-en="&lt;strong&gt;Target client profile:&lt;/strong&gt; SME managers and startup founders aged 30-55. They search for lawyers through referrals or Google. They expect quick responses, clarity about specialisation and easy contact. WhatsApp is the preferred channel for first contact."><strong>Perfil do cliente-alvo:</strong> gestores de PMEs e fundadores de startups entre 30-55 anos. Buscam advogados por indicação ou Google. Esperam resposta rápida, clareza sobre especialização e facilidade de contato. WhatsApp é o canal preferido para primeiro contato.</div>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="Referências" data-en="References">Referências</span>
+      <div class="process-text" data-pt="&lt;strong&gt;Moodboard de escritórios premium internacionais:&lt;/strong&gt; Freshfields, Cleary Gottlieb, Linklaters. Padrões comuns: tipografia serifada em tamanhos generosos, fotografia arquitetural de alta qualidade, paletas fora do clichê (verde-floresta, cobre, off-white), navegação limpa com amplo respiro." data-en="&lt;strong&gt;Moodboard from premium international firms:&lt;/strong&gt; Freshfields, Cleary Gottlieb, Linklaters. Common patterns: serif typography at generous sizes, high-quality architectural photography, non-cliché palettes (forest green, copper, off-white), clean navigation with generous whitespace."><strong>Moodboard de escritórios premium internacionais:</strong> Freshfields, Cleary Gottlieb, Linklaters. Padrões comuns: tipografia serifada em tamanhos generosos, fotografia arquitetural de alta qualidade, paletas fora do clichê (verde-floresta, cobre, off-white), navegação limpa com amplo respiro.</div>
+    </div>
+    <div class="process-item">
+      <span class="process-date" data-pt="WCAG" data-en="WCAG">WCAG</span>
+      <div class="process-text" data-pt="&lt;strong&gt;Auditoria de acessibilidade:&lt;/strong&gt; levantei os critérios WCAG 2.1 AA mais frequentemente violados em sites do segmento. Foco em: contraste mínimo 4.5:1 (texto) e 3:1 (componentes), navegação por teclado, semântica HTML, textos alternativos e estados de foco visíveis." data-en="&lt;strong&gt;Accessibility audit:&lt;/strong&gt; I mapped the most frequently violated WCAG 2.1 AA criteria in sector sites. Focus on: minimum contrast 4.5:1 (text) and 3:1 (components), keyboard navigation, HTML semantics, alternative texts and visible focus states."><strong>Auditoria de acessibilidade:</strong> levantei os critérios WCAG 2.1 AA mais frequentemente violados em sites do segmento. Foco em: contraste mínimo 4.5:1 (texto) e 3:1 (componentes), navegação por teclado, semântica HTML, textos alternativos e estados de foco visíveis.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 SÍNTESE -->
+<section class="case-section" id="sintese">
+  <div class="section-eyebrow"><span class="section-num">04</span><span class="section-label" data-pt="Síntese" data-en="Synthesis">Síntese</span></div>
+  <h2 class="section-title" data-pt="Quatro pilares para um site que &lt;em&gt;converte sem abrir mão da credibilidade&lt;/em&gt;" data-en="Four pillars for a site that &lt;em&gt;converts without sacrificing credibility&lt;/em&gt;">Quatro pilares para um site que <em>converte sem abrir mão da credibilidade</em></h2>
+  <div class="section-body">
+    <p data-pt="Cruzando benchmark, perfil de usuário e auditoria de acessibilidade, sintetizei os princípios que guiariam cada decisão de design:" data-en="Cross-referencing benchmark, user profile and accessibility audit, I synthesised the principles that would guide every design decision:">Cruzando benchmark, perfil de usuário e auditoria de acessibilidade, sintetizei os princípios que guiariam cada decisão de design:</p>
+  </div>
+  <blockquote class="pull-quote" data-pt="&quot;Acessibilidade não é uma feature opcional. É o piso mínimo de respeito ao usuário, e no segmento jurídico, é também diferenciação competitiva.&quot;" data-en="&quot;Accessibility isn't an optional feature. It's the minimum floor of respect for the user, and in the legal sector, it's also a competitive differentiator.&quot;">"Acessibilidade não é uma feature opcional. É o piso mínimo de respeito ao usuário, e no segmento jurídico, é também diferenciação competitiva."</blockquote>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Pilar 1 · Credibilidade visual" data-en="Pillar 1 · Visual credibility">Pilar 1 · Credibilidade visual</div>
+      <div class="insight-card-text" data-pt="Paleta fora do óbvio (verde-floresta + cobre + off-white), tipografia Montserrat, fotografia arquitetural real com efeito Ken Burns no hero. Visual que posiciona o escritório como sofisticado sem ser frio ou inacessível." data-en="Non-obvious palette (forest green + copper + off-white), Montserrat typography, real architectural photography with Ken Burns effect in the hero. Visuals that position the firm as sophisticated without being cold or inaccessible.">Paleta fora do óbvio (verde-floresta + cobre + off-white), tipografia Montserrat, fotografia arquitetural real com efeito Ken Burns no hero. Visual que posiciona o escritório como sofisticado sem ser frio ou inacessível.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Pilar 2 · Acessibilidade real" data-en="Pillar 2 · Real accessibility">Pilar 2 · Acessibilidade real</div>
+      <div class="insight-card-text" data-pt="WCAG 2.1 AA desde o token de design: contraste verificado em cada par cor/fundo, ARIA labels em todos os controles interativos, semântica HTML correta (nav, main, section, article), foco visível em todos os estados, textos alternativos descritivos." data-en="WCAG 2.1 AA from the design token level: contrast verified on every colour/background pair, ARIA labels on all interactive controls, correct HTML semantics (nav, main, section, article), visible focus on all states, descriptive alt texts.">WCAG 2.1 AA desde o token de design: contraste verificado em cada par cor/fundo, ARIA labels em todos os controles interativos, semântica HTML correta (nav, main, section, article), foco visível em todos os estados, textos alternativos descritivos.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Pilar 3 · Conversão progressiva" data-en="Pillar 3 · Progressive conversion">Pilar 3 · Conversão progressiva</div>
+      <div class="insight-card-text" data-pt="CTAs contextuais em cada área de atuação, formulário de contato rápido na página inicial, WhatsApp flutuante com rótulo acessível, ancoragem entre páginas de prática e formulário. O caminho do interesse ao contato tem zero fricção." data-en="Contextual CTAs on every practice area page, quick contact form on the homepage, floating WhatsApp with accessible label, deep-linking between practice pages and the contact form. The path from interest to contact has zero friction.">CTAs contextuais em cada área de atuação, formulário de contato rápido na página inicial, WhatsApp flutuante com rótulo acessível, ancoragem entre páginas de prática e formulário. O caminho do interesse ao contato tem zero fricção.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Pilar 4 · Responsividade total" data-en="Pillar 4 · Full responsiveness">Pilar 4 · Responsividade total</div>
+      <div class="insight-card-text" data-pt="Breakpoints em 768px e 1024px. Menu hambúrguer com animação e foco gerenciado no mobile. Imagens com max-width:100%, grid CSS que colapsa naturalmente. Testado em viewports de 320px a 1440px." data-en="Breakpoints at 768px and 1024px. Hamburger menu with animation and managed focus on mobile. Images with max-width:100%, CSS grid that collapses naturally. Tested on viewports from 320px to 1440px.">Breakpoints em 768px e 1024px. Menu hambúrguer com animação e foco gerenciado no mobile. Imagens com max-width:100%, grid CSS que colapsa naturalmente. Testado em viewports de 320px a 1440px.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 IDEAÇÃO -->
+<section class="case-section" id="ideacao">
+  <div class="section-eyebrow"><span class="section-num">05</span><span class="section-label" data-pt="Ideação" data-en="Ideation">Ideação</span></div>
+  <h2 class="section-title" data-pt="Do wireframe ao sistema de design: &lt;em&gt;decisões antes do código&lt;/em&gt;" data-en="From wireframe to design system: &lt;em&gt;decisions before code&lt;/em&gt;">Do wireframe ao sistema de design: <em>decisões antes do código</em></h2>
+  <div class="section-body">
+    <p data-pt="A ideação começou no Figma com wireframes de baixa fidelidade para definir hierarquia e fluxo antes de qualquer decisão visual. Em seguida, construí um sistema de design com tokens, componentes e estados antes de partir para o protótipo navegável." data-en="Ideation began in Figma with low-fidelity wireframes to define hierarchy and flow before any visual decision. I then built a design system with tokens, components and states before moving to the navigable prototype.">A ideação começou no Figma com wireframes de baixa fidelidade para definir hierarquia e fluxo antes de qualquer decisão visual. Em seguida, construí um sistema de design com tokens, componentes e estados antes de partir para o protótipo navegável.</p>
+    <p data-pt="Cada componente foi criado com &lt;strong&gt;variantes de estado no Figma&lt;/strong&gt;: default, hover, focus e disabled, garantindo que nenhum estado interativo ficasse sem especificação antes da implementação." data-en="Every component was created with &lt;strong&gt;state variants in Figma&lt;/strong&gt;: default, hover, focus and disabled, ensuring no interactive state was left unspecified before implementation.">Cada componente foi criado com <strong>variantes de estado no Figma</strong>: default, hover, focus e disabled, garantindo que nenhum estado interativo ficasse sem especificação antes da implementação.</p>
+    <div class="tag-row">
+      <span class="tag">Figma</span>
+      <span class="tag">Wireframes Lo-Fi</span>
+      <span class="tag">Design Tokens</span>
+      <span class="tag">Componentes</span>
+      <span class="tag">Auto Layout</span>
+      <span class="tag">Protótipo navegável</span>
+    </div>
+  </div>
+
+  <!-- Design System showcase -->
+  <div class="ds-showcase" role="region" aria-label="Sistema de design Tawareski">
+    <div class="ds-row">
+      <div class="ds-row-label">Paleta de cores · Design Tokens</div>
+      <div class="ds-swatches">
+        <div class="ds-swatch">
+          <div class="ds-swatch-color" style="background:#1B3D2A;"></div>
+          <div class="ds-swatch-name">#1B3D2A<br>Forest</div>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch-color" style="background:#2A5240;"></div>
+          <div class="ds-swatch-name">#2A5240<br>Forest Mid</div>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch-color" style="background:#B06830;"></div>
+          <div class="ds-swatch-name">#B06830<br>Copper</div>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch-color" style="background:#FAF9F6;"></div>
+          <div class="ds-swatch-name">#FAF9F6<br>Off-white</div>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch-color" style="background:#1A2A1F;"></div>
+          <div class="ds-swatch-name">#1A2A1F<br>Text</div>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch-color" style="background:rgba(210,235,215,.46);border:1px solid rgba(255,255,255,.12);"></div>
+          <div class="ds-swatch-name">D2EBD7/46%<br>Muted</div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-row">
+      <div class="ds-row-label">Tipografia · Montserrat</div>
+      <div class="ds-type-sample">
+        <div class="ds-type-row">
+          <span class="ds-type-row-tag">H1</span>
+          <span class="ds-type-h1">Tawareski</span>
+          <span class="ds-type-meta">Montserrat 700 · 52px · ls -0.01em</span>
+        </div>
+        <div class="ds-type-row">
+          <span class="ds-type-row-tag">H2</span>
+          <span class="ds-type-h2">Direito Empresarial</span>
+          <span class="ds-type-meta">Montserrat 600 · 32px</span>
+        </div>
+        <div class="ds-type-row">
+          <span class="ds-type-row-tag">Eyebrow</span>
+          <span class="ds-type-h3">DM Mono · Copper · LS 0.18em</span>
+          <span class="ds-type-meta">DM Mono 400 · 10px</span>
+        </div>
+        <div class="ds-type-row">
+          <span class="ds-type-row-tag">Body</span>
+          <span class="ds-type-body">Soluções jurídicas para empresas em crescimento.</span>
+          <span class="ds-type-meta">Montserrat 400 · 16px · lh 1.8</span>
+        </div>
+      </div>
+    </div>
+    <div class="ds-row">
+      <div class="ds-row-label">Componentes · Estados de interação especificados</div>
+      <div class="ds-components">
+        <button class="ds-btn-primary">Falar com advogado</button>
+        <button class="ds-btn-ghost">Saiba mais</button>
+        <div class="ds-card-mini">Área de atuação · Contratos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 SOLUÇÃO -->
+<section class="case-section" id="solucao">
+  <div class="section-eyebrow"><span class="section-num">06</span><span class="section-label" data-pt="Solução" data-en="Solution">Solução</span></div>
+  <h2 class="section-title" data-pt="7 páginas, totalmente responsivas, acessíveis e focadas em &lt;em&gt;gerar contato&lt;/em&gt;" data-en="7 pages, fully responsive, accessible and focused on &lt;em&gt;generating contact&lt;/em&gt;">7 páginas, totalmente responsivas, acessíveis e focadas em <em>gerar contato</em></h2>
+  <div class="section-body">
+    <p data-pt="A arquitetura de informação resultou em 7 páginas organizadas para conduzir o visitante do awareness ao contato: Home, Áreas de Atuação, Equipe, Blog, Contato, FAQ e Política de Privacidade, todas com roteamento client-side em JavaScript." data-en="The information architecture resulted in 7 pages organised to guide the visitor from awareness to contact: Home, Practice Areas, Team, Blog, Contact, FAQ and Privacy Policy, all with client-side routing in JavaScript.">A arquitetura de informação resultou em 7 páginas organizadas para conduzir o visitante do awareness ao contato: Home, Áreas de Atuação, Equipe, Blog, Contato, FAQ e Política de Privacidade, todas com roteamento client-side em JavaScript.</p>
+  </div>
+
+  <div class="page-map">
+    <div class="page-map-item">
+      <div class="page-map-num">01</div>
+      <div class="page-map-name">Home</div>
+      <div class="page-map-desc" data-pt="Hero com Ken Burns, CTAs primário e secundário, seções de áreas de atuação, equipe e contato rápido" data-en="Ken Burns hero, primary and secondary CTAs, practice areas, team and quick contact sections">Hero com Ken Burns, CTAs primário e secundário, seções de áreas de atuação, equipe e contato rápido</div>
+    </div>
+    <div class="page-map-item">
+      <div class="page-map-num">02</div>
+      <div class="page-map-name" data-pt="Áreas de Atuação" data-en="Practice Areas">Áreas de Atuação</div>
+      <div class="page-map-desc" data-pt="Cards das 6 especialidades jurídicas, cada uma com CTA de contato contextual" data-en="Cards for the 6 legal specialities, each with a contextual contact CTA">Cards das 6 especialidades jurídicas, cada uma com CTA de contato contextual</div>
+    </div>
+    <div class="page-map-item">
+      <div class="page-map-num">03</div>
+      <div class="page-map-name" data-pt="Equipe" data-en="Team">Equipe</div>
+      <div class="page-map-desc" data-pt="Cards dos 3 advogados com fotos reais, especialidades e mini-bio" data-en="Cards for the 3 lawyers with real photos, specialities and mini-bio">Cards dos 3 advogados com fotos reais, especialidades e mini-bio</div>
+    </div>
+    <div class="page-map-item">
+      <div class="page-map-num">04</div>
+      <div class="page-map-name">Blog</div>
+      <div class="page-map-desc" data-pt="Artigos jurídicos para autoridade de marca e SEO orgânico" data-en="Legal articles for brand authority and organic SEO">Artigos jurídicos para autoridade de marca e SEO orgânico</div>
+    </div>
+    <div class="page-map-item">
+      <div class="page-map-num">05</div>
+      <div class="page-map-name" data-pt="Contato" data-en="Contact">Contato</div>
+      <div class="page-map-desc" data-pt="Formulário de contato completo, endereço, WhatsApp flutuante e mapa" data-en="Full contact form, address, floating WhatsApp and map">Formulário de contato completo, endereço, WhatsApp flutuante e mapa</div>
+    </div>
+    <div class="page-map-item">
+      <div class="page-map-num">06</div>
+      <div class="page-map-name">FAQ</div>
+      <div class="page-map-desc" data-pt="Accordion com aria-expanded, perguntas frequentes sobre os serviços do escritório" data-en="Accordion with aria-expanded, frequently asked questions about the firm's services">Accordion com aria-expanded, perguntas frequentes sobre os serviços do escritório</div>
+    </div>
+    <div class="page-map-item">
+      <div class="page-map-num">07</div>
+      <div class="page-map-name" data-pt="Política de Privacidade" data-en="Privacy Policy">Política de Privacidade</div>
+      <div class="page-map-desc" data-pt="Política LGPD em linguagem clara e acessível" data-en="LGPD policy in clear, accessible language">Política LGPD em linguagem clara e acessível</div>
+    </div>
+  </div>
+
+  <div class="section-body" style="margin-top:40px;">
+    <p data-pt="&lt;strong&gt;WhatsApp flutuante:&lt;/strong&gt; botão fixo no canto inferior direito com role=&quot;complementary&quot;, aria-label descritivo e contraste mínimo de 3:1 em todos os breakpoints. Em mobile, o botão tem 44px de área de toque mínima (WCAG 2.5.5)." data-en="&lt;strong&gt;Floating WhatsApp:&lt;/strong&gt; fixed button in the bottom-right corner with role=&quot;complementary&quot;, descriptive aria-label and minimum contrast of 3:1 across all breakpoints. On mobile, the button has a minimum 44px touch target (WCAG 2.5.5)."><strong>WhatsApp flutuante:</strong> botão fixo no canto inferior direito com <code>role="complementary"</code>, <code>aria-label</code> descritivo e contraste mínimo de 3:1 em todos os breakpoints. Em mobile, o botão tem 44px de área de toque mínima (WCAG 2.5.5).</p>
+    <div class="a11y-badge" role="note" aria-label="Nota de acessibilidade">
+      <strong>WCAG 2.1 AA</strong> · Contraste, ARIA, foco, semântica, alt texts, toque mínimo
+    </div>
+  </div>
+</section>
+
+<!-- 07 VALIDAÇÃO -->
+<section class="case-section" id="validacao">
+  <div class="section-eyebrow"><span class="section-num">07</span><span class="section-label" data-pt="Validação" data-en="Validation">Validação</span></div>
+  <h2 class="section-title" data-pt="Testando responsividade, acessibilidade e fluxo de contato antes do código final" data-en="Testing responsiveness, accessibility and contact flow before the final code">Testando responsividade, acessibilidade e fluxo de contato antes do código final</h2>
+  <div class="section-body">
+    <p data-pt="A validação foi conduzida em três camadas: revisão do protótipo Figma contra o briefing de requisitos, testes de responsividade nos principais breakpoints e auditoria de acessibilidade com ferramentas automatizadas e inspeção manual." data-en="Validation was conducted in three layers: review of the Figma prototype against the requirements brief, responsiveness testing at key breakpoints, and accessibility auditing using automated tools and manual inspection.">A validação foi conduzida em três camadas: revisão do protótipo Figma contra o briefing de requisitos, testes de responsividade nos principais breakpoints e auditoria de acessibilidade com ferramentas automatizadas e inspeção manual.</p>
+  </div>
+  <div class="process-list">
+    <div class="process-item">
+      <span class="process-date">Protótipo</span>
+      <div class="process-text" data-pt="&lt;strong&gt;Revisão de fluxo no Figma:&lt;/strong&gt; percorri os fluxos de chegada por área de atuação, pelo hero e pelo blog, verificando que cada caminho levava a um CTA de contato sem dead ends. Identifiquei e corrigi dois fluxos onde o visitante ficaria sem opção de contato contextual." data-en="&lt;strong&gt;Flow review in Figma:&lt;/strong&gt; I walked through the arrival flows from practice area pages, the hero and the blog, verifying that every path led to a contact CTA without dead ends. Identified and fixed two flows where the visitor would be left without a contextual contact option."><strong>Revisão de fluxo no Figma:</strong> percorri os fluxos de chegada por área de atuação, pelo hero e pelo blog, verificando que cada caminho levava a um CTA de contato sem dead ends. Identifiquei e corrigi dois fluxos onde o visitante ficaria sem opção de contato contextual.</div>
+    </div>
+    <div class="process-item">
+      <span class="process-date">Mobile</span>
+      <div class="process-text" data-pt="&lt;strong&gt;Teste de responsividade:&lt;/strong&gt; validei nos viewports 320px, 375px, 768px e 1024px no Figma e no browser com DevTools. Menu hambúrguer com foco gerenciado, imagens com object-fit:cover, grid colapsando corretamente em todos os breakpoints." data-en="&lt;strong&gt;Responsiveness testing:&lt;/strong&gt; validated at 320px, 375px, 768px and 1024px viewports in Figma and in the browser with DevTools. Hamburger menu with managed focus, images with object-fit:cover, grid collapsing correctly at all breakpoints."><strong>Teste de responsividade:</strong> validei nos viewports 320px, 375px, 768px e 1024px no Figma e no browser com DevTools. Menu hambúrguer com foco gerenciado, imagens com object-fit:cover, grid colapsando corretamente em todos os breakpoints.</div>
+    </div>
+    <div class="process-item">
+      <span class="process-date">WCAG</span>
+      <div class="process-text" data-pt="&lt;strong&gt;Auditoria de acessibilidade:&lt;/strong&gt; uso de Contrast Checker (WebAIM) para cada par de cor, navegação completa por teclado (Tab, Shift+Tab, Enter, Escape), verificação de screen reader na estrutura de headings. Todos os critérios AA verificados." data-en="&lt;strong&gt;Accessibility audit:&lt;/strong&gt; use of Contrast Checker (WebAIM) for every colour pair, full keyboard navigation (Tab, Shift+Tab, Enter, Escape), screen reader verification of the heading structure. All AA criteria verified."><strong>Auditoria de acessibilidade:</strong> uso de Contrast Checker (WebAIM) para cada par de cor, navegação completa por teclado (Tab, Shift+Tab, Enter, Escape), verificação de screen reader na estrutura de headings. Todos os critérios AA verificados.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 IMPLEMENTAÇÃO -->
+<section class="case-section" id="implementacao">
+  <div class="section-eyebrow"><span class="section-num">08</span><span class="section-label" data-pt="Implementação" data-en="Implementation">Implementação</span></div>
+  <h2 class="section-title" data-pt="HTML, CSS e JS vanilla: &lt;em&gt;performance máxima, zero dependências&lt;/em&gt;" data-en="Vanilla HTML, CSS and JS: &lt;em&gt;maximum performance, zero dependencies&lt;/em&gt;">HTML, CSS e JS vanilla: <em>performance máxima, zero dependências</em></h2>
+  <div class="section-body">
+    <p data-pt="A implementação foi feita em HTML, CSS e JavaScript puro, sem frameworks ou bibliotecas externas além do Google Fonts. A escolha é intencional: &lt;strong&gt;sites institucionais não precisam de React&lt;/strong&gt;, e a ausência de dependências garante performance, segurança e manutenibilidade máximas." data-en="Implementation was done in pure HTML, CSS and JavaScript, with no frameworks or external libraries beyond Google Fonts. The choice is intentional: &lt;strong&gt;institutional sites don't need React&lt;/strong&gt;, and the absence of dependencies guarantees maximum performance, security and maintainability.">A implementação foi feita em HTML, CSS e JavaScript puro, sem frameworks ou bibliotecas externas além do Google Fonts. A escolha é intencional: <strong>sites institucionais não precisam de React</strong>, e a ausência de dependências garante performance, segurança e manutenibilidade máximas.</p>
+  </div>
+  <div class="process-list">
+    <div class="process-item">
+      <span class="process-date">HTML</span>
+      <div class="process-text" data-pt="&lt;strong&gt;Semântica e estrutura:&lt;/strong&gt; &lt;code&gt;&amp;lt;nav&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;main&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;section&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;article&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;footer&amp;gt;&lt;/code&gt; usados com função semântica real. Roteamento client-side via atributos &lt;code&gt;data-page&lt;/code&gt; e função JavaScript &lt;code&gt;navigate()&lt;/code&gt;. Aria-labels em todos os controles interativos, role=&quot;list&quot; em listas de navegação." data-en="&lt;strong&gt;Semantics and structure:&lt;/strong&gt; &lt;code&gt;&amp;lt;nav&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;main&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;section&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;article&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;footer&amp;gt;&lt;/code&gt; used with real semantic function. Client-side routing via &lt;code&gt;data-page&lt;/code&gt; attributes and a JavaScript &lt;code&gt;navigate()&lt;/code&gt; function. Aria-labels on all interactive controls, role=&quot;list&quot; on navigation lists."><strong>Semântica e estrutura:</strong> <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;footer&gt;</code> usados com função semântica real. Roteamento client-side via atributos <code>data-page</code> e função JavaScript <code>navigate()</code>. Aria-labels em todos os controles interativos, <code>role="list"</code> em listas de navegação.</div>
+    </div>
+    <div class="process-item">
+      <span class="process-date">CSS</span>
+      <div class="process-text" data-pt="&lt;strong&gt;Custom properties e responsive:&lt;/strong&gt; paleta completa definida como CSS variables em &lt;code&gt;:root&lt;/code&gt;, facilitando manutenção e eventual theming. &lt;code&gt;clamp()&lt;/code&gt; para tipografia fluida, &lt;code&gt;grid&lt;/code&gt; e &lt;code&gt;flex&lt;/code&gt; para layout responsivo sem media queries excessivas. &lt;code&gt;:focus-visible&lt;/code&gt; para estados de foco visíveis só para teclado." data-en="&lt;strong&gt;Custom properties and responsive:&lt;/strong&gt; complete palette defined as CSS variables in &lt;code&gt;:root&lt;/code&gt;, making maintenance and eventual theming easy. &lt;code&gt;clamp()&lt;/code&gt; for fluid typography, &lt;code&gt;grid&lt;/code&gt; and &lt;code&gt;flex&lt;/code&gt; for responsive layout without excessive media queries. &lt;code&gt;:focus-visible&lt;/code&gt; for keyboard-only visible focus states."><strong>Custom properties e responsive:</strong> paleta completa definida como CSS variables em <code>:root</code>, facilitando manutenção e eventual theming. <code>clamp()</code> para tipografia fluida, <code>grid</code> e <code>flex</code> para layout responsivo sem media queries excessivas. <code>:focus-visible</code> para estados de foco visíveis só para teclado.</div>
+    </div>
+    <div class="process-item">
+      <span class="process-date">JS</span>
+      <div class="process-text" data-pt="&lt;strong&gt;Interatividade acessível:&lt;/strong&gt; menu hambúrguer com gerenciamento de foco (trap + restore ao fechar), accordion do FAQ com &lt;code&gt;aria-expanded&lt;/code&gt; atualizado dinamicamente, animação Ken Burns em CSS puro, WhatsApp flutuante com visibilidade via scroll event. Nenhum framework, nenhuma dependência externa." data-en="&lt;strong&gt;Accessible interactivity:&lt;/strong&gt; hamburger menu with focus management (trap + restore on close), FAQ accordion with dynamically updated &lt;code&gt;aria-expanded&lt;/code&gt;, Ken Burns animation in pure CSS, floating WhatsApp with scroll-event visibility. No framework, no external dependencies."><strong>Interatividade acessível:</strong> menu hambúrguer com gerenciamento de foco (trap + restore ao fechar), accordion do FAQ com <code>aria-expanded</code> atualizado dinamicamente, animação Ken Burns em CSS puro, WhatsApp flutuante com visibilidade via scroll event. Nenhum framework, nenhuma dependência externa.</div>
+    </div>
+    <div class="process-item">
+      <span class="process-date">Figma</span>
+      <div class="process-text" data-pt="&lt;strong&gt;Handoff design-to-code:&lt;/strong&gt; o sistema de design no Figma foi construído com Auto Layout, variáveis de cor e tipografia alinhadas aos CSS custom properties, e componentes com todas as variantes de estado documentadas. A implementação partiu diretamente dos tokens do Figma para o CSS, sem interpretação livre." data-en="&lt;strong&gt;Design-to-code handoff:&lt;/strong&gt; the design system in Figma was built with Auto Layout, colour and typography variables aligned to CSS custom properties, and components with all state variants documented. Implementation drew directly from Figma tokens to CSS, with no free interpretation."><strong>Handoff design-to-code:</strong> o sistema de design no Figma foi construído com Auto Layout, variáveis de cor e tipografia alinhadas aos CSS custom properties, e componentes com todas as variantes de estado documentadas. A implementação partiu diretamente dos tokens do Figma para o CSS, sem interpretação livre.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 RESULTADOS -->
+<section class="case-section" id="resultados">
+  <div class="section-eyebrow"><span class="section-num">09</span><span class="section-label" data-pt="Resultados" data-en="Results">Resultados</span></div>
+  <h2 class="section-title" data-pt="O que foi entregue e o que cada decisão significa na prática" data-en="What was delivered and what each decision means in practice">O que foi entregue e o que cada decisão significa na prática</h2>
+  <div class="section-body">
+    <p data-pt="O redesign resultou em um site que supera os padrões do segmento em todas as dimensões do briefing: responsividade, acessibilidade, geração de leads e credibilidade visual." data-en="The redesign resulted in a website that surpasses sector standards across all dimensions of the brief: responsiveness, accessibility, lead generation and visual credibility.">O redesign resultou em um site que supera os padrões do segmento em todas as dimensões do briefing: responsividade, acessibilidade, geração de leads e credibilidade visual.</p>
+  </div>
+  <div class="results-grid" role="list">
+    <div class="result-stat" role="listitem">
+      <div class="result-num">7</div>
+      <div class="result-label" data-pt="páginas entregues, da home à política de privacidade" data-en="pages delivered, from home to privacy policy">páginas entregues, da home à política de privacidade</div>
+    </div>
+    <div class="result-stat" role="listitem">
+      <div class="result-num">AA</div>
+      <div class="result-label" data-pt="WCAG 2.1 conformidade total em acessibilidade" data-en="WCAG 2.1 full accessibility conformance">WCAG 2.1 conformidade total em acessibilidade</div>
+    </div>
+    <div class="result-stat" role="listitem">
+      <div class="result-num">100%</div>
+      <div class="result-label" data-pt="responsivo de 320px a 1440px" data-en="responsive from 320px to 1440px">responsivo de 320px a 1440px</div>
+    </div>
+    <div class="result-stat" role="listitem">
+      <div class="result-num">0</div>
+      <div class="result-label" data-pt="dependências externas além do Google Fonts" data-en="external dependencies beyond Google Fonts">dependências externas além do Google Fonts</div>
+    </div>
+  </div>
+  <div class="insight-grid" style="margin-top:2px;">
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Conversão" data-en="Conversion">Conversão</div>
+      <div class="insight-card-text" data-pt="7 pontos de contato distribuídos pelas 12 páginas: CTAs contextuais por área de atuação, formulário na home, formulário completo na página de contato, WhatsApp flutuante, link no footer e número direto no header mobile." data-en="7 contact points distributed across the 12 pages: contextual CTAs per practice area, form on the home, full form on the contact page, floating WhatsApp, footer link and direct number in the mobile header.">7 pontos de contato distribuídos pelas 12 páginas: CTAs contextuais por área de atuação, formulário na home, formulário completo na página de contato, WhatsApp flutuante, link no footer e número direto no header mobile.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-card-label" data-pt="Acessibilidade" data-en="Accessibility">Acessibilidade</div>
+      <div class="insight-card-text" data-pt="Skip link implementado para pular navegação, ordem de tab lógica em todas as páginas, contraste mínimo 4.5:1 em todos os textos, ARIA roles e labels em todos os componentes interativos, alt texts descritivos em todas as imagens." data-en="Skip link implemented to bypass navigation, logical tab order on all pages, minimum 4.5:1 contrast on all text, ARIA roles and labels on all interactive components, descriptive alt texts on all images.">Skip link implementado para pular navegação, ordem de tab lógica em todas as páginas, contraste mínimo 4.5:1 em todos os textos, ARIA roles e labels em todos os componentes interativos, alt texts descritivos em todas as imagens.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 APRENDIZADOS -->
+<section class="case-section" id="aprendizados">
+  <div class="section-eyebrow"><span class="section-num">10</span><span class="section-label" data-pt="Aprendizados" data-en="Learnings">Aprendizados</span></div>
+  <h2 class="section-title" data-pt="O que este projeto reforçou sobre design, acessibilidade e o &lt;em&gt;peso das decisões de UX&lt;/em&gt;" data-en="What this project reinforced about design, accessibility and the &lt;em&gt;weight of UX decisions&lt;/em&gt;">O que este projeto reforçou sobre design, acessibilidade e o <em>peso das decisões de UX</em></h2>
+  <div class="section-body">
+    <p data-pt="Trabalhar com um briefing de alto nível de exigência, com requisitos de acessibilidade não-negociáveis, deixou claro que &lt;strong&gt;acessibilidade não é uma camada adicionada ao final&lt;/strong&gt;: precisa estar no token de design, na escolha tipográfica, na estrutura HTML e no comportamento JavaScript desde o início." data-en="Working with a high-demand brief, with non-negotiable accessibility requirements, made it clear that &lt;strong&gt;accessibility is not a layer added at the end&lt;/strong&gt;: it needs to be in the design token, in the type choice, in the HTML structure and in JavaScript behaviour from the very start.">Trabalhar com um briefing de alto nível de exigência, com requisitos de acessibilidade não-negociáveis, deixou claro que <strong>acessibilidade não é uma camada adicionada ao final</strong>: precisa estar no token de design, na escolha tipográfica, na estrutura HTML e no comportamento JavaScript desde o início.</p>
+    <p data-pt="O Figma como etapa obrigatória antes do código também foi um aprendizado reforçado: especificar os estados de foco e hover no protótipo antes de implementar elimina decisões ambíguas durante o desenvolvimento e garante consistência entre o design e a entrega." data-en="Figma as a mandatory step before code was also reinforced as a learning: specifying focus and hover states in the prototype before implementing eliminates ambiguous decisions during development and guarantees consistency between design and delivery.">O Figma como etapa obrigatória antes do código também foi um aprendizado reforçado: especificar os estados de foco e hover no protótipo antes de implementar elimina decisões ambíguas durante o desenvolvimento e garante consistência entre o design e a entrega.</p>
+    <p data-pt="Por fim, a escolha de HTML/CSS/JS puro para um site institucional reforça que &lt;strong&gt;a ferramenta certa para o problema certo&lt;/strong&gt; é sempre mais importante do que usar a tecnologia mais popular. Performance, manutenibilidade e zero dependências são vantagens reais para um cliente que vai manter o site por anos." data-en="Finally, choosing pure HTML/CSS/JS for an institutional site reinforces that &lt;strong&gt;the right tool for the right problem&lt;/strong&gt; is always more important than using the most popular technology. Performance, maintainability and zero dependencies are real advantages for a client who will maintain the site for years.">Por fim, a escolha de HTML/CSS/JS puro para um site institucional reforça que <strong>a ferramenta certa para o problema certo</strong> é sempre mais importante do que usar a tecnologia mais popular. Performance, manutenibilidade e zero dependências são vantagens reais para um cliente que vai manter o site por anos.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="case-cta">
+  <div class="section-eyebrow" style="justify-content:center;" data-pt="Próximos passos" data-en="Next steps">Próximos passos</div>
+  <h2 class="section-title" data-pt="Quer um projeto com o mesmo &lt;em&gt;nível de atenção&lt;/em&gt;?" data-en="Want a project with the same &lt;em&gt;level of attention&lt;/em&gt;?">Quer um projeto com o mesmo <em>nível de atenção</em>?</h2>
+  <p style="font-size:15px;color:#4A4A48;max-width:520px;margin:0 auto;line-height:1.8;" data-pt="Estou disponível para projetos de UI/UX, Web Design e Front-end. Posso trabalhar do Figma ao código, com entrega de sites acessíveis, responsivos e focados em resultados reais." data-en="I'm available for UI/UX, Web Design and Front-end projects. I can work from Figma to code, delivering accessible, responsive websites focused on real results.">Estou disponível para projetos de UI/UX, Web Design e Front-end. Posso trabalhar do Figma ao código, com entrega de sites acessíveis, responsivos e focados em resultados reais.</p>
+  <div class="cta-links">
+    <a href="mailto:pestanascamilla@gmail.com" class="btn-cta-primary" data-pt="Falar com Camilla" data-en="Talk to Camilla">Falar com Camilla</a>
+    <a href="index.html" class="btn-cta-ghost" data-pt="Ver mais projetos" data-en="See more projects">Ver mais projetos</a>
+  </div>
+</section>
+
+<footer>
+  <p>Camilla Pestana · 2025</p>
+  <p data-pt="UI/UX · Acessibilidade · Web Design · Figma" data-en="UI/UX · Accessibility · Web Design · Figma">UI/UX · Acessibilidade · Web Design · Figma</p>
+</footer>
+
+<script>
+function setLang(lang) {
+  document.querySelectorAll('[data-pt]').forEach(el => {
+    if (lang === 'pt') {
+      el.innerHTML = el.getAttribute('data-pt');
+    } else {
+      el.innerHTML = el.getAttribute('data-en');
+    }
+  });
+  document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+}
+</script>
+</body>
+</html>
