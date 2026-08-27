@@ -15,8 +15,6 @@
     --pink: #E8547A;
     --pink-light: #FDF0F3;
     --pink-mid: #F4C5D0;
-    --pink-bg: #FDF6F8;
-    --pink-blob: #FBEAF0;
     --gray: #6B6B6B;
     --gray-light: #F0EFED;
     --gray-border: #E4E3E0;
@@ -132,22 +130,10 @@
     padding: 60px 6vw 80px;
     display: grid; grid-template-columns: 1fr 1fr;
     gap: 60px; align-items: center;
+    border-bottom: 1px solid var(--gray-border);
     position: relative;
     overflow: hidden;
     z-index: 1;
-  }
-
-  /* Blob orgânico suave no hero */
-  .hero::after {
-    content: '';
-    position: absolute;
-    width: 620px; height: 620px;
-    background: var(--pink-blob);
-    border-radius: 42% 58% 63% 37% / 45% 45% 55% 55%;
-    top: -180px; right: -160px;
-    z-index: 0;
-    opacity: 0.7;
-    filter: blur(2px);
   }
 
   .hero::before {
@@ -196,9 +182,9 @@
     background: var(--pink); color: white;
     font-family: var(--sans); font-size: 12px; font-weight: 600;
     letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 14px 30px; text-decoration: none; border: none; cursor: pointer;
+    padding: 14px 28px; text-decoration: none; border: none; cursor: pointer;
     transition: transform 0.15s, box-shadow 0.15s;
-    display: inline-block; border-radius: 100px;
+    display: inline-block;
   }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,84,122,0.3); }
 
@@ -216,13 +202,12 @@
 
   .hero-card {
     width: 100%; max-width: 360px;
-    background: var(--pink-bg); padding: 36px; position: relative;
-    border-radius: 24px;
+    background: var(--gray-light); padding: 36px; position: relative;
   }
   .hero-card::before {
     content: ''; position: absolute; top: -10px; right: -10px;
     width: 100%; height: 100%;
-    border: 1px solid var(--pink-mid); z-index: -1; border-radius: 24px;
+    border: 1px solid var(--pink-mid); z-index: -1;
   }
 
   .hero-card-label {
@@ -284,7 +269,6 @@
   }
 
   .project-card {
-    border-radius: 20px;
     background: var(--white); overflow: hidden;
     transition: background 0.3s;
     border: 1px solid var(--gray-border);
@@ -293,7 +277,7 @@
 
   .project-thumb {
     width: 100%; aspect-ratio: 16/10;
-    background: var(--gray-light); overflow: hidden; border-radius: 16px;
+    background: var(--gray-light); overflow: hidden;
   }
   .project-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
   .project-card:hover .project-thumb img { transform: scale(1.04); }
@@ -368,7 +352,7 @@
   .btn-top:hover svg { transform: translateY(-3px); }
 
   /*   */
-  .about-page { padding: 60px 6vw 80px; position: relative; z-index: 1; background: var(--pink-bg); border-radius: 40px 40px 0 0; }
+  .about-page { padding: 60px 6vw 80px; position: relative; z-index: 1; }
 
   .about-grid {
     display: grid; grid-template-columns: 380px 1fr;
@@ -381,17 +365,17 @@
 
   .about-photo {
     aspect-ratio: 3/4; background: var(--gray-light);
-    position: relative; overflow: hidden;
+    position: relative; overflow: hidden; border-radius: 20px;
   }
-  .about-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .about-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; }
   .about-photo-placeholder {
     width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
     font-family: var(--serif); font-size: 80px; font-weight: 300; color: var(--gray-border);
   }
   .about-photo::after {
-    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-    height: 3px; background: var(--pink);
+    content: ''; position: absolute; bottom: 0; left: 20px; right: 20px;
+    height: 3px; background: var(--pink); border-radius: 3px;
   }
 
   .about-tag {
@@ -428,7 +412,7 @@
   /* PROJETOS e SOBRE — background */
   #page-projetos,
   #page-sobre {
-    background-image: url('images/download.png');
+    background-image: url('images/background-pag1e2.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -460,19 +444,7 @@
     pointer-events: none;
     z-index: 0;
   }
-  .contact-page { padding: 60px 6vw 80px; position: relative; z-index: 1; background: var(--pink-bg); border-radius: 40px 40px 0 0; overflow: hidden; }
-  .contact-page::after {
-    content: '';
-    position: absolute;
-    width: 520px; height: 520px;
-    background: var(--pink-blob);
-    border-radius: 58% 42% 45% 55% / 55% 48% 52% 45%;
-    bottom: -200px; left: -160px;
-    z-index: 0;
-    opacity: 0.6;
-    filter: blur(2px);
-  }
-  .contact-page > * { position: relative; z-index: 1; }
+  .contact-page { padding: 60px 6vw 80px; position: relative; z-index: 1; }
 
   .contact-header { margin-bottom: 56px; }
   .contact-tag {
@@ -521,7 +493,6 @@
     text-transform: uppercase; color: var(--gray);
   }
   .form-field input, .form-field textarea {
-    border-radius: 12px;
     background: var(--gray-light); border: 1px solid var(--gray-border);
     color: var(--black); font-family: var(--sans); font-size: 14px;
     padding: 14px 16px; outline: none; resize: none;
@@ -536,7 +507,6 @@
     letter-spacing: 0.1em; text-transform: uppercase;
     padding: 16px 32px; align-self: flex-start;
     transition: transform 0.15s, box-shadow 0.15s;
-      border-radius: 100px;
   }
   .btn-send:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,84,122,0.3); }
 
@@ -1045,6 +1015,36 @@
 </div>
 
       <div class="project-card">
+  <div class="project-thumb">
+    <img src="images/lp-tawareski.png" alt="Tawareski Advocacia — Direito Empresarial">
+  </div>
+  <div class="project-info">
+    <div class="project-tags">
+      <span class="project-tag">UX/UI</span>
+      <span class="project-tag" data-pt="Acessibilidade" data-en="Accessibility">Acessibilidade</span>
+    </div>
+    <div class="project-name"
+      data-pt="Tawareski Advocacia — Presença digital"
+      data-en="Tawareski Law — Digital presence">
+      Tawareski Advocacia — Presença digital
+    </div>
+    <p class="project-desc"
+      data-pt="Redesign da presença digital de um escritório de advocacia empresarial, com foco em credibilidade, acessibilidade e conversão."
+      data-en="Redesign of a corporate law firm's digital presence, focused on credibility, accessibility and conversion.">
+      Redesign da presença digital de um escritório de advocacia empresarial, com foco em credibilidade, acessibilidade e conversão.
+    </p>
+    <div class="project-links-row">
+      <a href="case-study-tawareski.html"
+        class="project-link-secondary"
+        data-pt="Documentação" data-en="Case study">Documentação</a>
+      <a href="https://cspestana.github.io/Tawareski-advocacia/" target="_blank"
+        class="project-link"
+        data-pt="Preview" data-en="Preview">Preview</a>
+    </div>
+  </div>
+</div>
+
+      <div class="project-card">
         <div class="project-thumb">
 <img src="images/eats.jpg" alt="Escola Aberta do Terceiro Setor — on-Hive">
         </div>
@@ -1077,7 +1077,7 @@
 
       <div class="project-card">
 <div class="project-thumb">
-  <img src="images/case-ux.png" alt="Hábitos saudáveis na infância">
+  <img src="images/case-ux.jpg" alt="Hábitos saudáveis na infância">
 </div>
         <div class="project-info">
           <div class="project-tags">
