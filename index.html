@@ -413,6 +413,25 @@
   }
   .about-text p strong { color: var(--black); font-weight: 600; }
 
+  /* BLOCO FORMAÇÃO */
+  .about-education { margin-top: 44px; }
+  .about-education-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--pink); margin-bottom: 24px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .about-education-label::before { content: ''; width: 20px; height: 1px; background: var(--pink); }
+  .edu-item {
+    padding: 16px 0; border-top: 1px solid var(--gray-border);
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 16px; flex-wrap: wrap;
+  }
+  .edu-item:last-child { border-bottom: 1px solid var(--gray-border); }
+  .edu-main { display: flex; flex-direction: column; gap: 3px; }
+  .edu-degree { font-size: 15px; font-weight: 600; color: var(--black); }
+  .edu-place { font-size: 13px; color: var(--gray); }
+  .edu-year { font-family: var(--mono, 'DM Sans'); font-size: 12px; color: var(--pink); white-space: nowrap; font-weight: 500; }
+
   .about-skills {
     margin-top: 36px; border-top: 1px solid var(--gray-border);
   }
@@ -957,9 +976,11 @@
             <div class="skill-pills">
               <span class="skill-pill" data-pt="Definição de problema" data-en="Problem definition">Definição de problema</span>
               <span class="skill-pill" data-pt="Discovery" data-en="Discovery">Discovery</span>
+              <span class="skill-pill" data-pt="UX Strategy" data-en="UX Strategy">UX Strategy</span>
               <span class="skill-pill" data-pt="User flows" data-en="User flows">User flows</span>
               <span class="skill-pill" data-pt="Wireframes" data-en="Wireframes">Wireframes</span>
               <span class="skill-pill" data-pt="Prototipagem" data-en="Prototyping">Prototipagem</span>
+              <span class="skill-pill" data-pt="UX Writing" data-en="UX Writing">UX Writing</span>
               <span class="skill-pill" data-pt="Design System" data-en="Design System">Design System</span>
               <span class="skill-pill" data-pt="Análise de métricas" data-en="Metrics analysis">Análise de métricas</span>
             </div>
@@ -1203,6 +1224,34 @@
           <p data-pt="Cada decisão de interface parte de um entendimento claro do problema e do usuário." data-en="Every interface decision starts from a clear understanding of the problem and the user.">Cada decisão de interface parte de um entendimento claro do problema e do usuário.
           <p data-pt="Uso IA como acelerador no meu processo, para ganhar velocidade nas etapas certas e chegar mais rápido ao que importa. O julgamento de design fica sempre comigo." data-en="I use AI as an accelerator in my process, to gain speed at the right stages and get to what matters faster. The design judgement always stays with me.">Uso IA como acelerador no meu processo, para ganhar velocidade nas etapas certas e chegar mais rápido ao que importa. O julgamento de design fica sempre comigo.
 </p>
+
+          <div class="about-education reveal">
+            <div class="about-education-label" data-pt="Formação" data-en="Education">Formação</div>
+
+            <div class="edu-item">
+              <div class="edu-main">
+                <span class="edu-degree" data-pt="Especialização em UX, UI &amp; Product Design" data-en="Specialization in UX, UI &amp; Product Design">Especialização em UX, UI &amp; Product Design</span>
+                <span class="edu-place" data-pt="UX Unicórnio · 200h" data-en="UX Unicórnio · 200h">UX Unicórnio · 200h</span>
+              </div>
+              <span class="edu-year">2026</span>
+            </div>
+
+            <div class="edu-item">
+              <div class="edu-main">
+                <span class="edu-degree" data-pt="Extensão em Design Thinking" data-en="Extension in Design Thinking">Extensão em Design Thinking</span>
+                <span class="edu-place">Cruzeiro do Sul</span>
+              </div>
+              <span class="edu-year">2026</span>
+            </div>
+
+            <div class="edu-item">
+              <div class="edu-main">
+                <span class="edu-degree" data-pt="Bacharelado em Design Gráfico" data-en="Bachelor's in Graphic Design">Bacharelado em Design Gráfico</span>
+                <span class="edu-place">Centro Universitário FMU</span>
+              </div>
+              <span class="edu-year">2012</span>
+            </div>
+          </div>
 
           </div>
         </div>
