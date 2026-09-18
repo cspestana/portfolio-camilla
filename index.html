@@ -260,36 +260,127 @@
   .stat-label { font-size: 11px; color: var(--gray); }
 
   /* PROJETOS GRID */
-  .projects-wrap { padding: 60px 6vw; position: relative; z-index: 1; }
+  /* ===== CARROSSEL TRABALHOS SELECIONADOS ===== */
+  .projects-wrap {
+    height: 700vh; /* 7 cards × 100vh */
+    position: relative;
+    z-index: 1;
+  }
+
+  .projects-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 6vw 40px;
+    gap: 0;
+  }
 
   .projects-label {
     font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--gray); margin-bottom: 32px;
+    text-transform: uppercase; color: var(--gray); margin-bottom: 28px;
     display: flex; align-items: center; gap: 8px;
+    flex-shrink: 0;
+    align-self: flex-start;
   }
   .projects-label::before { content: ''; width: 20px; height: 1px; background: var(--gray); }
 
+  /* Container dos cards — ocupa todo o espaço disponível */
+  .projects-cards-container {
+    position: relative;
+    flex: 1;
+    width: 100%;
+    /* overflow hidden para cortar cards que saem pelas bordas */
+    overflow: hidden;
+  }
+
+  /* Grid: referência de posição para os cards absolutos */
   .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    position: absolute;
+    inset: 0;
   }
 
-  @media (max-width: 900px) {
-    .projects-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  /* Footer: dots + counter */
+  .projects-footer {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
   }
 
-  @media (max-width: 560px) {
-    .projects-grid { grid-template-columns: 1fr; gap: 16px; }
+  .projects-dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
   }
 
+  .projects-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gray-border);
+    transition: all 0.4s ease;
+    flex-shrink: 0;
+  }
+
+  .projects-dot.active {
+    background: var(--pink);
+    width: 18px;
+    border-radius: 4px;
+  }
+
+  .projects-dot.past {
+    background: var(--gray);
+  }
+
+  .projects-counter {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+
+  .projects-counter .current {
+    color: var(--black);
+  }
+
+
+  /* === CARD BASE === */
   .project-card {
-    background: var(--white); overflow: hidden;
-    transition: background 0.3s;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 380px;
+    background: var(--white);
+    overflow: hidden;
     border: 1px solid var(--gray-border);
     border-radius: 20px;
+    /* transform e opacity controlados pelo JS */
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+    transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity  0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                filter   0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform, opacity, filter;
+    cursor: pointer;
   }
   .project-card:hover { background: var(--pink-light); }
+
+  @media (max-width: 900px) {
+    .project-card { width: 300px; }
+  }
+  @media (max-width: 560px) {
+    .projects-wrap { height: 700vh; }
+    .project-card { width: 78vw; }
+  }
 
   .project-thumb {
     width: 100%; aspect-ratio: 16/10;
@@ -562,8 +653,8 @@
     nav { padding: 16px 6vw; }
     .nav-tab { padding: 8px 14px; font-size: 11px; }
     .hero { padding: 40px 6vw 60px; }
-    .projects-wrap, .about-page, .contact-page { padding: 48px 6vw 60px; }
-    .projects-grid { grid-template-columns: 1fr; }
+    .about-page, .contact-page { padding: 48px 6vw 60px; }
+    .projects-sticky { padding: 48px 4vw 32px; }
     .hero-actions { flex-direction: column; align-items: flex-start; gap: 14px; }
 
     /* HAMBÚRGUER */
@@ -1040,167 +1131,150 @@
   </div>
 
   <div class="projects-wrap">
-    <div class="projects-label" data-pt="Trabalhos selecionados" data-en="Selected work">Trabalhos selecionados</div>
+    <div class="projects-sticky">
+      <div class="projects-label" data-pt="Trabalhos selecionados" data-en="Selected work">Trabalhos selecionados</div>
 
-    <div class="projects-grid">
+      <div class="projects-cards-container">
+        <div class="projects-grid">
 
-      <div class="project-card reveal">
-  <div class="project-thumb">
-    <img src="images/PayFlow.png" alt="PayFlow — Módulo de Pagamento de Professores">
-  </div>
-  <div class="project-info">
-    <div class="project-tags">
-      <span class="project-tag">Product Design</span>
-      <span class="project-tag">UX/UI</span>      
-    </div>
-    <div class="project-name"
-      data-pt="PayFlow — Módulo de Pagamento de Professores"
-      data-en="PayFlow — Teacher Payment Module">
-      PayFlow — Módulo de Pagamento de Professores
-    </div>
-    <p class="project-desc"
-      data-pt="Do material bruto de discovery à interface navegável: módulo de fechamento mensal de folha de pagamento para escolas de dança, com foco em reduzir erros silenciosos no processo da Fernanda."
-      data-en="From raw discovery material to a navigable interface: a monthly payroll closing module for dance schools, focused on reducing silent errors in Fernanda’s workflow.">
-      Do material bruto de discovery à interface navegável: módulo de fechamento mensal de folha de pagamento para escolas de dança, com foco em reduzir erros silenciosos no processo da Fernanda.
-    </p>
-    <div class="project-links-row">
-      <a href="case-study-payflow.html" target="_blank"
-        class="project-link-secondary"
-        data-pt="Documentação" data-en="Case study">Documentação</a>
-      <a href="https://cspestana.github.io/Fraktal/" target="_blank"
-        class="project-link"
-        data-pt="Preview" data-en="Preview">Preview</a>
-    </div>
-  </div>
-</div>
-
-      <div class="project-card reveal">
-  <div class="project-thumb">
-    <img src="images/lp-tawareski.png" alt="Tawareski Advocacia — Direito Empresarial">
-  </div>
-  <div class="project-info">
-    <div class="project-tags">
-      <span class="project-tag">UX/UI</span>
-      <span class="project-tag" data-pt="Acessibilidade" data-en="Accessibility">Acessibilidade</span>
-    </div>
-    <div class="project-name"
-      data-pt="Tawareski Advocacia — Presença digital"
-      data-en="Tawareski Law — Digital presence">
-      Tawareski Advocacia — Presença digital
-    </div>
-    <p class="project-desc"
-      data-pt="Redesign da presença digital de um escritório de advocacia empresarial, com foco em credibilidade, acessibilidade e conversão."
-      data-en="Redesign of a corporate law firm's digital presence, focused on credibility, accessibility and conversion.">
-      Redesign da presença digital de um escritório de advocacia empresarial, com foco em credibilidade, acessibilidade e conversão.
-    </p>
-    <div class="project-links-row">
-      <a href="case-study-tawareski.html"
-        class="project-link-secondary"
-        data-pt="Documentação" data-en="Case study">Documentação</a>
-      <a href="https://cspestana.github.io/Tawareski-advocacia/" target="_blank"
-        class="project-link"
-        data-pt="Preview" data-en="Preview">Preview</a>
-    </div>
-  </div>
-</div>
-
-      <div class="project-card reveal">
-        <div class="project-thumb">
-<img src="images/eats.jpg" alt="Escola Aberta do Terceiro Setor — on-Hive">
-        </div>
-        <div class="project-info">
-          <div class="project-tags">
-            <span class="project-tag">Product Design</span>
-            <span class="project-tag">UX/UI</span>
+          <div class="project-card" data-pcard="0">
+            <div class="project-thumb">
+              <img src="images/PayFlow.png" alt="PayFlow — Módulo de Pagamento de Professores">
+            </div>
+            <div class="project-info">
+              <div class="project-tags">
+                <span class="project-tag">Product Design</span>
+                <span class="project-tag">UX/UI</span>
+              </div>
+              <div class="project-name" data-pt="PayFlow — Módulo de Pagamento de Professores" data-en="PayFlow — Teacher Payment Module">PayFlow — Módulo de Pagamento de Professores</div>
+              <p class="project-desc" data-pt="Do material bruto de discovery à interface navegável: módulo de fechamento mensal de folha de pagamento para escolas de dança, com foco em reduzir erros silenciosos no processo da Fernanda." data-en="From raw discovery material to a navigable interface: a monthly payroll closing module for dance schools, focused on reducing silent errors in Fernanda’s workflow.">Do material bruto de discovery à interface navegável: módulo de fechamento mensal de folha de pagamento para escolas de dança, com foco em reduzir erros silenciosos no processo da Fernanda.</p>
+              <div class="project-links-row">
+                <a href="case-study-payflow.html" target="_blank" class="project-link-secondary" data-pt="Documentação" data-en="Case study">Documentação</a>
+                <a href="https://cspestana.github.io/Fraktal/" target="_blank" class="project-link" data-pt="Preview" data-en="Preview">Preview</a>
+              </div>
+            </div>
           </div>
-          <div class="project-name">Escola Aberta do Terceiro Setor — on-Hive</div>
-          <p class="project-desc" data-pt="40 mil usuários dependiam de uma plataforma de cursos com inconsistências herdadas e bugs críticos. Como única designer da equipe, migrei e padronizei o sistema: Design System com 80+ componentes, 3 ciclos de validação com Clarity e resolução de bugs em parceria direta com devs." data-en="40,000 users depended on a course platform with inherited inconsistencies and critical bugs. As the sole designer on the team, I migrated and standardised the system: Design System with 80+ components, 3 Clarity validation cycles and bug resolution in direct partnership with devs.">40 mil usuários dependiam de uma plataforma de cursos com inconsistências herdadas e bugs críticos. Como única designer da equipe, migrei e padronizei o sistema: Design System com 80+ componentes, 3 ciclos de validação com Clarity e resolução de bugs em parceria direta com devs.</p>
-          <div class="project-links-row">
-            <a href="case-study-lms-migracao.html" class="project-link-secondary" data-pt="Documentação" data-en="Case study">Documentação</a>
-            <a href="https://eats.onhive.org.br/login" target="_blank" class="project-link">Preview</a>
-          </div>
-        </div>
-      </div>
 
-      <div class="project-card reveal">
-<div class="project-thumb">
-  <img src="images/case-ux.png" alt="Hábitos saudáveis na infância">
-</div>
-        <div class="project-info">
-          <div class="project-tags">
-            <span class="project-tag">UX Research</span>
-            <span class="project-tag">Product Design</span>
+          <div class="project-card" data-pcard="1">
+            <div class="project-thumb">
+              <img src="images/lp-tawareski.png" alt="Tawareski Advocacia — Direito Empresarial">
+            </div>
+            <div class="project-info">
+              <div class="project-tags">
+                <span class="project-tag">UX/UI</span>
+                <span class="project-tag" data-pt="Acessibilidade" data-en="Accessibility">Acessibilidade</span>
+              </div>
+              <div class="project-name" data-pt="Tawareski Advocacia — Presença digital" data-en="Tawareski Law — Digital presence">Tawareski Advocacia — Presença digital</div>
+              <p class="project-desc" data-pt="Redesign da presença digital de um escritório de advocacia empresarial, com foco em credibilidade, acessibilidade e conversão." data-en="Redesign of a corporate law firm’s digital presence, focused on credibility, accessibility and conversion.">Redesign da presença digital de um escritório de advocacia empresarial, com foco em credibilidade, acessibilidade e conversão.</p>
+              <div class="project-links-row">
+                <a href="case-study-tawareski.html" class="project-link-secondary" data-pt="Documentação" data-en="Case study">Documentação</a>
+                <a href="https://cspestana.github.io/Tawareski-advocacia/" target="_blank" class="project-link" data-pt="Preview" data-en="Preview">Preview</a>
+              </div>
+            </div>
           </div>
-          <div class="project-name" data-pt="Cuidados com a saúde all-in-one" data-en="All-in-one healthcare">Cuidados com a saúde all-in-one</div>
-          <p class="project-desc" data-pt="Cuidadores gerenciam a saúde dos filhos de forma fragmentada, sem uma solução centralizada. Conduzo pesquisa qualitativa para mapear as dores reais do sistema e definir as oportunidades de design." data-en="Caregivers manage their children's health in a fragmented way, with no centralised solution. I am conducting qualitative research to map the real pain points of the system and define design opportunities.">Cuidadores gerenciam a saúde dos filhos de forma fragmentada, sem uma solução centralizada. Conduzo pesquisa qualitativa para mapear as dores reais do sistema e definir as oportunidades de design.</p>
-          <div class="project-links-row">
-            <button onclick="openModal('ux')" class="project-link-secondary" style="background:none;border:none;padding:0;font-family:var(--sans);cursor:pointer;" data-pt="Documentação" data-en="Case study">Documentação</button>
-            <a href="#" class="project-link" onclick="return false;">Preview</a>
-          </div>
-        </div>
-      </div>
 
-      <div class="project-card reveal">
-  <div class="project-thumb">
-    <img src="images/lp-filafavo.png" alt="FilaFavo — Lembrancinhas em 3D">
-  </div>
-  <div class="project-info">
-    <div class="project-tags">
-      <span class="project-tag">UX/UI</span>
-      <span class="project-tag">Front-end</span>
-    </div>
-    <div class="project-name"
-      data-pt="FilaFavo — Lembrancinhas em 3D"
-      data-en="FilaFavo — 3D Party Favours">
-      FilaFavo — Lembrancinhas em 3D
-    </div>
-    <p class="project-desc"
-      data-pt="De uma necessidade real a um produto próprio: naming, identidade visual e landing page para negócio de lembrancinhas em 3D, do conceito ao ar em domínio próprio."
-      data-en="From a real need to a product of my own: naming, visual identity and landing page for a 3D party favour business, from concept to live on a custom domain.">
-      De uma necessidade real a um produto próprio: naming, identidade visual e landing page para negócio de lembrancinhas em 3D, do conceito ao ar em domínio próprio.
-    </p>
-    <div class="project-links-row">
-      <a href="case-study-filafavo.html"
-        class="project-link-secondary"
-        data-pt="Documentação" data-en="Case study">Documentação</a>
-      <a href="https://cspestana.github.io/FilaFavo/" target="_blank"
-        class="project-link"
-        data-pt="Preview" data-en="Preview">Preview</a>
-    </div>
-  </div>
-</div>
+          <div class="project-card" data-pcard="2">
+            <div class="project-thumb">
+              <img src="images/eats.jpg" alt="Escola Aberta do Terceiro Setor — on-Hive">
+            </div>
+            <div class="project-info">
+              <div class="project-tags">
+                <span class="project-tag">Product Design</span>
+                <span class="project-tag">UX/UI</span>
+              </div>
+              <div class="project-name">Escola Aberta do Terceiro Setor — on-Hive</div>
+              <p class="project-desc" data-pt="40 mil usuários dependiam de uma plataforma de cursos com inconsistências herdadas e bugs críticos. Como única designer da equipe, migrei e padronizei o sistema: Design System com 80+ componentes, 3 ciclos de validação com Clarity e resolução de bugs em parceria direta com devs." data-en="40,000 users depended on a course platform with inherited inconsistencies and critical bugs. As the sole designer on the team, I migrated and standardised the system: Design System with 80+ components, 3 Clarity validation cycles and bug resolution in direct partnership with devs.">40 mil usuários dependiam de uma plataforma de cursos com inconsistências herdadas e bugs críticos. Como única designer da equipe, migrei e padronizei o sistema: Design System com 80+ componentes, 3 ciclos de validação com Clarity e resolução de bugs em parceria direta com devs.</p>
+              <div class="project-links-row">
+                <a href="case-study-lms-migracao.html" class="project-link-secondary" data-pt="Documentação" data-en="Case study">Documentação</a>
+                <a href="https://eats.onhive.org.br/login" target="_blank" class="project-link">Preview</a>
+              </div>
+            </div>
+          </div>
 
-      <div class="project-card reveal">
-        <div class="project-thumb">
-<img src="images/daniel-noffs.png" alt="Daniel Noffs — Personal Trainer">
-</div>
-        <div class="project-info">
-          <div class="project-tags">
-            <span class="project-tag">UI Design</span>
-            <span class="project-tag">Front-end</span>
+          <div class="project-card" data-pcard="3">
+            <div class="project-thumb">
+              <img src="images/case-ux.png" alt="Hábitos saudáveis na infância">
+            </div>
+            <div class="project-info">
+              <div class="project-tags">
+                <span class="project-tag">UX Research</span>
+                <span class="project-tag">Product Design</span>
+              </div>
+              <div class="project-name" data-pt="Cuidados com a saúde all-in-one" data-en="All-in-one healthcare">Cuidados com a saúde all-in-one</div>
+              <p class="project-desc" data-pt="Cuidadores gerenciam a saúde dos filhos de forma fragmentada, sem uma solução centralizada. Conduzo pesquisa qualitativa para mapear as dores reais do sistema e definir as oportunidades de design." data-en="Caregivers manage their children’s health in a fragmented way, with no centralised solution. I am conducting qualitative research to map the real pain points of the system and define design opportunities.">Cuidadores gerenciam a saúde dos filhos de forma fragmentada, sem uma solução centralizada. Conduzo pesquisa qualitativa para mapear as dores reais do sistema e definir as oportunidades de design.</p>
+              <div class="project-links-row">
+                <button onclick="openModal(‘ux’)" class="project-link-secondary" style="background:none;border:none;padding:0;font-family:var(--sans);cursor:pointer;" data-pt="Documentação" data-en="Case study">Documentação</button>
+                <a href="#" class="project-link" onclick="return false;">Preview</a>
+              </div>
+            </div>
           </div>
-          <div class="project-name">Daniel Noffs — Personal Trainer</div>
-          <p class="project-desc" data-pt="Personal trainer sem presença digital estruturada perdia visibilidade e oportunidades de captar clientes. Projetei e desenvolvi o site completo, com depoimentos em tempo real via Google Sheets, do zero ao domínio próprio." data-en="A personal trainer with no structured digital presence was losing visibility and client leads. I designed and developed the full website, with real-time testimonials via Google Sheets, from scratch to live domain.">Personal trainer sem presença digital estruturada perdia visibilidade e oportunidades de captar clientes. Projetei e desenvolvi o site completo, com depoimentos em tempo real via Google Sheets, do zero ao domínio próprio.</p>
-          <div class="project-links-row">
-            <a href="case-study-daniel-noffs.html" class="project-link-secondary" data-pt="Documentação" data-en="Case study">Documentação</a>
-            <a href="https://danielnoffs.com.br" target="_blank" class="project-link">Preview</a>
+
+          <div class="project-card" data-pcard="4">
+            <div class="project-thumb">
+              <img src="images/lp-filafavo.png" alt="FilaFavo — Lembrancinhas em 3D">
+            </div>
+            <div class="project-info">
+              <div class="project-tags">
+                <span class="project-tag">UX/UI</span>
+                <span class="project-tag">Front-end</span>
+              </div>
+              <div class="project-name" data-pt="FilaFavo — Lembrancinhas em 3D" data-en="FilaFavo — 3D Party Favours">FilaFavo — Lembrancinhas em 3D</div>
+              <p class="project-desc" data-pt="De uma necessidade real a um produto próprio: naming, identidade visual e landing page para negócio de lembrancinhas em 3D, do conceito ao ar em domínio próprio." data-en="From a real need to a product of my own: naming, visual identity and landing page for a 3D party favour business, from concept to live on a custom domain.">De uma necessidade real a um produto próprio: naming, identidade visual e landing page para negócio de lembrancinhas em 3D, do conceito ao ar em domínio próprio.</p>
+              <div class="project-links-row">
+                <a href="case-study-filafavo.html" class="project-link-secondary" data-pt="Documentação" data-en="Case study">Documentação</a>
+                <a href="https://cspestana.github.io/FilaFavo/" target="_blank" class="project-link" data-pt="Preview" data-en="Preview">Preview</a>
+              </div>
+            </div>
           </div>
+
+          <div class="project-card" data-pcard="5">
+            <div class="project-thumb">
+              <img src="images/daniel-noffs.png" alt="Daniel Noffs — Personal Trainer">
+            </div>
+            <div class="project-info">
+              <div class="project-tags">
+                <span class="project-tag">UI Design</span>
+                <span class="project-tag">Front-end</span>
+              </div>
+              <div class="project-name">Daniel Noffs — Personal Trainer</div>
+              <p class="project-desc" data-pt="Personal trainer sem presença digital estruturada perdia visibilidade e oportunidades de captar clientes. Projetei e desenvolvi o site completo, com depoimentos em tempo real via Google Sheets, do zero ao domínio próprio." data-en="A personal trainer with no structured digital presence was losing visibility and client leads. I designed and developed the full website, with real-time testimonials via Google Sheets, from scratch to live domain.">Personal trainer sem presença digital estruturada perdia visibilidade e oportunidades de captar clientes. Projetei e desenvolvi o site completo, com depoimentos em tempo real via Google Sheets, do zero ao domínio próprio.</p>
+              <div class="project-links-row">
+                <a href="case-study-daniel-noffs.html" class="project-link-secondary" data-pt="Documentação" data-en="Case study">Documentação</a>
+                <a href="https://danielnoffs.com.br" target="_blank" class="project-link">Preview</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card" data-pcard="6" style="--card-opacity:0.55;">
+            <div class="project-thumb">
+              <div class="project-thumb-placeholder">◻</div>
+            </div>
+            <div class="project-info">
+              <div class="project-tags">
+                <span class="project-tag">Mobile</span>
+                <span class="project-tag">UX/UI</span>
+              </div>
+              <div class="project-name" data-pt="Em breve" data-en="Coming soon">Em breve</div>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <div class="project-card reveal" style="--card-opacity:0.55;">
-        <div class="project-thumb">
-          <div class="project-thumb-placeholder">◻</div>
+      <div class="projects-footer">
+        <div class="projects-dots" id="projects-dots">
+          <span class="projects-dot active"></span>
+          <span class="projects-dot"></span>
+          <span class="projects-dot"></span>
+          <span class="projects-dot"></span>
+          <span class="projects-dot"></span>
+          <span class="projects-dot"></span>
+          <span class="projects-dot"></span>
         </div>
-        <div class="project-info">
-          <div class="project-tags">
-            <span class="project-tag">Mobile</span>
-            <span class="project-tag">UX/UI</span>
-          </div>
-          <div class="project-name" data-pt="Em breve" data-en="Coming soon">Em breve</div>
+        <div class="projects-counter">
+          <span class="current" id="projects-current">01</span> / 07
         </div>
       </div>
-
     </div>
   </div>
 
@@ -1472,6 +1546,83 @@ Este projeto de UX Research investiga as dores reais desse sistema, com foco em 
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
+  // CARROSSEL TRABALHOS SELECIONADOS — scatter circular
+  (function() {
+    var TOTAL = 7;
+    var cards = document.querySelectorAll('.project-card[data-pcard]');
+    var dots  = document.querySelectorAll('#projects-dots .projects-dot');
+    var counterEl = document.getElementById('projects-current');
+    var wrapEl = document.querySelector('.projects-wrap');
+
+    // Posições de espalhamento para cada distância circular (dist ≠ 0)
+    // tx/ty em px a partir do centro; sc = scale; rot = rotação graus
+    // blur em px; bright = brightness (0–1)
+    var SLOTS = {
+       1: { tx:  370, ty: -130, sc: 0.60, rot:  6, blur: 3, bright: 0.70 }, // próximo à direita
+      '-1': { tx: -380, ty: -110, sc: 0.62, rot: -7, blur: 3, bright: 0.72 }, // próximo à esquerda
+       2: { tx:  430, ty:  160, sc: 0.50, rot:  9, blur: 4, bright: 0.60 }, // 2º à direita
+      '-2': { tx: -440, ty:  140, sc: 0.52, rot: -6, blur: 4, bright: 0.62 }, // 2º à esquerda
+       3: { tx:  110, ty: -250, sc: 0.44, rot:  4, blur: 5, bright: 0.52 }, // acima/direita
+      '-3': { tx: -130, ty:  230, sc: 0.42, rot: -4, blur: 5, bright: 0.50 }, // abaixo/esquerda
+    };
+
+    function mod(n, m) { return ((n % m) + m) % m; }
+
+    function updateProjects(idx) {
+      idx = mod(idx, TOTAL);
+
+      cards.forEach(function(card, i) {
+        var dist = mod(i - idx, TOTAL);
+        if (dist > Math.floor(TOTAL / 2)) dist -= TOTAL; // converte para com sinal
+
+        if (dist === 0) {
+          // ATIVO — centro, frente, nítido
+          card.style.transform   = 'translate(-50%, -50%) scale(0.88) rotate(0deg)';
+          card.style.opacity     = '1';
+          card.style.filter      = 'blur(0px) brightness(1)';
+          card.style.zIndex      = '10';
+          card.style.boxShadow   = '0 32px 80px rgba(0,0,0,0.18), 0 8px 32px rgba(0,0,0,0.10)';
+        } else {
+          var s = SLOTS[dist];
+          if (s) {
+            card.style.transform = 'translate(calc(-50% + ' + s.tx + 'px), calc(-50% + ' + s.ty + 'px)) scale(' + s.sc + ') rotate(' + s.rot + 'deg)';
+            card.style.opacity   = '1';
+            card.style.filter    = 'blur(' + s.blur + 'px) brightness(' + s.bright + ')';
+            card.style.zIndex    = String(5 - Math.abs(dist));
+            card.style.boxShadow = 'none';
+          } else {
+            // distância inesperada — esconde
+            card.style.opacity = '0';
+            card.style.zIndex  = '0';
+          }
+        }
+      });
+
+      dots.forEach(function(dot, i) {
+        dot.classList.remove('active', 'past');
+        if (i === idx)    dot.classList.add('active');
+        else if (i < idx) dot.classList.add('past');
+      });
+
+      if (counterEl) counterEl.textContent = String(idx + 1).padStart(2, '0');
+    }
+
+    function onScroll() {
+      if (!wrapEl) return;
+      var rect = wrapEl.getBoundingClientRect();
+      var wrapH = wrapEl.offsetHeight;
+      var stickyH = window.innerHeight;
+      var scrolled = -rect.top;
+      var scrollable = wrapH - stickyH;
+      var progress = Math.max(0, Math.min(1, scrolled / scrollable));
+      var idx = Math.round(progress * (TOTAL - 1));
+      updateProjects(idx);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    updateProjects(0);
+  })();
 
   // FADE-IN AO ROLAR
   (function() {
