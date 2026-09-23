@@ -10,28 +10,33 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --white: #FAFAF8;
-    --black: #111110;
-    --pink: #E8547A;
-    --pink-light: #FDF0F3;
-    --pink-mid: #F4C5D0;
-    --pink-bg: #FDF6F8;
-    --pink-blob: #FBEAF0;
-    --gray: #6B6B6B;
-    --gray-light: #F0EFED;
-    --gray-border: #E4E3E0;
+    --white: #16121A;        /* fundo principal (escuro rosado) */
+    --black: #F2EDF0;        /* texto (quase branco) */
+    --pink: #FF6B92;         /* rosa vibrante */
+    --pink-light: #2A1F28;   /* rosa escuro para fundos sutis */
+    --pink-mid: #6E3B52;     /* rosa médio escurecido */
+    --pink-bg: #1E1822;      /* fundo rosado sutil das seções */
+    --pink-blob: #2C2030;    /* blob */
+    --gray: #A89CA6;         /* texto secundário */
+    --gray-light: #231D29;   /* campos, fundos claros */
+    --gray-border: #362E3D;  /* bordas */
     --serif: 'Cormorant Garamond', Georgia, serif;
     --sans: 'DM Sans', sans-serif;
+    --nav-bg: rgba(22,18,26,0.82);
+    --nav-bg-mobile: rgba(22,18,26,0.96);
+    --card-shadow: rgba(0,0,0,0.4);
+    --body-overlay: rgba(18, 14, 22, 0.55);
   }
 
   html { scroll-behavior: smooth; }
 
   body {
-    background-color: var(--white);
-    background-image: url('background2.png');
+    background-color: #0A0710;
+    background-image: url('images/background.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    background-repeat: no-repeat;
     color: var(--black);
     font-family: var(--sans);
     overflow-x: hidden;
@@ -43,7 +48,7 @@
     content: '';
     position: fixed;
     inset: 0;
-    background: rgba(250, 250, 248, 0.72);
+    background: var(--body-overlay);
     z-index: 0;
     pointer-events: none;
   }
@@ -87,7 +92,7 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 24px 6vw;
     display: flex; justify-content: space-between; align-items: center;
-    background: rgba(250,250,248,0.92);
+    background: var(--nav-bg);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--gray-border);
   }
@@ -129,35 +134,57 @@
 
   /* HERO (dentro de projetos) */
   .hero {
+    padding: 60px 6vw 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* FAIXA DE SKILLS ROLANTE (marquee) */
+  .skills-marquee {
+    position: relative; z-index: 1;
+    overflow: hidden;
+    border-top: 1px solid var(--gray-border);
+    border-bottom: 1px solid var(--gray-border);
+    padding: 22px 0;
+    margin-bottom: 40px;
+    background: rgba(30, 24, 34, 0.35);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .skills-marquee-track {
+    display: inline-flex; align-items: center;
+    white-space: nowrap;
+    animation: marquee 28s linear infinite;
+    will-change: transform;
+  }
+  .skills-marquee:hover .skills-marquee-track { animation-play-state: paused; }
+  .skills-marquee-item {
+    font-family: var(--serif); font-size: 22px; font-weight: 400;
+    color: var(--black); padding: 0 4px;
+  }
+  .skills-marquee-item em { font-style: italic; color: var(--pink); }
+  .skills-marquee-sep { color: var(--pink); font-size: 16px; padding: 0 22px; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .skills-marquee-track { animation: none; }
+    .skills-marquee { -webkit-mask-image: none; mask-image: none; text-align: center; }
+    .skills-marquee-track { white-space: normal; display: block; }
+  }
+  @media (max-width: 600px) {
+    .skills-marquee-item { font-size: 18px; }
+    .skills-marquee-sep { padding: 0 14px; }
+  }
+
+  .hero-old-grid {
     padding: 60px 6vw 80px;
     display: grid; grid-template-columns: 1fr 1fr;
     gap: 60px; align-items: center;
     position: relative;
     overflow: hidden;
     z-index: 1;
-  }
-
-  .hero::after {
-    content: '';
-    position: absolute;
-    width: 620px; height: 620px;
-    background: var(--pink-blob);
-    border-radius: 42% 58% 63% 37% / 45% 45% 55% 55%;
-    top: -180px; right: -160px;
-    z-index: 0;
-    opacity: 0.7;
-    filter: blur(2px);
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url('background1.jpg');
-    background-size: cover;
-    background-position: center top;
-    opacity: 0.13;
-    z-index: 0;
   }
 
   .hero > * {
@@ -358,7 +385,8 @@
     top: 50%;
     left: 50%;
     width: 380px;
-    background: var(--white);
+    background: rgba(28, 22, 34, 0.82);
+    backdrop-filter: blur(6px);
     overflow: hidden;
     border: 1px solid var(--gray-border);
     border-radius: 20px;
@@ -535,40 +563,15 @@
   .about-skill-name { color: var(--black); font-weight: 500; }
   .about-skill-level { color: var(--pink); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
 
-  /* PROJETOS e SOBRE — background */
+  /* PROJETOS e SOBRE — sem fundo próprio (usa a nebulosa do body) */
   #page-projetos,
   #page-sobre {
-    background-image: url('images/background-pag1e2.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     position: relative;
-  }
-  #page-projetos::before,
-  #page-sobre::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(255, 255, 255, 0.75);
-    pointer-events: none;
-    z-index: 0;
   }
 
   /* CONTATO */
   #page-contato {
-    background-image: url('images/contato-bkg.jpg');
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
     position: relative;
-  }
-  #page-contato::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(255, 255, 255, 0.70);
-    pointer-events: none;
-    z-index: 0;
   }
   .contact-page { padding: 60px 6vw 80px; position: relative; z-index: 1; border-radius: 40px 40px 0 0; }
 
@@ -658,7 +661,7 @@
     .hero-actions { flex-direction: column; align-items: flex-start; gap: 14px; }
 
     /* HAMBÚRGUER */
-    .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(250,250,248,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray-border); padding: 8px 0; z-index: 99; }
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--nav-bg-mobile); backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray-border); padding: 8px 0; z-index: 99; }
     .nav-links.open { display: flex; }
     .nav-links li { list-style: none; }
     .nav-links .nav-tab { display: block; padding: 14px 6vw; border-bottom: none; width: 100%; font-size: 13px; text-align: left; }
@@ -1054,79 +1057,26 @@
         <button class="btn-ghost" onclick="showPage('sobre')" data-pt="Sobre mim" data-en="About me">Sobre mim</button>
       </div>
     </div>
+  </div>
 
-    <div class="hero-visual">
-      <div class="hero-card">
-        <div class="hero-card-label" data-pt="Skills" data-en="Skills">Skills</div>
-        <div class="hero-card-skills">
-
-          <div class="skill-group">
-            <div class="skill-group-label">
-              <span data-pt="Product Design" data-en="Product Design">Product Design</span>
-            </div>
-            <div class="skill-pills">
-              <span class="skill-pill" data-pt="Definição de problema" data-en="Problem definition">Definição de problema</span>
-              <span class="skill-pill" data-pt="Discovery" data-en="Discovery">Discovery</span>
-              <span class="skill-pill" data-pt="UX Strategy" data-en="UX Strategy">UX Strategy</span>
-              <span class="skill-pill" data-pt="User flows" data-en="User flows">User flows</span>
-              <span class="skill-pill" data-pt="Wireframes" data-en="Wireframes">Wireframes</span>
-              <span class="skill-pill" data-pt="Prototipagem" data-en="Prototyping">Prototipagem</span>
-              <span class="skill-pill" data-pt="UX Writing" data-en="UX Writing">UX Writing</span>
-              <span class="skill-pill" data-pt="Design System" data-en="Design System">Design System</span>
-              <span class="skill-pill" data-pt="Análise de métricas" data-en="Metrics analysis">Análise de métricas</span>
-            </div>
-          </div>
-
-          <div class="skill-group">
-            <div class="skill-group-label">
-              <span data-pt="UX Research" data-en="UX Research">UX Research</span>
-            </div>
-            <div class="skill-pills">
-              <span class="skill-pill" data-pt="Entrevistas" data-en="Interviews">Entrevistas</span>
-              <span class="skill-pill" data-pt="Jornadas do usuário" data-en="User journeys">Jornadas do usuário</span>
-              <span class="skill-pill" data-pt="Personas" data-en="Personas">Personas</span>
-              <span class="skill-pill" data-pt="Testes de usabilidade" data-en="Usability testing">Testes de usabilidade</span>
-              <span class="skill-pill" data-pt="Análise de competidores" data-en="Competitive analysis">Análise de competidores</span>
-            </div>
-          </div>
-
-          <div class="skill-group">
-            <div class="skill-group-label">
-              <span data-pt="Ferramentas" data-en="Tools">Ferramentas</span>
-            </div>
-            <div class="skill-pills">
-              <span class="skill-pill highlight">Figma</span>
-              <span class="skill-pill">Microsoft Clarity</span>
-              <span class="skill-pill">Google Analytics</span>
-              <span class="skill-pill" data-pt="Pacote Adobe" data-en="Adobe Suite">Pacote Adobe</span>
-            </div>
-          </div>
-
-          <div class="skill-group">
-            <div class="skill-group-label">
-              <span data-pt="Front-end" data-en="Front-end">Front-end</span>
-            </div>
-            <div class="skill-pills">
-              <span class="skill-pill">HTML</span>
-              <span class="skill-pill">CSS / SASS</span>
-              <span class="skill-pill">JavaScript</span>
-              <span class="skill-pill">React</span>
-            </div>
-          </div>
-
-          <div class="skill-group">
-            <div class="skill-group-label">
-              <span data-pt="IA no processo de design" data-en="AI in the design process">IA no processo de design</span>
-            </div>
-            <div class="skill-pills">
-              <span class="skill-pill highlight" data-pt="Prototipagem assistida" data-en="AI-assisted prototyping">Prototipagem assistida</span>
-              <span class="skill-pill highlight" data-pt="Aceleração de pesquisa" data-en="Research acceleration">Aceleração de pesquisa</span>
-              <span class="skill-pill highlight" data-pt="Geração de variações" data-en="Variation generation">Geração de variações</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
+  <div class="skills-marquee" aria-label="Skills">
+    <div class="skills-marquee-track">
+      <span class="skills-marquee-item">Product Design</span><span class="skills-marquee-sep">•</span>
+      <span class="skills-marquee-item">UX/UI Design</span><span class="skills-marquee-sep">•</span>
+      <span class="skills-marquee-item">Visual &amp; Brand Design</span><span class="skills-marquee-sep">•</span>
+      <span class="skills-marquee-item">Figma</span><span class="skills-marquee-sep">•</span>
+      <span class="skills-marquee-item">Front-end</span><span class="skills-marquee-sep">•</span>
+      <span class="skills-marquee-item"><em>IA</em></span><span class="skills-marquee-sep">•</span>
+      <span class="skills-marquee-item">Design System</span><span class="skills-marquee-sep">•</span>
+      <span class="skills-marquee-item">Discovery</span><span class="skills-marquee-sep">•</span>
+      <span class="skills-marquee-item">Product Design</span><span class="skills-marquee-sep">•</span>
+      <span class="skills-marquee-item">UX/UI Design</span><span class="skills-marquee-sep">•</span>
+      <span class="skills-marquee-item">Visual &amp; Brand Design</span><span class="skills-marquee-sep">•</span>
+      <span class="skills-marquee-item">Figma</span><span class="skills-marquee-sep">•</span>
+      <span class="skills-marquee-item">Front-end</span><span class="skills-marquee-sep">•</span>
+      <span class="skills-marquee-item"><em>IA</em></span><span class="skills-marquee-sep">•</span>
+      <span class="skills-marquee-item">Design System</span><span class="skills-marquee-sep">•</span>
+      <span class="skills-marquee-item">Discovery</span><span class="skills-marquee-sep">•</span>
     </div>
   </div>
 
