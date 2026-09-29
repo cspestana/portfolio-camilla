@@ -75,11 +75,14 @@
   .cursor {
     width: 20px; height: 24px;
     position: fixed; pointer-events: none; z-index: 9999;
-    transition: width 0.2s, height 0.2s, opacity 0.2s;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='24' viewBox='0 0 20 24' fill='none'%3E%3Cpath d='M1 1L1 19L5.5 14.5L8.5 22L11 21L8 13.5L14.5 13.5L1 1Z' fill='%23E8547A' stroke='white' stroke-width='1.2' stroke-linejoin='round'/%3E%3C/svg%3E");
+    transition: transform 0.18s ease, opacity 0.2s;
+    transform-origin: 0 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='24' viewBox='0 0 20 24' fill='none'%3E%3Cpath d='M1 1L1 19L5.5 14.5L8.5 22L11 21L8 13.5L14.5 13.5L1 1Z' fill='%23FF6B92' stroke='white' stroke-width='1.2' stroke-linejoin='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-size: contain;
   }
+  /* Destaque da seta ao passar sobre links e botões */
+  .cursor.cursor-hover { transform: scale(1.4); }
   .cursor-ring { display: none; }
 
   .hamburger { display: none; }
@@ -1399,16 +1402,22 @@ Este projeto de UX Research investiga as dores reais desse sistema, com foco em 
   document.addEventListener('mouseover', e => {
     const isLink = e.target.closest('a, button, .nav-tab');
     const isField = e.target.closest('input, textarea');
-    if (isLink || isField) cursor.style.opacity = '0';
+    if (isField) {
+      // em campos de texto, esconde a seta (usa o cursor de texto)
+      cursor.style.opacity = '0';
+    } else if (isLink) {
+      // em links/botões, mantém a seta e dá um leve destaque
+      cursor.style.opacity = '1';
+      cursor.classList.add('cursor-hover');
+    }
   });
 
   document.addEventListener('mouseout', e => {
     const isLink = e.target.closest('a, button, .nav-tab');
     const isField = e.target.closest('input, textarea');
     if (isLink || isField) {
-      cursor.style.width = '20px';
-      cursor.style.height = '24px';
       cursor.style.opacity = '1';
+      cursor.classList.remove('cursor-hover');
     }
   });
 
