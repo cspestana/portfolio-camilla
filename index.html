@@ -342,6 +342,9 @@
   .projects-grid {
     position: absolute;
     inset: 0;
+    display: grid;
+    place-items: center;
+    touch-action: pan-y; /* permite rolar a página no celular enquanto arrasta na horizontal */
   }
 
   /* Footer: dots + counter */
@@ -361,6 +364,7 @@
   }
 
   .projects-dot {
+    cursor: pointer;
     width: 6px;
     height: 6px;
     border-radius: 50%;
@@ -394,23 +398,18 @@
 
   /* === CARD BASE === */
   .project-card {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    grid-area: 1 / 1; /* todos os cards empilhados no centro */
+    position: relative;
     width: 380px;
     background: rgba(28, 22, 34, 0.82);
     backdrop-filter: blur(6px);
     overflow: hidden;
     border: 1px solid var(--gray-border);
     border-radius: 20px;
-    /* transform e opacity controlados pelo JS */
-    transform: translate(-50%, -50%) scale(0.5);
+    /* transform, opacity e z-index controlados pelo GSAP */
     opacity: 0;
-    transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
-                opacity  0.75s cubic-bezier(0.22, 1, 0.36, 1),
-                filter   0.75s cubic-bezier(0.22, 1, 0.36, 1),
-                box-shadow 0.75s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: transform, opacity, filter;
+    will-change: transform, opacity;
+    transition: background 0.3s;
     cursor: none;
   }
   .project-card:hover { background: var(--pink-light); }
@@ -658,9 +657,10 @@
   footer {
     padding: 28px 6vw;
     border-top: 1px solid var(--gray-border);
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 12px;
+    display: flex; justify-content: center; align-items: center;
+    text-align: center;
   }
+  footer p .footer-pink { color: var(--pink); }
   footer p { font-size: 12px; color: var(--gray); }
   footer span { color: var(--pink); }
 
@@ -1390,6 +1390,11 @@ Este projeto de UX Research investiga as dores reais desse sistema, com foco em 
   </div>
 </div>
 
+<!-- GSAP (carrossel de trabalhos) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
+
 <script>
   // CURSOR
   const cursor = document.getElementById('cursor');
@@ -1522,83 +1527,126 @@ Este projeto de UX Research investiga as dores reais desse sistema, com foco em 
       }
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    // recalcula posições do carrossel quando a aba muda
+    if (window.ScrollTrigger) requestAnimationFrame(function(){ ScrollTrigger.refresh(); });
   }
 
-  // CARROSSEL TRABALHOS SELECIONADOS — scatter circular
+  // CARROSSEL TRABALHOS SELECIONADOS — GSAP seamless loop
+  // Baseado no pen "Infinite scrolling, dragging, and snapping cards" (GreenSock)
   (function() {
-    var TOTAL = 7;
-    var cards = document.querySelectorAll('.project-card[data-pcard]');
-    var dots  = document.querySelectorAll('#projects-dots .projects-dot');
+    if (!window.gsap || !window.ScrollTrigger) return;
+    gsap.registerPlugin(ScrollTrigger, Draggable);
+
+    var cards     = gsap.utils.toArray('.project-card[data-pcard]');
+    var dots      = gsap.utils.toArray('#projects-dots .projects-dot');
     var counterEl = document.getElementById('projects-current');
-    var wrapEl = document.querySelector('.projects-wrap');
+    var wrapEl    = document.querySelector('.projects-wrap');
+    var TOTAL     = cards.length;
+    if (!wrapEl || !TOTAL) return;
 
-    // Posições de espalhamento para cada distância circular (dist ≠ 0)
-    // tx/ty em px a partir do centro; sc = scale; rot = rotação graus
-    // blur em px; bright = brightness (0–1)
-    var SLOTS = {
-       1: { tx:  370, ty: -130, sc: 0.60, rot:  6, blur: 3, bright: 0.70 }, // próximo à direita
-      '-1': { tx: -380, ty: -110, sc: 0.62, rot: -7, blur: 3, bright: 0.72 }, // próximo à esquerda
-       2: { tx:  430, ty:  160, sc: 0.50, rot:  9, blur: 4, bright: 0.60 }, // 2º à direita
-      '-2': { tx: -440, ty:  140, sc: 0.52, rot: -6, blur: 4, bright: 0.62 }, // 2º à esquerda
-       3: { tx:  110, ty: -250, sc: 0.44, rot:  4, blur: 5, bright: 0.52 }, // acima/direita
-      '-3': { tx: -130, ty:  230, sc: 0.42, rot: -4, blur: 5, bright: 0.50 }, // abaixo/esquerda
-    };
+    // espaçamento entre cards na timeline. TOTAL * spacing precisa ser >= 1
+    // (duração da animação de cada card), senão o loop "pula".
+    var spacing = Math.max(0.15, 1 / TOTAL);
 
-    function mod(n, m) { return ((n % m) + m) % m; }
+    gsap.set(cards, { xPercent: 400, opacity: 0, scale: 0 });
 
-    function updateProjects(idx) {
-      idx = mod(idx, TOTAL);
+    // animação de cada card: entra pela direita, cresce no centro, sai pela esquerda
+    function animateFunc(el) {
+      var tl = gsap.timeline();
+      tl.fromTo(el, { scale: 0, opacity: 0 },
+                    { scale: 1, opacity: 1, zIndex: 100, duration: 0.5, yoyo: true, repeat: 1, ease: 'power1.in', immediateRender: false })
+        .fromTo(el, { xPercent: 400 },
+                    { xPercent: -400, duration: 1, ease: 'none', immediateRender: false }, 0);
+      return tl;
+    }
 
-      cards.forEach(function(card, i) {
-        var dist = mod(i - idx, TOTAL);
-        if (dist > Math.floor(TOTAL / 2)) dist -= TOTAL; // converte para com sinal
-
-        if (dist === 0) {
-          // ATIVO — centro, frente, nítido
-          card.style.transform   = 'translate(-50%, -50%) scale(0.88) rotate(0deg)';
-          card.style.opacity     = '1';
-          card.style.filter      = 'blur(0px) brightness(1)';
-          card.style.zIndex      = '10';
-          card.style.boxShadow   = '0 32px 80px rgba(0,0,0,0.18), 0 8px 32px rgba(0,0,0,0.10)';
-        } else {
-          var s = SLOTS[dist];
-          if (s) {
-            card.style.transform = 'translate(calc(-50% + ' + s.tx + 'px), calc(-50% + ' + s.ty + 'px)) scale(' + s.sc + ') rotate(' + s.rot + 'deg)';
-            card.style.opacity   = '1';
-            card.style.filter    = 'blur(' + s.blur + 'px) brightness(' + s.bright + ')';
-            card.style.zIndex    = String(5 - Math.abs(dist));
-            card.style.boxShadow = 'none';
-          } else {
-            // distância inesperada — esconde
-            card.style.opacity = '0';
-            card.style.zIndex  = '0';
-          }
-        }
+    function buildSeamlessLoop(items, spacing, animateFunc) {
+      var rawSequence  = gsap.timeline({ paused: true });
+      var seamlessLoop = gsap.timeline({
+        paused: true,
+        repeat: -1,
+        onRepeat: function() { this._time === this._dur && (this._tTime += this._dur - 0.01); },
+        onReverseComplete: function() { this.totalTime(this.rawTime() + this.duration() * 100); }
       });
+      var cycleDuration = spacing * items.length;
+      var dur;
+      items.concat(items).concat(items).forEach(function(item, i) {
+        var anim = animateFunc(items[i % items.length]);
+        rawSequence.add(anim, i * spacing);
+        dur || (dur = anim.duration());
+      });
+      seamlessLoop.fromTo(rawSequence,
+        { time: cycleDuration + dur / 2 },
+        { time: '+=' + cycleDuration, duration: cycleDuration, ease: 'none' });
+      return seamlessLoop;
+    }
 
+    var seamlessLoop = buildSeamlessLoop(cards, spacing, animateFunc);
+    var lastIdx = -1;
+
+    function updateUI() {
+      var idx = ((Math.round(seamlessLoop.time() / spacing) % TOTAL) + TOTAL) % TOTAL;
+      if (idx === lastIdx) return;
+      lastIdx = idx;
       dots.forEach(function(dot, i) {
         dot.classList.remove('active', 'past');
         if (i === idx)    dot.classList.add('active');
         else if (i < idx) dot.classList.add('past');
       });
-
       if (counterEl) counterEl.textContent = String(idx + 1).padStart(2, '0');
     }
 
-    function onScroll() {
-      if (!wrapEl) return;
-      var rect = wrapEl.getBoundingClientRect();
-      var wrapH = wrapEl.offsetHeight;
-      var stickyH = window.innerHeight;
-      var scrolled = -rect.top;
-      var scrollable = wrapH - stickyH;
-      var progress = Math.max(0, Math.min(1, scrolled / scrollable));
-      var idx = Math.round(progress * (TOTAL - 1));
-      updateProjects(idx);
+    // tween que "persegue" a posição do scroll, deixando o movimento suave
+    var scrub = gsap.to(seamlessLoop, {
+      time: 0, duration: 0.5, ease: 'power3', paused: true, onUpdate: updateUI
+    });
+
+    // o scroll dentro da .projects-wrap (700vh, sticky) controla o carrossel
+    var trigger = ScrollTrigger.create({
+      trigger: wrapEl,
+      start: 'top top',
+      end: 'bottom bottom',
+      onUpdate: function(self) {
+        scrub.vars.time = self.progress * (TOTAL - 1) * spacing;
+        scrub.invalidate().restart();
+      },
+      snap: {
+        snapTo: 1 / (TOTAL - 1),
+        duration: { min: 0.2, max: 0.6 },
+        delay: 0.05,
+        ease: 'power1.inOut'
+      }
+    });
+
+    function scrollToCard(i) {
+      var y = trigger.start + (trigger.end - trigger.start) * (i / (TOTAL - 1));
+      window.scrollTo({ top: y, behavior: 'smooth' });
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    updateProjects(0);
+    // clicar nos dots leva até o card
+    dots.forEach(function(dot, i) {
+      dot.addEventListener('click', function() { scrollToCard(i); });
+    });
+
+    // arrastar na horizontal também navega (converte o arraste em scroll)
+    if (window.Draggable) {
+      var startScroll = 0;
+      Draggable.create(document.createElement('div'), {
+        type: 'x',
+        trigger: '.projects-cards-container',
+        minimumMovement: 6,
+        onPress: function() { startScroll = window.scrollY; },
+        onDrag: function() {
+          var perCard = (trigger.end - trigger.start) / (TOTAL - 1);
+          var cardW = cards[0].offsetWidth || 380;
+          var y = startScroll + (this.startX - this.x) * (perCard / cardW);
+          window.scrollTo(0, gsap.utils.clamp(trigger.start, trigger.end, y));
+        }
+      });
+    }
+
+    seamlessLoop.time(0);
+    updateUI();
   })();
 
   // FADE-IN AO ROLAR
@@ -1714,8 +1762,7 @@ Este projeto de UX Research investiga as dores reais desse sistema, com foco em 
 </div>
 
 <footer>
-  <p>© 2026 Camilla Pestana · CNPJ 36.151.883/0001-88</p>
-  <p data-pt="Desenvolvido com ♥ e muito Frappé" data-en="Crafted with ♥ and a lot of Frappé"><span data-pt="Desenvolvido com " data-en="Crafted with ">Desenvolvido com </span><span>♥</span><span data-pt=" e muito Frappé" data-en=" and a lot of Frappé"> e muito Frappé</span></p>
+  <p>© 2026 Camilla Pestana · <span class="footer-pink">CNPJ 36.151.883/0001-88</span></p>
 </footer>
 </div>
 
