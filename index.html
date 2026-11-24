@@ -302,7 +302,7 @@
   /* PROJETOS GRID */
   /* ===== CARROSSEL TRABALHOS SELECIONADOS ===== */
   .projects-wrap {
-    height: 700vh; /* 7 cards × 100vh */
+    height: 600vh; /* 6 cards × 100vh */
     position: relative;
     z-index: 1;
   }
@@ -418,7 +418,7 @@
     .project-card { width: 300px; }
   }
   @media (max-width: 560px) {
-    .projects-wrap { height: 700vh; }
+    .projects-wrap { height: 600vh; }
     .project-card { width: 78vw; }
   }
 
@@ -1200,25 +1200,7 @@
             </div>
           </div>
 
-          <div class="project-card" data-pcard="5">
-            <div class="project-thumb">
-              <img src="images/case-ux.png" alt="Hábitos saudáveis na infância">
-            </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="project-tag">UX Research</span>
-                <span class="project-tag">Product Design</span>
-              </div>
-              <div class="project-name" data-pt="Cuidados com a saúde all-in-one" data-en="All-in-one healthcare" data-es="Cuidado de la salud all-in-one">Cuidados com a saúde all-in-one</div>
-              <p class="project-desc" data-pt="Cuidadores gerenciam a saúde dos filhos de forma fragmentada, sem uma solução centralizada. Conduzo pesquisa qualitativa para mapear as dores reais do sistema e definir as oportunidades de design." data-en="Caregivers manage their children’s health in a fragmented way, with no centralised solution. I am conducting qualitative research to map the real pain points of the system and define design opportunities." data-es="Los cuidadores gestionan la salud de sus hijos de forma fragmentada, sin una solución centralizada. Realizo investigación cualitativa para mapear los dolores reales del sistema y definir las oportunidades de diseño.">Cuidadores gerenciam a saúde dos filhos de forma fragmentada, sem uma solução centralizada. Conduzo pesquisa qualitativa para mapear as dores reais do sistema e definir as oportunidades de design.</p>
-              <div class="project-links-row">
-                <button onclick="openModal(‘ux’)" class="project-link-secondary" style="background:none;border:none;padding:0;font-family:var(--sans);cursor:pointer;" data-pt="Documentação" data-en="Case study" data-es="Documentación">Documentação</button>
-                <a href="#" class="project-link" onclick="return false;">Preview</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card" data-pcard="6" style="--card-opacity:0.55;">
+          <div class="project-card" data-pcard="5" style="--card-opacity:0.55;">
             <div class="project-thumb">
               <div class="project-thumb-placeholder">◻</div>
             </div>
@@ -1242,10 +1224,9 @@
           <span class="projects-dot"></span>
           <span class="projects-dot"></span>
           <span class="projects-dot"></span>
-          <span class="projects-dot"></span>
         </div>
         <div class="projects-counter">
-          <span class="current" id="projects-current">01</span> / 07
+          <span class="current" id="projects-current">01</span> / 06
         </div>
       </div>
     </div>
@@ -1605,7 +1586,7 @@ Este projeto de UX Research investiga as dores reais desse sistema, com foco em 
       time: 0, duration: 0.5, ease: 'power3', paused: true, onUpdate: updateUI
     });
 
-    // o scroll dentro da .projects-wrap (700vh, sticky) controla o carrossel
+    // o scroll dentro da .projects-wrap (600vh, sticky) controla o carrossel
     var trigger = ScrollTrigger.create({
       trigger: wrapEl,
       start: 'top top',
