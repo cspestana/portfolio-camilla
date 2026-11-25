@@ -3,1793 +3,1313 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Camilla Pestana — UX/UI & Product Design</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111110'/%3E%3Ctext x='32' y='40' font-family='Georgia, serif' font-size='26' font-weight='300' fill='%23E8547A' text-anchor='middle'%3ECP%3C/text%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Camilla Pestana Noffs — UX/UI & Product Design</title>
+<meta name="description" content="Portfólio de Camilla Pestana Noffs, Product Designer e UX/UI Designer. Do discovery à interface navegável, com domínio de front-end.">
+<meta name="theme-color" content="#16121A">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Camilla Pestana Noffs — UX/UI & Product Design">
+<meta property="og:description" content="Product Designer e UX/UI Designer. Do problema, ao produto.">
+<meta property="og:url" content="https://cspestana.github.io/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2316121A'/%3E%3Ctext x='32' y='40' font-family='Georgia, serif' font-size='26' font-weight='300' fill='%23FF6B92' text-anchor='middle'%3ECP%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#16121A; --text:#F2EDF0; --pink:#FF6B92; --pink-light:#2A1F28;
+    --gray:#A89CA6; --border:#362E3D;--fill-rest:#E7E1EB; --panel:#1C1622;
+    --serif:'Cormorant Garamond',Georgia,serif; --sans:'DM Sans',sans-serif;
+  }
+  html{scroll-behavior:smooth}
+  body{background:#0E0B11;color:var(--text);font-family:var(--sans)}
 
-  :root {
-    --white: #16121A;        /* fundo principal (escuro rosado) */
-    --black: #F2EDF0;        /* texto (quase branco) */
-    --pink: #FF6B92;         /* rosa vibrante */
-    --pink-light: #2A1F28;   /* rosa escuro para fundos sutis */
-    --pink-mid: #6E3B52;     /* rosa médio escurecido */
-    --pink-bg: #1E1822;      /* fundo rosado sutil das seções */
-    --pink-blob: #2C2030;    /* blob */
-    --gray: #A89CA6;         /* texto secundário */
-    --gray-light: #231D29;   /* campos, fundos claros */
-    --gray-border: #362E3D;  /* bordas */
-    --serif: 'Cormorant Garamond', Georgia, serif;
-    --sans: 'DM Sans', sans-serif;
-    --nav-bg: rgba(22,18,26,0.82);
-    --nav-bg-mobile: rgba(22,18,26,0.96);
-    --card-shadow: rgba(0,0,0,0.4);
-    --body-overlay: rgba(18, 14, 22, 0.55);
+  /* painel de conteúdo que desliza por cima do rodapé */
+  .sheet{
+    position:relative;z-index:2;
+    background:
+      linear-gradient(rgba(16,12,20,.82), rgba(16,12,20,.88)),
+      url('images/bg.jpg') center / cover fixed no-repeat,
+      var(--bg);
+    margin-bottom:var(--endH,420px);
+    box-shadow:0 28px 70px rgba(0,0,0,.72), 0 10px 40px rgba(255,107,146,.10);
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 6vw}
+
+  /* ===== HERO ===== */
+  /* ===== ABERTURA LIMPA ===== */
+  .opening{
+    min-height:100vh;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;
+  }
+  .name{
+    font-family:var(--serif);font-weight:300;line-height:1.05;letter-spacing:-.02em;
+    font-size:clamp(42px,8.4vw,116px);
+  }
+  .name em{font-style:italic;color:var(--pink)}
+
+  /* cada caractere entra de baixo, com máscara */
+  .ch{
+    display:inline-block;overflow:hidden;
+    padding-bottom:.2em;margin-bottom:-.2em;vertical-align:bottom;
+  }
+  .name .wd{display:inline-block;white-space:nowrap}
+  .ch > i{
+    display:inline-block;font-style:inherit;
+    transform:translateY(115%);opacity:0;
+    transition:transform .95s cubic-bezier(.22,1,.36,1),opacity .8s ease;
+  }
+  .is-in .ch > i{transform:translateY(0);opacity:1}
+  .sp{display:inline-block;width:.3em}
+
+  /* fio e cargo */
+  .rule{
+    width:0;height:1px;margin:46px 0 26px;
+    background:linear-gradient(90deg,transparent,var(--pink),transparent);
+    transition:width 1.1s cubic-bezier(.22,1,.36,1) .55s;
+  }
+  .is-in .rule{width:min(240px,42vw)}
+  .role{
+    font-size:clamp(10px,1.1vw,12px);font-weight:600;letter-spacing:.34em;
+    text-transform:uppercase;color:var(--gray);
+    opacity:0;transform:translateY(12px);
+    transition:opacity .9s ease .85s,transform .9s cubic-bezier(.22,1,.36,1) .85s;
+  }
+  .is-in .role{opacity:1;transform:none}
+
+  /* título da área dos cards */
+  .split-left h2{
+    font-family:var(--serif);font-weight:300;line-height:1.08;letter-spacing:-.01em;
+    font-size:clamp(34px,4.4vw,58px);margin-bottom:24px;
+  }
+  .split-left h2 em{display:block;font-style:italic;color:var(--pink)}
+  .split-left p{
+    font-size:15.5px;line-height:1.8;color:var(--gray);max-width:420px;
+    margin-bottom:34px;font-weight:300;
   }
 
-  html { scroll-behavior: smooth; }
-
-  body {
-    background-color: #0A0710;
-    background-image: url('images/background.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    color: var(--black);
-    font-family: var(--sans);
-    overflow-x: hidden;
-    cursor: none;
-    min-height: 100vh;
+  /* ===== PROJETOS (colagem) ===== */
+  .section-label{
+    display:flex;align-items:center;gap:10px;
+    font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);
+    margin-bottom:30px;
   }
+  .section-label::before{content:'';width:22px;height:1px;background:var(--gray)}
 
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: var(--body-overlay);
-    z-index: 0;
-    pointer-events: none;
+  .split{
+    display:grid;grid-template-columns:0.92fr 1.08fr;gap:70px;align-items:start;
+    padding-bottom:140px;
   }
+  /* coluna esquerda gruda enquanto a colagem rola */
+  .split-left{position:sticky;top:110px}
 
-  /* CANVAS DE PONTINHOS INTERATIVOS */
-  #dots-canvas {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
+  /* colagem: sangra um pouco pra fora da margem, igual à referência */
+  .collage{position:relative;margin-right:-6vw}
+  .collage-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:0}
+
+  .work-item{
+    position:relative;z-index:1;display:block;margin:0 0 96px;padding:0;width:100%;
+    background:none;border:none;text-align:left;font-family:inherit;color:inherit;cursor:pointer;
   }
-
-  body > * {
-    position: relative;
-    z-index: 1;
+  .work-item:last-child{margin-bottom:0}
+  .work-media{
+    position:relative;aspect-ratio:16/10;
+    transition:transform .45s cubic-bezier(.22,1,.36,1);
   }
-
-  a, button, .nav-tab { cursor: none; }
-  .project-card { cursor: none; }
-
-  /* CURSOR */
-  .cursor {
-    width: 20px; height: 24px;
-    position: fixed; pointer-events: none; z-index: 9999;
-    transition: transform 0.18s ease, opacity 0.2s;
-    transform-origin: 0 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='24' viewBox='0 0 20 24' fill='none'%3E%3Cpath d='M1 1L1 19L5.5 14.5L8.5 22L11 21L8 13.5L14.5 13.5L1 1Z' fill='%23FF6B92' stroke='white' stroke-width='1.2' stroke-linejoin='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-size: contain;
+  .work-media canvas{
+    display:block;width:100%;height:auto;
+    filter:drop-shadow(0 18px 40px rgba(0,0,0,.45));
   }
-  /* Destaque da seta ao passar sobre links e botões */
-  .cursor.cursor-hover { transform: scale(1.4); }
-  .cursor-ring { display: none; }
+  .work-item:hover .work-media{transform:translateY(-7px)}
+  .work-item:focus-visible{outline:2px solid var(--pink);outline-offset:10px;border-radius:14px}
 
-  .hamburger { display: none; }
+  .work-info{padding-top:44px;display:flex;flex-direction:column;gap:9px;max-width:92%}
+  .work-tags{display:flex;gap:7px;flex-wrap:wrap}
+  .work-tag{
+    font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--pink);background:var(--pink-light);padding:4px 9px;border-radius:3px;
+  }
+  .work-title{font-family:var(--serif);font-size:23px;font-weight:400;line-height:1.2;transition:color .25s}
+  .work-item:hover .work-title{color:var(--pink)}
 
-  .lang-toggle {
-    display: flex; gap: 0; align-items: center;
-    font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
-    margin-left: 16px;
-  }
-  .lang-btn {
-    background: none; border: none; padding: 5px 8px; cursor: none;
-    color: var(--gray); font-family: var(--mono); font-size: 10px;
-    font-weight: 600; letter-spacing: 0.1em; transition: color 0.2s;
-  }
-  .lang-btn.active { color: var(--pink); }
-  .lang-divider { color: var(--gray-border); font-size: 10px; }
-
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: 24px 6vw;
-    display: flex; justify-content: space-between; align-items: center;
-    background: var(--nav-bg);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--gray-border);
-  }
-
-  .nav-logo {
-    font-family: var(--serif);
-    font-size: 20px; font-weight: 400; letter-spacing: 0.02em;
-    color: var(--black); text-decoration: none;
-  }
-  .nav-logo span { color: var(--pink); font-style: italic; }
-
-  .nav-links { display: flex; gap: 0; list-style: none; }
-
-  .nav-tab {
-    font-size: 12px; font-weight: 600; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--gray);
-    padding: 10px 24px; cursor: none;
-    border-bottom: 2px solid transparent;
-    transition: color 0.2s, border-color 0.2s;
-    position: relative;
-  }
-
-  .nav-tab:hover { color: var(--black); }
-  .nav-tab.active { color: var(--pink); border-bottom-color: var(--pink); }
-
-  /* PAGES */
-  .page {
-    display: none;
-    padding-top: 88px;
-    min-height: 100vh;
-    animation: fadeIn 0.4s ease both;
-  }
-  .page.active { display: block; }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* HERO (dentro de projetos) */
-  .hero {
-    padding: 60px 6vw 40px;
-    position: relative;
-    z-index: 1;
-  }
-
-  /* FAIXA DE SKILLS ROLANTE (marquee) */
-  .skills-marquee {
-    position: relative; z-index: 1;
-    overflow: hidden;
-    border-top: 1px solid var(--gray-border);
-    border-bottom: 1px solid var(--gray-border);
-    padding: 22px 0;
-    margin-bottom: 40px;
-    background: rgba(30, 24, 34, 0.35);
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  }
-  .skills-marquee-track {
-    display: inline-flex; align-items: center;
-    white-space: nowrap;
-    animation: marquee 28s linear infinite;
-    will-change: transform;
-  }
-  .skills-marquee:hover .skills-marquee-track { animation-play-state: paused; }
-  .skills-marquee-item {
-    font-family: var(--serif); font-size: 22px; font-weight: 400;
-    color: var(--black); padding: 0 4px;
-  }
-  .skills-marquee-item em { font-style: italic; color: var(--pink); }
-  .skills-marquee-sep { color: var(--pink); font-size: 16px; padding: 0 22px; }
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .skills-marquee-track { animation: none; }
-    .skills-marquee { -webkit-mask-image: none; mask-image: none; text-align: center; }
-    .skills-marquee-track { white-space: normal; display: block; }
-  }
-  @media (max-width: 600px) {
-    .skills-marquee-item { font-size: 18px; }
-    .skills-marquee-sep { padding: 0 14px; }
-  }
-
-  .hero-old-grid {
-    padding: 60px 6vw 80px;
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 60px; align-items: center;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-  }
-
-  .hero > * {
-    position: relative;
-    z-index: 1;
-  }
-
-  @media (max-width: 768px) {
-    .hero { grid-template-columns: 1fr; }
-    .hero-visual { display: none; }
-  }
-
-  .hero-tag {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--pink); margin-bottom: 20px;
-  }
-  .hero-tag::before { content: ''; width: 20px; height: 1px; background: var(--pink); }
-
-  .hero-title {
-    font-family: var(--serif);
-    font-size: clamp(38px, 5vw, 68px);
-    font-weight: 300; line-height: 1.0; letter-spacing: -0.02em;
-  }
-  .hero-title em { font-style: italic; color: var(--pink); }
-
-  .hero-sub {
-    margin-top: 24px; font-size: 15px; font-weight: 300;
-    color: var(--gray); max-width: 400px; line-height: 1.8;
-  }
-
-  .hero-actions { display: flex; align-items: center; gap: 24px; margin-top: 36px; }
-
-  .btn-primary {
-    background: var(--pink); color: white;
-    font-family: var(--sans); font-size: 12px; font-weight: 600;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 14px 28px; text-decoration: none; border: none; cursor: none;
-    transition: transform 0.15s, box-shadow 0.15s;
-    display: inline-block;
-    border-radius: 100px;
-  }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,84,122,0.3); }
-
-  .btn-ghost {
-    font-size: 13px; font-weight: 500; color: var(--gray);
-    text-decoration: none; border-bottom: 1px solid var(--gray-border);
-    padding-bottom: 2px; cursor: none;
-    transition: color 0.2s, border-color 0.2s; background: none; border-top: none; border-left: none; border-right: none;
-    font-family: var(--sans);
-  }
-  .btn-ghost:hover { color: var(--black); border-bottom-color: var(--black); }
-
-  /* HERO CARD */
-  .hero-visual { display: flex; align-items: center; justify-content: center; }
-
-  .hero-card {
-    width: 100%; max-width: 360px;
-    background: var(--pink-bg); padding: 36px; position: relative;
-    border-radius: 24px;
-  }
-  .hero-card::before {
-    content: ''; position: absolute; top: -10px; right: -10px;
-    width: 100%; height: 100%;
-    border: 1px solid var(--pink-mid); z-index: -1; border-radius: 24px;
-  }
-
-  .hero-card-label {
-    font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--pink); margin-bottom: 20px;
-  }
-
-  .hero-card-skills { display: flex; flex-direction: column; gap: 18px; }
-
-  .skill-group-label {
-    font-size: 9.5px; font-weight: 600; letter-spacing: 0.16em;
-    text-transform: uppercase; color: var(--gray);
-    display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
-  }
-  .skill-group-label .skill-years {
-    font-family: var(--mono); font-size: 9px; color: var(--pink);
-    letter-spacing: 0.05em; font-weight: 500;
-  }
-  .skill-pills { display: flex; flex-wrap: wrap; gap: 6px; }
-  .skill-pill {
-    font-size: 11px; font-weight: 400; color: var(--black);
-    padding: 5px 11px; border: 1px solid var(--gray-border);
-    border-radius: 100px; background: var(--white);
-    transition: border-color 0.2s, color 0.2s;
-    white-space: nowrap;
-  }
-  .skill-pill:hover { border-color: var(--pink); color: var(--pink); }
-  .skill-pill.highlight { border-color: var(--pink); color: var(--pink); background: var(--pink-light); }
-
-  .hero-card-divider { height: 1px; background: var(--gray-border); margin: 20px 0; }
-
-  .hero-card-stat { display: flex; justify-content: space-between; }
-  .stat-item { display: flex; flex-direction: column; gap: 4px; }
-  .stat-num { font-family: var(--serif); font-size: 28px; font-weight: 300; }
-  .stat-label { font-size: 11px; color: var(--gray); }
-
-  /* PROJETOS GRID */
-  /* ===== CARROSSEL TRABALHOS SELECIONADOS ===== */
-  .projects-wrap {
-    height: 600vh; /* 6 cards × 100vh */
-    position: relative;
-    z-index: 1;
-  }
-
-  .projects-sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 60px 6vw 40px;
-    gap: 0;
-  }
-
-  .projects-label {
-    font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--gray); margin-bottom: 28px;
-    display: flex; align-items: center; gap: 8px;
-    flex-shrink: 0;
-    align-self: flex-start;
-  }
-  .projects-label::before { content: ''; width: 20px; height: 1px; background: var(--gray); }
-
-  /* Container dos cards — ocupa todo o espaço disponível */
-  .projects-cards-container {
-    position: relative;
-    flex: 1;
-    width: 100%;
-    /* overflow hidden para cortar cards que saem pelas bordas */
-    overflow: hidden;
-  }
-
-  /* Grid: referência de posição para os cards absolutos */
-  .projects-grid {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    touch-action: pan-y; /* permite rolar a página no celular enquanto arrasta na horizontal */
-  }
-
-  /* Footer: dots + counter */
-  .projects-footer {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    padding-top: 1.5rem;
-    padding-bottom: 0.5rem;
-  }
-
-  .projects-dots {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-  }
-
-  .projects-dot {
-    cursor: pointer;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--gray-border);
-    transition: all 0.4s ease;
-    flex-shrink: 0;
-  }
-
-  .projects-dot.active {
-    background: var(--pink);
-    width: 18px;
-    border-radius: 4px;
-  }
-
-  .projects-dot.past {
-    background: var(--gray);
-  }
-
-  .projects-counter {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    color: var(--gray);
-    text-transform: uppercase;
-  }
-
-  .projects-counter .current {
-    color: var(--black);
+  @media (max-width:1024px){
+    .split{grid-template-columns:1fr;gap:60px;padding-bottom:90px}
+    .split-left{position:static}
+    .collage{margin-right:0}
+    .collage-svg{display:none}
+    /* no mobile some a bagunça: tudo alinhado e sem rotação */
+    .work-item{width:100%!important;margin-left:0!important;transform:none!important;margin-bottom:56px}
+    .work-media{transform:none!important}
   }
 
 
-  /* === CARD BASE === */
-  .project-card {
-    grid-area: 1 / 1; /* todos os cards empilhados no centro */
-    position: relative;
-    width: 380px;
-    background: rgba(28, 22, 34, 0.82);
-    backdrop-filter: blur(6px);
-    overflow: hidden;
-    border: 1px solid var(--gray-border);
-    border-radius: 20px;
-    /* transform, opacity e z-index controlados pelo GSAP */
-    opacity: 0;
-    will-change: transform, opacity;
-    transition: background 0.3s;
-    cursor: none;
-  }
-  .project-card:hover { background: var(--pink-light); }
+  /* ===== SOBRE MIM ===== */
+  .about{padding:40px 0 130px}
+  .about-grid{display:grid;grid-template-columns:420px 1fr;gap:80px;align-items:start}
 
-  @media (max-width: 900px) {
-    .project-card { width: 300px; }
-  }
-  @media (max-width: 560px) {
-    .projects-wrap { height: 600vh; }
-    .project-card { width: 78vw; }
-  }
+  /* palco do crachá */
+  .badge-stage{position:relative;height:510px;user-select:none;touch-action:none}
+  .cord{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
 
-  .project-thumb {
-    width: 100%; aspect-ratio: 16/10;
-    background: var(--gray-light); overflow: hidden; border-radius: 16px;
+  .badge{
+    position:absolute;left:0;top:0;width:236px;
+    transform-origin:50% -14px;        /* gira a partir do furo do clipe */
+    cursor:grab;will-change:transform;
   }
-  .project-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-  .project-card:hover .project-thumb img { transform: scale(1.04); }
-
-  .project-thumb-placeholder {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--serif); font-size: 48px; font-weight: 300; color: var(--gray-border);
+  .badge.grabbing{cursor:grabbing}
+  .badge-clip{
+    width:54px;height:16px;margin:0 auto -7px;border-radius:5px;
+    background:linear-gradient(#8b8794,#5a5663);border:1px solid #3b3842;position:relative;z-index:2;
+  }
+  .badge-card{
+    background:var(--panel);border:1px solid var(--border);border-radius:16px;
+    padding:14px 14px 20px;box-shadow:0 26px 60px rgba(0,0,0,.5);position:relative;
+  }
+  .badge-photo{
+    width:100%;aspect-ratio:1/1.08;object-fit:cover;object-position:center top;
+    border-radius:10px;background:#201A26;display:block;border:1px solid var(--border);
+  }
+  .badge-name{
+    font-family:var(--serif);font-size:21px;font-weight:400;line-height:1.15;
+    margin-top:16px;color:var(--pink);
+  }
+  .badge-name em{font-style:italic;color:var(--pink)}
+  .badge-role{
+    font-size:9.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--gray);margin-top:7px;
   }
 
-  .project-info { padding: 28px 32px; }
-
-  .project-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
-  .project-tag {
-    font-size: 10px; font-weight: 600; letter-spacing: 0.15em;
-    text-transform: uppercase; color: var(--pink);
-    background: var(--pink-light); padding: 4px 10px;
+  /* texto do sobre */
+  .about-text h2{
+    font-family:var(--serif);font-weight:300;line-height:1.1;letter-spacing:-.01em;
+    font-size:clamp(32px,4.2vw,54px);margin-bottom:26px;
   }
-
-  .project-name {
-    font-family: var(--serif); font-size: 24px; font-weight: 400;
-    line-height: 1.2; color: var(--black); margin-bottom: 8px;
+  .about-text h2 em{font-style:italic;color:var(--pink)}
+  .about-text p{
+    font-size:15.5px;line-height:1.85;color:var(--gray);font-weight:300;
+    margin-bottom:18px;max-width:600px;
   }
-
-  .project-desc { font-size: 13px; color: var(--gray); line-height: 1.7; margin-bottom: 20px; }
-
-  .project-link {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--pink); text-decoration: none;
-    transition: gap 0.2s;
+  .edu{margin-top:44px;border-top:1px solid var(--border)}
+  .edu-item{
+    display:grid;grid-template-columns:1fr auto;gap:18px;align-items:baseline;
+    padding:18px 0;border-bottom:1px solid var(--border);
   }
-  .project-link:hover { gap: 14px; }
-  .project-link::after { content: '→'; }
+  .edu-title{font-size:15px;color:var(--text);font-weight:400}
+  .edu-org{font-size:12.5px;color:var(--gray);margin-top:4px}
+  .edu-year{font-size:11px;letter-spacing:.14em;color:var(--pink)}
 
-  .project-links-row { display: flex; gap: 28px; flex-wrap: wrap; }
-
-  .project-link-secondary {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--gray); text-decoration: none;
-    transition: gap 0.2s, color 0.2s;
-  }
-  .project-link-secondary:hover { gap: 14px; color: var(--black); }
-  .project-link-secondary::after { content: '→'; }
-
-  /* ===== EFEITO HOVER "CAPA DESLIZANTE" (SÓ DESKTOP) ===== */
-  /* No touch/mobile nada muda: layout original (imagem em cima, texto embaixo). */
-  @media (hover: hover) and (pointer: fine) {
-    .projects-grid { counter-reset: pcard; }
-    .project-card { counter-increment: pcard; height: 470px; }
-
-    /* imagem vira camada de fundo, fixa */
-    .project-thumb {
-      position: absolute; inset: 0; z-index: 1;
-      width: 100%; height: 100%; aspect-ratio: auto; border-radius: 20px;
+  /* preenchimento do texto conforme o scroll */
+  .about-text .w{ opacity:calc(.17 + .83 * var(--p, 0)); }
+  @supports (color: color-mix(in srgb, red 50%, blue)){
+    .about-text .w{
+      color:color-mix(in srgb, currentColor calc(var(--p, 0) * 100%), var(--fill-rest));
     }
-    .project-thumb::after {
-      content: ''; position: absolute; inset: 0; border-radius: 20px;
-      background: linear-gradient(to top, rgba(22,18,26,0.65), transparent 55%);
-      pointer-events: none;
-    }
-
-    /* capa escura por cima, que desliza pra baixo no hover */
-    .project-info {
-      position: absolute; inset: 0; z-index: 2;
-      background: rgba(24,18,26,0.97);
-      border-radius: 20px;
-      display: flex; flex-direction: column;
-      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .project-info::after {
-      content: counter(pcard, decimal-leading-zero);
-      position: absolute; top: 22px; right: 30px;
-      font-family: var(--serif); font-weight: 300; font-size: 34px;
-      color: var(--pink); opacity: 0.85; pointer-events: none;
-    }
-    /* descrição limitada a 2 linhas pra caber na faixa revelada */
-    .project-desc {
-      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-      overflow: hidden; margin-bottom: 16px;
-    }
-    /* revela a imagem: capa desce ~54% */
-    .project-card:hover .project-info { transform: translateY(54%); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .about-text .w{ opacity:1; color:inherit }
   }
 
-  /* CONTAINER CENTRALIZADO */
-  .page-wrapper {
-    max-width: 1280px;
-    margin: 0 auto;
-    min-height: 100vh;
-    position: relative;
+  /* faixa de skills */
+  .marquee{
+    margin-top:0;border-top:1px solid var(--border);
+    overflow:hidden;padding:18px 0;
+  }
+  .marquee-track{display:flex;width:max-content;animation:slide 38s linear infinite}
+  .marquee:hover .marquee-track{animation-play-state:paused}
+  @keyframes slide{to{transform:translateX(-50%)}}
+  .marquee-item{
+    font-family:var(--serif);font-size:21px;font-weight:400;color:var(--text);
+    padding:0 26px;white-space:nowrap;display:inline-flex;align-items:center;gap:52px;
+  }
+  .marquee-item em{font-style:italic;color:var(--pink)}
+  .marquee-item::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--pink);opacity:.6}
+
+  @media (max-width:1024px){
+    .about-grid{grid-template-columns:1fr;gap:48px}
+    .badge-stage{height:480px}
   }
 
-  /* BACK TO TOP */
-  .back-to-top {
-    display: flex; justify-content: center; padding: 48px 6vw 64px;
-    border-top: 1px solid var(--gray-border);
+
+  /* bolinhas interativas: ficam sobre a imagem de fundo e sob o conteúdo */
+  #dots-canvas{
+    position:fixed;inset:0;width:100%;height:100%;
+    z-index:-1;pointer-events:none;
   }
 
-  .btn-top {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-size: 12px; font-weight: 600; letter-spacing: 0.15em;
-    text-transform: uppercase; color: var(--gray);
-    background: none; border: 1px solid var(--gray-border);
-    padding: 14px 28px; cursor: none;
-    transition: color 0.2s, border-color 0.2s, transform 0.2s;
-    font-family: var(--sans);
-  }
-  .btn-top:hover { color: var(--pink); border-color: var(--pink); transform: translateY(-2px); }
-  .btn-top svg { transition: transform 0.2s; }
-  .btn-top:hover svg { transform: translateY(-3px); }
+  /* fundo fixo trava no Safari mobile: nele o fundo rola junto */
+  @media (max-width:860px){ .sheet{background-attachment:scroll} }
 
-  /*   */
-  .about-page { padding: 60px 6vw 80px; position: relative; z-index: 1; border-radius: 40px 40px 0 0; }
-
-  .about-grid {
-    display: grid; grid-template-columns: 380px 1fr;
-    gap: 80px; align-items: start;
+  /* ===== FIM DA PÁGINA (revelado por baixo do painel) ===== */
+  .end{
+    position:fixed;left:0;right:0;bottom:0;z-index:1;
+    background:#0E0B11;overflow:hidden;
+    padding:72px 6vw 34px;
+    display:flex;flex-direction:column;justify-content:flex-end;
   }
-
-  @media (max-width: 900px) {
-    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  /* degradê: a página da frente projetando sombra na de trás */
+  .end::before{
+    content:'';position:absolute;left:0;right:0;top:0;height:190px;pointer-events:none;
+    background:linear-gradient(to bottom,
+      rgba(0,0,0,.62) 0%,
+      rgba(44,24,38,.42) 32%,
+      rgba(255,107,146,.05) 62%,
+      transparent 100%);
   }
-
-  .about-photo {
-    aspect-ratio: 3/4; background: var(--gray-light);
-    position: relative; overflow: hidden; border-radius: 20px;
+  .end-inner{max-width:1180px;margin:0 auto;width:100%;position:relative}
+  .end-top{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:48px;align-items:start}
+  .end-mark{font-family:var(--serif);font-size:24px;color:var(--text)}
+  .end-mark span{color:var(--pink);font-style:italic}
+  .end-col h4{
+    font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--gray);margin-bottom:18px;
   }
-  .about-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; }
-  .about-photo-placeholder {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--serif); font-size: 80px; font-weight: 300; color: var(--gray-border);
+  .end-col a{
+    display:block;color:var(--text);text-decoration:none;font-size:14.5px;
+    margin-bottom:12px;transition:color .2s,transform .2s;width:fit-content;
   }
-  .about-photo::after {
-    content: ''; position: absolute; bottom: 0; left: 20px; right: 20px;
-    height: 3px; background: var(--pink); border-radius: 3px;
+  .end-col a:hover{color:var(--pink);transform:translateX(4px)}
+  .end-bar{
+    margin-top:54px;padding-top:22px;border-top:1px solid var(--gray-border);
+    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    font-size:11.5px;color:var(--gray);
   }
-
-  .about-tag {
-    font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--pink); margin-bottom: 16px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .about-tag::before { content: ''; width: 20px; height: 1px; background: var(--pink); }
-
-  .about-title {
-    font-family: var(--serif);
-    font-size: clamp(36px, 4vw, 56px);
-    font-weight: 300; line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 32px;
-  }
-  .about-title em { font-style: italic; color: var(--pink); }
-
-  .about-text p {
-    font-size: 15px; line-height: 1.9; color: var(--gray); margin-bottom: 18px;
-  }
-  .about-text p strong { color: var(--black); font-weight: 600; }
-
-  /* BLOCO FORMAÇÃO */
-  .about-education { margin-top: 44px; }
-  .about-education-label {
-    font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--pink); margin-bottom: 24px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .about-education-label::before { content: ''; width: 20px; height: 1px; background: var(--pink); }
-  .edu-item {
-    padding: 16px 0; border-top: 1px solid var(--gray-border);
-    display: flex; justify-content: space-between; align-items: baseline;
-    gap: 16px; flex-wrap: wrap;
-  }
-  .edu-item:last-child { border-bottom: 1px solid var(--gray-border); }
-  .edu-main { display: flex; flex-direction: column; gap: 3px; }
-  .edu-degree { font-size: 15px; font-weight: 600; color: var(--black); }
-  .edu-place { font-size: 13px; color: var(--gray); }
-  .edu-year { font-family: var(--mono, 'DM Sans'); font-size: 12px; color: var(--pink); white-space: nowrap; font-weight: 500; }
-
-  .about-skills {
-    margin-top: 36px; border-top: 1px solid var(--gray-border);
+  @media (max-width:860px){
+    .end-top{grid-template-columns:1fr;gap:34px}
+    .end{padding:48px 6vw 24px}
   }
 
-  .about-skill-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 14px 0; border-bottom: 1px solid var(--gray-border);
-    font-size: 14px;
+  /* ===== MODAL ===== */
+  .modal{
+    position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
+    padding:5vh 5vw;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s;
   }
-  .about-skill-name { color: var(--black); font-weight: 500; }
-  .about-skill-level { color: var(--pink); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
-
-  /* PROJETOS e SOBRE — sem fundo próprio (usa a nebulosa do body) */
-  #page-projetos,
-  #page-sobre {
-    position: relative;
+  .modal.open{opacity:1;visibility:visible}
+  .modal-backdrop{position:absolute;inset:0;background:rgba(10,8,12,.88);backdrop-filter:blur(8px)}
+  .modal-panel{
+    position:relative;width:100%;max-width:900px;max-height:90vh;overflow-y:auto;
+    background:var(--panel);border:1px solid var(--border);border-radius:20px;
+    padding:44px 52px 52px;transform:translateY(18px) scale(.985);
+    transition:transform .4s cubic-bezier(.22,1,.36,1);
   }
-
-  /* CONTATO */
-  #page-contato {
-    position: relative;
+  .modal.open .modal-panel{transform:none}
+  .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:34px}
+  .modal-kicker{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gray)}
+  .modal-close{
+    background:none;border:1px solid var(--border);color:var(--text);
+    width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:16px;line-height:1;
+    display:flex;align-items:center;justify-content:center;transition:all .25s;font-family:inherit;
   }
-  .contact-page { padding: 60px 6vw 80px; position: relative; z-index: 1; border-radius: 40px 40px 0 0; }
-
-  .contact-header { margin-bottom: 56px; }
-  .contact-tag {
-    font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--pink); margin-bottom: 16px;
-    display: flex; align-items: center; gap: 8px;
+  .modal-close:hover{border-color:var(--pink);color:var(--pink);transform:rotate(90deg)}
+  .modal-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .modal h2{font-family:var(--serif);font-weight:300;font-size:clamp(30px,4.5vw,46px);line-height:1.1;margin-bottom:14px}
+  .modal-sub{font-size:16px;color:var(--gray);line-height:1.7;font-weight:300;margin-bottom:30px}
+  .modal-shot{
+    width:100%;aspect-ratio:16/10;max-height:300px;object-fit:cover;border-radius:12px;border:1px solid var(--border);
+    margin-bottom:32px;background:#201A26;display:block;
   }
-  .contact-tag::before { content: ''; width: 20px; height: 1px; background: var(--pink); }
-
-  .contact-title {
-    font-family: var(--serif);
-    font-size: clamp(36px, 5vw, 64px);
-    font-weight: 300; line-height: 1.05; letter-spacing: -0.01em;
+  .modal-body p{font-size:15px;line-height:1.85;color:#CFC5CE;font-weight:300;margin-bottom:18px}
+  .modal-metric{
+    display:flex;gap:40px;flex-wrap:wrap;margin:30px 0 34px;
+    padding:24px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
   }
-  .contact-title em { font-style: italic; color: var(--pink); }
-
-  .contact-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+  .metric-num{font-family:var(--serif);font-size:34px;font-weight:300;color:var(--pink);line-height:1}
+  .metric-label{font-size:11.5px;color:var(--gray);margin-top:6px;line-height:1.5;max-width:170px}
+  .modal-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:100px;
+    font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+    text-decoration:none;transition:all .25s;font-family:inherit;cursor:pointer;
   }
-  @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; gap: 48px; } }
+  .btn-primary{background:var(--pink);color:#1a0d13;border:1px solid var(--pink)}
+  .btn-primary:hover{transform:translateY(-2px)}
+  .btn-ghost{background:none;color:var(--text);border:1px solid var(--border)}
+  .btn-ghost:hover{border-color:var(--pink);color:var(--pink)}
+  body.locked{overflow:hidden}
 
-  .contact-intro p {
-    font-size: 15px; line-height: 1.9; color: var(--gray); margin-bottom: 32px;
-  }
-
-  .contact-links { display: flex; flex-direction: column; }
-
-  .contact-link-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 18px 0; border-bottom: 1px solid var(--gray-border);
-    text-decoration: none; color: var(--black);
-    transition: padding-left 0.2s;
-  }
-  .contact-link-row:first-child { border-top: 1px solid var(--gray-border); }
-  .contact-link-row:hover { padding-left: 8px; }
-  .contact-link-name { font-size: 14px; font-weight: 500; }
-  .contact-link-handle { font-size: 13px; color: var(--pink); }
-  .contact-link-arrow { color: var(--gray); transition: color 0.2s; }
-  .contact-link-row:hover .contact-link-arrow { color: var(--pink); }
-
-  .contact-form { display: flex; flex-direction: column; gap: 16px; }
-
-  .form-field { display: flex; flex-direction: column; gap: 8px; }
-  .form-field label {
-    font-size: 11px; font-weight: 600; letter-spacing: 0.15em;
-    text-transform: uppercase; color: var(--gray);
-  }
-  .form-field input, .form-field textarea {
-    background: #E8E6E1; border: 1px solid #DAD8D2;
-    color: var(--black); font-family: var(--sans); font-size: 14px;
-    padding: 14px 16px; outline: none; resize: none;
-    transition: border-color 0.2s; cursor: none;
-    border-radius: 12px;
-  }
-  .form-field input:focus, .form-field textarea:focus { border-color: var(--pink); }
-  .form-field textarea { min-height: 120px; }
-
-  .btn-send {
-    background: var(--pink); color: white; border: none; cursor: none;
-    font-family: var(--sans); font-size: 12px; font-weight: 600;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 16px 32px; align-self: flex-start;
-    transition: transform 0.15s, box-shadow 0.15s;
-    border-radius: 100px;
-  }
-  .btn-send:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,84,122,0.3); }
-
-  /* FOOTER */
-  footer {
-    padding: 28px 6vw;
-    border-top: 1px solid var(--gray-border);
-    display: flex; justify-content: center; align-items: center;
-    text-align: center;
-  }
-  footer p .footer-pink { color: var(--pink); }
-  footer p { font-size: 12px; color: var(--gray); }
-  footer span { color: var(--pink); }
-
-  /* MOBILE */
-  @media (max-width: 600px) {
-    nav { padding: 16px 6vw; }
-    .nav-tab { padding: 8px 14px; font-size: 11px; }
-    .hero { padding: 40px 6vw 60px; }
-    .about-page, .contact-page { padding: 48px 6vw 60px; }
-    .projects-sticky { padding: 48px 4vw 32px; }
-    .hero-actions { flex-direction: column; align-items: flex-start; gap: 14px; }
-
-    /* HAMBÚRGUER */
-    .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--nav-bg-mobile); backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray-border); padding: 8px 0; z-index: 99; }
-    .nav-links.open { display: flex; }
-    .nav-links li { list-style: none; }
-    .nav-links .nav-tab { display: block; padding: 14px 6vw; border-bottom: none; width: 100%; font-size: 13px; text-align: left; }
-    .hamburger { display: flex !important; flex-direction: column; gap: 5px; background: none; border: none; cursor: none; padding: 4px; }
-    .hamburger span { display: block; width: 22px; height: 2px; background: var(--black); transition: all 0.3s; }
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    /* EXTRAS PREÇO */
-    .biz-pricing-extra { padding: 24px 20px; gap: 14px; }
-    .biz-pricing-extra-item { width: 100%; justify-content: space-between; }
-    .biz-e-label { font-size: 12px; }
-    .biz-e-price { font-size: 15px; }
+  @media (max-width:640px){
+    .modal{padding:0}
+    .modal-panel{max-height:100vh;height:100vh;border-radius:0;border:none;padding:28px 24px 44px}
   }
 
-  /* MODAL CONFIRMAÇÃO */
-  .modal-confirm-overlay {
-    display: none; position: fixed; inset: 0; z-index: 2000;
-    background: rgba(17,17,16,0.6); backdrop-filter: blur(4px);
-    align-items: center; justify-content: center;
+  /* cursor customizado */
+  body{cursor:none}
+  a,button,.work-item,.badge,.lang-btn{cursor:none}
+  .cursor{
+    width:20px;height:24px;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;
+    transition:transform .18s ease,opacity .2s;transform-origin:0 0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='24' viewBox='0 0 20 24' fill='none'%3E%3Cpath d='M1 1L1 19L5.5 14.5L8.5 22L11 21L8 13.5L14.5 13.5L1 1Z' fill='%23FF6B92' stroke='white' stroke-width='1.2' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-size:contain;
   }
-  .modal-confirm-overlay.open { display: flex; animation: fadeIn 0.25s ease both; }
-  .modal-confirm {
-    background: var(--white); padding: 48px 40px; text-align: center;
-    max-width: 380px; width: 90%; animation: slideUp 0.3s ease both;
-  }
-  .modal-confirm-icon {
-    width: 48px; height: 48px; background: var(--pink-light);
-    border-radius: 50%; display: flex; align-items: center;
-    justify-content: center; margin: 0 auto 20px;
-    font-size: 22px;
-  }
-  .modal-confirm-title {
-    font-family: var(--serif); font-size: 22px; font-weight: 300;
-    margin-bottom: 10px;
-  }
-  .modal-confirm-text {
-    font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 28px;
-  }
-  .modal-confirm-btn {
-    background: var(--pink); color: white; border: none;
-    padding: 12px 32px; font-size: 13px; font-weight: 500;
-    letter-spacing: 0.05em; cursor: none;
-    transition: opacity 0.2s;
-  }
-  .modal-confirm-btn:hover { opacity: 0.85; }
-
-  /* MODAL */
-  .modal-overlay {
-    display: none;
-    position: fixed; inset: 0; z-index: 1000;
-    background: rgba(17,17,16,0.7);
-    backdrop-filter: blur(6px);
-    align-items: center; justify-content: center;
-    padding: 24px;
-  }
-  .modal-overlay.open { display: flex; animation: fadeIn 0.3s ease both; }
-
-  .modal {
-    background: var(--white);
-    width: 100%; max-width: 820px;
-    max-height: 90vh;
-    overflow-y: auto;
-    position: relative;
-    animation: slideUp 0.35s ease both;
-  }
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
+  .cursor.cursor-hover{transform:scale(1.4)}
+  @media (hover:none),(pointer:coarse){
+    body,a,button,.work-item,.badge,.lang-btn{cursor:auto}
+    .cursor{display:none}
   }
 
-  .modal-close {
-    position: sticky; top: 0; left: 100%;
-    width: 44px; height: 44px;
-    background: var(--white); border: 1px solid var(--gray-border);
-    display: flex; align-items: center; justify-content: center;
-    cursor: none; font-size: 18px; color: var(--gray);
-    transition: color 0.2s, border-color 0.2s;
-    float: right; margin: 16px 16px 0 0;
-    z-index: 10;
+  /* seletor de idioma */
+  .lang-toggle{
+    position:fixed;top:26px;right:6vw;z-index:120;display:flex;align-items:center;gap:2px;
+    padding:6px 8px;border:1px solid var(--border);border-radius:999px;
+    background:rgba(22,18,26,.62);backdrop-filter:blur(10px);
   }
-  .modal-close:hover { color: var(--pink); border-color: var(--pink); }
-
-  .modal-images {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 2px; background: var(--gray-border);
-    margin-bottom: 0;
+  .lang-btn{
+    background:none;border:none;padding:4px 9px;border-radius:999px;
+    font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.12em;
+    color:var(--gray);transition:color .2s,background .2s;
   }
-  .modal-images img {
-    width: 100%; height: 550px;
-    object-fit: cover; object-position: top;
-    display: block;
-  }
-  .modal-images img:first-child {
-    grid-column: 1 / -1; height: 530px;
-  }
-
-  .modal-body { padding: 40px 48px 48px; }
-
-  .modal-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-  .modal-tag {
-    font-size: 10px; font-weight: 600; letter-spacing: 0.15em;
-    text-transform: uppercase; color: var(--pink);
-    background: var(--pink-light); padding: 4px 10px;
-  }
-
-  .modal-title {
-    font-family: var(--serif); font-size: clamp(24px, 3vw, 36px);
-    font-weight: 300; line-height: 1.1; margin-bottom: 32px;
-  }
-
-  .modal-sections { display: flex; flex-direction: column; gap: 28px; }
-
-  .modal-section-label {
-    font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--pink);
-    margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
-  }
-  .modal-section-label::before { content: ''; width: 16px; height: 1px; background: var(--pink); }
-
-  .modal-section-text {
-    font-size: 14px; line-height: 1.85; color: var(--gray);
-  }
-
-  .modal-note {
-    margin-top: 32px; padding: 16px 20px;
-    background: var(--gray-light); border-left: 2px solid var(--pink-mid);
-    font-size: 12px; color: var(--gray); line-height: 1.7; font-style: italic;
-  }
-
-  @media (max-width: 600px) {
-    .modal-images { grid-template-columns: 1fr; }
-    .modal-images img:first-child { height: 220px; }
-    .modal-images img { height: 180px; }
-    .modal-body { padding: 28px 24px 36px; }
-  }
-  /* ============ PÁGINA INÍCIO (comercial) ============ */
-  .biz-wrap section { padding: 100px 6vw; max-width: 1280px; margin: 0 auto; }
-  .biz-eyebrow {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--pink); margin-bottom: 20px;
-  }
-  .biz-eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--pink); }
-  .biz-eyebrow-light { color: var(--pink-mid); }
-  .biz-eyebrow-light::before { background: var(--pink-mid); }
-
-  .biz-hero { min-height: 92vh; display: flex; flex-direction: column; justify-content: center; padding-top: 140px !important; }
-  .biz-hero-title {
-    font-family: var(--serif); font-weight: 300; line-height: 1.04;
-    font-size: clamp(38px, 6vw, 88px); max-width: 920px; letter-spacing: -0.01em;
-  }
-  .biz-hero-title em { font-style: italic; color: var(--pink); }
-  .biz-hero-sub { font-size: clamp(16px, 1.6vw, 19px); color: var(--gray); max-width: 560px; margin-top: 28px; line-height: 1.6; font-weight: 300; }
-  .biz-hero-actions { display: flex; gap: 16px; margin-top: 44px; flex-wrap: wrap; align-items: center; }
-  .biz-hero-proof { display: flex; gap: 40px; margin-top: 64px; padding-top: 28px; border-top: 1px solid var(--gray-border); flex-wrap: wrap; max-width: 640px; }
-  .biz-proof-item .biz-proof-num { font-family: var(--serif); font-size: 30px; font-weight: 300; color: var(--pink); display: block; }
-  .biz-proof-item .biz-proof-label { font-size: 11px; color: var(--gray); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
-
-  .biz-how { background: var(--gray-light); }
-  .biz-how-head { max-width: 680px; margin-bottom: 64px; }
-  .biz-how-head h2 { font-family: var(--serif); font-size: clamp(28px,3.6vw,46px); font-weight: 300; line-height: 1.1; }
-  .biz-how-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--gray-border); border: 1px solid var(--gray-border); }
-  .biz-how-step { background: var(--white); padding: 40px 32px; }
-  .biz-how-num { font-family: var(--serif); font-size: 44px; font-weight: 300; color: var(--pink-mid); line-height: 1; }
-  .biz-how-step h3 { font-size: 16px; font-weight: 600; margin-top: 20px; margin-bottom: 10px; }
-  .biz-how-step p { font-size: 13.5px; color: var(--gray); line-height: 1.6; font-weight: 300; }
-
-  .biz-section-title { font-family: var(--serif); font-size: clamp(28px,3.6vw,46px); font-weight: 300; margin-bottom: 56px; }
-  .biz-link-sm { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; text-decoration: none; color: var(--gray); }
-  .biz-link-sm.primary { color: var(--pink); }
-
-  .biz-pricing { background: var(--black); color: var(--white); }
-  .biz-pricing-head { max-width: 680px; margin-bottom: 64px; }
-  .biz-pricing-head h2 { font-family: var(--serif); font-size: clamp(28px,3.6vw,46px); font-weight: 300; line-height: 1.1; color: var(--white); }
-  .biz-pricing-head p { color: rgba(255,255,255,0.55); margin-top: 18px; font-size: 14.5px; font-weight: 300; line-height: 1.7; max-width: 540px; }
-  .biz-pricing-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(255,255,255,0.12); }
-  .biz-price-card { background: var(--black); padding: 44px; }
-  .biz-price-card.featured { background: #181715; }
-  .biz-pc-badge {
-    display: inline-block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--pink); border: 1px solid var(--pink); padding: 5px 12px; margin-bottom: 22px;
-  }
-  .biz-price-card h3 { font-family: var(--serif); font-size: 24px; font-weight: 400; margin-bottom: 6px; }
-  .biz-pc-sub { font-size: 12.5px; color: rgba(255,255,255,0.45); margin-bottom: 26px; }
-  .biz-pc-price { font-family: var(--serif); font-size: 42px; font-weight: 300; margin-bottom: 4px; }
-  .biz-pc-note { font-size: 11.5px; color: rgba(255,255,255,0.4); margin-bottom: 28px; }
-  .biz-pc-list { list-style: none; display: flex; flex-direction: column; gap: 13px; margin-bottom: 32px; padding: 0; }
-  .biz-pc-list li { font-size: 13.5px; color: rgba(255,255,255,0.8); display: flex; gap: 10px; font-weight: 300; }
-  .biz-pc-list li::before { content: '—'; color: var(--pink); flex-shrink: 0; }
-  .biz-btn-price {
-    display: inline-flex; justify-content: center; align-items: center;
-    background: var(--white); color: var(--black); padding: 14px; font-size: 12.5px; font-weight: 600;
-    letter-spacing: 0.04em; text-decoration: none; text-transform: uppercase; transition: background 0.2s, color 0.2s;
-  }
-  .biz-price-card.featured .biz-btn-price { background: var(--pink); color: var(--white); }
-  .biz-btn-price:hover { background: var(--pink-mid); color: var(--black); }
-  .biz-price-card.featured .biz-btn-price:hover { background: var(--pink-mid); color: var(--black); }
-  .biz-pricing-extra { margin-top: 1px; background: #181715; padding: 32px 44px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; align-items: center; }
-  .biz-pricing-extra-item { display: flex; gap: 12px; align-items: center; }
-  .biz-e-label { font-size: 13px; color: rgba(255,255,255,0.7); font-weight: 300; }
-  .biz-e-price { font-family: var(--serif); font-size: 17px; color: var(--pink-mid); white-space: nowrap; flex-shrink: 0; }
-  .biz-pricing-foot-note { margin-top: 28px; font-size: 12px; color: rgba(255,255,255,0.4); display: flex; gap: 8px; align-items: center; }
-  .biz-pricing-foot-note::before { content: '✓'; color: var(--pink-mid); }
-  .biz-pricing-foot-note.no-icon::before { content: none; }
-
-  .biz-final-cta { background: var(--pink); color: var(--white); text-align: center; padding: 110px 6vw !important; }
-  .biz-final-cta h2 { font-family: var(--serif); font-size: clamp(30px,5vw,58px); font-weight: 300; max-width: 760px; margin: 0 auto 28px; line-height: 1.1; }
-  .biz-final-cta p { font-size: 16px; opacity: 0.92; max-width: 480px; margin: 0 auto 40px; font-weight: 300; }
-
-  @media (max-width: 900px) {
-    .biz-how-grid { grid-template-columns: 1fr 1fr; }
-    .biz-pricing-grid { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 600px) {
-    .biz-wrap section { padding: 64px 6vw; }
-    .biz-hero { padding-top: 110px !important; }
-    .biz-pricing-extra { flex-direction: column; align-items: flex-start; }
-  }
-  /* FADE-IN AO ROLAR */
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-    will-change: opacity, transform;
-  }
-  .reveal.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  /* Card com opacidade reduzida (Em breve) mantém após revelar */
-  .reveal[style*="--card-opacity"].is-visible { opacity: 0.55; }
-  /* Delay escalonado para elementos em sequência (cards) */
-  .reveal.delay-1 { transition-delay: 0.08s; }
-  .reveal.delay-2 { transition-delay: 0.16s; }
-  .reveal.delay-3 { transition-delay: 0.24s; }
-  /* Respeita quem prefere menos movimento (acessibilidade) */
-  @media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1; transform: none; transition: none; }
-  }
+  .lang-btn:hover{color:var(--text)}
+  .lang-btn.active{color:var(--pink);background:var(--pink-light)}
+  .lang-divider{color:var(--border);font-size:10px}
+  @media (max-width:860px){ .lang-toggle{top:16px;right:16px} }
+  body.locked .lang-toggle{opacity:0;pointer-events:none;transition:opacity .25s}
 </style>
 </head>
 <body>
 
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<div class="lang-toggle" role="group" aria-label="Idioma / Language / Idioma">
+  <button class="lang-btn active" id="btn-pt" type="button" onclick="setLang('pt')">PT</button>
+  <span class="lang-divider">|</span>
+  <button class="lang-btn" id="btn-en" type="button" onclick="setLang('en')">EN</button>
+  <span class="lang-divider">|</span>
+  <button class="lang-btn" id="btn-es" type="button" onclick="setLang('es')">ES</button>
+</div>
+
+<div class="sheet">
 <canvas id="dots-canvas"></canvas>
+<!-- ABERTURA -->
+<header class="opening wrap" id="opening">
+  <h1 class="name" data-split>Camilla Pestana <em>Noffs</em></h1>
+  <div class="rule"></div>
+  <div class="role">Product Designer · UX/UI</div>
+</header>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursor-ring"></div>
+<!-- PROJETOS EM COLAGEM -->
+<main class="wrap">
+  <div class="split">
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo" onclick="showPage('projetos'); return false;">camilla<span>.pestana</span></a>
-  <div style="display:flex;align-items:center;gap:8px;">
-    <div class="lang-toggle">
-      <button class="lang-btn active" id="btn-pt" onclick="setLang('pt')">PT</button>
-      <span class="lang-divider">|</span>
-      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
-      <span class="lang-divider">|</span>
-      <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
+    <div class="split-left">
+      <div class="section-label" data-pt="Trabalhos selecionados" data-en="Selected work" data-es="Trabajos seleccionados">Trabalhos selecionados</div>
+      <h2 data-pt="Do problema, <em>ao produto</em>" data-en="From the problem, <em>to the product</em>" data-es="Del problema, <em>al producto</em>">Do problema, <em>ao produto</em></h2>
+      <p data-pt="Seis projetos onde discovery, interface e código se encontram. Clique em qualquer card para ver o resumo, as métricas e o case completo." data-en="Six projects where discovery, interface and code meet. Click any card for the summary, the metrics and the full case study." data-es="Seis proyectos donde discovery, interfaz y código se encuentran. Haz clic en cualquier card para ver el resumen, las métricas y el caso completo.">Seis projetos onde discovery, interface e código se encontram. Clique em qualquer card para ver o resumo, as métricas e o case completo.</p>
     </div>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-  <ul class="nav-links" id="nav-links">
-    <li><div class="nav-tab active" onclick="showPage('projetos')" data-pt="Projetos" data-en="Projects" data-es="Proyectos">Projetos</div></li>
-    <li><div class="nav-tab" onclick="showPage('sobre')" data-pt="Sobre" data-en="About" data-es="Sobre mí">Sobre</div></li>
-    <li><div class="nav-tab" onclick="showPage('contato')" data-pt="Contato" data-en="Contact" data-es="Contacto">Contato</div></li>
-  </ul>
-</nav>
 
-<!-- PAGE: INÍCIO -->
-<div class="page" id="page-inicio">
-  <div class="biz-wrap">
-
-    <!-- 1. HERO -->
-    <section class="biz-hero">
-      <div class="biz-eyebrow" data-pt="Design + desenvolvimento" data-en="Design + development" data-es="Diseño + desarrollo">Design + desenvolvimento</div>
-      <h1 class="biz-hero-title" data-pt="Sites profissionais,&lt;br&gt;do design ao &lt;em&gt;código&lt;/em&gt;,&lt;br&gt;para o seu negócio." data-en="Professional websites,&lt;br&gt;from design to &lt;em&gt;code&lt;/em&gt;,&lt;br&gt;for your business." data-es="Sitios profesionales,&lt;br&gt;del diseño al &lt;em&gt;código&lt;/em&gt;,&lt;br&gt;para tu negocio.">Sites profissionais,<br>do design ao <em>código</em>,<br>para o seu negócio.</h1>
-      <p class="biz-hero-sub" data-pt="Projeto, identidade visual e desenvolvimento em um só lugar, com domínio próprio incluso e no ar em até 10 a 15 dias úteis, dependendo do pacote." data-en="Design, visual identity and development in one place, with your own domain included and live in 10 to 15 business days, depending on the package." data-es="Diseño, identidad visual y desarrollo en un solo lugar, con dominio propio incluido y en línea en 10 a 15 días hábiles, según el paquete.">Projeto, identidade visual e desenvolvimento em um só lugar, com domínio próprio incluso e no ar em até 10 a 15 dias úteis, dependendo do pacote.</p>
-      <div class="biz-hero-actions">
-        <button onclick="showPage('contato')" class="btn-primary" style="border:none;cursor:pointer;" data-pt="Pedir uma proposta →" data-en="Request a proposal →" data-es="Pedir una propuesta →">Pedir uma proposta →</button>
-        <button onclick="showPage('projetos')" class="btn-ghost-link" style="background:none;border:none;border-bottom:1px solid var(--black);cursor:pointer;font-family:var(--sans);" data-pt="Ver trabalhos realizados" data-en="See completed work" data-es="Ver trabajos realizados">Ver trabalhos realizados</button>
-      </div>
-      <div class="biz-hero-proof">
-        <div class="biz-proof-item"><span class="biz-proof-num">10-15</span><span class="biz-proof-label" data-pt="Dias úteis até o ar" data-en="Business days to go live" data-es="Días hábiles hasta publicar">Dias úteis até o ar</span></div>
-        <div class="biz-proof-item"><span class="biz-proof-num">100%</span><span class="biz-proof-label" data-pt="Responsivo" data-en="Responsive" data-es="Responsivo">Responsivo</span></div>
-        <div class="biz-proof-item"><span class="biz-proof-num">CNPJ</span><span class="biz-proof-label" data-pt="Nota fiscal" data-en="Invoice issued" data-es="Factura">Nota fiscal</span></div>
-      </div>
-    </section>
-
-    <!-- 2. COMO FUNCIONA -->
-    <section class="biz-how">
-      <div class="biz-how-head">
-        <div class="biz-eyebrow" data-pt="Como funciona" data-en="How it works" data-es="Cómo funciona">Como funciona</div>
-        <h2 data-pt="Do briefing ao site no ar,&lt;br&gt;em 4 etapas simples." data-en="From briefing to launch,&lt;br&gt;in 4 simple steps." data-es="Del briefing al sitio en línea,&lt;br&gt;en 4 pasos simples.">Do briefing ao site no ar,<br>em 4 etapas simples.</h2>
-      </div>
-      <div class="biz-how-grid">
-        <div class="biz-how-step">
-          <span class="biz-how-num">01</span>
-          <h3 data-pt="Briefing" data-en="Briefing" data-es="Briefing">Briefing</h3>
-          <p data-pt="Você me conta sobre o negócio: serviços, fotos, contato e o que não pode faltar na página." data-en="You tell me about your business: services, photos, contact info and everything that needs to be on the page." data-es="Me cuentas sobre el negocio: servicios, fotos, contacto y lo que no puede faltar en la página.">Você me conta sobre o negócio: serviços, fotos, contato e o que não pode faltar na página.</p>
-        </div>
-        <div class="biz-how-step">
-          <span class="biz-how-num">02</span>
-          <h3 data-pt="Proposta" data-en="Proposal" data-es="Propuesta">Proposta</h3>
-          <p data-pt="Te envio a proposta do site para você aprovar ou ajustar antes de seguirmos." data-en="I send you the site proposal for you to approve or adjust before we move forward." data-es="Te envío la propuesta del sitio para que la apruebes o ajustes antes de seguir.">Te envio a proposta do site para você aprovar ou ajustar antes de seguirmos.</p>
-        </div>
-        <div class="biz-how-step">
-          <span class="biz-how-num">03</span>
-          <h3 data-pt="Desenvolvimento" data-en="Development" data-es="Desarrollo">Desenvolvimento</h3>
-          <p data-pt="Construo o site do design ao código, com domínio próprio já configurado." data-en="I build the site from design to code, with your own domain already set up." data-es="Construyo el sitio del diseño al código, con dominio propio ya configurado.">Construo o site do design ao código, com domínio próprio já configurado.</p>
-        </div>
-        <div class="biz-how-step">
-          <span class="biz-how-num">04</span>
-          <h3 data-pt="Entrega" data-en="Delivery" data-es="Entrega">Entrega</h3>
-          <p data-pt="Site no ar, testado no celular e no computador, pronto para receber clientes." data-en="Site live, tested on mobile and desktop, ready to welcome customers." data-es="Sitio en línea, probado en celular y computadora, listo para recibir clientes.">Site no ar, testado no celular e no computador, pronto para receber clientes.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. PACOTES -->
-    <section class="biz-pricing">
-      <div class="biz-pricing-head">
-        <div class="biz-eyebrow biz-eyebrow-light" data-pt="Pacotes" data-en="Packages" data-es="Paquetes">Pacotes</div>
-        <h2 data-pt="Um valor justo,&lt;br&gt;sem mensalidade obrigatória." data-en="Fair pricing,&lt;br&gt;no mandatory monthly fee." data-es="Un precio justo,&lt;br&gt;sin mensualidad obligatoria.">Um valor justo,<br>sem mensalidade obrigatória.</h2>
-        <p data-pt="Todo pacote já inclui domínio próprio por 1 ano. Sem letra pequena, sem custo escondido depois da entrega." data-en="Every package already includes your own domain for 1 year. No fine print, no hidden costs after delivery." data-es="Todo paquete incluye dominio propio por 1 año. Sin letra pequeña, sin costos ocultos después de la entrega.">Todo pacote já inclui domínio próprio por 1 ano. Sem letra pequena, sem custo escondido depois da entrega.</p>
-      </div>
-
-      <div class="biz-pricing-grid">
-        <div class="biz-price-card">
-          <span class="biz-pc-badge" data-pt="Essencial" data-en="Essential" data-es="Esencial">Essencial</span>
-          <h3 data-pt="Site Vitrine" data-en="Showcase Website" data-es="Sitio Vitrina">Site Vitrine</h3>
-          <div class="biz-pc-sub" data-pt="Para apresentar o negócio com profissionalismo" data-en="To present your business professionally" data-es="Para presentar el negocio con profesionalismo">Para apresentar o negócio com profissionalismo</div>
-          <div class="biz-pc-price">R$ 297</div>
-          <div class="biz-pc-note" data-pt="domínio próprio incluso · 1 ano" data-en="own domain included · 1 year" data-es="dominio propio incluido · 1 año">domínio próprio incluso · 1 ano</div>
-          <ul class="biz-pc-list">
-            <li data-pt="1 página, até 5 seções" data-en="1 page, up to 5 sections" data-es="1 página, hasta 5 secciones">1 página, até 5 seções</li>
-            <li data-pt="Responsivo (celular e desktop)" data-en="Responsive (mobile and desktop)" data-es="Responsivo (celular y escritorio)">Responsivo (celular e desktop)</li>
-            <li data-pt="Botão de WhatsApp fixo" data-en="Fixed WhatsApp button" data-es="Botón de WhatsApp fijo">Botão de WhatsApp fixo</li>
-            <li data-pt="Localização no Google Maps" data-en="Google Maps location" data-es="Ubicación en Google Maps">Localização no Google Maps</li>
-            <li data-pt="Entrega em até 10 dias úteis*" data-en="Delivery in up to 10 business days*" data-es="Entrega en hasta 10 días hábiles*">Entrega em até 10 dias úteis*</li>
-          </ul>
-          <button onclick="window.open('https://wa.me/5511978332614?text=Ol%C3%A1%20Camilla!%20Tenho%20interesse%20no%20pacote%20Site%20Vitrine.', '_blank')" class="biz-btn-price" style="border:none;cursor:pointer;width:100%;" data-pt="Pedir esta proposta" data-en="Request this proposal" data-es="Pedir esta propuesta">Pedir esta proposta</button>
-        </div>
-        <div class="biz-price-card featured">
-          <span class="biz-pc-badge" data-pt="Completo" data-en="Complete" data-es="Completo">Completo</span>
-          <h3 data-pt="Presença Digital" data-en="Digital Presence" data-es="Presencia Digital">Presença Digital</h3>
-          <div class="biz-pc-sub" data-pt="Site + visibilidade no Google desde o primeiro dia" data-en="Website + Google visibility from day one" data-es="Sitio + visibilidad en Google desde el primer día">Site + visibilidade no Google desde o primeiro dia</div>
-          <div class="biz-pc-price">R$ 370</div>
-          <div class="biz-pc-note" data-pt="domínio próprio incluso · 1 ano" data-en="own domain included · 1 year" data-es="dominio propio incluido · 1 año">domínio próprio incluso · 1 ano</div>
-          <ul class="biz-pc-list">
-            <li data-pt="Tudo do Site Vitrine" data-en="Everything in Showcase Website" data-es="Todo lo del Sitio Vitrina">Tudo do Site Vitrine</li>
-            <li data-pt="Configuração do Google Meu Negócio" data-en="Google Business Profile setup" data-es="Configuración de Google Mi Negocio">Configuração do Google Meu Negócio</li>
-            <li data-pt="SEO básico (título, descrição, palavras-chave)" data-en="Basic SEO (title, description, keywords)" data-es="SEO básico (título, descripción, palabras clave)">SEO básico (título, descrição, palavras-chave)</li>
-            <li data-pt="Mapa e endereço indexados ao Google" data-en="Map and address indexed on Google" data-es="Mapa y dirección indexados en Google">Mapa e endereço indexados ao Google</li>
-            <li data-pt="Entrega em até 15 dias úteis*" data-en="Delivery in up to 15 business days*" data-es="Entrega en hasta 15 días hábiles*">Entrega em até 15 dias úteis*</li>
-          </ul>
-          <button onclick="window.open('https://wa.me/5511978332614?text=Ol%C3%A1%20Camilla!%20Tenho%20interesse%20no%20pacote%20Presen%C3%A7a%20Digital.', '_blank')" class="biz-btn-price" style="border:none;cursor:pointer;width:100%;" data-pt="Pedir esta proposta" data-en="Request this proposal" data-es="Pedir esta propuesta">Pedir esta proposta</button>
-        </div>
-      </div>
-
-      <div class="biz-pricing-extra">
-        <div class="biz-pricing-extra-item"><span class="biz-e-label" data-pt="Ajuste pontual (foto, texto, preço)" data-en="One-time update (photo, text, price)" data-es="Ajuste puntual (foto, texto, precio)">Ajuste pontual (foto, texto, preço)</span><span class="biz-e-price">R$ 50</span></div>
-        <div class="biz-pricing-extra-item"><span class="biz-e-label" data-pt="Inclusão de nova seção" data-en="New section addition" data-es="Inclusión de nueva sección">Inclusão de nova seção</span><span class="biz-e-price">R$ 80</span></div>
-        <div class="biz-pricing-extra-item"><span class="biz-e-label" data-pt="Manutenção mensal (2 ajustes/mês)" data-en="Monthly maintenance (2 updates/month)" data-es="Mantenimiento mensual (2 ajustes/mes)">Manutenção mensal (2 ajustes/mês)</span><span class="biz-e-price">R$ 79/mês</span></div>
-        <div class="biz-pricing-extra-item"><span class="biz-e-label" data-pt="Renovação de domínio (2º ano)" data-en="Domain renewal (2nd year)" data-es="Renovación de dominio (2º año)">Renovação de domínio (2º ano)</span><span class="biz-e-price">R$ 60</span></div>
-      </div>
-      <div class="biz-pricing-foot-note" data-pt="Emito nota fiscal. CNPJ ativo em serviços de design e desenvolvimento" data-en="Invoice issued. Active CNPJ in design and development services" data-es="Emito factura. CNPJ activo en servicios de diseño y desarrollo">Emito nota fiscal. CNPJ ativo em serviços de design e desenvolvimento</div>
-      <div class="biz-pricing-foot-note no-icon" style="margin-top:10px;" data-pt="*Prazo contado a partir do recebimento de todo o material (textos, fotos e logo)" data-en="*Timeline starts upon receipt of all materials (texts, photos and logo)" data-es="*El plazo se cuenta desde la recepción de todo el material (textos, fotos y logo)">*Prazo contado a partir do recebimento de todo o material (textos, fotos e logo)</div>
-    </section>
-
-    <!-- 5. CTA FINAL -->
-    <section class="biz-final-cta">
-      <h2 data-pt="Seu negócio merece estar no Google." data-en="Your business deserves to be on Google." data-es="Tu negocio merece estar en Google.">Seu negócio merece estar no Google.</h2>
-      <p data-pt="Vamos colocar seu site no ar, com domínio próprio, design profissional e suporte para tirar dúvidas." data-en="Let's get your website live, with your own domain, professional design and support along the way." data-es="Pongamos tu sitio en línea, con dominio propio, diseño profesional y soporte para resolver dudas.">Vamos colocar seu site no ar, com domínio próprio, design profissional e suporte para tirar dúvidas.</p>
-      <button onclick="showPage('contato')" class="btn-primary" style="background:var(--white);color:var(--black);border:none;cursor:pointer;" data-pt="Falar comigo →" data-en="Get in touch →" data-es="Hablar conmigo →">Falar comigo →</button>
-    </section>
+    <div class="collage" id="collage">
+      <svg class="collage-svg" id="collage-svg" aria-hidden="true"></svg>
+    </div>
 
   </div>
+</main>
+
+
+<!-- SOBRE MIM -->
+<section class="about wrap" id="sobre">
+  <div class="section-label" data-pt="Sobre mim" data-en="About me" data-es="Sobre mí">Sobre mim</div>
+  <div class="about-grid">
+
+    <div class="badge-stage" id="stage">
+      <svg class="cord" id="cord" aria-hidden="true"></svg>
+      <div class="badge" id="badge">
+        <div class="badge-clip"></div>
+        <div class="badge-card">
+          <img class="badge-photo" src="images/camilla2026.jpg" alt="Camilla Pestana Noffs">
+          <div class="badge-name">Camilla Pestana <em>Noffs</em></div>
+          <div class="badge-role">Product Designer · UX/UI</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-text">
+      <h2 data-pt="Do detalhe, <em>à interface</em>" data-en="From the detail, <em>to the interface</em>" data-es="Del detalle, <em>a la interfaz</em>">Do detalhe, <em>à interface</em></h2>
+      <p data-pt="Com 14 anos de prática em design, trago para o produto precisão visual e atenção ao detalhe que só vêm com tempo de execução real." data-en="With 14 years of hands-on design practice, I bring to product the visual precision and eye for detail that only come from real execution time." data-es="Con 14 años de práctica en diseño, aporto al producto la precisión visual y la atención al detalle que solo llegan con tiempo real de ejecución.">Com 14 anos de prática em design, trago para o produto precisão visual e atenção ao detalhe que só vêm com tempo de execução real.</p>
+      <p data-pt="Atuo em Product Design e UX/UI, do discovery à interface navegável, com domínio de front-end para implementar e colaborar diretamente com times de desenvolvimento." data-en="I work in Product Design and UX/UI, from discovery to a navigable interface, with the front-end skills to implement and collaborate directly with development teams." data-es="Trabajo en Product Design y UX/UI, del discovery a la interfaz navegable, con dominio de front-end para implementar y colaborar directamente con equipos de desarrollo.">Atuo em Product Design e UX/UI, do discovery à interface navegável, com domínio de front-end para implementar e colaborar diretamente com times de desenvolvimento.</p>
+      <p data-pt="Cada decisão de interface parte de um entendimento claro do problema e do usuário." data-en="Every interface decision starts from a clear understanding of the problem and of the user." data-es="Cada decisión de interfaz parte de un entendimiento claro del problema y del usuario.">Cada decisão de interface parte de um entendimento claro do problema e do usuário.</p>
+      <p data-pt="Uso IA como acelerador no meu processo, para ganhar velocidade nas etapas certas e chegar mais rápido ao que importa. O julgamento de design fica sempre comigo." data-en="I use AI as an accelerator in my process, to gain speed in the right steps and get faster to what matters. The design judgment always stays with me." data-es="Uso IA como acelerador en mi proceso, para ganar velocidad en las etapas correctas y llegar más rápido a lo que importa. El criterio de diseño siempre es mío.">Uso IA como acelerador no meu processo, para ganhar velocidade nas etapas certas e chegar mais rápido ao que importa. O julgamento de design fica sempre comigo.</p>
+
+      <div class="edu">
+        <div class="edu-item">
+          <div><div class="edu-title" data-pt="Especialização em UX, UI &amp; Product Design" data-en="Specialization in UX, UI &amp; Product Design" data-es="Especialización en UX, UI &amp; Product Design">Especialização em UX, UI &amp; Product Design</div><div class="edu-org" data-pt="UX Unicórnio · 200h" data-en="UX Unicórnio · 200h" data-es="UX Unicórnio · 200h">UX Unicórnio · 200h</div></div>
+          <div class="edu-year">2026</div>
+        </div>
+        <div class="edu-item">
+          <div><div class="edu-title" data-pt="Bacharelado em Design Gráfico" data-en="Bachelor's Degree in Graphic Design" data-es="Licenciatura en Diseño Gráfico">Bacharelado em Design Gráfico</div><div class="edu-org" data-pt="Centro Universitário FMU" data-en="Centro Universitário FMU" data-es="Centro Universitário FMU">Centro Universitário FMU</div></div>
+          <div class="edu-year">2012</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+<div class="marquee"><div class="marquee-track"><span class="marquee-item">Product Design</span><span class="marquee-item">UX/UI Design</span><span class="marquee-item">Visual &amp; Brand Design</span><span class="marquee-item">Figma</span><span class="marquee-item">Photoshop</span><span class="marquee-item">Illustrator</span><span class="marquee-item">InDesign</span><span class="marquee-item">Front-end</span><span class="marquee-item" data-pt="<em>IA</em>" data-en="<em>AI</em>" data-es="<em>IA</em>"><em>IA</em></span><span class="marquee-item">Design System</span><span class="marquee-item">Discovery</span><span class="marquee-item">Product Design</span><span class="marquee-item">UX/UI Design</span><span class="marquee-item">Visual &amp; Brand Design</span><span class="marquee-item">Figma</span><span class="marquee-item">Photoshop</span><span class="marquee-item">Illustrator</span><span class="marquee-item">InDesign</span><span class="marquee-item">Front-end</span><span class="marquee-item" data-pt="<em>IA</em>" data-en="<em>AI</em>" data-es="<em>IA</em>"><em>IA</em></span><span class="marquee-item">Design System</span><span class="marquee-item">Discovery</span></div></div>
 </div>
 
-<div class="page-wrapper">
-<!-- PAGE: PROJETOS -->
-<div class="page active" id="page-projetos">
-
-  <div class="hero">
-    <div class="hero-content">
-      <div class="hero-tag" data-pt="Product Designer · UX/UI" data-en="Available for projects" data-es="Product Designer · UX/UI">Product Designer · UX/UI</div>
-      <h1 class="hero-title" data-pt="Do problema,&lt;br&gt;&lt;em&gt;ao produto&lt;/em&gt;" data-en="From problem,&lt;br&gt;&lt;em&gt;to product&lt;/em&gt;" data-es="Del problema,&lt;br&gt;&lt;em&gt;al producto&lt;/em&gt;">
-        Do problema,<br><em>ao produto</em>
-      </h1>
-      <p class="hero-sub" data-pt="Transformo problemas de negócio e necessidades de usuário em interfaces que funcionam, escalam e são implementáveis." data-en="I turn business problems and user needs into interfaces that work, scale and can be implemented." data-es="Transformo problemas de negocio y necesidades de usuario en interfaces que funcionan, escalan y son implementables.">Transformo problemas de negócio e necessidades de usuário em interfaces que funcionam, escalam e são implementáveis.</p>
-      <div class="hero-actions">
-        <button class="btn-primary" onclick="showPage('contato')" data-pt="Entre em contato" data-en="Get in touch" data-es="Ponte en contacto">Entre em contato</button>
-        <button class="btn-ghost" onclick="showPage('sobre')" data-pt="Sobre mim" data-en="About me" data-es="Sobre mí">Sobre mim</button>
+<!-- FIM DA PÁGINA -->
+<footer class="end" id="end">
+  <div class="end-inner">
+    <div class="end-top">
+      <div class="end-mark">
+        camilla<span>.pestananoffs</span>
+      </div>
+      <div class="end-col">
+        <h4 data-pt="Fale comigo" data-en="Get in touch" data-es="Hablar conmigo">Fale comigo</h4>
+        <a href="mailto:pestanascamilla@gmail.com" data-pt="E-mail" data-en="Email" data-es="Correo">E-mail</a>
+        <a href="https://wa.me/5511978332614" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+      <div class="end-col">
+        <h4 data-pt="Onde me achar" data-en="Find me" data-es="Dónde encontrarme">Onde me achar</h4>
+        <a href="https://linkedin.com/in/camilla-pestana" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/cspestana" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
-  </div>
-
-  <div class="skills-marquee" aria-label="Skills">
-    <div class="skills-marquee-track">
-      <span class="skills-marquee-item">Product Design</span><span class="skills-marquee-sep">•</span>
-      <span class="skills-marquee-item">UX/UI Design</span><span class="skills-marquee-sep">•</span>
-      <span class="skills-marquee-item">Visual &amp; Brand Design</span><span class="skills-marquee-sep">•</span>
-      <span class="skills-marquee-item">Figma</span><span class="skills-marquee-sep">•</span>
-      <span class="skills-marquee-item">Photoshop</span><span class="skills-marquee-sep">•</span>
-      <span class="skills-marquee-item">Illustrator</span><span class="skills-marquee-sep">•</span>
-      <span class="skills-marquee-item">InDesign</span><span class="skills-marquee-sep">•</span>
-      <span class="skills-marquee-item">Front-end</span><span class="skills-marquee-sep">•</span>
-      <span class="skills-marquee-item"><em>IA</em></span><span class="skills-marquee-sep">•</span>
-      <span class="skills-marquee-item">Design System</span><span class="skills-marquee-sep">•</span>
-      <span class="skills-marquee-item">Discovery</span><span class="skills-marquee-sep">•</span>
-      <span class="skills-marquee-item">Product Design</span><span class="skills-marquee-sep">•</span>
-      <span class="skills-marquee-item">UX/UI Design</span><span class="skills-marquee-sep">•</span>
-      <span class="skills-marquee-item">Visual &amp; Brand Design</span><span class="skills-marquee-sep">•</span>
-      <span class="skills-marquee-item">Figma</span><span class="skills-marquee-sep">•</span>
-      <span class="skills-marquee-item">Photoshop</span><span class="skills-marquee-sep">•</span>
-      <span class="skills-marquee-item">Illustrator</span><span class="skills-marquee-sep">•</span>
-      <span class="skills-marquee-item">InDesign</span><span class="skills-marquee-sep">•</span>
-      <span class="skills-marquee-item">Front-end</span><span class="skills-marquee-sep">•</span>
-      <span class="skills-marquee-item"><em>IA</em></span><span class="skills-marquee-sep">•</span>
-      <span class="skills-marquee-item">Design System</span><span class="skills-marquee-sep">•</span>
-      <span class="skills-marquee-item">Discovery</span><span class="skills-marquee-sep">•</span>
+    <div class="end-bar">
+      <span>© 2026 Camilla Pestana Noffs · CNPJ 36.151.883/0001-88</span>
     </div>
   </div>
-
-  <div class="projects-wrap">
-    <div class="projects-sticky">
-      <div class="projects-label" data-pt="Trabalhos selecionados" data-en="Selected work" data-es="Trabajos seleccionados">Trabalhos selecionados</div>
-
-      <div class="projects-cards-container">
-        <div class="projects-grid">
-
-          <div class="project-card" data-pcard="0">
-            <div class="project-thumb">
-              <img src="images/PayFlow.png" alt="PayFlow — Módulo de Pagamento de Professores">
-            </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="project-tag">Product Design</span>
-                <span class="project-tag">UX/UI</span>
-              </div>
-              <div class="project-name" data-pt="PayFlow — Módulo de Pagamento de Professores" data-en="PayFlow — Teacher Payment Module" data-es="PayFlow — Módulo de Pago de Profesores">PayFlow — Módulo de Pagamento de Professores</div>
-              <p class="project-desc" data-pt="Do material bruto de discovery à interface navegável: módulo de fechamento mensal de folha de pagamento para escolas de dança, com foco em reduzir erros silenciosos no processo da Fernanda." data-en="From raw discovery material to a navigable interface: a monthly payroll closing module for dance schools, focused on reducing silent errors in Fernanda’s workflow." data-es="Del material bruto de discovery a la interfaz navegable: módulo de cierre mensual de nómina para escuelas de danza, enfocado en reducir errores silenciosos en el proceso de Fernanda.">Do material bruto de discovery à interface navegável: módulo de fechamento mensal de folha de pagamento para escolas de dança, com foco em reduzir erros silenciosos no processo da Fernanda.</p>
-              <div class="project-links-row">
-                <a href="case-study-payflow.html" target="_blank" class="project-link-secondary" data-pt="Documentação" data-en="Case study" data-es="Documentación">Documentação</a>
-                <a href="https://cspestana.github.io/Fraktal/" target="_blank" class="project-link" data-pt="Preview" data-en="Preview" data-es="Preview">Preview</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card" data-pcard="1">
-            <div class="project-thumb">
-              <img src="images/daniel-noffs.png" alt="Daniel Noffs — Personal Trainer">
-            </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="project-tag">UI Design</span>
-                <span class="project-tag">Front-end</span>
-              </div>
-              <div class="project-name">Daniel Noffs — Personal Trainer</div>
-              <p class="project-desc" data-pt="Personal trainer sem presença digital estruturada perdia visibilidade e oportunidades de captar clientes. Projetei e desenvolvi o site completo, com depoimentos em tempo real via Google Sheets, do zero ao domínio próprio." data-en="A personal trainer with no structured digital presence was losing visibility and client leads. I designed and developed the full website, with real-time testimonials via Google Sheets, from scratch to live domain." data-es="Un personal trainer sin presencia digital estructurada perdía visibilidad y oportunidades de captar clientes. Diseñé y desarrollé el sitio completo, con testimonios en tiempo real vía Google Sheets, desde cero hasta dominio propio.">Personal trainer sem presença digital estruturada perdia visibilidade e oportunidades de captar clientes. Projetei e desenvolvi o site completo, com depoimentos em tempo real via Google Sheets, do zero ao domínio próprio.</p>
-              <div class="project-links-row">
-                <a href="case-study-daniel-noffs.html" class="project-link-secondary" data-pt="Documentação" data-en="Case study" data-es="Documentación">Documentação</a>
-                <a href="https://danielnoffs.com.br" target="_blank" class="project-link">Preview</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card" data-pcard="2">
-            <div class="project-thumb">
-              <img src="images/eats.jpg" alt="Escola Aberta do Terceiro Setor — on-Hive">
-            </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="project-tag">Product Design</span>
-                <span class="project-tag">UX/UI</span>
-              </div>
-              <div class="project-name">Escola Aberta do Terceiro Setor — on-Hive</div>
-              <p class="project-desc" data-pt="40 mil usuários dependiam de uma plataforma de cursos com inconsistências herdadas e bugs críticos. Como única designer da equipe, migrei e padronizei o sistema: Design System com 80+ componentes, 3 ciclos de validação com Clarity e resolução de bugs em parceria direta com devs." data-en="40,000 users depended on a course platform with inherited inconsistencies and critical bugs. As the sole designer on the team, I migrated and standardised the system: Design System with 80+ components, 3 Clarity validation cycles and bug resolution in direct partnership with devs." data-es="40 mil usuarios dependían de una plataforma de cursos con inconsistencias heredadas y bugs críticos. Como única diseñadora del equipo, migré y estandaricé el sistema: Design System con más de 80 componentes, 3 ciclos de validación con Clarity y resolución de bugs en colaboración directa con devs.">40 mil usuários dependiam de uma plataforma de cursos com inconsistências herdadas e bugs críticos. Como única designer da equipe, migrei e padronizei o sistema: Design System com 80+ componentes, 3 ciclos de validação com Clarity e resolução de bugs em parceria direta com devs.</p>
-              <div class="project-links-row">
-                <a href="case-study-lms-migracao.html" class="project-link-secondary" data-pt="Documentação" data-en="Case study" data-es="Documentación">Documentação</a>
-                <a href="https://eats.onhive.org.br/login" target="_blank" class="project-link">Preview</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card" data-pcard="3">
-            <div class="project-thumb">
-              <img src="images/lp-tawareski.png" alt="Tawareski Advocacia — Direito Empresarial">
-            </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="project-tag">UX/UI</span>
-                <span class="project-tag" data-pt="Acessibilidade" data-en="Accessibility" data-es="Accesibilidad">Acessibilidade</span>
-              </div>
-              <div class="project-name" data-pt="Tawareski Advocacia — Presença digital" data-en="Tawareski Law — Digital presence" data-es="Tawareski Advocacia — Presencia digital">Tawareski Advocacia — Presença digital</div>
-              <p class="project-desc" data-pt="Redesign da presença digital de um escritório de advocacia empresarial, com foco em credibilidade, acessibilidade e conversão." data-en="Redesign of a corporate law firm’s digital presence, focused on credibility, accessibility and conversion." data-es="Rediseño de la presencia digital de un despacho de abogados empresarial, enfocado en credibilidad, accesibilidad y conversión.">Redesign da presença digital de um escritório de advocacia empresarial, com foco em credibilidade, acessibilidade e conversão.</p>
-              <div class="project-links-row">
-                <a href="case-study-tawareski.html" class="project-link-secondary" data-pt="Documentação" data-en="Case study" data-es="Documentación">Documentação</a>
-                <a href="https://cspestana.github.io/Tawareski-advocacia/" target="_blank" class="project-link" data-pt="Preview" data-en="Preview" data-es="Preview">Preview</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card" data-pcard="4">
-            <div class="project-thumb">
-              <img src="images/lp-filafavo.png" alt="FilaFavo — Lembrancinhas em 3D">
-            </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="project-tag">UX/UI</span>
-                <span class="project-tag">Front-end</span>
-              </div>
-              <div class="project-name" data-pt="FilaFavo — Lembrancinhas em 3D" data-en="FilaFavo — 3D Party Favours" data-es="FilaFavo — Recuerditos en 3D">FilaFavo — Lembrancinhas em 3D</div>
-              <p class="project-desc" data-pt="De uma necessidade real a um produto próprio: naming, identidade visual e landing page para negócio de lembrancinhas em 3D, do conceito ao ar em domínio próprio." data-en="From a real need to a product of my own: naming, visual identity and landing page for a 3D party favour business, from concept to live on a custom domain." data-es="De una necesidad real a un producto propio: naming, identidad visual y landing page para un negocio de recuerditos en 3D, del concepto a estar en línea con dominio propio.">De uma necessidade real a um produto próprio: naming, identidade visual e landing page para negócio de lembrancinhas em 3D, do conceito ao ar em domínio próprio.</p>
-              <div class="project-links-row">
-                <a href="case-study-filafavo.html" class="project-link-secondary" data-pt="Documentação" data-en="Case study" data-es="Documentación">Documentação</a>
-                <a href="https://cspestana.github.io/FilaFavo/" target="_blank" class="project-link" data-pt="Preview" data-en="Preview" data-es="Preview">Preview</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card" data-pcard="5" style="--card-opacity:0.55;">
-            <div class="project-thumb">
-              <div class="project-thumb-placeholder">◻</div>
-            </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="project-tag">Mobile</span>
-                <span class="project-tag">UX/UI</span>
-              </div>
-              <div class="project-name" data-pt="Em breve" data-en="Coming soon" data-es="Próximamente">Em breve</div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="projects-footer">
-        <div class="projects-dots" id="projects-dots">
-          <span class="projects-dot active"></span>
-          <span class="projects-dot"></span>
-          <span class="projects-dot"></span>
-          <span class="projects-dot"></span>
-          <span class="projects-dot"></span>
-          <span class="projects-dot"></span>
-        </div>
-        <div class="projects-counter">
-          <span class="current" id="projects-current">01</span> / 06
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<!-- PAGE: SOBRE -->
-<div class="page" id="page-sobre">
-  <div class="about-page">
-    <div class="about-grid">
-      <div class="about-photo reveal">
-<img src="images/camilla2026.jpg" alt="Camilla Pestana">
-      </div>
-
-      <div class="reveal delay-1">
-        <div class="about-tag" data-pt="Sobre mim" data-en="About me" data-es="Sobre mí">Sobre mim</div>
-        <h2 class="about-title" data-pt="Do detalhe,&lt;br&gt;&lt;em&gt;à interface&lt;/em&gt;" data-en="From detail,&lt;br&gt;&lt;em&gt;to interface&lt;/em&gt;" data-es="Del detalle,&lt;br&gt;&lt;em&gt;a la interfaz&lt;/em&gt;">Do detalhe,<br><em>à interface</em></h2>
-
-        <div class="about-text">
-          <p data-pt="Com 14 anos de prática em design, trago para o produto precisão visual e atenção ao detalhe que só vêm com tempo de execução real." data-en="With 14 years of design practice, I bring to the product visual precision and attention to detail that only comes with real execution time." data-es="Con 14 años de práctica en diseño, aporto al producto precisión visual y atención al detalle que solo vienen con tiempo de ejecución real.">Com 14 anos de prática em design, trago para o produto precisão visual e atenção ao detalhe que só vêm com tempo de execução real.
-          <p data-pt="Atuo em Product Design e UX/UI, do discovery à interface navegável, com domínio de front-end para implementar e colaborar diretamente com times de desenvolvimento." data-en="I work in Product Design and UX/UI, from discovery to navigable interface, with front-end skills to implement and collaborate directly with development teams." data-es="Trabajo en Product Design y UX/UI, del discovery a la interfaz navegable, con dominio de front-end para implementar y colaborar directamente con equipos de desarrollo.">Atuo em Product Design e UX/UI, do discovery à interface navegável, com domínio de front-end para implementar e colaborar diretamente com times de desenvolvimento.
-          <p data-pt="Cada decisão de interface parte de um entendimento claro do problema e do usuário." data-en="Every interface decision starts from a clear understanding of the problem and the user." data-es="Cada decisión de interfaz parte de un entendimiento claro del problema y del usuario.">Cada decisão de interface parte de um entendimento claro do problema e do usuário.
-          <p data-pt="Uso IA como acelerador no meu processo, para ganhar velocidade nas etapas certas e chegar mais rápido ao que importa. O julgamento de design fica sempre comigo." data-en="I use AI as an accelerator in my process, to gain speed at the right stages and get to what matters faster. The design judgement always stays with me." data-es="Uso IA como acelerador en mi proceso, para ganar velocidad en las etapas correctas y llegar más rápido a lo que importa. El criterio de diseño siempre es mío.">Uso IA como acelerador no meu processo, para ganhar velocidade nas etapas certas e chegar mais rápido ao que importa. O julgamento de design fica sempre comigo.
-</p>
-
-          <div class="about-education reveal">
-            <div class="about-education-label" data-pt="Formação" data-en="Education" data-es="Formación">Formação</div>
-
-            <div class="edu-item">
-              <div class="edu-main">
-                <span class="edu-degree" data-pt="Especialização em UX, UI &amp; Product Design" data-en="Specialization in UX, UI &amp; Product Design" data-es="Especialización en UX, UI &amp; Product Design">Especialização em UX, UI &amp; Product Design</span>
-                <span class="edu-place" data-pt="UX Unicórnio · 200h" data-en="UX Unicórnio · 200h" data-es="UX Unicórnio · 200h">UX Unicórnio · 200h</span>
-              </div>
-              <span class="edu-year">2026</span>
-            </div>
-
-            <div class="edu-item">
-              <div class="edu-main">
-                <span class="edu-degree" data-pt="Extensão em Design Thinking" data-en="Extension in Design Thinking" data-es="Extensión en Design Thinking">Extensão em Design Thinking</span>
-                <span class="edu-place">Cruzeiro do Sul</span>
-              </div>
-              <span class="edu-year">2026</span>
-            </div>
-
-            <div class="edu-item">
-              <div class="edu-main">
-                <span class="edu-degree" data-pt="Bacharelado em Design Gráfico" data-en="Bachelor's in Graphic Design" data-es="Licenciatura en Diseño Gráfico">Bacharelado em Design Gráfico</span>
-                <span class="edu-place">Centro Universitário FMU</span>
-              </div>
-              <span class="edu-year">2012</span>
-            </div>
-          </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-<!-- PAGE: CONTATO -->
-<div class="page" id="page-contato">
-  <div class="contact-page">
-    <div class="contact-header">
-      <div class="contact-tag" data-pt="Contato" data-en="Contact" data-es="Contacto">Contato</div>
-      <h2 class="contact-title" data-pt="Vamos criar algo&lt;br&gt;&lt;em&gt;juntos?&lt;/em&gt;" data-en="Let's create something&lt;br&gt;&lt;em&gt;together?&lt;/em&gt;" data-es="¿Creamos algo&lt;br&gt;&lt;em&gt;juntos?&lt;/em&gt;">Vamos criar algo<br><em>juntos?</em></h2>
-    </div>
-
-    <div class="contact-grid">
-      <div class="contact-intro">
-        <p data-pt="Entre design e tecnologia, sigo aberta a novos desafios e oportunidades." data-en="Between design and technology, I remain open to new challenges and opportunities." data-es="Entre diseño y tecnología, sigo abierta a nuevos desafíos y oportunidades.">Entre design e tecnologia, sigo aberta a novos desafios e oportunidades.</p>
-
-        <div class="contact-links">
-          <a href="https://linkedin.com/in/camilla-pestana" target="_blank" class="contact-link-row">
-            <span class="contact-link-name">LinkedIn</span>
-            <span class="contact-link-handle">/in/camilla-pestana</span>
-            <span class="contact-link-arrow">→</span>
-          </a>
-        </div>
-      </div></p>
-
-      <form class="contact-form" id="contact-form">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_subject" value="Nova mensagem do portfólio!">
-        <div class="form-field">
-          <label for="nome" data-pt="Seu nome" data-en="Your name" data-es="Tu nombre">Seu nome</label>
-          <input type="text" id="nome" name="nome" placeholder="Como posso te chamar?" data-placeholder-pt="Como posso te chamar?" data-placeholder-en="What can I call you?" data-placeholder-es="¿Cómo te llamo?" required>
-        </div>
-        <div class="form-field">
-          <label for="email" data-pt="E-mail" data-en="E-mail" data-es="E-mail">E-mail</label>
-          <input type="email" id="email" name="email" placeholder="seu@email.com" required>
-        </div>
-        <div class="form-field">
-          <label for="mensagem" data-pt="Mensagem" data-en="Message" data-es="Mensaje">Mensagem</label>
-          <textarea id="mensagem" name="mensagem" placeholder="Me conte sobre o que você precisa..." data-placeholder-pt="Me conte sobre o que você precisa..." data-placeholder-en="Tell me about what you need..." data-placeholder-es="Cuéntame lo que necesitas..." required></textarea>
-        </div>
-        <button type="submit" class="btn-send" id="btn-send" data-pt="Enviar mensagem" data-en="Send message" data-es="Enviar mensaje">Enviar mensagem</button>
-      </form>
-    </div>
-  </div>
-
-</div>
-
-<!-- MODAL CONFIRMAÇÃO -->
-<div class="modal-confirm-overlay" id="modal-confirm">
-  <div class="modal-confirm">
-    <div class="modal-confirm-icon">✓</div>
-    <div class="modal-confirm-title" data-pt="Mensagem enviada!" data-en="Message sent!" data-es="¡Mensaje enviado!">Mensagem enviada!</div>
-    <p class="modal-confirm-text" data-pt="Obrigada pelo contato.&lt;br&gt;Retorno em breve. 😊" data-en="Thank you for reaching out.&lt;br&gt;I'll get back to you soon. 😊" data-es="¡Gracias por tu mensaje!&lt;br&gt;Te respondo pronto. 😊">Obrigada pelo contato.<br>Retorno em breve. 😊</p>
-    <button class="modal-confirm-btn" onclick="closeConfirm()">OK</button>
-  </div>
-</div>
+</footer>
 
 <!-- MODAL -->
-<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
-  <div class="modal" id="modal-box">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-
-    <!-- MODAL UX RESEARCH -->
-    <div id="modal-ux" style="display:none;">
-      <div class="modal-body" style="padding-top:56px;">
-        <div class="modal-tags">
-          <span class="modal-tag">UX Research</span>
-        </div>
-        <h2 class="modal-title" data-pt="Hábitos saudáveis&lt;br&gt;na infância" data-en="All-in-one&lt;br&gt;healthcare" data-es="Hábitos saludables&lt;br&gt;en la infancia">Hábitos saudáveis<br>na infância</h2>
-        <div class="modal-sections">
-          <div>
-            <div class="modal-section-label">O projeto</div>
-            <p class="modal-section-text">O cuidado infantil funciona como um sistema distribuído: informações, responsabilidades e decisões circulam entre família, cuidadores e profissionais de saúde, mas raramente se encontram em um só lugar. Essa fragmentação gera sobrecarga mental para os cuidadores e dificulta a manutenção de hábitos saudáveis na rotina das crianças.
-Este projeto de UX Research investiga as dores reais desse sistema, com foco em identificar oportunidades para uma solução de cuidados infantis all-in-one centralizada, acessível e adequada à realidade de quem cuida.</p>
-          </div>
-          <div>
-            <div class="modal-section-label">Minha atuação</div>
-            <p class="modal-section-text">Atuei como UX Researcher em projeto acadêmico desenvolvido em grupo pelo curso UX Unicórnio. Participei da desk research e análise de literatura para mapear o modelo conceitual do sistema de cuidado infantil, da definição do escopo e dos eixos de intervenção do projeto, e da estruturação e condução de entrevistas em profundidade com cuidadores primários e secundários.</p>
-          </div>
-          <div>
-            <div class="modal-section-label">Resultado</div>
-            <p class="modal-section-text">Projeto em andamento. A desk research revelou três eixos de intervenção que estão orientando a pesquisa qualitativa. Atualmente na fase de entrevistas com cuidadores. Os dados coletados serão sintetizados para definir o problema central e as oportunidades de design da solução.</p>
-          </div>
-        </div>
-      </div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-panel">
+    <div class="modal-head">
+      <span class="modal-kicker" data-pt="Projeto" data-en="Project" data-es="Proyecto">Projeto</span>
+      <button class="modal-close" data-close aria-label="Fechar" data-aria-pt="Fechar" data-aria-en="Close" data-aria-es="Cerrar">✕</button>
     </div>
-
+    <div class="modal-tags" id="modal-tags"></div>
+    <h2 id="modal-title"></h2>
+    <p class="modal-sub" id="modal-sub"></p>
+    <img class="modal-shot" id="modal-shot" alt="">
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-metric" id="modal-metric"></div>
+    <div class="modal-actions" id="modal-actions"></div>
   </div>
 </div>
 
-<!-- GSAP (carrossel de trabalhos) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
-
 <script>
-  // CURSOR
-  const cursor = document.getElementById('cursor');
-
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-  });
-
-  document.addEventListener('mouseover', e => {
-    const isLink = e.target.closest('a, button, .nav-tab');
-    const isField = e.target.closest('input, textarea');
-    if (isField) {
-      // em campos de texto, esconde a seta (usa o cursor de texto)
-      cursor.style.opacity = '0';
-    } else if (isLink) {
-      // em links/botões, mantém a seta e dá um leve destaque
-      cursor.style.opacity = '1';
-      cursor.classList.add('cursor-hover');
-    }
-  });
-
-  document.addEventListener('mouseout', e => {
-    const isLink = e.target.closest('a, button, .nav-tab');
-    const isField = e.target.closest('input, textarea');
-    if (isLink || isField) {
-      cursor.style.opacity = '1';
-      cursor.classList.remove('cursor-hover');
-    }
-  });
-
-  // FORMULÁRIO AJAX
-  const contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const btn = document.getElementById('btn-send');
-      btn.textContent = 'Enviando...';
-      btn.disabled = true;
-
-      const data = new FormData(contactForm);
-
-      try {
-        const res = await fetch('https://formsubmit.co/ajax/pestanascamilla@gmail.com', {
-          method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: data
-        });
-        if (res.ok) {
-          contactForm.reset();
-          document.getElementById('modal-confirm').classList.add('open');
-          document.body.style.overflow = 'hidden';
-        }
-      } catch(err) {
-        alert('Erro ao enviar. Tente novamente.');
-      }
-
-      btn.textContent = 'Enviar mensagem';
-      btn.disabled = false;
-    });
+const PROJECTS = [
+  {
+    id:'payflow',
+    img:'images/PayFlow.png',
+    tags:{pt:['Product Design','UX/UI'],en:['Product Design','UX/UI'],es:['Product Design','UX/UI']},
+    title:{
+      pt:'PayFlow — Módulo de Pagamento de Professores',
+      en:'PayFlow — Teacher Payroll Module',
+      es:'PayFlow — Módulo de Pago de Profesores'
+    },
+    sub:{
+      pt:'Módulo de fechamento mensal de folha de pagamento para escolas de dança.',
+      en:'Monthly payroll closing module for dance schools.',
+      es:'Módulo de cierre mensual de nómina para escuelas de danza.'
+    },
+    body:{
+      pt:[
+        'O desafio era partir de anotações brutas de entrevistas, sem requisitos prontos e sem fluxo pré-definido, e chegar a uma interface de alta fidelidade navegável.',
+        'A dor central não era o volume: era que qualquer erro passava despercebido e chegava ao financeiro sem rastreamento. A estrutura do produto nasceu da interpretação dessas dores.'
+      ],
+      en:[
+        'The challenge was to start from raw interview notes, with no ready requirements and no predefined flow, and arrive at a navigable high-fidelity interface.',
+        'The core pain was not volume: it was that any error slipped through unnoticed and reached finance with no traceability. The product structure came out of interpreting those pains.'
+      ],
+      es:[
+        'El reto era partir de notas brutas de entrevistas, sin requisitos listos y sin flujo predefinido, y llegar a una interfaz de alta fidelidad navegable.',
+        'El dolor central no era el volumen: era que cualquier error pasaba desapercibido y llegaba a finanzas sin trazabilidad. La estructura del producto nació de interpretar esos dolores.'
+      ]
+    },
+    metrics:{
+      pt:[['7','telas em alta fidelidade, do estado vazio à confirmação de envio'],['4','decisões de design documentadas com trade-offs']],
+      en:[['7','high-fidelity screens, from empty state to submission confirmation'],['4','design decisions documented with trade-offs']],
+      es:[['7','pantallas en alta fidelidad, del estado vacío a la confirmación de envío'],['4','decisiones de diseño documentadas con trade-offs']]
+    },
+    caseUrl:'case-study-payflow.html',
+    liveUrl:'https://cspestana.github.io/Fraktal/',
+    liveLabel:{pt:'Abrir protótipo',en:'Open prototype',es:'Abrir prototipo'}
+  },
+  {
+    id:'daniel-noffs',
+    img:'images/daniel-noffs.png',
+    tags:{pt:['UI Design','Front-end'],en:['UI Design','Front-end'],es:['UI Design','Front-end']},
+    title:{
+      pt:'Daniel Noffs — Personal Trainer',
+      en:'Daniel Noffs — Personal Trainer',
+      es:'Daniel Noffs — Entrenador Personal'
+    },
+    sub:{
+      pt:'Presença digital completa, do design ao código, com dados reais desde o lançamento.',
+      en:'A complete digital presence, from design to code, with real data from launch day.',
+      es:'Presencia digital completa, del diseño al código, con datos reales desde el lanzamiento.'
+    },
+    body:{
+      pt:[
+        'Um profissional com mais de 20 anos de experiência que dependia inteiramente de indicação e WhatsApp, sem nenhum canal que comunicasse profissionalismo para quem ainda não o conhecia.',
+        'Projetei e desenvolvi o site inteiro, com depoimentos em tempo real via Google Sheets, domínio próprio, SEO local e analytics em conformidade com a LGPD.'
+      ],
+      en:[
+        'A professional with over 20 years of experience who relied entirely on referrals and WhatsApp, with no channel that conveyed professionalism to anyone who did not know him yet.',
+        'I designed and built the entire site, with real-time testimonials via Google Sheets, a custom domain, local SEO and analytics compliant with Brazilian data protection law.'
+      ],
+      es:[
+        'Un profesional con más de 20 años de experiencia que dependía por completo de recomendaciones y WhatsApp, sin ningún canal que comunicara profesionalismo a quien aún no lo conocía.',
+        'Diseñé y desarrollé el sitio entero, con testimonios en tiempo real vía Google Sheets, dominio propio, SEO local y analytics conforme a la ley de protección de datos.'
+      ]
+    },
+    metrics:{
+      pt:[['41+','usuários ativos nos primeiros 28 dias'],['3','camadas de oferta unificadas num único site']],
+      en:[['41+','active users in the first 28 days'],['3','offer tiers unified in a single site']],
+      es:[['41+','usuarios activos en los primeros 28 días'],['3','niveles de oferta unificados en un solo sitio']]
+    },
+    caseUrl:'case-study-daniel-noffs.html',
+    liveUrl:'https://danielnoffs.com.br',
+    liveLabel:{pt:'Visitar o site',en:'Visit the site',es:'Visitar el sitio'}
+  },
+  {
+    id:'escola-aberta',
+    img:'images/eats.jpg',
+    tags:{pt:['Product Design','UX/UI'],en:['Product Design','UX/UI'],es:['Product Design','UX/UI']},
+    title:{
+      pt:'Escola Aberta do Terceiro Setor — on-Hive',
+      en:'Escola Aberta do Terceiro Setor — on-Hive',
+      es:'Escola Aberta do Terceiro Setor — on-Hive'
+    },
+    sub:{
+      pt:'De um estudo herdado que só existia no papel à plataforma em produção.',
+      en:'From an inherited study that only existed on paper to a platform in production.',
+      es:'De un estudio heredado que solo existía en papel a la plataforma en producción.'
+    },
+    body:{
+      pt:[
+        'Como única designer da equipe, dei continuidade a um estudo de design nunca implementado e migrei a base de alunos de uma plataforma terceirizada para uma solução própria.',
+        'O ciclo entre design, dados e desenvolvimento se fechou de verdade: problemas que não apareceram nos testes internos foram capturados e corrigidos com dados reais de uso via Microsoft Clarity.'
+      ],
+      en:[
+        'As the only designer on the team, I picked up a design study that had never been implemented and migrated the student base from a third-party platform to an in-house solution.',
+        'The loop between design, data and development actually closed: problems that never showed up in internal testing were caught and fixed with real usage data through Microsoft Clarity.'
+      ],
+      es:[
+        'Como única diseñadora del equipo, retomé un estudio de diseño que nunca se había implementado y migré la base de alumnos de una plataforma de terceros a una solución propia.',
+        'El ciclo entre diseño, datos y desarrollo se cerró de verdad: problemas que no aparecieron en las pruebas internas se detectaron y corrigieron con datos reales de uso vía Microsoft Clarity.'
+      ]
+    },
+    metrics:{
+      pt:[['40 mil+','alunos atendidos, sem interrupção de acesso'],['80+','componentes no Design System'],['3','ciclos de melhoria com dados reais']],
+      en:[['40k+','students served, with no interruption of access'],['80+','components in the Design System'],['3','improvement cycles driven by real data']],
+      es:[['40 mil+','alumnos atendidos, sin interrupción de acceso'],['80+','componentes en el Design System'],['3','ciclos de mejora con datos reales']]
+    },
+    caseUrl:'case-study-lms-migracao.html',
+    liveUrl:'https://eats.onhive.org.br/login',
+    liveLabel:{pt:'Visitar o site',en:'Visit the site',es:'Visitar el sitio'}
+  },
+  {
+    id:'tawareski',
+    img:'images/lp-tawareski.png',
+    tags:{pt:['UX/UI','Acessibilidade'],en:['UX/UI','Accessibility'],es:['UX/UI','Accesibilidad']},
+    title:{
+      pt:'Tawareski Advocacia — Presença digital',
+      en:'Tawareski Advocacia — Digital presence',
+      es:'Tawareski Advocacia — Presencia digital'
+    },
+    sub:{
+      pt:'Redesign completo, do wireframe ao código, com WCAG 2.1 AA como piso mínimo.',
+      en:'A full redesign, from wireframe to code, with WCAG 2.1 AA as the baseline.',
+      es:'Rediseño completo, del wireframe al código, con WCAG 2.1 AA como mínimo.'
+    },
+    body:{
+      pt:[
+        'Sites de advocacia costumam falhar nos mesmos quatro pontos: não são responsivos, não são acessíveis, não convertem e não comunicam credibilidade.',
+        'A acessibilidade entrou desde o token de design: contraste verificado em cada par de cor, ARIA em todos os controles, navegação completa por teclado e semântica HTML real.'
+      ],
+      en:[
+        'Law firm sites tend to fail at the same four points: they are not responsive, not accessible, they do not convert and they do not convey credibility.',
+        'Accessibility came in at the design token level: contrast checked on every color pair, ARIA on every control, full keyboard navigation and real HTML semantics.'
+      ],
+      es:[
+        'Los sitios de despachos de abogados suelen fallar en los mismos cuatro puntos: no son responsivos, no son accesibles, no convierten y no comunican credibilidad.',
+        'La accesibilidad entró desde el token de diseño: contraste verificado en cada par de color, ARIA en todos los controles, navegación completa por teclado y semántica HTML real.'
+      ]
+    },
+    metrics:{
+      pt:[['AA','conformidade WCAG 2.1 em toda a navegação'],['7','páginas entregues, 100% responsivas'],['0','dependências externas além de fontes']],
+      en:[['AA','WCAG 2.1 compliance across the whole navigation'],['7','pages delivered, 100% responsive'],['0','external dependencies beyond fonts']],
+      es:[['AA','conformidad WCAG 2.1 en toda la navegación'],['7','páginas entregadas, 100% responsivas'],['0','dependencias externas más allá de las fuentes']]
+    },
+    caseUrl:'case-study-tawareski.html',
+    liveUrl:'https://cspestana.github.io/Tawareski-advocacia/',
+    liveLabel:{pt:'Visitar o site',en:'Visit the site',es:'Visitar el sitio'}
+  },
+  {
+    id:'filafavo',
+    img:'images/lp-filafavo.png',
+    tags:{pt:['UX/UI','Front-end'],en:['UX/UI','Front-end'],es:['UX/UI','Front-end']},
+    title:{
+      pt:'FilaFavo — Lembrancinhas em 3D',
+      en:'FilaFavo — 3D-printed party favors',
+      es:'FilaFavo — Recuerdos de fiesta en 3D'
+    },
+    sub:{
+      pt:'Naming, identidade visual e landing page de catálogo para um negócio de impressão 3D.',
+      en:'Naming, visual identity and a catalog landing page for a 3D printing business.',
+      es:'Naming, identidad visual y landing page de catálogo para un negocio de impresión 3D.'
+    },
+    body:{
+      pt:[
+        'Nasceu de um problema que eu mesma vivi ao planejar o primeiro aniversário da minha filha: lembrancinha de festa infantil é quase sempre guloseima.',
+        'A pesquisa foi etnográfica e orgânica, em conversas reais com outras mães. O naming ganhou três camadas de leitura (filamento, favor e favo de mel) que viraram conceito visual.'
+      ],
+      en:[
+        'It came out of a problem I lived myself while planning my daughter\'s first birthday: party favors for kids are almost always candy.',
+        'The research was ethnographic and organic, in real conversations with other mothers. The naming gained three layers of meaning (filament, favor and honeycomb) that turned into a visual concept.'
+      ],
+      es:[
+        'Nació de un problema que yo misma viví al planear el primer cumpleaños de mi hija: el recuerdo de fiesta infantil casi siempre es dulce.',
+        'La investigación fue etnográfica y orgánica, en conversaciones reales con otras madres. El naming ganó tres capas de lectura (filamento, favor y panal) que se volvieron concepto visual.'
+      ]
+    },
+    metrics:{
+      pt:[['0→1','da ideia ao produto digital completo'],['16','modelos no catálogo inicial']],
+      en:[['0→1','from idea to a complete digital product'],['16','models in the initial catalog']],
+      es:[['0→1','de la idea al producto digital completo'],['16','modelos en el catálogo inicial']]
+    },
+    caseUrl:'case-study-filafavo.html',
+    liveUrl:'https://cspestana.github.io/FilaFavo/',
+    liveLabel:{pt:'Visitar o site',en:'Visit the site',es:'Visitar el sitio'}
+  },
+  {
+    id:'em-breve',
+    img:null,
+    tags:{pt:['Mobile','UX/UI'],en:['Mobile','UX/UI'],es:['Mobile','UX/UI']},
+    title:{pt:'Em breve',en:'Coming soon',es:'Próximamente'},
+    sub:{
+      pt:'Estou finalizando este case. Volte em breve.',
+      en:'I am finishing this case study. Check back soon.',
+      es:'Estoy terminando este caso. Vuelve pronto.'
+    },
+    body:{
+      pt:['Em breve você encontra aqui o processo completo deste projeto.'],
+      en:['The full process behind this project will be here shortly.'],
+      es:['Pronto encontrarás aquí el proceso completo de este proyecto.']
+    },
+    metrics:{pt:[],en:[],es:[]},
+    caseUrl:null,
+    liveUrl:null,
+    liveLabel:{pt:'',en:'',es:''}
   }
+];
 
-  function closeConfirm() {
-    document.getElementById('modal-confirm').classList.remove('open');
-    document.body.style.overflow = '';
-  }
+/* idioma corrente + leitor de campo traduzido */
+let LANG = (localStorage.getItem('lang') || 'pt');
+if (!['pt','en','es'].includes(LANG)) LANG = 'pt';
+const T = v => (v && typeof v === 'object' && !Array.isArray(v)) ? (v[LANG] !== undefined ? v[LANG] : v.pt) : v;
 
-  // MODAL
-  function openModal(id) {
-    document.querySelectorAll('.modal [id^="modal-"]').forEach(el => el.style.display = 'none');
-    document.getElementById('modal-' + id).style.display = 'block';
-    document.getElementById('modal-overlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeModal() {
-    document.getElementById('modal-overlay').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  function closeModalOutside(e) {
-    if (e.target === document.getElementById('modal-overlay')) closeModal();
-  }
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+/* ---------- layout da colagem (largura, deslocamento e rotação por card) ---------- */
+const CARD_W = 78;                        // largura igual pra todos (%)
+const LAYOUT = [                          // só o deslocamento horizontal muda
+  { x: 0 }, { x: 18 }, { x: 4 }, { x: 20 }, { x: 2 }, { x: 16 }
+];
 
-  // IDIOMA
-  function setLang(lang) {
-    document.querySelectorAll('[data-pt]').forEach(el => {
-      const text = el.getAttribute('data-' + lang);
-      if (text) el.innerHTML = text;
-    });
-    document.querySelectorAll('[data-placeholder-pt]').forEach(el => {
-      el.placeholder = el.getAttribute('data-placeholder-' + lang);
-    });
-    document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
-    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-    document.getElementById('btn-es').classList.toggle('active', lang === 'es');
-    localStorage.setItem('lang', lang);
-    const htmlLang = lang === 'en' ? 'en' : (lang === 'es' ? 'es' : 'pt-BR');
-    document.documentElement.setAttribute('lang', htmlLang);
-  }
+/* ---------- render dos cards ---------- */
+const tagHtml = (p,l) => p.tags[l].map(t=>`<span class='work-tag'>${t}</span>`).join('');
+const collage = document.getElementById('collage');
+collage.insertAdjacentHTML('beforeend', PROJECTS.map((p,i) => {
+  const L = LAYOUT[i % LAYOUT.length];
+  return `
+  <button class="work-item" data-i="${i}" aria-haspopup="dialog"
+          style="width:${CARD_W}%;margin-left:${L.x}%">
+    <div class="work-media"><canvas aria-label="${T(p.title)}" data-aria-pt="${p.title.pt}" data-aria-en="${p.title.en}" data-aria-es="${p.title.es}"></canvas></div>
+    <div class="work-info">
+      <div class="work-tags" data-pt="${tagHtml(p,'pt')}" data-en="${tagHtml(p,'en')}" data-es="${tagHtml(p,'es')}">${tagHtml(p,LANG)}</div>
+      <div class="work-title" data-pt="${p.title.pt}" data-en="${p.title.en}" data-es="${p.title.es}">${T(p.title)}</div>
+    </div>
+  </button>`;
+}).join(''));
 
-  // Restaurar idioma salvo
-  document.addEventListener('DOMContentLoaded', function() {
-    const savedLang = localStorage.getItem('lang') || 'pt';
-    if (savedLang !== 'pt') setLang(savedLang);
-  });
 
-  window.addEventListener('load', function() {
-    const savedLang = localStorage.getItem('lang') || 'pt';
-    if (savedLang !== 'pt') setLang(savedLang);
-  });
-
-  // HAMBÚRGUER
-  function toggleMenu() {
-    const nav = document.getElementById('nav-links');
-    const btn = document.getElementById('hamburger');
-    nav.classList.toggle('open');
-    btn.classList.toggle('open');
-  }
-
-  // TABS
-  function showPage(name) {
-    // fecha menu mobile se estiver aberto
-    document.getElementById('nav-links').classList.remove('open');
-    document.getElementById('hamburger').classList.remove('open');
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-    document.getElementById('page-' + name).classList.add('active');
-    const matchMap = { projetos: 'proj', sobre: 'sobr', contato: 'cont' };
-    document.querySelectorAll('.nav-tab').forEach(t => {
-      if (t.textContent.toLowerCase().includes(matchMap[name])) {
-        t.classList.add('active');
-      }
-    });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    // recalcula posições do carrossel quando a aba muda
-    if (window.ScrollTrigger) requestAnimationFrame(function(){ ScrollTrigger.refresh(); });
-  }
-
-  // CARROSSEL TRABALHOS SELECIONADOS — GSAP seamless loop
-  // Baseado no pen "Infinite scrolling, dragging, and snapping cards" (GreenSock)
-  (function() {
-    if (!window.gsap || !window.ScrollTrigger) return;
-    gsap.registerPlugin(ScrollTrigger, Draggable);
-
-    var cards     = gsap.utils.toArray('.project-card[data-pcard]');
-    var dots      = gsap.utils.toArray('#projects-dots .projects-dot');
-    var counterEl = document.getElementById('projects-current');
-    var wrapEl    = document.querySelector('.projects-wrap');
-    var TOTAL     = cards.length;
-    if (!wrapEl || !TOTAL) return;
-
-    // espaçamento entre cards na timeline. TOTAL * spacing precisa ser >= 1
-    // (duração da animação de cada card), senão o loop "pula".
-    var spacing = Math.max(0.15, 1 / TOTAL);
-
-    gsap.set(cards, { xPercent: 400, opacity: 0, scale: 0 });
-
-    // animação de cada card: entra pela direita, cresce no centro, sai pela esquerda
-    function animateFunc(el) {
-      var tl = gsap.timeline();
-      tl.fromTo(el, { scale: 0, opacity: 0 },
-                    { scale: 1, opacity: 1, zIndex: 100, duration: 0.5, yoyo: true, repeat: 1, ease: 'power1.in', immediateRender: false })
-        .fromTo(el, { xPercent: 400 },
-                    { xPercent: -400, duration: 1, ease: 'none', immediateRender: false }, 0);
-      return tl;
-    }
-
-    function buildSeamlessLoop(items, spacing, animateFunc) {
-      var rawSequence  = gsap.timeline({ paused: true });
-      var seamlessLoop = gsap.timeline({
-        paused: true,
-        repeat: -1,
-        onRepeat: function() { this._time === this._dur && (this._tTime += this._dur - 0.01); },
-        onReverseComplete: function() { this.totalTime(this.rawTime() + this.duration() * 100); }
-      });
-      var cycleDuration = spacing * items.length;
-      var dur;
-      items.concat(items).concat(items).forEach(function(item, i) {
-        var anim = animateFunc(items[i % items.length]);
-        rawSequence.add(anim, i * spacing);
-        dur || (dur = anim.duration());
-      });
-      seamlessLoop.fromTo(rawSequence,
-        { time: cycleDuration + dur / 2 },
-        { time: '+=' + cycleDuration, duration: cycleDuration, ease: 'none' });
-      return seamlessLoop;
-    }
-
-    var seamlessLoop = buildSeamlessLoop(cards, spacing, animateFunc);
-    var lastIdx = -1;
-
-    function updateUI() {
-      var idx = ((Math.round(seamlessLoop.time() / spacing) % TOTAL) + TOTAL) % TOTAL;
-      if (idx === lastIdx) return;
-      lastIdx = idx;
-      dots.forEach(function(dot, i) {
-        dot.classList.remove('active', 'past');
-        if (i === idx)    dot.classList.add('active');
-        else if (i < idx) dot.classList.add('past');
-      });
-      if (counterEl) counterEl.textContent = String(idx + 1).padStart(2, '0');
-    }
-
-    // tween que "persegue" a posição do scroll, deixando o movimento suave
-    var scrub = gsap.to(seamlessLoop, {
-      time: 0, duration: 0.5, ease: 'power3', paused: true, onUpdate: updateUI
-    });
-
-    // o scroll dentro da .projects-wrap (600vh, sticky) controla o carrossel
-    var trigger = ScrollTrigger.create({
-      trigger: wrapEl,
-      start: 'top top',
-      end: 'bottom bottom',
-      onUpdate: function(self) {
-        scrub.vars.time = self.progress * (TOTAL - 1) * spacing;
-        scrub.invalidate().restart();
-      },
-      snap: {
-        snapTo: 1 / (TOTAL - 1),
-        duration: { min: 0.2, max: 0.6 },
-        delay: 0.05,
-        ease: 'power1.inOut'
-      }
-    });
-
-    function scrollToCard(i) {
-      var y = trigger.start + (trigger.end - trigger.start) * (i / (TOTAL - 1));
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-
-    // clicar nos dots leva até o card
-    dots.forEach(function(dot, i) {
-      dot.addEventListener('click', function() { scrollToCard(i); });
-    });
-
-    // arrastar na horizontal também navega (converte o arraste em scroll)
-    if (window.Draggable) {
-      var startScroll = 0;
-      Draggable.create(document.createElement('div'), {
-        type: 'x',
-        trigger: '.projects-cards-container',
-        minimumMovement: 6,
-        onPress: function() { startScroll = window.scrollY; },
-        onDrag: function() {
-          var perCard = (trigger.end - trigger.start) / (TOTAL - 1);
-          var cardW = cards[0].offsetWidth || 380;
-          var y = startScroll + (this.startX - this.x) * (perCard / cardW);
-          window.scrollTo(0, gsap.utils.clamp(trigger.start, trigger.end, y));
-        }
-      });
-    }
-
-    seamlessLoop.time(0);
-    updateUI();
-  })();
-
-  // FADE-IN AO ROLAR
-  (function() {
-    function initReveal() {
-      var els = document.querySelectorAll('.reveal');
-      if (!('IntersectionObserver' in window)) {
-        els.forEach(function(el){ el.classList.add('is-visible'); });
-        return;
-      }
-      var obs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            obs.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-      els.forEach(function(el){ obs.observe(el); });
-    }
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initReveal);
-    } else {
-      initReveal();
-    }
-  })();
-</script>
-
-<!-- FUNDO DE PONTINHOS INTERATIVOS -->
-<script>
-(function() {
+/* ---------- fundo de bolinhas (mesmo do index) ---------- */
+(function(){
   const canvas = document.getElementById('dots-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
-  const GAP = 34;          // distância entre os pontos
-  const DOT_RADIUS = 1.3;  // tamanho base do ponto
-  const INFLUENCE = 130;   // raio de influência do mouse
-  const PINK = '255, 107, 146'; // rosa (mesmo do --pink dark)
+  const GAP = 34, DOT_RADIUS = 1.3, INFLUENCE = 130, PINK = '255, 107, 146';
+  let dots = [], mouse = { x:-9999, y:-9999 }, width = 0, height = 0, queued = false;
 
-  let dots = [];
-  let mouse = { x: -9999, y: -9999 };
-  let width, height;
-
-  function build() {
-    width = canvas.width = window.innerWidth;
+  function build(){
+    width  = canvas.width  = window.innerWidth;
     height = canvas.height = window.innerHeight;
     dots = [];
-    const cols = Math.ceil(width / GAP) + 1;
-    const rows = Math.ceil(height / GAP) + 1;
-    for (let i = 0; i < cols; i++) {
-      for (let j = 0; j < rows; j++) {
-        const x = i * GAP;
-        const y = j * GAP;
-        dots.push({ x, y, baseX: x, baseY: y });
-      }
-    }
+    const cols = Math.ceil(width/GAP)+1, rows = Math.ceil(height/GAP)+1;
+    for (let i=0;i<cols;i++) for (let j=0;j<rows;j++) dots.push({ baseX:i*GAP, baseY:j*GAP });
+    draw();
   }
 
-  function draw() {
-    ctx.clearRect(0, 0, width, height);
-    for (const d of dots) {
-      const dx = mouse.x - d.baseX;
-      const dy = mouse.y - d.baseY;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-
-      let r = DOT_RADIUS;
-      let alpha = 0.28;
-      let ox = 0, oy = 0;
-
-      if (dist < INFLUENCE) {
-        const force = (1 - dist / INFLUENCE);
-        // afasta o ponto suavemente do cursor
+  function draw(){
+    queued = false;
+    ctx.clearRect(0,0,width,height);
+    for (const d of dots){
+      const dx = mouse.x - d.baseX, dy = mouse.y - d.baseY;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      let r = DOT_RADIUS, alpha = 0.28, ox = 0, oy = 0;
+      if (dist < INFLUENCE){
+        const force = 1 - dist/INFLUENCE;
         const angle = Math.atan2(dy, dx);
-        const push = force * 12;
+        const push  = force * 12;
         ox = -Math.cos(angle) * push;
         oy = -Math.sin(angle) * push;
-        // aumenta tamanho e brilho perto do mouse
         r = DOT_RADIUS + force * 2.2;
         alpha = 0.28 + force * 0.6;
       }
-
       ctx.beginPath();
-      ctx.arc(d.baseX + ox, d.baseY + oy, r, 0, Math.PI * 2);
+      ctx.arc(d.baseX + ox, d.baseY + oy, r, 0, Math.PI*2);
       ctx.fillStyle = 'rgba(' + PINK + ',' + alpha + ')';
       ctx.fill();
     }
-    requestAnimationFrame(draw);
   }
 
-  window.addEventListener('mousemove', e => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-  });
-  window.addEventListener('mouseleave', () => {
-    mouse.x = -9999; mouse.y = -9999;
-  });
+  // só redesenha quando algo muda (os pontos não têm inércia, então não precisa de loop eterno)
+  function request(){ if (!queued){ queued = true; requestAnimationFrame(draw); } }
+
+  window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; request(); });
+  window.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; request(); });
   window.addEventListener('resize', build);
-
   build();
-  draw();
 })();
+
+/* ---------- abertura: nome entrando caractere por caractere ---------- */
+(function(){
+  const el = document.querySelector('[data-split]');
+  if (!el) return;
+  const DELAY = 0.045;                      // stagger entre caracteres
+  let n = 0;
+
+  // percorre os nós preservando o <em> do sobrenome
+  function split(node){
+    [...node.childNodes].forEach(child => {
+      if (child.nodeType === 3){            // texto
+        const frag = document.createDocumentFragment();
+        let word = null;                    // agrupa os caracteres por palavra
+        [...child.textContent].forEach(c => {
+          if (c === ' '){
+            word = null;
+            const sp = document.createElement('span');
+            sp.className = 'sp'; frag.appendChild(sp); return;
+          }
+          if (!word){
+            word = document.createElement('span');
+            word.className = 'wd';
+            frag.appendChild(word);
+          }
+          const out = document.createElement('span');
+          out.className = 'ch';
+          const inn = document.createElement('i');
+          inn.textContent = c;
+          inn.style.transitionDelay = (n * DELAY) + 's, ' + (n * DELAY) + 's';
+          n++;
+          out.appendChild(inn); word.appendChild(out);
+        });
+        node.replaceChild(frag, child);
+      } else if (child.nodeType === 1){     // elemento (o <em>)
+        split(child);
+      }
+    });
+  }
+  split(el);
+
+  const open = document.getElementById('opening');
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    open.classList.add('is-in');
+    open.querySelectorAll('.ch > i').forEach(i => i.style.transition = 'none');
+  } else {
+    requestAnimationFrame(() => requestAnimationFrame(() => open.classList.add('is-in')));
+  }
+})();
+
+/* ---------- motor do efeito: arqueamento por velocidade de scroll ---------- */
+const svg   = document.getElementById('collage-svg');
+const items = [...collage.querySelectorAll('.work-item')];
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let connPath = null;
+
+const RADIUS   = 14;   // raio do canto
+const MAXBEND  = 30;   // quanto o card pode arquear (px)
+const PAD      = 34;   // folga no canvas pro arco não ser cortado
+const STEP     = 6;    // largura da fatia ao deformar
+const AMP      = 48;   // parallax (bem mais sutil agora, o arco é o protagonista)
+const SPEEDS   = [0.45, -0.32, 0.55, -0.48, 0.36, -0.60];
+
+const cards = items.map((el, i) => {
+  const p = PROJECTS[i];
+  const c = {
+    el, media: el.querySelector('.work-media'), cv: el.querySelector('canvas'),
+    img: null, cssW: 0, cssH: 0, bend: 0, shift: 0, target: 0, speed: SPEEDS[i % SPEEDS.length], baseTop: 0
+  };
+  c.ctx = c.cv.getContext('2d');
+  if (p.img){
+    const im = new Image();
+    im.onload = () => { c.img = im; resize(); };
+    im.src = p.img;
+  }
+  return c;
+});
+
+/* caminho do card com as bordas de cima e de baixo arqueadas */
+function bentPath(ctx, w, h, r, A){
+  const top = x => PAD - A * Math.sin(Math.PI * x / w);
+  const bot = x => PAD + h + A * Math.sin(Math.PI * x / w);
+  ctx.beginPath();
+  ctx.moveTo(r, top(r));
+  for (let x = r; x <= w - r; x += STEP) ctx.lineTo(x, top(x));
+  ctx.lineTo(w - r, top(w - r));
+  ctx.quadraticCurveTo(w, top(w), w, top(w) + r);
+  ctx.lineTo(w, bot(w) - r);
+  ctx.quadraticCurveTo(w, bot(w), w - r, bot(w - r));
+  for (let x = w - r; x >= r; x -= STEP) ctx.lineTo(x, bot(x));
+  ctx.lineTo(r, bot(r));
+  ctx.quadraticCurveTo(0, bot(0), 0, bot(0) - r);
+  ctx.lineTo(0, top(0) + r);
+  ctx.quadraticCurveTo(0, top(0), r, top(r));
+  ctx.closePath();
+}
+
+function draw(c){
+  const { ctx, cssW: w, cssH: h, img } = c;
+  const A = c.bend;
+  ctx.clearRect(0, 0, w, h + PAD * 2);
+  ctx.save();
+  bentPath(ctx, w, h, RADIUS, A);
+  ctx.clip();
+  if (img){
+    // desenha em fatias verticais: cada coluna ganha sua própria altura -> a imagem acompanha o arco
+    for (let x = 0; x < w; x += STEP){
+      const sw   = Math.min(STEP, w - x);
+      const sMid = Math.sin(Math.PI * (x + sw / 2) / w);
+      const off  = A * sMid;
+      ctx.drawImage(img,
+        (x / w) * img.naturalWidth, 0, (sw / w) * img.naturalWidth, img.naturalHeight,
+        x, PAD - off, sw + 1, h + off * 2);
+    }
+  } else {
+    ctx.fillStyle = '#201A26';
+    ctx.fillRect(0, PAD - A, w, h + A * 2);
+    ctx.fillStyle = '#362E3D'; ctx.font = '300 34px Georgia, serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText('◻', w / 2, PAD + h / 2);
+  }
+  ctx.restore();
+  ctx.save();
+  bentPath(ctx, w, h, RADIUS, A);
+  ctx.strokeStyle = c.hovered ? '#FF6B92' : '#362E3D';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  ctx.restore();
+}
+
+function docTop(el){ let y = 0, n = el; while (n){ y += n.offsetTop; n = n.offsetParent; } return y; }
+
+function resize(){
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  cards.forEach(c => {
+    const r = c.media.getBoundingClientRect();
+    c.cssW = Math.round(r.width);
+    c.cssH = Math.round(r.width * 10 / 16);
+    c.cv.style.marginTop = (-PAD) + 'px';
+    c.cv.style.width  = c.cssW + 'px';
+    c.cv.style.height = (c.cssH + PAD * 2) + 'px';
+    c.cv.width  = Math.round(c.cssW * dpr);
+    c.cv.height = Math.round((c.cssH + PAD * 2) * dpr);
+    c.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    c.baseTop = docTop(c.el);
+    draw(c);
+  });
+  drawConnectors();
+}
+
+function drawConnectors(){
+  if (window.innerWidth <= 1024){ if (connPath){ connPath.remove(); connPath = null; } return; }
+  const base = collage.getBoundingClientRect();
+  svg.setAttribute('viewBox', `0 0 ${base.width} ${base.height}`);
+  let d = '';
+  for (let i = 0; i < items.length - 1; i++){
+    const a = items[i].querySelector('.work-media').getBoundingClientRect();
+    const b = items[i+1].querySelector('.work-media').getBoundingClientRect();
+    const right = (b.left + b.width/2) > (a.left + a.width/2);
+    const x1 = (right ? a.right - a.width*0.18 : a.left + a.width*0.18) - base.left;
+    const x2 = (right ? b.left + b.width*0.2  : b.right - b.width*0.2) - base.left;
+    d += `M ${x1} ${a.bottom - base.top} L ${x2} ${b.top - base.top} `;
+  }
+  if (!connPath){
+    connPath = document.createElementNS('http://www.w3.org/2000/svg','path');
+    connPath.setAttribute('fill','none'); connPath.setAttribute('stroke','#6E3B52');
+    connPath.setAttribute('stroke-width','1.4'); connPath.setAttribute('stroke-dasharray','1 7');
+    connPath.setAttribute('stroke-linecap','round'); connPath.setAttribute('opacity','.85');
+    svg.appendChild(connPath);
+  }
+  connPath.setAttribute('d', d);
+}
+
+/* loop: velocidade do scroll -> arco; posição -> parallax */
+let lastY = window.scrollY, vel = 0, bend = 0, running = false, settle = 0;
+
+function frame(){
+  const y   = window.scrollY;
+  const raw = y - lastY; lastY = y;
+  vel  += (raw - vel) * 0.22;
+  const want = Math.min(Math.abs(vel) * 1.15, MAXBEND);
+  bend += (want - bend) * 0.14;
+
+  const vh = window.innerHeight;
+  let moving = Math.abs(want - bend) > 0.3 || Math.abs(vel) > 0.3;
+
+  cards.forEach(c => {
+    const r = c.media.getBoundingClientRect();
+    const onScreen = r.bottom > -200 && r.top < vh + 200;
+
+    // parallax
+    let delta = ((c.baseTop + c.el.offsetHeight/2 - y) - vh/2) / vh;
+    delta = Math.max(-1, Math.min(1, delta));
+    c.target = delta * c.speed * AMP;
+    c.shift += (c.target - c.shift) * 0.12;
+    if (Math.abs(c.target - c.shift) > 0.2) moving = true;
+    c.el.style.transform = `translate3d(0, ${c.shift.toFixed(2)}px, 0)`;
+
+    // arco (só em quem está na tela)
+    const nb = onScreen ? bend : 0;
+    if (Math.abs(nb - c.bend) > 0.15){ c.bend = nb; draw(c); }
+  });
+
+  drawConnectors();
+  if (moving || settle-- > 0) requestAnimationFrame(frame);
+  else running = false;
+}
+
+function kick(){
+  if (window.innerWidth <= 1024 || reduced) return;
+  settle = 25;
+  if (!running){ running = true; requestAnimationFrame(frame); }
+}
+
+/* hover muda a cor da borda desenhada no canvas */
+items.forEach((el, i) => {
+  el.addEventListener('mouseenter', () => { cards[i].hovered = true;  draw(cards[i]); });
+  el.addEventListener('mouseleave', () => { cards[i].hovered = false; draw(cards[i]); });
+});
+
+window.addEventListener('scroll', kick, { passive:true });
+window.addEventListener('resize', resize);
+window.addEventListener('load', resize);
+resize();
+
+
+/* ---------- crachá pendurado: corda verlet + arraste ---------- */
+(function(){
+  const stage = document.getElementById('stage');
+  const badge = document.getElementById('badge');
+  const cord  = document.getElementById('cord');
+  if (!stage || !badge || !cord) return;
+
+  const N = 16, ITER = 16, GRAV = 1.1, FRICTION = 0.982;
+  let W = 0, H = 0, segLen = 12, pts = [], anchor = {x:0, y:0};
+  let dragging = false, grab = {x:0, y:0}, aim = {x:0, y:0};
+  let running = false, calm = 0;
+
+  const band  = document.createElementNS('http://www.w3.org/2000/svg','path');
+  const shine = document.createElementNS('http://www.w3.org/2000/svg','path');
+  band.setAttribute('fill','none');
+  cord.appendChild(band); cord.appendChild(shine);
+
+  function style(){
+    band.setAttribute('stroke','#D44E74');  band.setAttribute('stroke-width','14');
+    band.setAttribute('stroke-linecap','round'); band.setAttribute('stroke-linejoin','round');
+    shine.setAttribute('fill','none'); shine.setAttribute('stroke','#FF6B92');
+    shine.setAttribute('stroke-width','6'); shine.setAttribute('stroke-linecap','round');
+    shine.setAttribute('stroke-linejoin','round'); shine.setAttribute('opacity','.95');
+  }
+  style();
+
+  function layout(){
+    W = stage.clientWidth; H = stage.clientHeight;
+    cord.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    anchor = { x: W/2, y: 0 };
+    const ropeLen = Math.min(108, H*0.2);
+    segLen = ropeLen / (N-1);
+    pts = [];
+    for (let i=0;i<N;i++){
+      const y = anchor.y + i*segLen;
+      pts.push({ x:anchor.x, y, px:anchor.x, py:y });
+    }
+    render();
+  }
+
+  function step(){
+    for (let i=1;i<N;i++){
+      const p = pts[i];
+      const vx = (p.x - p.px) * FRICTION;
+      const vy = (p.y - p.py) * FRICTION;
+      p.px = p.x; p.py = p.y;
+      p.x += vx; p.y += vy + GRAV;
+    }
+    for (let k=0;k<ITER;k++){
+      pts[0].x = anchor.x; pts[0].y = anchor.y;
+      for (let i=0;i<N-1;i++){
+        const a = pts[i], b = pts[i+1];
+        const dx = b.x-a.x, dy = b.y-a.y;
+        const d  = Math.hypot(dx,dy) || 0.0001;
+        const f  = ((d - segLen) / d) * 0.5;
+        const ox = dx*f, oy = dy*f;
+        if (i !== 0){ a.x += ox; a.y += oy; }
+        b.x -= ox; b.y -= oy;
+      }
+      if (dragging){ pts[N-1].x = aim.x; pts[N-1].y = aim.y; }
+    }
+  }
+
+  function render(){
+    let d = `M ${pts[0].x} ${pts[0].y}`;
+    for (let i=1;i<N;i++) d += ` L ${pts[i].x} ${pts[i].y}`;
+    band.setAttribute('d', d); shine.setAttribute('d', d);
+
+    const a = pts[N-2], b = pts[N-1];
+    const deg = Math.atan2(b.y-a.y, b.x-a.x) * 180/Math.PI - 90;
+    badge.style.transformOrigin = '50% 0';
+    badge.style.transform =
+      `translate(${(b.x - badge.offsetWidth/2).toFixed(2)}px, ${b.y.toFixed(2)}px) rotate(${deg.toFixed(2)}deg)`;
+  }
+
+  function frame(){
+    step(); render();
+    let mv = 0;
+    for (let i=1;i<N;i++) mv += Math.abs(pts[i].x-pts[i].px) + Math.abs(pts[i].y-pts[i].py);
+    if (dragging || mv > 0.4) calm = 0; else calm++;
+    if (calm < 40) requestAnimationFrame(frame); else running = false;   // para sozinho ao assentar
+  }
+  function kick(){ calm = 0; if (!running){ running = true; requestAnimationFrame(frame); } }
+
+  const local = e => { const r = stage.getBoundingClientRect(); return { x:e.clientX-r.left, y:e.clientY-r.top }; };
+
+  badge.addEventListener('pointerdown', e => {
+    e.preventDefault();
+    const p = local(e), last = pts[N-1];
+    grab.x = p.x - last.x; grab.y = p.y - last.y;
+    aim.x = last.x; aim.y = last.y;
+    dragging = true; badge.classList.add('grabbing');
+    try { badge.setPointerCapture(e.pointerId); } catch(_){}
+    kick();
+  });
+  window.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    const p = local(e);
+    aim.x = p.x - grab.x; aim.y = p.y - grab.y;
+    kick();
+  });
+  window.addEventListener('pointerup', () => {
+    if (!dragging) return;
+    dragging = false; badge.classList.remove('grabbing'); kick();
+  });
+
+  window.addEventListener('resize', layout);
+  if (badge.querySelector('img')) badge.querySelector('img').addEventListener('load', layout);
+  layout();
+})();
+
+
+/* ---------- fim da página: reserva o espaço do rodapé ---------- */
+(function(){
+  const end = document.getElementById('end');
+  if (!end) return;
+  const fit = () => document.documentElement.style.setProperty('--endH', end.offsetHeight + 'px');
+  fit();
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+})();
+
+/* ---------- modal ---------- */
+const modal   = document.getElementById('modal');
+const panel   = modal.querySelector('.modal-panel');
+let lastFocus = null;
+let openIndex = -1;
+
+function openModal(i, pushHash = true){
+  const p = PROJECTS[i];
+  document.getElementById('modal-tags').innerHTML = tagHtml(p, LANG);
+  document.getElementById('modal-title').textContent = T(p.title);
+  document.getElementById('modal-sub').textContent   = T(p.sub);
+
+  const shot = document.getElementById('modal-shot');
+  if (p.img){ shot.src = p.img; shot.alt = T(p.title); shot.style.display='block'; }
+  else { shot.removeAttribute('src'); shot.style.display='none'; }
+
+  document.getElementById('modal-body').innerHTML = T(p.body).map(t=>`<p>${t}</p>`).join('');
+
+  const met = document.getElementById('modal-metric');
+  const mets = T(p.metrics);
+  met.innerHTML = mets.map(([n,l])=>`<div><div class="metric-num">${n}</div><div class="metric-label">${l}</div></div>`).join('');
+  met.style.display = mets.length ? 'flex' : 'none';
+
+  const act = document.getElementById('modal-actions');
+  let html = '';
+  const CASE_LABEL = {pt:'Ver case completo →', en:'Read the full case study →', es:'Ver el caso completo →'};
+  if (p.caseUrl) html += `<a class="btn btn-primary" href="${p.caseUrl}">${CASE_LABEL[LANG]}</a>`;
+  if (p.liveUrl) html += `<a class="btn btn-ghost" href="${p.liveUrl}" target="_blank" rel="noopener">${T(p.liveLabel)}</a>`;
+  act.innerHTML = html;
+
+  openIndex = i;
+  lastFocus = document.activeElement;
+  modal.classList.add('open');
+  document.body.classList.add('locked');
+  panel.scrollTop = 0;
+  modal.querySelector('.modal-close').focus();
+  if (pushHash) history.pushState({modal:i}, '', '#case/' + p.id);
+}
+
+function closeModal(pop = true){
+  modal.classList.remove('open');
+  document.body.classList.remove('locked');
+  if (lastFocus) lastFocus.focus();
+  if (pop && location.hash.startsWith('#case/')) history.pushState({}, '', location.pathname);
+}
+
+collage.addEventListener('click', e => {
+  const btn = e.target.closest('.work-item');
+  if (btn) openModal(+btn.dataset.i);
+});
+modal.addEventListener('click', e => { if (e.target.hasAttribute('data-close')) closeModal(); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  // foco preso dentro do modal
+  if (e.key === 'Tab' && modal.classList.contains('open')){
+    const f = panel.querySelectorAll('button, a[href]');
+    if (!f.length) return;
+    const first = f[0], last = f[f.length-1];
+    if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  }
+});
+window.addEventListener('popstate', () => {
+  const m = location.hash.match(/^#case\/(.+)$/);
+  if (m){ const i = PROJECTS.findIndex(p => p.id === m[1]); if (i >= 0) return openModal(i, false); }
+  closeModal(false);
+});
+// abre direto se a URL já vier com #case/...
+(() => {
+  const m = location.hash.match(/^#case\/(.+)$/);
+  if (m){ const i = PROJECTS.findIndex(p => p.id === m[1]); if (i >= 0) openModal(i, false); }
+})();
+
+/* ---------- preenchimento do texto do "sobre" conforme o scroll ---------- */
+(() => {
+  const blocks = [...document.querySelectorAll('.about-text h2, .about-text p, .about-text .edu-item')];
+  if (!blocks.length) return;
+
+  // quebra em palavras preservando as tags internas (em, divs da formação)
+  function split(root){
+    const words = [];
+    (function walk(node){
+      [...node.childNodes].forEach(n => {
+        if (n.nodeType === 3){
+          const parts = n.nodeValue.split(/(\s+)/);
+          if (parts.length === 1 && !parts[0].trim()) return;
+          const frag = document.createDocumentFragment();
+          parts.forEach(t => {
+            if (!t) return;
+            if (/^\s+$/.test(t)){ frag.appendChild(document.createTextNode(t)); return; }
+            const sp = document.createElement('span');
+            sp.className = 'w';
+            sp.textContent = t;
+            frag.appendChild(sp);
+            words.push(sp);
+          });
+          n.parentNode.replaceChild(frag, n);
+        } else if (n.nodeType === 1){
+          walk(n);
+        }
+      });
+    })(root);
+    return words;
+  }
+
+  const groups = blocks.map(el => {
+    const words = split(el);
+    return { el, words, spread: Math.max(4, Math.round(words.length * 0.3)), last: [] };
+  }).filter(g => g.words.length);
+
+  const fillAll = () => groups.forEach(g => g.words.forEach(w => w.style.setProperty('--p','1')));
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches){ fillAll(); return; }
+
+  const START = 0.86;  // começa quando o topo do bloco passa de 86% da tela
+  const END   = 0.45;  // termina quando a base chega a 45% da tela
+
+  let queued = false;
+  function update(){
+    queued = false;
+    const vh = window.innerHeight;
+    for (const g of groups){
+      const r = g.el.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > vh + 200) continue;   // fora de vista, nem calcula
+      const span = (vh * START) - (vh * END) + r.height;
+      const prog = Math.min(1, Math.max(0, ((vh * START) - r.top) / span));
+      const n = g.words.length, sp = g.spread;
+      const head = prog * (n + sp);
+      for (let i = 0; i < n; i++){
+        let v = (head - i) / sp;
+        v = v < 0 ? 0 : v > 1 ? 1 : v;
+        v = Math.round(v * 100) / 100;
+        if (g.last[i] !== v){ g.last[i] = v; g.words[i].style.setProperty('--p', v); }
+      }
+    }
+  }
+  function request(){ if (!queued){ queued = true; requestAnimationFrame(update); } }
+
+  addEventListener('scroll', request, { passive: true });
+  addEventListener('resize', request);
+  // ao trocar de idioma o texto é reescrito: refaz a divisão em palavras
+  window.rebuildTextFill = () => {
+    groups.forEach(g => { g.words = split(g.el); g.spread = Math.max(4, Math.round(g.words.length * 0.3)); g.last = []; });
+    request();
+  };
+  request();
+})();
+
+
+/* ---------- cursor customizado ---------- */
+(() => {
+  const cur = document.getElementById('cursor');
+  if (!cur || !matchMedia('(hover: hover) and (pointer: fine)').matches){ if (cur) cur.style.display='none'; return; }
+  addEventListener('mousemove', e => {
+    cur.style.transform = `translate(${e.clientX}px, ${e.clientY}px)` + (cur.classList.contains('cursor-hover') ? ' scale(1.4)' : '');
+  }, { passive: true });
+  const hot = 'a, button, .work-item, .badge';
+  document.addEventListener('mouseover', e => { if (e.target.closest(hot)) cur.classList.add('cursor-hover'); });
+  document.addEventListener('mouseout',  e => { if (e.target.closest(hot)) cur.classList.remove('cursor-hover'); });
+})();
+
+/* ---------- idiomas PT | EN | ES ---------- */
+function setLang(lang){
+  if (!['pt','en','es'].includes(lang)) lang = 'pt';
+  LANG = lang;
+
+  document.querySelectorAll('[data-pt]').forEach(el => {
+    const t = el.getAttribute('data-' + lang);
+    if (t !== null) el.innerHTML = t;
+  });
+  document.querySelectorAll('[data-aria-pt]').forEach(el => {
+    const t = el.getAttribute('data-aria-' + lang);
+    if (t !== null) el.setAttribute('aria-label', t);
+  });
+
+  ['pt','en','es'].forEach(l => {
+    const b = document.getElementById('btn-' + l);
+    if (b) b.classList.toggle('active', l === lang);
+  });
+
+  localStorage.setItem('lang', lang);
+  document.documentElement.setAttribute('lang', lang === 'en' ? 'en' : (lang === 'es' ? 'es' : 'pt-BR'));
+
+  if (window.rebuildTextFill) window.rebuildTextFill();
+  if (openIndex >= 0 && modal.classList.contains('open')) openModal(openIndex, false);
+}
+
+// aplica o idioma salvo assim que a página monta
+setLang(LANG);
 </script>
-
-<!-- RODAPÉ GLOBAL -->
-<div class="back-to-top">
-  <button class="btn-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
-      <path d="M7 12V2M2 7l5-5 5 5"/>
-    </svg>
-    <span data-pt="Voltar ao topo" data-en="Back to top" data-es="Volver arriba">Voltar ao topo</span>
-  </button>
-</div>
-
-<footer>
-  <p>© 2026 Camilla Pestana · <span class="footer-pink">CNPJ 36.151.883/0001-88</span></p>
-</footer>
-</div>
-
 </body>
 </html>
