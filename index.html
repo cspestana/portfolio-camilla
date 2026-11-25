@@ -334,11 +334,14 @@
   a,button,.work-item,.badge,.lang-btn{cursor:none}
   .cursor{
     width:20px;height:24px;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;
-    transition:transform .18s ease,opacity .2s;transform-origin:0 0;
+    /* posição no 'translate' (sem transição, acompanha o mouse na hora)
+       e tamanho no 'scale', que é o único que anima */
+    translate:0 0; scale:1; transform-origin:0 0; will-change:translate;
+    transition:scale .16s ease, opacity .2s;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='24' viewBox='0 0 20 24' fill='none'%3E%3Cpath d='M1 1L1 19L5.5 14.5L8.5 22L11 21L8 13.5L14.5 13.5L1 1Z' fill='%23FF6B92' stroke='white' stroke-width='1.2' stroke-linejoin='round'/%3E%3C/svg%3E");
     background-repeat:no-repeat;background-size:contain;
   }
-  .cursor.cursor-hover{transform:scale(1.4)}
+  .cursor.cursor-hover{scale:1.4}
   @media (hover:none),(pointer:coarse){
     body,a,button,.work-item,.badge,.lang-btn{cursor:auto}
     .cursor{display:none}
@@ -364,7 +367,7 @@
 </head>
 <body>
 
-<div class="cursor" id="cursor" aria-hidden="true"></div>
+<div class="cursor" id="cursor" aria-hidden="true" style="opacity:0"></div>
 
 <div class="lang-toggle" role="group" aria-label="Idioma / Language / Idioma">
   <button class="lang-btn active" id="btn-pt" type="button" onclick="setLang('pt')">PT</button>
@@ -1274,9 +1277,22 @@ window.addEventListener('popstate', () => {
 (() => {
   const cur = document.getElementById('cursor');
   if (!cur || !matchMedia('(hover: hover) and (pointer: fine)').matches){ if (cur) cur.style.display='none'; return; }
+
+  let x = -100, y = -100, queued = false, shown = false;
+  function paint(){
+    queued = false;
+    cur.style.translate = x + 'px ' + y + 'px';
+  }
   addEventListener('mousemove', e => {
-    cur.style.transform = `translate(${e.clientX}px, ${e.clientY}px)` + (cur.classList.contains('cursor-hover') ? ' scale(1.4)' : '');
+    x = e.clientX; y = e.clientY;
+    if (!shown){ shown = true; cur.style.opacity = '1'; }
+    if (!queued){ queued = true; requestAnimationFrame(paint); }
   }, { passive: true });
+
+  // some ao sair da janela, volta ao entrar
+  document.addEventListener('mouseleave', () => cur.style.opacity = '0');
+  document.addEventListener('mouseenter', () => { if (shown) cur.style.opacity = '1'; });
+
   const hot = 'a, button, .work-item, .badge';
   document.addEventListener('mouseover', e => { if (e.target.closest(hot)) cur.classList.add('cursor-hover'); });
   document.addEventListener('mouseout',  e => { if (e.target.closest(hot)) cur.classList.remove('cursor-hover'); });
