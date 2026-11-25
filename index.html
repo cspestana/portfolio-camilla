@@ -266,6 +266,14 @@
     margin-bottom:12px;transition:color .2s,transform .2s;width:fit-content;
   }
   .end-col a:hover{color:var(--pink);transform:translateX(4px)}
+  .end-col a.copied{color:var(--pink)}
+  /* endereço completo, revelado ao copiar (serve de plano B se a cópia falhar) */
+  .mail-addr{
+    font-size:12.5px;color:var(--gray);margin:-6px 0 12px;
+    max-height:0;opacity:0;overflow:hidden;user-select:all;
+    transition:max-height .3s ease,opacity .3s ease,margin .3s ease;
+  }
+  .mail-addr.show{max-height:28px;opacity:1;margin:-4px 0 14px}
   .end-bar{
     margin-top:54px;padding-top:22px;border-top:1px solid var(--gray-border);
     display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
@@ -458,7 +466,8 @@
       </div>
       <div class="end-col">
         <h4 data-pt="Fale comigo" data-en="Get in touch" data-es="Hablar conmigo">Fale comigo</h4>
-        <a href="mailto:pestanascamilla@gmail.com" data-pt="E-mail" data-en="Email" data-es="Correo">E-mail</a>
+        <a href="mailto:pestanascamilla@gmail.com" id="mail-link" title="pestanascamilla@gmail.com" aria-live="polite" data-pt="E-mail" data-en="Email" data-es="Correo">E-mail</a>
+        <div class="mail-addr" id="mail-addr">pestanascamilla@gmail.com</div>
         <a href="https://wa.me/5511978332614" target="_blank" rel="noopener">WhatsApp</a>
       </div>
       <div class="end-col">
@@ -1326,6 +1335,54 @@ function setLang(lang){
 
 // aplica o idioma salvo assim que a página monta
 setLang(LANG);
+
+/* ---------- e-mail: copia para a área de transferência ---------- */
+(() => {
+  const link = document.getElementById('mail-link');
+  const addr = document.getElementById('mail-addr');
+  if (!link) return;
+  const EMAIL = 'pestanascamilla@gmail.com';
+  const OK   = {pt:'E-mail copiado ✓', en:'Email copied ✓', es:'Correo copiado ✓'};
+  const FAIL = {pt:'Copie o endereço abaixo', en:'Copy the address below', es:'Copia la dirección abajo'};
+  let timer = null;
+
+  function copy(text){
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+    // plano B para contextos sem a API de clipboard
+    return new Promise((res, rej) => {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly','');
+      ta.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+      document.body.appendChild(ta);
+      ta.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch(e){ ok = false; }
+      document.body.removeChild(ta);
+      ok ? res() : rej();
+    });
+  }
+
+  function feedback(msg){
+    clearTimeout(timer);
+    link.textContent = msg;
+    link.classList.add('copied');
+    if (addr) addr.classList.add('show');
+    timer = setTimeout(() => {
+      link.textContent = link.getAttribute('data-' + LANG) || 'E-mail';
+      link.classList.remove('copied');
+      if (addr) addr.classList.remove('show');
+    }, 3000);
+  }
+
+  link.addEventListener('click', e => {
+    // no celular o mailto funciona: deixa o app de e-mail abrir normalmente
+    if (matchMedia('(hover: none), (pointer: coarse)').matches) return;
+    e.preventDefault();
+    copy(EMAIL).then(() => feedback(OK[LANG] || OK.pt))
+               .catch(() => feedback(FAIL[LANG] || FAIL.pt));
+  });
+})();
 </script>
 </body>
 </html>
